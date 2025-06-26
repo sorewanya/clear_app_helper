@@ -1,6 +1,6 @@
 name: clear_app_helper
 description: "A new Flutter package project."
-version: 0.0.1
+version: 0.1.0
 homepage:
 
 environment:
@@ -10,6 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  equatable: ^2.0.7
+  dartz: ^0.10.1
+  internet_connection_checker: ^3.0.1
+  json_annotation: ^4.9.0
+  copy_with_extension: ^6.0.1
 
 dev_dependencies:
   flutter_test:
