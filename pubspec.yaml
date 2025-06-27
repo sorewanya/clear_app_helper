@@ -16,6 +16,23 @@ dependencies:
   json_annotation: ^4.9.0
   copy_with_extension: ^6.0.1
   shared_preferences: ^2.5.3
+  file_picker: ^10.2.0
+  material_design_icons_flutter: ^7.0.7296
+  bloc_concurrency: ^0.3.0
+  package_info_plus: ^8.3.0
+  path_provider: ^2.1.5
+  flutter_bloc: ^9.1.1
+  get_it: ^8.0.3
+  get: ^4.7.2
+  crypto: ^3.0.6
+  animated_toggle_switch: ^0.8.5
+  graphview: ^1.2.0
+  flex_color_picker: ^3.7.1
+  flutter_iconpicker: ^4.0.1
+  flutter_slidable: ^4.0.0
+  animated_tree_view: ^2.3.0
+  flash: ^3.1.1
+  rfw: ^1.0.31
 
 dev_dependencies:
   flutter_test:
