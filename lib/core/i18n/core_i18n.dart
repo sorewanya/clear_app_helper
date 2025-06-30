@@ -10,6 +10,13 @@ part 'core_ru.dart';
 /// (you can use packages [easy_localization], [localization] or [slang] and make implementation of this class for your lang)
 ///
 class CoreI18n {
+  String get makeCopy => "Make copy";
+  String get lock => "Lock";
+  String get share => "Share";
+  String get delete => "Delete";
+  String get newItem => "New";
+  String get nodeInGraphName => "Node";
+  String get errorGettingItemId => "Error getting itemId";
   String get searchEmptyListMessage => "Nothing to show, start adding or change the search query";
   String get searchResetButtonText => "Reset";
   String get searchShowSettings => "Show settings";

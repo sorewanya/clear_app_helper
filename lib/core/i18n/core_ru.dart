@@ -4,6 +4,13 @@
 part of 'core_i18n.dart';
 
 class CoreI18nRu implements CoreI18n {
+  String get makeCopy => "Создать копию";
+  String get lock => "Заблокировать";
+  String get share => "Поделиться";
+  String get delete => "Удалить";
+  String get newItem => "Новый";
+  String get nodeInGraphName => "Узел";
+  String get errorGettingItemId => "Ошибка получения itemId";
   String get searchEmptyListMessage => "Показывать нечего, начните добавлять или измените поисковый запрос";
   String get searchShowSettings => "Показать настройки поиска";
   String get searchResetButtonText => "Обнулить";
