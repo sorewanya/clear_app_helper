@@ -79,9 +79,9 @@ class _GraphViewOfItemsState<AppEntityType extends AppEntity> extends State<Grap
             return node.key!.value != null
                 ? GestureDetector(
                     onTap: (() {
-                      RouteHelper.toNamed(widget.onTapRouteName, arguments: widget.emptySearchEntity?.copyWith(id: id));
+                      RouteHelper.toNamed(widget.onTapRouteName, arguments: widget.emptySearchEntity.copyWith(id: id));
                     }),
-                    onLongPress: () => widget.onLongPress != null ? widget.onLongPress!(id) : {},
+                    onLongPress: () => widget.onLongPress?.call(id),
                     child: widget.cardWidget(id as int),
                   )
                 : MyPaddedDecoratedBoxWithOpacity(
