@@ -10,6 +10,7 @@ part 'core_ru.dart';
 /// (you can use packages [easy_localization], [localization] or [slang] and make implementation of this class for your lang)
 ///
 class CoreI18n {
+  String get searchEmptyListMessage => "Nothing to show, start adding or change the search query";
   String get searchResetButtonText => "Reset";
   String get searchShowSettings => "Show settings";
   String get search => "Search";

@@ -4,6 +4,7 @@
 part of 'core_i18n.dart';
 
 class CoreI18nRu implements CoreI18n {
+  String get searchEmptyListMessage => "Показывать нечего, начните добавлять или измените поисковый запрос";
   String get searchShowSettings => "Показать настройки поиска";
   String get searchResetButtonText => "Обнулить";
   String get search => "Поиск";
