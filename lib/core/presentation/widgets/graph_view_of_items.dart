@@ -16,7 +16,7 @@ class GraphViewOfItems<AppEntityType extends AppEntity> extends StatefulWidget {
     this.onLongPress,
     required this.cardWidget,
     required this.graph,
-    this.emptySearchEntity,
+    required this.emptySearchEntity,
   });
 
   /// elements to show, is being filled by graph.addEdge()
@@ -26,7 +26,7 @@ class GraphViewOfItems<AppEntityType extends AppEntity> extends StatefulWidget {
   final String onTapRouteName;
 
   /// Search entity, what copyWith with selected id and send to [onTapRouteName] page
-  final SearchEntity? emptySearchEntity;
+  final SearchEntity emptySearchEntity;
 
   /// Long tap callback
   final Function(int itemId)? onLongPress;
