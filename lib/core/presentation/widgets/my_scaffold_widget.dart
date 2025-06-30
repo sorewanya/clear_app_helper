@@ -1,5 +1,7 @@
+import 'package:clear_app_helper/core/i18n/core_i18n.dart';
 import 'package:clear_app_helper/core/presentation/widgets/search_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 ///
 /// Widget wrapper around [Scaffold]
@@ -47,7 +49,10 @@ class MyScaffoldWidget extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: FittedBox(fit: BoxFit.fitHeight, child: appBarTitle ?? const Text("Clear App Helper")),
+        title: FittedBox(
+          fit: BoxFit.fitHeight,
+          child: appBarTitle ?? Text(GetIt.instance<CoreI18n>().defaultAppBarTitle),
+        ),
         leading: appBarLeading,
         actions:
             appBarActions ??
