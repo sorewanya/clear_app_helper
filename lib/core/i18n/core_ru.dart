@@ -4,6 +4,9 @@
 part of 'core_i18n.dart';
 
 class CoreI18nRu implements CoreI18n {
+  String get searchShowSettings => "Показать настройки поиска";
+  String get searchResetButtonText => "Обнулить";
+  String get search => "Поиск";
   String get defaultAppBarTitle => "Clear App Helper";
   String get serverFailureMessage => "Ошибка сервера! Повтор попытки каждые 5 сек.";
   String get emptyLocalStorageFailureMessage => "Ничего не найдено!";
