@@ -11,7 +11,7 @@ class TestLocalDataSource extends ExampleLocalDataSource<TestEntity, TestSearchE
   }
 
   void addDefaults() {
-    dbHelper.addManyDefaultSync(itemList: () => throw UnimplementedError());
+    dbHelper.addManyDefault(itemList: () => throw UnimplementedError());
   }
 
   @override
