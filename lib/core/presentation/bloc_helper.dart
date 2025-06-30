@@ -46,7 +46,7 @@ class BlocHelper<T extends AppEntity, SEType extends SearchEntity> {
   }
 
   /// call update from useCase
-  /// * [revertDelete] bast be true if item updated with change isDeleted
+  /// * [revertDelete] mast be true if item updated with change isDeleted
   /// * [ifRightUpdate] Function start if item correct updated
   Future<int> update({
     required T itemToUpdate,
