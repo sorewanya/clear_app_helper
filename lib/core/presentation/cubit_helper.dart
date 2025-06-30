@@ -7,6 +7,7 @@ import 'package:clear_app_helper/core/domain/entities/search_entity.dart';
 import 'package:clear_app_helper/core/error/failure.dart';
 import 'package:clear_app_helper/core/error/map_failure_to_message.dart';
 import 'package:clear_app_helper/core/usecases/usecase.dart';
+import 'package:flutter/foundation.dart';
 
 ///simple Cubit helper
 ///FIXME need to tests, refactoring
@@ -96,7 +97,7 @@ class CubitHelper {
     Function? errorFunc,
     Function? orElseFunc,
   }) {
-    log("state().maybeMap");
+    if (kDebugMode) log("state().maybeMap");
     state().maybeMap(
       orElse: orElseFunc ?? () => {},
       emptyList: emptyListFunc ?? (_) async => goToLoading(),
