@@ -4,6 +4,7 @@
 part of 'core_i18n.dart';
 
 class CoreI18nRu implements CoreI18n {
+  String get defaultAppBarTitle => "Clear App Helper";
   String get serverFailureMessage => "Ошибка сервера! Повтор попытки каждые 5 сек.";
   String get emptyLocalStorageFailureMessage => "Ничего не найдено!";
   String get cachedFailureMessage => "Ошибка локальной БД. Повтор попытки каждые 5 сек.";

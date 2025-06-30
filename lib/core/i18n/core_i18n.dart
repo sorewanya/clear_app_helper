@@ -10,6 +10,7 @@ part 'core_ru.dart';
 /// (you can use packages [easy_localization], [localization] or [slang] and make implementation of this class for your lang)
 ///
 class CoreI18n {
+  String get defaultAppBarTitle => "Clear App Helper";
   String get serverFailureMessage => "Server failure! Try again in 5 seconds.";
   String get emptyLocalStorageFailureMessage => "Nothing found!";
   String get cachedFailureMessage => "Cache failure! Try again in 5 seconds.";
