@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' show ReadContext;
-import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
@@ -20,9 +19,7 @@ class IconsHelper {
   /// default: MdiIcons.crosshairsQuestion
   static IconData getIconData(String nameOfSettings) {
     return MdiIconData(
-      Get.context != null
-          ? int.parse(Get.context!.read<SettingsBloc>().getUserOrDefaultValueByNamed(nameOfSettings) ?? "0xf1136")
-          : 0xf1136,
+      int.parse(GetIt.instance<SettingsBloc>().getUserOrDefaultValueByNamed(nameOfSettings) ?? "0xf1136"),
     );
   }
 
