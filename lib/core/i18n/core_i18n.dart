@@ -10,6 +10,10 @@ part 'core_ru.dart';
 /// (you can use packages [easy_localization], [localization] or [slang] and make implementation of this class for your lang)
 ///
 class CoreI18n {
+  String get newSetting => "New setting";
+  String get settingIsNotSaved => "Setting cannot be saved, check the entered data";
+  String get settingIsSave => "Setting saved";
+  String get caseSensitiveSearchWarning => "Search is case-sensitive! setting:";
   String get restore => "Restore";
   String get validatorDoubleNotLessZero => "must be a double >= 0";
   String get validatorIntegerNotLessZero => "must be an integer >= 0";

@@ -4,6 +4,10 @@
 part of 'core_i18n.dart';
 
 class CoreI18nRu implements CoreI18n {
+  String get newSetting => "Новая настройка";
+  String get settingIsNotSaved => "настройка не может быть сохранена, проверьте правильность введённых данных";
+  String get settingIsSave => "Настройка сохранена";
+  String get caseSensitiveSearchWarning => "Поиск регистро зависим! настройка:";
   String get restore => "Восстановить";
   String get validatorDoubleNotLessZero => "должно быть вещественным числом >= 0";
   String get validatorIntegerNotLessZero => "должно быть целым числом >= 0";

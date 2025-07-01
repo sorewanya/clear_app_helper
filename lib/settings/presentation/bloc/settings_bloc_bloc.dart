@@ -6,6 +6,7 @@ import 'package:clear_app_helper/core/datasources/default_data.dart';
 import 'package:clear_app_helper/core/domain/entities/ids_finded.dart';
 import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
 import 'package:clear_app_helper/core/hash_func.dart';
+import 'package:clear_app_helper/core/i18n/core_i18n.dart';
 import 'package:clear_app_helper/core/presentation/bloc/entity_bloc.dart';
 import 'package:clear_app_helper/core/presentation/bloc_helper.dart';
 import 'package:clear_app_helper/core/presentation/functions.dart';
@@ -23,6 +24,7 @@ import 'package:clear_app_helper/settings/domain/usecase/settings_use_case.dart'
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 part 'settings_bloc_event.dart';
@@ -145,8 +147,8 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
             blocUpdate: (item) async => await updateSetting(item),
             item: value.item,
             origItem: value.origItem,
-            textSave: "Настройка сохранена",
-            textValidFailed: "настройка не может быть сохранена, проверьте правильность введённых данных",
+            textSave: GetIt.instance<CoreI18n>().settingIsSave,
+            textValidFailed: GetIt.instance<CoreI18n>().settingIsNotSaved,
             pop: value.pop,
             showItemNavifator: (id) =>
                 RouteHelper.toNamed(SettingsRouteNames.settingsDetailPage, arguments: SettingsSearchEntity(id: id)),
@@ -286,7 +288,7 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
     return fullMap[itemId]?.setting ??
         SettingsEntity(
           id: null,
-          name: "unsetted",
+          name: GetIt.instance<CoreI18n>().newSetting,
           defaultValue: "",
           userValue: null,
           confirmType: null,
