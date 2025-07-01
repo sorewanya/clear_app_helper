@@ -4,6 +4,7 @@
 part of 'core_i18n.dart';
 
 class CoreI18nRu implements CoreI18n {
+  String get restore => "Восстановить";
   String get validatorDoubleNotLessZero => "должно быть вещественным числом >= 0";
   String get validatorIntegerNotLessZero => "должно быть целым числом >= 0";
   String get validatorNotEmpty => "значение не указано!";

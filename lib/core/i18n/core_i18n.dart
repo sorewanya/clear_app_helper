@@ -10,6 +10,7 @@ part 'core_ru.dart';
 /// (you can use packages [easy_localization], [localization] or [slang] and make implementation of this class for your lang)
 ///
 class CoreI18n {
+  String get restore => "Restore";
   String get validatorDoubleNotLessZero => "must be a double >= 0";
   String get validatorIntegerNotLessZero => "must be an integer >= 0";
   String get validatorNotEmpty => "value not specified!";
