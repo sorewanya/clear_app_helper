@@ -10,6 +10,23 @@ part 'core_ru.dart';
 /// (you can use packages [easy_localization], [localization] or [slang] and make implementation of this class for your lang)
 ///
 class CoreI18n {
+  String get savedSearchSaveSearch => "Save search query";
+  String get savedSearchSaveHelpText => """Enter a display name for future use
+
+  Note that the active query is saved, not the edited one!
+  Click 'Find', check that it is what you need and only then save
+  """;
+  String get savedSearchSave => "Save";
+  String get savedSearchRemove => "Remove";
+  String get savedSearchUpdateByCurrent => "Update current";
+  String get savedSearchUpdate => "Update";
+  String get cancel => "Cancel";
+  String get savedSearchHelpText => "Use the bottom field to rename";
+  String get savedSearchRename => "Rename";
+  String get savedSearchFind => "Find";
+  String get searchShowChanged => "show changed";
+  String get searchShowDeleted => "show deleted";
+  String get searchName => "Name";
   String get newSetting => "New setting";
   String get settingIsNotSaved => "Setting cannot be saved, check the entered data";
   String get settingIsSave => "Setting saved";

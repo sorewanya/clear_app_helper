@@ -4,6 +4,22 @@
 part of 'core_i18n.dart';
 
 class CoreI18nRu implements CoreI18n {
+  String get savedSearchSaveSearch => "Сохранить поисковый запрос";
+  String get savedSearchSaveHelpText => """Введите отображаемое название для последующего использования
+
+  Учтите, что сохраняется активный, а не отредактированный запрос!
+  Нажмите 'Найти', проверьте, что это то, что вам нужно и только потом сохраняйте""";
+  String get savedSearchSave => "Сохранить";
+  String get savedSearchRemove => "Удалить";
+  String get savedSearchUpdateByCurrent => "Обновить текущим";
+  String get savedSearchUpdate => "Обновить";
+  String get cancel => "Отмена";
+  String get savedSearchRename => "Переименовать";
+  String get savedSearchHelpText => "Используйте поле внизу для переименования";
+  String get savedSearchFind => "Искать";
+  String get searchShowChanged => "показать изменённые";
+  String get searchShowDeleted => "показать удалённые";
+  String get searchName => "Название";
   String get newSetting => "Новая настройка";
   String get settingIsNotSaved => "настройка не может быть сохранена, проверьте правильность введённых данных";
   String get settingIsSave => "Настройка сохранена";
