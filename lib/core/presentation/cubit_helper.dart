@@ -34,7 +34,7 @@ class CubitHelper {
   ///
   /// set if dont needed:
   /// `startCheck: (f) => f(),`
-  final Function(Function()) startCheck;
+  final Function(Function() f) startCheck;
 
   /// function to update data from useCase
   final Function() load;
@@ -49,7 +49,7 @@ class CubitHelper {
   final Function()? stateLoaded;
 
   /// set filtred state
-  final Function(SearchEntity)? stateFiltred;
+  final Function(SearchEntity se)? stateFiltred;
 
   /// emitLoading && load
   void goToLoading() {
