@@ -3,14 +3,15 @@ import 'package:equatable/equatable.dart';
 
 import '../../data/datasouces/examples_impl.dart';
 
-class TestEntity extends AppEntity with AppEntityWithIsDeleted {
+class TestEntity with AppEntityWithIsDeleted, EquatableMixin implements AppEntity {
   @override
   // ignore: overridden_fields
   final int? id;
   final String uid;
   final String title;
+  final bool isDeleted;
 
-  TestEntity({required this.id, required this.uid, required this.title});
+  TestEntity({required this.id, required this.uid, required this.title, required this.isDeleted});
 
   @override
   List<Object?> get props => [uid, title, isDeleted];
@@ -19,6 +20,8 @@ class TestEntity extends AppEntity with AppEntityWithIsDeleted {
   factory TestEntity.fromJson(Map<String, dynamic> json) => throw UnimplementedError();
   @override
   Map<String, dynamic> toJson() => throw UnimplementedError();
+  @override
+  get copyWith => throw UnimplementedError();
 }
 
 class TestLog with EquatableMixin implements ExampleLog {
@@ -39,4 +42,6 @@ class TestLog with EquatableMixin implements ExampleLog {
   factory TestLog.fromJson(Map<String, dynamic> json) => throw UnimplementedError();
   @override
   Map<String, dynamic> toJson() => throw UnimplementedError();
+  @override
+  get copyWith => throw UnimplementedError();
 }

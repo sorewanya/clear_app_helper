@@ -1,18 +1,19 @@
 import 'package:equatable/equatable.dart';
 
-abstract class AppEntity with EquatableMixin {
+abstract interface class AppEntity with EquatableMixin {
   AppEntity({this.id});
   final int? id;
   @override
   List<Object?> get props => [];
   Map<String, dynamic> toJson();
   AppEntity.fromJson(Map<String, dynamic> json) : id = 0;
+  get copyWith => throw UnsupportedError('copyWith not implemented $runtimeType');
 }
 
-mixin AppEntityWithIsDeleted on AppEntity {
-  final bool isDeleted = false;
+abstract mixin class AppEntityWithIsDeleted implements AppEntity {
+  bool get isDeleted;
 }
 
-mixin AppEntityWithName on AppEntity {
-  final String name = "";
+abstract mixin class AppEntityWithName implements AppEntity {
+  String get name;
 }
