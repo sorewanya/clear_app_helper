@@ -79,6 +79,7 @@ class CoreI18n {
   String get validatorDoubleNotLessZero => "must be a double >= 0";
   String get validatorIntegerNotLessZero => "must be an integer >= 0";
   String get validatorNotEmpty => "value not specified!";
+  String get viewDefaultErrorText => "error displaying viewDefault for";
   String get viewStyleList => "List";
   String get viewStyleTree => "Tree";
   String get widgetEditPartsIn => "Parts in";

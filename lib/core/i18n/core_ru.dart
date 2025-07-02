@@ -73,6 +73,7 @@ class CoreI18nRu implements CoreI18n {
   String get validatorDoubleNotLessZero => "должно быть вещественным числом >= 0";
   String get validatorIntegerNotLessZero => "должно быть целым числом >= 0";
   String get validatorNotEmpty => "значение не указано!";
+  String get viewDefaultErrorText => "ошибка отображения viewDefault для";
   String get viewStyleList => "Список";
   String get viewStyleTree => "Дерево";
   String get widgetEditPartsIn => "Части в";
