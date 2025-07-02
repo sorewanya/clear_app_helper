@@ -46,6 +46,8 @@ class CoreI18n {
   String get settingIsNotSaved => "Setting cannot be saved, check the entered data";
   String get settingIsSave => "Setting saved";
   String get settings => "Settings";
+  String get settingsIsRequired => "This setting has the logic of being mandatory-set by the user\nUntil the user sets the value, he will be asked for confirmation/clarification each time";
+  String get settingsIsRequiredStop => "This setting has the logic of mandatory-set by the user\nUntil the user sets the value, the task associated with this setting cannot be performed";
   String get settingsList => "Settings list";
   String get settingsMainDiscription => "Settings allow users to change the functionality and appearance of the system according to their preferences.";
   String get settingsViewStyleDefault => "Default settings view style";
