@@ -10,46 +10,47 @@ part 'core_ru.dart';
 /// (you can use packages [easy_localization], [localization] or [slang] and make implementation of this class for your lang)
 ///
 class CoreI18n {
-  String get savedSearchSaveSearch => "Save search query";
-  String get savedSearchSaveHelpText => """Enter a display name for future use
-
-  Note that the active query is saved, not the edited one!
-  Click 'Find', check that it is what you need and only then save
-  """;
-  String get savedSearchSave => "Save";
-  String get savedSearchRemove => "Remove";
-  String get savedSearchUpdateByCurrent => "Update current";
-  String get savedSearchUpdate => "Update";
+  String get cachedFailureMessage => "Cache failure! Try again in 5 seconds.";
   String get cancel => "Cancel";
-  String get savedSearchHelpText => "Use the bottom field to rename";
-  String get savedSearchRename => "Rename";
+  String get caseSensitiveSearchWarning => "Search is case-sensitive! setting:";
+  String get defaultAppBarTitle => "Clear App Helper";
+  String get delete => "Delete";
+  String get emptyLocalStorageFailureMessage => "Nothing found!";
+  String get errorGettingItemId => "Error getting itemId";
+  String get loadSettingInfoToCard => "Load setting info to card";
+  String get lock => "Lock";
+  String get makeCopy => "Make copy";
+  String get newItem => "New";
+  String get newSetting => "New setting";
+  String get nodeInGraphName => "Node";
+  String get restore => "Restore";
   String get savedSearchFind => "Find";
+  String get savedSearchHelpText => "Use the bottom field to rename";
+  String get savedSearchRemove => "Remove";
+  String get savedSearchRename => "Rename";
+  String get savedSearchSave => "Save";
+  String get savedSearchSaveHelpText => """Enter a display name for future use\n\nNote that the active query is saved, not the edited one!\nClick 'Find', check that it is what you need and only then save""";
+  String get savedSearchSaveSearch => "Save search query";
+  String get savedSearchUpdate => "Update";
+  String get savedSearchUpdateByCurrent => "Update current";
+  String get search => "Search";
+  String get searchEmptyListMessage => "Nothing to show, start adding or change the search query";
+  String get searchName => "Name";
+  String get searchResetButtonText => "Reset";
   String get searchShowChanged => "show changed";
   String get searchShowDeleted => "show deleted";
-  String get searchName => "Name";
-  String get newSetting => "New setting";
+  String get searchShowSettings => "Show search settings";
+  String get serverFailureMessage => "Server failure! Try again in 5 seconds.";
+  String get setDefaultInSettings => "Default";
   String get settingIsNotSaved => "Setting cannot be saved, check the entered data";
   String get settingIsSave => "Setting saved";
-  String get caseSensitiveSearchWarning => "Search is case-sensitive! setting:";
-  String get restore => "Restore";
+  String get settings => "Settings";
+  String get settingUserValue => "UserValue";
+  String get settingVariants => "Variants";
+  String get share => "Share";
   String get validatorDoubleNotLessZero => "must be a double >= 0";
   String get validatorIntegerNotLessZero => "must be an integer >= 0";
   String get validatorNotEmpty => "value not specified!";
-  String get makeCopy => "Make copy";
-  String get lock => "Lock";
-  String get share => "Share";
-  String get delete => "Delete";
-  String get newItem => "New";
-  String get nodeInGraphName => "Node";
-  String get errorGettingItemId => "Error getting itemId";
-  String get searchEmptyListMessage => "Nothing to show, start adding or change the search query";
-  String get searchResetButtonText => "Reset";
-  String get searchShowSettings => "Show settings";
-  String get search => "Search";
-  String get defaultAppBarTitle => "Clear App Helper";
-  String get serverFailureMessage => "Server failure! Try again in 5 seconds.";
-  String get emptyLocalStorageFailureMessage => "Nothing found!";
-  String get cachedFailureMessage => "Cache failure! Try again in 5 seconds.";
   String descriptionCoreSettingsEnum(CoreSettingsEnum setting) => switch (setting) {
     CoreSettingsEnum.viewDefault => "Default page to open",
     CoreSettingsEnum.showDeleted => "Show deleted items? global setting",
