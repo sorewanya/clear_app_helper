@@ -18,6 +18,7 @@ class CoreI18nRu implements CoreI18n {
   String get newSetting => "Новая настройка";
   String get nodeInGraphName => "Узел";
   String get restore => "Восстановить";
+  String get save => "Сохранить";
   String get savedSearchFind => "Искать";
   String get savedSearchHelpText => "Используйте поле внизу для переименования";
   String get savedSearchRemove => "Удалить";

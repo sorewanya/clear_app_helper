@@ -24,6 +24,7 @@ class CoreI18n {
   String get newSetting => "New setting";
   String get nodeInGraphName => "Node";
   String get restore => "Restore";
+  String get save => "Save";
   String get savedSearchFind => "Find";
   String get savedSearchHelpText => "Use the bottom field to rename";
   String get savedSearchRemove => "Remove";
