@@ -20,13 +20,12 @@ class SearchElementMultiDropdownWidget<T extends SearchElementIntSet> extends St
   /// send to [SearchElementMultiRow], as "$label: "
   final String label;
 
-  /// get comparison
+  /// get searchElement
   final T Function() getElement;
 
-  /// set comparison
+  /// set searchElement
   final Function(T e) setElement;
 
-  /// default comparison
   final int? defaultValue;
 
   final Function() filtr;
@@ -73,7 +72,6 @@ class SearchElementMultiDropdownWidget<T extends SearchElementIntSet> extends St
               onPressed: () => setState(() {
                 searchElement.intSet.remove(index);
                 setElement(searchElement);
-                // filtrInfoBar();
               }),
             ),
           ],
