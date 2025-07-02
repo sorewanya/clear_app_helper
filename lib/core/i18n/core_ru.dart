@@ -7,6 +7,7 @@ class CoreI18nRu implements CoreI18n {
   String get cachedFailureMessage => "Ошибка локальной БД. Повтор попытки каждые 5 сек.";
   String get cancel => "Отмена";
   String get caseSensitiveSearchWarning => "Поиск регистро зависим! настройка:";
+  String get curentEntityLoading => "Загрузка CurentEntity";
   String get defaultAppBarTitle => "Clear App Helper";
   String get delete => "Удалить";
   String get emptyLocalStorageFailureMessage => "Ничего не найдено!";
@@ -40,6 +41,10 @@ class CoreI18nRu implements CoreI18n {
   String get settingIsNotSaved => "настройка не может быть сохранена, проверьте правильность введённых данных";
   String get settingIsSave => "Настройка сохранена";
   String get settings => "Настройки";
+  String get settingsBuilderStateInitial => "SettingsBuilder: начальное состояние";
+  String get settingsBuilderStateLoadingError => "SettingsBuilder: ошибка загрузки";
+  String get settingsBuilderStateSavingError => "SettingsBuilder: ошибка сохранения";
+  String get settingsBuilderWork => "SettingsBuilder: работа в BlocSettings";
   String get settingsIsRequired => "Данная настройка имеет логику обязательно-выставляемой пользователем\nПока пользователь не выставил значение у него каждый раз будет запрашиваться подтверждение/уточнение";
   String get settingsIsRequiredStop => "Данная настройка имеет логику обязательно-выставляемой пользователем\nПока пользователь не выставил значение выполнение задачи связанной с этой настройкой невозможно";
   String get settingsList => "Список настроек";

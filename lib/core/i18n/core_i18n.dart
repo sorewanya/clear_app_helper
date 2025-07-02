@@ -13,6 +13,7 @@ class CoreI18n {
   String get cachedFailureMessage => "Cache failure! Try again in 5 seconds.";
   String get cancel => "Cancel";
   String get caseSensitiveSearchWarning => "Search is case-sensitive! setting:";
+  String get curentEntityLoading => "Loading CurentEntity";
   String get defaultAppBarTitle => "Clear App Helper";
   String get delete => "Delete";
   String get emptyLocalStorageFailureMessage => "Nothing found!";
@@ -46,6 +47,10 @@ class CoreI18n {
   String get settingIsNotSaved => "Setting cannot be saved, check the entered data";
   String get settingIsSave => "Setting saved";
   String get settings => "Settings";
+  String get settingsBuilderStateInitial => "SettingsBuilder initial state";
+  String get settingsBuilderStateLoadingError => "SettingsBuilder loading Error";
+  String get settingsBuilderStateSavingError => "SettingsBuilder saving Error";
+  String get settingsBuilderWork => "SettingsBuilder: work in BlocSettings";
   String get settingsIsRequired => "This setting has the logic of being mandatory-set by the user\nUntil the user sets the value, he will be asked for confirmation/clarification each time";
   String get settingsIsRequiredStop => "This setting has the logic of mandatory-set by the user\nUntil the user sets the value, the task associated with this setting cannot be performed";
   String get settingsList => "Settings list";
