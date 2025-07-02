@@ -65,6 +65,8 @@ class CoreI18n {
   String get validatorNotEmpty => "value not specified!";
   String get viewStyleList => "List";
   String get viewStyleTree => "Tree";
+  String get widgetEditPartsIn => "Parts in";
+  String get widgetEditSeeResult => "See result";
   String descriptionCoreSettingsEnum(CoreSettingsEnum setting) => switch (setting) {
     CoreSettingsEnum.allAfterRemoveItemReloadList => "Automatically refresh search results after deleting an item?",
     CoreSettingsEnum.allAfterSaveItemShowInfobar => "Show message after saving?",

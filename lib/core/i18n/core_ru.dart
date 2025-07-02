@@ -59,6 +59,8 @@ class CoreI18nRu implements CoreI18n {
   String get validatorNotEmpty => "значение не указано!";
   String get viewStyleList => "Список";
   String get viewStyleTree => "Дерево";
+  String get widgetEditPartsIn => "Части в";
+  String get widgetEditSeeResult => "Посмотреть результат";
   String descriptionCoreSettingsEnum(CoreSettingsEnum setting) => switch (setting) {
     CoreSettingsEnum.allAfterRemoveItemReloadList => "Автоматически обновлять результаты поиска после удаления элемента?",
     CoreSettingsEnum.allAfterSaveItemShowInfobar => "Показывать сообщении после сохранения?",
