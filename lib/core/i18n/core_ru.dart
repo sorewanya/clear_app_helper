@@ -12,6 +12,7 @@ class CoreI18nRu implements CoreI18n {
   String get delete => "Удалить";
   String get emptyLocalStorageFailureMessage => "Ничего не найдено!";
   String get errorGettingItemId => "Ошибка получения itemId";
+  String get find => "Найти";
   String get loadSettingInfoToCard => "Загрузка информации о настройке в карточку";
   String get lock => "Заблокировать";
   String get makeCopy => "Создать копию";

@@ -18,6 +18,7 @@ class CoreI18n {
   String get delete => "Delete";
   String get emptyLocalStorageFailureMessage => "Nothing found!";
   String get errorGettingItemId => "Error getting itemId";
+  String get find => "Find";
   String get loadSettingInfoToCard => "Load setting info to card";
   String get lock => "Lock";
   String get makeCopy => "Make copy";
