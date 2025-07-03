@@ -4,6 +4,8 @@
 part of 'core_i18n.dart';
 
 class CoreI18nRu implements CoreI18n {
+  String get allAfterRemoveItemReloadList => "По умолчанию списки не обновляются(очищаются) при удалении элементов, вы можете изменить это в настройках(после изменения настройки это сообщение не будет показываться!)";
+  String get autoSaveOnPop => "По умолчанию при выходе из редактирования запрашивается подтверждение, вы можете изменить это в настройках(после изменения настройки (как в true, так и false) это сообщение не будет показываться!)";
   String get cachedFailureMessage => "Ошибка локальной БД. Повтор попытки каждые 5 сек.";
   String get cancel => "Отмена";
   String get caseSensitiveSearchWarning => "Поиск регистро зависим! настройка:";
@@ -58,6 +60,7 @@ class CoreI18nRu implements CoreI18n {
   String get searchShowChanged => "показать изменённые";
   String get searchShowDeleted => "показать удалённые";
   String get searchShowSettings => "Показать настройки поиска";
+  String get searchUpdateListAfterReset => "По умолчанию при обнулении любого значения поисковый запрос сразу обрабатывается, вы можете изменить это в настройках(после изменения настройки это сообщение не будет показываться!)";
   String get serverFailureMessage => "Ошибка сервера! Повтор попытки каждые 5 сек.";
   String get setDefaultInSettings => "По умолчанию";
   String get setting => "Настройка";
@@ -79,6 +82,7 @@ class CoreI18nRu implements CoreI18n {
   String get settingsList => "Список настроек";
   String get settingsMainDiscription => "Настройки позволяют пользователю изменять функциональность и внешний вид системы в соответствии с его предпочтениями.";
   String get settingsNotEditedSetting => "Данная настройка не редактируемая, она хранит набор вариантов для других настроек. Значения:";
+  String get settingsSetAsDefault => "Подтвердить по умолчанию";
   String get settingsValueNotIntWarning => "одно из значений в строке не int! Используйте '1,5,10' стиль";
   String get settingsValueTypeError => "ERROR! Тип настройки SettingsTypeEnum.value, но values пустое!";
   String get settingsViewStyleDefault => "Настройка вида списка по умолчанию";
@@ -86,9 +90,12 @@ class CoreI18nRu implements CoreI18n {
   String get settingUserValue => "Пользовательское значение";
   String get settingVariants => "Варианты";
   String get settintsTypeNotFound => "Тип настройки не найден";
+  String get setup => "Настроить";
   String get share => "Поделиться";
   String get sHOW => "ПОКАЗАТЬ";
   String get stay => 'Остаться';
+  String get uidNotExist => "Выбранный uid не существует!";
+  String get uidNotSetup => "Не указан uid!";
   String get unlock => "Разблокировать";
   String get unlockConfirm => "Разблокировать?";
   String get userValue => "Пользовательское значение";

@@ -10,6 +10,8 @@ part 'core_ru.dart';
 /// (you can use packages [easy_localization], [localization] or [slang] and make implementation of this class for your lang)
 ///
 class CoreI18n {
+  String get allAfterRemoveItemReloadList => "By default, lists are not updated (cleared) when items are deleted, you can change this in the settings (after changing the setting, this message will not be shown!)";
+  String get autoSaveOnPop => "By default, when exiting editing, a confirmation message is asked, you can change this in the settings (after changing the setting (either true or false) this message will not be shown!)";
   String get cachedFailureMessage => "Cache failure! Try again in 5 seconds.";
   String get cancel => "Cancel";
   String get caseSensitiveSearchWarning => "Search is case-sensitive! setting:";
@@ -64,6 +66,7 @@ class CoreI18n {
   String get searchShowChanged => "show changed";
   String get searchShowDeleted => "show deleted";
   String get searchShowSettings => "Show search settings";
+  String get searchUpdateListAfterReset => "By default, when any value is reset, the search query is processed immediately, you can change this in the settings (after changing the setting, this message will not be shown!)";
   String get serverFailureMessage => "Server failure! Try again in 5 seconds.";
   String get setDefaultInSettings => "Default";
   String get setting => "Setting";
@@ -85,6 +88,7 @@ class CoreI18n {
   String get settingsList => "Settings list";
   String get settingsMainDiscription => "Settings allow users to change the functionality and appearance of the system according to their preferences.";
   String get settingsNotEditedSetting => "This setting is not editable, it stores a set of options for other settings. Values:";
+  String get settingsSetAsDefault => "Set as default";
   String get settingsValueNotIntWarning => "one of value in string is not int! use '1,5,10' style";
   String get settingsValueTypeError => "ERROR! Type is value, but values is empty!";
   String get settingsViewStyleDefault => "Default settings view style";
@@ -92,9 +96,12 @@ class CoreI18n {
   String get settingUserValue => "UserValue";
   String get settingVariants => "Variants";
   String get settintsTypeNotFound => "Setting type not found";
+  String get setup => "Setup";
   String get share => "Share";
   String get sHOW => "SHOW";
   String get stay => 'Stay';
+  String get uidNotExist => "Uid not exist";
+  String get uidNotSetup => "Uid not setup";
   String get unlock => "Unlock";
   String get unlockConfirm => "Unlock?";
   String get userValue => "User Value";
