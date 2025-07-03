@@ -16,13 +16,11 @@ class ExampleDBLogsHelper<T extends AppEntity> implements DBLogsHelper<T> {
   @override
   Future<List<int>> addMany({required List<T> itemList}) => throw UnimplementedError();
   @override
-  List<int>? addManyDefaultSync({
+  Future<List<int>>? addManyDefault({
     required List<T> Function() itemList,
     int? idToEmptyCheck,
-    Function()? doIfAddDefaultsInsideTxnSync,
+    Function()? doIfAddDefaultsInsideTxn,
   }) => throw UnimplementedError();
-  @override
-  List<int> addManySync({required List<T> itemList}) => throw UnimplementedError();
   @override
   int addSync({required T item}) => throw UnimplementedError();
   @override
@@ -42,15 +40,11 @@ class ExampleDBLogsHelper<T extends AppEntity> implements DBLogsHelper<T> {
   @override
   bool getShowDeletedSettings() => throw UnimplementedError();
   @override
-  T? getSyncById({required int id}) => throw UnimplementedError();
-  @override
   bool isLoggingEnabled() => throw UnimplementedError();
   @override
   (int?, int?) loggingSizeLimited() => throw UnimplementedError();
   @override
   Future<int> update({required T item}) => throw UnimplementedError();
-  @override
-  int updateSync({required T item}) => throw UnimplementedError();
   @override
   Stream<void> watchLazy() => throw UnimplementedError();
   @override
@@ -66,15 +60,12 @@ class ExampleDBHelper<T extends AppEntity> implements DBHelper<T> {
   @override
   Future<List<int>> addMany({required List<T> itemList}) => throw UnimplementedError();
   @override
-  List<int>? addManyDefaultSync({
+  Future<List<int>>? addManyDefault({
     required List<T> Function() itemList,
     int? idToEmptyCheck,
-    Function()? doIfAddDefaultsInsideTxnSync,
+    Function()? doIfAddDefaultsInsideTxn,
   }) => throw UnimplementedError();
-  @override
-  List<int> addManySync({required List<T> itemList}) => throw UnimplementedError();
-  @override
-  int addSync({required T item}) => throw UnimplementedError();
+
   @override
   Future<bool> delete(int id) => throw UnimplementedError();
   @override
@@ -90,11 +81,7 @@ class ExampleDBHelper<T extends AppEntity> implements DBHelper<T> {
   @override
   bool getShowDeletedSettings() => throw UnimplementedError();
   @override
-  T? getSyncById({required int id}) => throw UnimplementedError();
-  @override
   Future<int> update({required T item}) => throw UnimplementedError();
-  @override
-  int updateSync({required T item}) => throw UnimplementedError();
   @override
   Stream<void> watchLazy() => throw UnimplementedError();
   @override

@@ -1,3 +1,3 @@
 import 'app_entity.dart';
 
-abstract class AppSubentities extends AppEntity {}
+abstract interface class AppSubentities implements AppEntity {}

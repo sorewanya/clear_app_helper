@@ -18,6 +18,7 @@ class ComparisonDateTime implements ComparisonTypes {
   final Comparison comparison;
 
   factory ComparisonDateTime.fromJson(Map<String, dynamic> json) => _$ComparisonDateTimeFromJson(json);
+  Map<String, dynamic> toJson() => _$ComparisonDateTimeToJson(this);
 }
 
 @JsonSerializable()
@@ -29,6 +30,7 @@ class ComparisonInteger implements ComparisonTypes {
   final Comparison comparison;
 
   factory ComparisonInteger.fromJson(Map<String, dynamic> json) => _$ComparisonIntegerFromJson(json);
+  Map<String, dynamic> toJson() => _$ComparisonIntegerToJson(this);
 }
 
 @JsonSerializable()
@@ -40,4 +42,5 @@ class ComparisonDouble implements ComparisonTypes {
   final Comparison comparison;
 
   factory ComparisonDouble.fromJson(Map<String, dynamic> json) => _$ComparisonDoubleFromJson(json);
+  Map<String, dynamic> toJson() => _$ComparisonDoubleToJson(this);
 }

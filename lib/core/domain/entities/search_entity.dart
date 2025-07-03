@@ -5,5 +5,5 @@ abstract class SearchEntity {
   bool isEmpty() => true;
   SearchEntity.fromJson(Map<String, dynamic> json);
   Map<String, dynamic> toJson();
-  get copyWith => throw UnsupportedError('copyWith not implemented');
+  get copyWith => throw UnsupportedError('copyWith not implemented $runtimeType');
 }

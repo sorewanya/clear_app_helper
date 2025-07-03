@@ -7,18 +7,21 @@ part 'search_element.g.dart';
 class SearchElement {
   SearchElement();
   factory SearchElement.fromJson(Map<String, dynamic> json) => _$SearchElementFromJson(json);
+  Map<String, dynamic> toJson() => _$SearchElementToJson(this);
 }
 
 @JsonSerializable()
 class SearchCreatedOn extends SearchElement with SearchElementDateTimeComparisons {
   SearchCreatedOn();
   factory SearchCreatedOn.fromJson(Map<String, dynamic> json) => _$SearchCreatedOnFromJson(json);
+  Map<String, dynamic> toJson() => _$SearchCreatedOnToJson(this);
 }
 
 @JsonSerializable()
 class SearchUpdatedOn extends SearchElement with SearchElementDateTimeComparisons {
   SearchUpdatedOn();
   factory SearchUpdatedOn.fromJson(Map<String, dynamic> json) => _$SearchUpdatedOnFromJson(json);
+  Map<String, dynamic> toJson() => _$SearchUpdatedOnToJson(this);
 }
 
 mixin SearchElementDateTimeComparisons on SearchElement {

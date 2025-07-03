@@ -12,16 +12,12 @@ abstract class DBHelper<T extends AppEntity> {
 
   Future<T?> getById({required int id});
 
-  T? getSyncById({required int id});
-
   Future<List<int>> addMany({required List<T> itemList});
 
-  List<int> addManySync({required List<T> itemList});
-
-  List<int>? addManyDefaultSync({
+  Future<List<int>>? addManyDefault({
     required List<T> Function() itemList,
     int? idToEmptyCheck,
-    Function()? doIfAddDefaultsInsideTxnSync,
+    Function()? doIfAddDefaultsInsideTxn,
   });
 
   Future<int> update({required T item});
@@ -35,11 +31,7 @@ abstract class DBHelper<T extends AppEntity> {
   ///It deletes, not sets the value [isDeleted]!
   Future<void> deleteAll();
 
-  int updateSync({required T item});
-
   Future<int> add({required T item});
-
-  int addSync({required T item});
 
   Stream<T?> watchObject(id);
 
@@ -56,7 +48,4 @@ mixin DBLogsHelper<T extends AppEntity> on DBHelper<T> {
   Future checkAndRemoveByCount(int count, bool byItem, int id);
 
   Future<int> addLog({required T item, required id});
-
-  @override
-  int addSync({required T item});
 }

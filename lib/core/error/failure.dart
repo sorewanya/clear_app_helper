@@ -3,6 +3,11 @@ sealed class Failure {
   const factory Failure.emptyLocalStorageFailure() = EmptyLocalStorageFailure;
   const factory Failure.cacheFailure(Exception exception, StackTrace stackTrace) = CacheFailure;
   const factory Failure.castDeleteOnUndeleted() = CastDeleteOnUndeleted;
+  const factory Failure.tryRemoveAll() = TryRemoveAll;
+}
+
+class TryRemoveAll implements Failure {
+  const TryRemoveAll();
 }
 
 mixin FailureWithExAndStack {
