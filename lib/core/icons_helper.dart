@@ -19,7 +19,7 @@ class IconsHelper {
   /// default: MdiIcons.crosshairsQuestion
   static IconData getIconData(String nameOfSettings) {
     return MdiIconData(
-      int.parse(GetIt.instance<SettingsBloc>().getUserOrDefaultValueByNamed(nameOfSettings) ?? "0xf1136"),
+      int.tryParse(GetIt.instance<SettingsBloc>().getUserOrDefaultValueByNamed(nameOfSettings) ?? "0xf1136") ?? 0xf1136,
     );
   }
 
