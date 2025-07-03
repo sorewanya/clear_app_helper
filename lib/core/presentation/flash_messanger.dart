@@ -274,7 +274,6 @@ class FlashMessangerHelper {
     ).then(then);
   }
 
-  /// Показывает всплывающее сообщение, чаще всего показывается после сохранения какого-либо действия
   /// * [text]
   /// * [buttonText]
   /// * [showItemNavifator] callback tap to button with [buttonText], usually RouteHelper.toNamed to right now created item
