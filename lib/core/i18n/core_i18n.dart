@@ -15,6 +15,7 @@ class CoreI18n {
   String get caseSensitiveSearchWarning => "Search is case-sensitive! setting:";
   String get changeDataIn => "You changed data in";
   String get curentEntityLoading => "Loading CurentEntity";
+  String get dateTimeLocale => "en";
   String get defaultAppBarTitle => "Clear App Helper";
   String get delete => "Delete";
   String get deleteConfirm => "Delete?";

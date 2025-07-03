@@ -9,6 +9,7 @@ class CoreI18nRu implements CoreI18n {
   String get caseSensitiveSearchWarning => "Поиск регистро зависим! настройка:";
   String get changeDataIn => "Вы изменили данные в";
   String get curentEntityLoading => "Загрузка CurentEntity";
+  String get dateTimeLocale => "ru";
   String get defaultAppBarTitle => "Clear App Helper";
   String get delete => "Удалить";
   String get deleteConfirm => "Удалить?";
