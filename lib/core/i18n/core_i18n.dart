@@ -23,6 +23,8 @@ class CoreI18n {
   String get emptyLocalStorageFailureMessage => "Nothing found!";
   String get errorGettingItemId => "Error getting itemId";
   String get exitSaveConfirm => "By default, when exiting editing, a confirmation message is asked, you can change this in the settings (after changing the setting (either true or false) this message will not be shown!)";
+  String get exportElements => "Export element(s)";
+  String get exportElementsInDiffFiles => "in separate files";
   String get filePath => "File path";
   String get filePathAllowedExtensions => "Allowed file extensions";
   String get filePathChange => "Change file path";

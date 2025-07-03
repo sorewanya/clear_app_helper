@@ -17,6 +17,8 @@ class CoreI18nRu implements CoreI18n {
   String get emptyLocalStorageFailureMessage => "Ничего не найдено!";
   String get errorGettingItemId => "Ошибка получения itemId";
   String get exitSaveConfirm => "По умолчанию при выходе из редактирования запрашивается подтверждение, вы можете изменить это в настройках(после изменения настройки (как в true, так и false) это сообщение не будет показываться!)";
+  String get exportElements => "Экспортировать элемент(ы)";
+  String get exportElementsInDiffFiles => "в отдельные файлы";
   String get filePath => "Путь к файлу";
   String get filePathAllowedExtensions => "Разрешенные расширения файлов";
   String get filePathChange => "Изменить путь";
