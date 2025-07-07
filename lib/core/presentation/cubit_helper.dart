@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 
 import 'package:clear_app_helper/core/domain/entities/app_entity.dart';
@@ -7,14 +5,14 @@ import 'package:clear_app_helper/core/domain/entities/search_entity.dart';
 import 'package:clear_app_helper/core/error/failure.dart';
 import 'package:clear_app_helper/core/error/map_failure_to_message.dart';
 import 'package:clear_app_helper/core/usecases/usecase.dart';
-import 'package:flutter/foundation.dart';
+
+enum CubitStateStatus { inited, loading, loaded, emptyList, filtred, error, someElse }
 
 ///simple Cubit helper
-///FIXME need to tests, refactoring
 class CubitHelper {
   CubitHelper({
     required this.useCase,
-    required this.state,
+    required this.stateStatus,
     required this.startCheck,
     required this.load,
     this.stateError,
@@ -22,13 +20,9 @@ class CubitHelper {
     this.stateLoaded,
     this.stateFiltred,
   });
+  CubitStateStatus Function() stateStatus;
 
   UseCase useCase;
-
-  /// ```
-  /// state: () => state,
-  /// ```
-  final Function() state;
 
   /// callback function to check state is loaded
   ///
@@ -77,41 +71,38 @@ class CubitHelper {
   ///     );
   /// }
   /// ```
-  T? stateMaybeMap<T>({required Function delayedThen, required dynamic loaded, dynamic emptyList}) {
-    return state().maybeMap(
-      orElse: () {
-        //if not `loaded`
-        T? result;
-        Future.delayed(const Duration(milliseconds: 500), () => delayedThen()).then((value) => result = value);
-        return result;
-      },
-      loaded: loaded,
-      emptyList: emptyList,
-    );
-  }
+  T? stateMaybeMap<T>({required Function delayedThen, required Function() loaded, Function()? emptyList}) =>
+      switch (stateStatus()) {
+        CubitStateStatus.loaded => loaded(),
+        CubitStateStatus.emptyList => emptyList?.call(),
+        _ => () {
+          //if not `loaded`
+          T? result;
+          Future.delayed(const Duration(milliseconds: 500), () => delayedThen()).then((value) => result = value);
+          return result;
+        }(),
+      };
 
   void stateMaybeLoad(
-    Function? loadingFunc, {
-    Function? emptyListFunc,
-    Function? filtredFunc,
-    Function? errorFunc,
-    Function? orElseFunc,
-  }) {
-    if (kDebugMode) log("state().maybeMap");
-    state().maybeMap(
-      orElse: orElseFunc ?? () => {},
-      emptyList: emptyListFunc ?? (_) async => goToLoading(),
-      loading: loadingFunc,
-      filtred: filtredFunc ?? ((_) => goToLoading()),
-      error:
-          errorFunc ??
-          (_) => Future.delayed(
+    Function()? loadingFunc, {
+    Function()? emptyListFunc,
+    Function()? filtredFunc,
+    Function()? errorFunc,
+    Function()? orElseFunc,
+  }) => switch (stateStatus()) {
+    CubitStateStatus.filtred => filtredFunc ?? ((_) => goToLoading()),
+    CubitStateStatus.loading => loadingFunc?.call(),
+    CubitStateStatus.emptyList => emptyListFunc?.call() ?? goToLoading(),
+    CubitStateStatus.someElse => orElseFunc?.call(),
+    CubitStateStatus.error =>
+      errorFunc?.call() ??
+          Future.delayed(
             //if error try load() again 5 sec late
             const Duration(seconds: 5),
             (() => goToLoading()),
           ),
-    );
-  }
+    _ => null,
+  };
 
   /// call add from useCase
   /// * [ifRightAdd] Function start if item correct added
