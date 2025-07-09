@@ -1,6 +1,7 @@
 import 'package:clear_app_helper/core/i18n/core_i18n.dart';
 import 'package:clear_app_helper/core/platform/network_info.dart';
 import 'package:clear_app_helper/core/presentation/bloc/curent_entity/curent_entity_bloc_bloc.dart';
+import 'package:clear_app_helper/core/presentation/theme_data.dart';
 import 'package:clear_app_helper/settings/data/repositories/settings_description_repository.dart';
 import 'package:clear_app_helper/settings/data/repositories/settings_repository.dart';
 import 'package:clear_app_helper/settings/domain/usecase/settings_description_use_case.dart';
@@ -20,6 +21,7 @@ init() {
   /// UNCOMENT NEXT LINE AND ADD YOUR DefaultData !!
   // getIt.registerLazySingleton<AbstractDefaultData>(() => DefaultData());
 
+  getIt.registerLazySingleton<MyThemeData>(() => MyThemeData());
   getIt.registerLazySingleton<CoreI18n>(() => CoreI18nRu());
   getIt.registerLazySingleton<SharedPreferencesHelper>(() => SharedPreferencesHelper());
 
