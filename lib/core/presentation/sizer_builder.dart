@@ -1,33 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+/// This builder mast be around [MaterialApp],
+/// to use returned values setup [MaterialApp] builder param with [MyThemeWithSizerBuilder]
 /// Example:
 ///```
 /// SizerBuilder(
-///           builder: (fontSizeFactor, fontSizeDelta, iconThemeSize) => GetMaterialApp(
-///             debugShowCheckedModeBanner: false,
+///           builder: (fontSizeFactor, fontSizeDelta, iconThemeSize) => MaterialApp(
 ///             title: '===APP TITLE===',
 ///     ///copyWith cant be in SizerBuilder because Theme.of(context) created in MaterialApp, I dont want to wrap all pages to Theme, so...
-///             theme: getIt\<MyThemeData>().light.copyWith(
-///                   textTheme: getIt\<MyThemeData>().dark.textTheme.apply(
-///                         fontSizeFactor: fontSizeFactor,
-///                         fontSizeDelta: fontSizeDelta,
-///                       ),
-///                   iconTheme: getIt\<MyThemeData>()
-///                       .dark
-///                       .iconTheme
-///                       .copyWith(size: iconThemeSize, color: Color.fromARGB(0, 19, 131, 26)),
-///                 ),
-///             darkTheme: getIt\<MyThemeData>().dark.copyWith(
-///                   textTheme: getIt\<MyThemeData>().dark.textTheme.apply(
-///                         fontSizeFactor: fontSizeFactor,
-///                         fontSizeDelta: fontSizeDelta,
-///                       ),
-///                   iconTheme: getIt\<MyThemeData>()
-///                       .dark
-///                       .iconTheme
-///                       .copyWith(size: iconThemeSize, color: Color.fromARGB(0, 19, 131, 26)),
-///                 ),
+///             builder: (context, child) => MyThemeWithSizerBuilder(
+///                  fontSizeFactor: fontSizeFactor,
+///                  fontSizeDelta: fontSizeDelta,
+///                  iconThemeSize: iconThemeSize,
+///                  child: child ?? Placeholder()),
+///             theme: getIt\<MyThemeData>().light,
+///             darkTheme: getIt\<MyThemeData>().dark,
 ///             themeMode: getIt\<MyThemeData>().mode,
 ///```
 class SizerBuilder extends StatelessWidget {
@@ -41,7 +29,7 @@ class SizerBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, screenType) {
-        return builder((fontSizeFactor ?? 3.5).sp, (fontSizeDelta ?? 1.0).sp, (iconThemeSize ?? 100).sp);
+        return builder((fontSizeFactor ?? 3.5).sp, (fontSizeDelta ?? 1.0).sp, (iconThemeSize ?? 20).sp);
       },
     );
   }
