@@ -36,6 +36,7 @@ class CoreI18nRu implements CoreI18n {
   String get newSetting => "Новая настройка";
   String get nodeInGraphName => "Узел";
   String get notDelete => "Не удалить";
+  String get notFound => "Не найден";
   String get notLock => "Не заблокировать";
   String get notRestore => "Не восстановить";
   String get notSave => "Не сохранять";
@@ -105,6 +106,7 @@ class CoreI18nRu implements CoreI18n {
   String get viewDefaultErrorText => "ошибка отображения viewDefault для";
   String get viewStyleList => "Список";
   String get viewStyleTree => "Дерево";
+  String get widget => "Виджет";
   String get widgetEditPartsIn => "Части в";
   String get widgetEditSeeResult => "Посмотреть результат";
   String descriptionCoreSettingsEnum(CoreSettingsEnum setting) => switch (setting) {

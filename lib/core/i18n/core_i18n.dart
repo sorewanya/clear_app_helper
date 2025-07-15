@@ -42,6 +42,7 @@ class CoreI18n {
   String get newSetting => "New setting";
   String get nodeInGraphName => "Node";
   String get notDelete => "Not delete";
+  String get notFound => "Not found";
   String get notLock => "Not lock";
   String get notRestore => "Not restore";
   String get notSave => "Not save";
@@ -111,6 +112,7 @@ class CoreI18n {
   String get viewDefaultErrorText => "error displaying viewDefault for";
   String get viewStyleList => "List";
   String get viewStyleTree => "Tree";
+  String get widget => "Widget";
   String get widgetEditPartsIn => "Parts in";
   String get widgetEditSeeResult => "See result";
   String descriptionCoreSettingsEnum(CoreSettingsEnum setting) => switch (setting) {
