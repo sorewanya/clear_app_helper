@@ -87,7 +87,7 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
                 setSearchEntity: (se) {
                   settingsBloc.add(SettingsBlocEvent.load(se));
                 },
-                setState: (f) => setState(() => f()),
+                setState: (f) => mounted ? setState(() => f()) : null,
               );
             },
           ),

@@ -133,7 +133,7 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
       } else if (type == SettingsTypeEnum.savedSearch.index) {
         return ListOfSavedSearchEntityWidget(
           values: values ?? [],
-          updateValues: (newValues) => setState(() => values = newValues),
+          updateValues: (newValues) => mounted ? setState(() => values = newValues) : null,
         );
       } else if (type == SettingsTypeEnum.listOfValuesExtend.index) {
         final i = SettingsListOfValuesExtend.fromEntity(origItem);
@@ -199,7 +199,7 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
               onPressed: () {
                 FilePicker.platform.getDirectoryPath().then((path) {
                   if (path != null) {
-                    setState(() => userValue = path);
+                    if (mounted) setState(() => userValue = path);
                   }
                 });
               },

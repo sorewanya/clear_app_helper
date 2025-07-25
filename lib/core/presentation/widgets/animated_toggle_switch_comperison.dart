@@ -22,8 +22,11 @@ class AnimatedToggleSwitchComparison extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = Theme.of(context).iconTheme.size ?? 20;
     return AnimatedToggleSwitch<Comparison>.rolling(
       current: comparison,
+      height: size * 2,
+      borderWidth: size * 0.1,
       values:
           values ??
           const [

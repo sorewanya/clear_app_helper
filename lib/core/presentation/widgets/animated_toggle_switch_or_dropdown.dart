@@ -43,10 +43,15 @@ class AnimatedToggleSwitchOrDropdown extends StatelessWidget {
     final iconDatas = values!.map((e) => IconsHelper.getIconDataOrNullByString(e)).toList();
     if (iconDatas.contains(null)) haveAllIcons = false;
     final curentValue = hasIndexValue == true ? values![asInt!] : value;
+
+    final size = Theme.of(context).iconTheme.size ?? 20;
+
     return haveAllIcons
         ? AnimatedToggleSwitch<String>.rolling(
             current: curentValue,
             values: values!,
+            height: size * 2,
+            borderWidth: size * 0.1,
             onChanged: (i) => setState(() => setValue(hasIndexValue == true ? values!.indexOf(i).toString() : i)),
             iconBuilder: ((value, foreground) {
               return Icon(IconsHelper.getIconDataByString(value));
