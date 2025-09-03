@@ -25,21 +25,19 @@ class TextButtonsPlusToInt extends StatelessWidget {
             .toSet();
 
     return SizedBox(
-      height: 30,
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 60,
-          childAspectRatio: 3 / 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 20,
-        ),
-        itemCount: curentIntSet.length,
-        itemBuilder: (context, index) => TextButton(
-          onPressed: (() {
-            plusIntValue(curentIntSet.elementAt(index));
-          }),
-          child: Text("+${curentIntSet.elementAt(index)}"),
-        ),
+      child: Wrap(
+        children: [
+          ...curentIntSet.map(
+            (e) => SizedBox(
+              child: TextButton(
+                onPressed: (() {
+                  plusIntValue(e);
+                }),
+                child: Text("+$e"),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
