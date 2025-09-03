@@ -21,7 +21,6 @@ class ExampleDBLogsHelper<T extends AppEntity> implements DBLogsHelper<T> {
     int? idToEmptyCheck,
     Function()? doIfAddDefaultsInsideTxn,
   }) => throw UnimplementedError();
-  @override
   int addSync({required T item}) => throw UnimplementedError();
   @override
   Future checkAndRemoveByCount(int count, bool byItem, int id) => throw UnimplementedError();
@@ -119,4 +118,6 @@ class ExampleLocalDataSource<Type extends AppEntity, SEType extends SearchEntity
   Stream<void> watchLazy() => throw UnimplementedError();
   @override
   Stream<void> watchObjectLazy(int? id) => throw UnimplementedError();
+  @override
+  Stream<List<Type>?> watch(SEType searchEntity) => throw UnimplementedError();
 }

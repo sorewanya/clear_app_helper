@@ -27,6 +27,8 @@ abstract class LocalDataSource<Type extends AppEntity, SEType extends SearchEnti
     return dbHelper.watchObjectLazy(id);
   }
 
+  Stream<List<Type>?> watch(SEType searchEntity);
+
   Stream<void> watchLazy() {
     return dbHelper.watchLazy();
   }

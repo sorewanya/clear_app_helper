@@ -127,6 +127,10 @@ abstract class Repository<Type extends AppEntity, SEType extends SearchEntity> {
     return localDataSource.watchObjectLazy(id);
   }
 
+  Stream<List<Type>?> watch(SEType searchEntity) {
+    return localDataSource.watch(searchEntity);
+  }
+
   Stream<void> watchLazy() {
     return localDataSource.watchLazy();
   }

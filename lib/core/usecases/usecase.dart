@@ -50,6 +50,10 @@ abstract class UseCase<Type extends AppEntity, SEType extends SearchEntity> {
     return repository.watchObjectLazy(id);
   }
 
+  Stream<List<Type>?> watch(UseCaseParams<SEType> params) {
+    return repository.watch(params.searchEntity);
+  }
+
   Stream<void> watchLazy() {
     return repository.watchLazy();
   }
