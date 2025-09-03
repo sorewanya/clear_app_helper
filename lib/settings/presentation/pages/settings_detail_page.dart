@@ -183,7 +183,7 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
                     )
                     .then((path) {
                       if (path != null) {
-                        setState(() => userValue = path.paths.first);
+                        if (mounted) setState(() => userValue = path.paths.first);
                       }
                     });
               },
