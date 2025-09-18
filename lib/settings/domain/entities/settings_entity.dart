@@ -63,7 +63,7 @@ class SettingsEntity with AppEntityWithIsDeleted, AppEntityWithName, EquatableMi
       SettingsTypeEnum.listOfValuesExtend => SettingsListOfValuesExtend.fromEntity(this) ?? this,
       SettingsTypeEnum.savedSearch => SettingsSavedSearch.fromEntity(this) ?? this,
       SettingsTypeEnum.rfwWidget => this,
-      SettingsTypeEnum.doublee => SettingsInt.fromEntity(this) ?? this,
+      SettingsTypeEnum.doublee => SettingsDouble.fromEntity(this) ?? this,
     };
   }
 
