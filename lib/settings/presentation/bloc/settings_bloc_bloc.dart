@@ -220,7 +220,7 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
 
   Stream<SettingsEntity?> getStreamByEnum(EnumsOfSettings e) => getStreamByNamed(e.name);
   Stream<SettingsEntity?> getStreamByNamed(String name) {
-    return settingsUseCase.getStream(getByNamed(name)?.id! ?? 0);
+    return settingsUseCase.getStream(getByNamed(name)?.id ?? 0);
   }
 
   SettingsEntity? getByEnum(EnumsOfSettings e) => getByNamed(e.name);
