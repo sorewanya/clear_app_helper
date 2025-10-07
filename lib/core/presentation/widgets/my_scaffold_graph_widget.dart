@@ -9,6 +9,7 @@ import 'package:clear_app_helper/core/route_helper.dart';
 
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
+//TODO use PageController? its remove needed to shimmers
 
 ///
 /// Widget wrapper around [MyScaffoldWidget], created for ListPage's,

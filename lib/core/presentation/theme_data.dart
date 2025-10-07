@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 /// ...
 /// )
 /// ```
-/// see [SizerBuilder] to add
+//TODO create user settings
 class MyThemeData {
   late ThemeData light;
   late ThemeData dark;
@@ -43,6 +43,7 @@ class MyThemeData {
       _instance ?? MyThemeData._internal(light, dark, mode);
 }
 
+//TODO remove, use color directly in Theme
 Color getColorByBoolIsDeleted(bool isDeleted, context) {
   return isDeleted
       ? Theme.of(context).colorScheme.error.withValues(alpha: 0.3)

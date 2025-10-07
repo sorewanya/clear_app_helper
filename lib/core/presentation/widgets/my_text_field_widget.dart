@@ -13,6 +13,7 @@ class MyTextFieldWidget extends StatefulWidget {
     super.key,
     required this.text,
     required this.formFieldKey,
+    //TODO remove getValue, add initialValue and use controllers
     required this.getValue,
     required this.setValue,
     this.setShouldPop,

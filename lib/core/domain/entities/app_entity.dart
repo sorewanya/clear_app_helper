@@ -7,7 +7,7 @@ abstract interface class AppEntity with EquatableMixin {
   List<Object?> get props => [];
   Map<String, dynamic> toJson();
   AppEntity.fromJson(Map<String, dynamic> json) : id = 0;
-  get copyWith => throw UnsupportedError('copyWith not implemented $runtimeType');
+  dynamic get copyWith => throw UnsupportedError('copyWith not implemented $runtimeType');
 }
 
 abstract mixin class AppEntityWithIsDeleted implements AppEntity {

@@ -1,6 +1,8 @@
 import 'package:clear_app_helper/core/domain/entities/app_entity.dart';
 
 abstract class DBHelper<T extends AppEntity> {
+  bool defaultChecked = false;
+
   ///Global setting: Case sensitive in search queries
   bool getCaseSensitiveSettings();
 

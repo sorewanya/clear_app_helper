@@ -8,6 +8,8 @@ import 'package:clear_app_helper/core/domain/entities/search_entity.dart';
 abstract class ExampleLog extends DBLog {}
 
 class ExampleDBLogsHelper<T extends AppEntity> implements DBLogsHelper<T> {
+  @override
+  bool defaultChecked = false;
   ExampleDBLogsHelper();
   @override
   Future<int> add({required T item}) => throw UnimplementedError();
@@ -53,6 +55,8 @@ class ExampleDBLogsHelper<T extends AppEntity> implements DBLogsHelper<T> {
 }
 
 class ExampleDBHelper<T extends AppEntity> implements DBHelper<T> {
+  @override
+  bool defaultChecked = false;
   ExampleDBHelper();
   @override
   Future<int> add({required T item}) => throw UnimplementedError();

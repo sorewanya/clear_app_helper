@@ -22,7 +22,7 @@ class AnimatedToggleSwitchOrDropdown extends StatelessWidget {
   /// ```
   /// setState: (f) => setState(() => f()),
   /// ```
-  final Function(Function f) setState;
+  final Function(Function() f) setState;
   const AnimatedToggleSwitchOrDropdown({
     super.key,
     required this.value,

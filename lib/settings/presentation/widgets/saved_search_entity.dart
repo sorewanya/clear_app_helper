@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:animated_tree_view/helpers/collection_utils.dart';
 import 'package:clear_app_helper/core/i18n/core_i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,10 +43,16 @@ class SavedSearchEntity<Type extends SearchEntity> extends StatelessWidget {
     if (s == null) return const SizedBox();
 
     final List<NamedSearchEntity<Type>> list =
-        s.values?.map((e) {
-          Map<String, dynamic> m = json.decode(e);
-          return NamedSearchEntity<Type>(m.entries.first.key, fromJson(m.entries.first.value));
-        }).toList() ??
+        s.values
+            ?.map((e) {
+              Map<String, dynamic> m = json.decode(e);
+              if (m.entries.isNotEmpty) {
+                return NamedSearchEntity<Type>(m.entries.first.key, fromJson(m.entries.first.value));
+              }
+              return null;
+            })
+            .filterNotNull()
+            .toList() ??
         [];
 
     setSavedList(List<NamedSearchEntity<Type>> list) {

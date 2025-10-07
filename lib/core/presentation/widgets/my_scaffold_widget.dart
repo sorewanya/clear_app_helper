@@ -11,6 +11,7 @@ class MyScaffoldWidget extends StatelessWidget {
     required this.body,
     this.floatingActionButton,
     this.appBarTitle,
+    this.titleTextStyle,
     this.appBarLeading,
     this.appBarActions,
     this.drawer,
@@ -27,6 +28,7 @@ class MyScaffoldWidget extends StatelessWidget {
 
   /// [AppBar] title
   final Widget? appBarTitle;
+  final TextStyle? titleTextStyle;
 
   /// Leading in Scaffold's [AppBar]
   final Widget? appBarLeading;
@@ -53,6 +55,7 @@ class MyScaffoldWidget extends StatelessWidget {
           fit: BoxFit.fitHeight,
           child: appBarTitle ?? Text(GetIt.instance<CoreI18n>().defaultAppBarTitle),
         ),
+        titleTextStyle: titleTextStyle,
         leading: appBarLeading,
         actions:
             appBarActions ??

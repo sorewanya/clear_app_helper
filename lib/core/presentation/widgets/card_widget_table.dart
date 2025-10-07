@@ -3,6 +3,7 @@ import 'package:clear_app_helper/core/presentation/widgets/builders/curent_entit
 import 'package:clear_app_helper/core/presentation/widgets/table_cell_slidable_action_open.dart';
 import 'package:flutter/material.dart';
 
+//TODO add shimmer
 class CardWidgetTable extends StatelessWidget {
   const CardWidgetTable({
     super.key,
