@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// "+1 +5 +10" buttons
 class TextButtonsPlusToInt extends StatelessWidget {
-  const TextButtonsPlusToInt({super.key, required this.plusIntValue, this.intSet});
+  const TextButtonsPlusToInt({required this.plusIntValue, super.key, this.intSet});
 
   /// value to plus callback
   final Function(int value) plusIntValue;
@@ -20,7 +20,7 @@ class TextButtonsPlusToInt extends StatelessWidget {
         context
             .read<SettingsBloc>()
             .getStringsListUserOrDefaultValueByNamed(CoreSettingsEnum.plusIntValues.name)
-            .map((e) => int.tryParse(e))
+            .map(int.tryParse)
             .whereType<int>()
             .toSet();
 
@@ -30,10 +30,10 @@ class TextButtonsPlusToInt extends StatelessWidget {
           ...curentIntSet.map(
             (e) => SizedBox(
               child: TextButton(
-                onPressed: (() {
+                onPressed: () {
                   plusIntValue(e);
-                }),
-                child: Text("+$e"),
+                },
+                child: Text('+$e'),
               ),
             ),
           ),

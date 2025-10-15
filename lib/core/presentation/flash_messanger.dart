@@ -1,14 +1,15 @@
-import 'package:clear_app_helper/core/i18n/core_i18n.dart';
-import 'package:flash/flash.dart';
-import 'package:flash/flash_helper.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'dart:async';
 
 import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
+import 'package:clear_app_helper/core/i18n/core_i18n.dart';
 import 'package:clear_app_helper/core/icons_helper.dart';
 import 'package:clear_app_helper/core/presentation/functions.dart';
 import 'package:clear_app_helper/settings/domain/entities/settings_entity.dart';
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
+import 'package:flash/flash.dart';
+import 'package:flash/flash_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 
 //TODO make as fifo
@@ -30,27 +31,29 @@ class FlashMessangerHelper {
       await ifYes();
       return;
     }
-    showBottomFlash(
-      ifYes: () async {
-        if (autoSave == null) {
-          await showInfoBarText(
-            doNotShowSettingsName: CoreSettingsEnum.autoSaveOnPop.name,
-            duration: const Duration(seconds: 6),
-            text: GetIt.instance<CoreI18n>().exitSaveConfirm,
-            buttonText: GetIt.instance<CoreI18n>().settingChange,
-            showItemNavifator: null,
-          );
-        }
-        await ifYes();
-      },
-      pop: pop,
-      persistent: persistent,
-      titleText: GetIt.instance<CoreI18n>().saveConfirm,
-      contentText:
-          '${GetIt.instance<CoreI18n>().changeDataIn} $entityInfo, ${GetIt.instance<CoreI18n>().exitSaveConfirm}',
-      // dismissText: GetIt.instance<CoreI18n>().stay,
-      yesText: GetIt.instance<CoreI18n>().save,
-      noText: GetIt.instance<CoreI18n>().notSave,
+    unawaited(
+      showBottomFlash(
+        ifYes: () async {
+          if (autoSave == null) {
+            await showInfoBarText(
+              doNotShowSettingsName: CoreSettingsEnum.autoSaveOnPop.name,
+              duration: const Duration(seconds: 6),
+              text: GetIt.instance<CoreI18n>().exitSaveConfirm,
+              buttonText: GetIt.instance<CoreI18n>().settingChange,
+              showItemNavifator: null,
+            );
+          }
+          await ifYes();
+        },
+        pop: pop,
+        persistent: persistent,
+        titleText: GetIt.instance<CoreI18n>().saveConfirm,
+        contentText:
+            '${GetIt.instance<CoreI18n>().changeDataIn} $entityInfo, ${GetIt.instance<CoreI18n>().exitSaveConfirm}',
+        // dismissText: GetIt.instance<CoreI18n>().stay,
+        yesText: GetIt.instance<CoreI18n>().save,
+        noText: GetIt.instance<CoreI18n>().notSave,
+      ),
     );
   }
 
@@ -62,7 +65,7 @@ class FlashMessangerHelper {
     required bool isDeleted,
     bool? persistent,
     EdgeInsets? margin,
-  }) async => await showFlashf(
+  }) async => showFlashf(
     then: (b) async {
       if (b == true) {
         await ifYes();
@@ -85,7 +88,7 @@ class FlashMessangerHelper {
     required Function() pop,
     required Function(bool b) setIsLock,
     required bool isLock,
-  }) async => await showBottomFlash(
+  }) async => showBottomFlash(
     ifYes: () async {
       await setIsLock(!isLock);
       await saveForm(isLockIgnore: true);
@@ -102,7 +105,6 @@ class FlashMessangerHelper {
   /// * [pop] user say no(button "Not save" etc)
   /// * [titleText] title
   /// * [contentText] main content
-  /// * [dismissText] dismiss button text
   /// * [yesText] yes button text
   /// * [noText] no button text
   static Future<void> showBottomFlash({
@@ -110,7 +112,6 @@ class FlashMessangerHelper {
     required Function() pop,
     required String titleText,
     required String contentText,
-    // required String dismissText,
     required String yesText,
     required String noText,
     bool? persistent,
@@ -228,7 +229,7 @@ class FlashMessangerHelper {
     await showFlash(
       context: Get.context!,
       persistent: persistent ?? true,
-      barrierBlur: 3.0,
+      barrierBlur: 3,
       barrierColor: Colors.black38,
       barrierDismissible: true,
       duration: duration,
@@ -279,13 +280,13 @@ class FlashMessangerHelper {
   /// * [showItemNavifator] callback tap to button with [buttonText], usually RouteHelper.toNamed to right now created item
   /// * [duration] ?? const Duration(seconds: 3)
   /// * [doNotShowSettingsName] SettingsEntity name, what setted by 'Do Not Show Again!',
-  /// used in [setNextSettingsVariantByName], this value not checked in this place!
+  /// used in [`setNextSettingsVariantByName`], this value not checked in this place!
   static Future<void> showInfoBarText({
     required String text,
+    required void Function()? showItemNavifator,
+    required String doNotShowSettingsName,
     String? buttonText,
     Duration? duration,
-    required Function? showItemNavifator,
-    required String doNotShowSettingsName,
   }) async {
     if (Get.context != null) {
       final sc = ScrollController();
@@ -308,7 +309,7 @@ class FlashMessangerHelper {
               ),
               if (showItemNavifator != null)
                 TextButton(
-                  onPressed: (() => showItemNavifator()),
+                  onPressed: showItemNavifator,
                   child: Text(
                     buttonText ?? GetIt.instance<CoreI18n>().sHOW,
                     style: const TextStyle(color: Colors.amber),
@@ -336,7 +337,7 @@ class FlashMessangerHelper {
         duration: duration ?? const Duration(seconds: 10),
         primaryActionBuilder: (context, controller) {
           return TextButton(
-            onPressed: (() => controller.dismiss(true)),
+            onPressed: () => controller.dismiss(true),
             child: const Text('Ok', style: TextStyle(color: Colors.amber)),
           );
         },

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MyPaddedDecoratedBoxWithOpacity extends StatelessWidget {
   const MyPaddedDecoratedBoxWithOpacity({
     super.key,
-    this.padding = const EdgeInsets.all(4.0),
+    this.padding = const EdgeInsets.all(4),
     this.decoration,
     this.child,
     this.borderOpacity = 0.3,
@@ -24,7 +24,8 @@ class MyPaddedDecoratedBoxWithOpacity extends StatelessWidget {
     return Padding(
       padding: padding,
       child: DecoratedBox(
-        decoration: decoration ??
+        decoration:
+            decoration ??
             BoxDecoration(
               border: Border.all(color: Theme.of(context).primaryColorLight.withValues(alpha: borderOpacity)),
               borderRadius: borderRadius ?? BorderRadius.circular(10),

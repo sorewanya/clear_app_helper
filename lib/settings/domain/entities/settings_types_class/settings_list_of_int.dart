@@ -11,21 +11,23 @@ class SettingsListOfInt extends SettingsEntity {
             confirmType: item.confirmType,
             type: item.type,
             values: item.values,
-            isDeleted: item.isDeleted)
+            isDeleted: item.isDeleted,
+          )
         : null;
   }
 
-  SettingsListOfInt(
-      {required super.id,
-      required super.name,
-      required super.defaultValue,
-      required super.userValue,
-      required super.confirmType,
-      required super.type,
-      required super.values,
-      required super.isDeleted});
+  SettingsListOfInt({
+    required super.id,
+    required super.name,
+    required super.defaultValue,
+    required super.userValue,
+    required super.confirmType,
+    required super.type,
+    required super.values,
+    required super.isDeleted,
+  });
 
   List<int> get getUserOrDefaultAsListOfInt =>
-      (userValue ?? defaultValue).split(',').map((e) => int.tryParse(e)).whereType<int>().toList();
+      (userValue ?? defaultValue).split(',').map(int.tryParse).whereType<int>().toList();
   Set<int> get getUserOrDefaultAsSetOfInt => getUserOrDefaultAsListOfInt.toSet();
 }

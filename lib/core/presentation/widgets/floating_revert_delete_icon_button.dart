@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 
 /// delete/restore FloatingActionButton
 class FloatingRevertDeleteIconButton extends StatelessWidget {
-  const FloatingRevertDeleteIconButton({super.key, required this.isDeleted, required this.onPressed});
+  const FloatingRevertDeleteIconButton({required this.isDeleted, required this.onPressed, super.key});
 
   final Function() onPressed;
 

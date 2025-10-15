@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CurentEntityBuilder extends StatelessWidget {
-  const CurentEntityBuilder({super.key, required this.childFunc});
+  const CurentEntityBuilder({required this.childFunc, super.key});
 
+  // ignore: strict_raw_type
   final Widget Function(EntityBloc curentBloc) childFunc;
 
   @override
@@ -16,7 +17,7 @@ class CurentEntityBuilder extends StatelessWidget {
       childFunc: (_) {
         return BlocBuilder<CurentEntityBloc, CurentEntityBlocState>(
           builder: (context, state) => switch (state) {
-            EmptyCurentEntityBlocState() => loadingIndicator("CurentEntityBloc empty"),
+            EmptyCurentEntityBlocState() => loadingIndicator('CurentEntityBloc empty'),
             LoadedCurentEntityBlocState() => childFunc(state.curentBloc),
           },
         );

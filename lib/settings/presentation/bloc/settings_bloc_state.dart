@@ -3,17 +3,11 @@ part of 'settings_bloc_bloc.dart';
 sealed class SettingsBlocState {
   const factory SettingsBlocState.initial() = InitialSettingsBlocState;
   const factory SettingsBlocState.loading() = LoadingSettingsBlocState;
-  const factory SettingsBlocState.loadingError(
-    String errorMessage,
-    SettingsSearchEntity searchEntity,
-  ) = LoadingErrorSettingsBlocState;
-  const factory SettingsBlocState.loaded(
-    IdsFinded<SettingsSearchEntity> settingsIdsFinded,
-  ) = LoadedSettingsBlocState;
+  const factory SettingsBlocState.loadingError(String errorMessage, SettingsSearchEntity searchEntity) =
+      LoadingErrorSettingsBlocState;
+  const factory SettingsBlocState.loaded(IdsFinded<SettingsSearchEntity> settingsIdsFinded) = LoadedSettingsBlocState;
   const factory SettingsBlocState.saving() = SavingSettingsBlocState;
-  const factory SettingsBlocState.savingError(
-    String errorMessage,
-  ) = SavingErrorSettingsBlocState;
+  const factory SettingsBlocState.savingError(String errorMessage) = SavingErrorSettingsBlocState;
 }
 
 class InitialSettingsBlocState implements SettingsBlocState {

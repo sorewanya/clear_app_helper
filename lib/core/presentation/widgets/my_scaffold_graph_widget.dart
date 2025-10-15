@@ -21,23 +21,23 @@ class MyScaffoldGraphWidget<AppEntityType extends AppEntity> extends StatelessWi
     required this.curentSearchEntity,
     required this.appBarTitle,
     required this.listSearchWidget,
-    this.appBarLeading,
     required this.drawer,
+    required this.emptySearchEntity,
+    required this.cardWidget,
+    required this.resetSearch,
+    this.appBarLeading,
     this.topInBodyColumn,
     this.endDrawer,
     super.key,
-    required this.emptySearchEntity,
-    required this.cardWidget,
     this.addButton = true,
     this.onLongPress,
-    required this.resetSearch,
   });
 
   final Function()? resetSearch;
 
   /// callback to get cartWidget for item
   ///
-  /// for example: StreamBuilder with [CardWidgetTable]
+  /// for example: StreamBuilder with [`CardWidgetTable`]
   final Widget Function(int itemId) cardWidget;
 
   /// Route name ([RouteHelper.toNamed]), sended to [GraphViewOfItems]

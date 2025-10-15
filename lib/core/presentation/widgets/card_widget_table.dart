@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 //TODO add shimmer
 class CardWidgetTable extends StatelessWidget {
   const CardWidgetTable({
-    super.key,
     required this.isDeleted,
     required this.leftWidgets,
     required this.centerWidgets,
     required this.centerExtendedWidgetsNames,
     required this.centerExtendedWidget,
     required this.rightWidgets,
+    super.key,
   });
 
   final bool? isDeleted;
@@ -31,18 +31,20 @@ class CardWidgetTable extends StatelessWidget {
           TableRow(
             decoration: tableDecoration(context, isDeleted),
             children: [
-              (curentBloc.itemActions?.getItemSwipeLeftToRight(context)?.isNotEmpty ?? false)
-                  ? const TableCellSlidableActionOpen()
-                  : const SizedBox(width: 20),
+              if (curentBloc.itemActions?.getItemSwipeLeftToRight(context)?.isNotEmpty ?? false)
+                const TableCellSlidableActionOpen()
+              else
+                const SizedBox(width: 20),
               ...leftWidgets,
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [...centerWidgets, if (centerExtendedWidgetsNames.isNotEmpty) centerExtendedWidget],
               ),
               ...rightWidgets,
-              (curentBloc.itemActions?.getItemSwipeRightToLeft(context)?.isNotEmpty ?? false)
-                  ? const TableCellSlidableActionOpen(right: true)
-                  : const SizedBox(width: 20),
+              if (curentBloc.itemActions?.getItemSwipeRightToLeft(context)?.isNotEmpty ?? false)
+                const TableCellSlidableActionOpen(right: true)
+              else
+                const SizedBox(width: 20),
             ],
           ),
         ],

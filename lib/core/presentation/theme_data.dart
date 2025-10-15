@@ -44,8 +44,10 @@ class MyThemeData {
 }
 
 //TODO remove, use color directly in Theme
-Color getColorByBoolIsDeleted(bool isDeleted, context) {
-  return isDeleted
-      ? Theme.of(context).colorScheme.error.withValues(alpha: 0.3)
-      : Theme.of(context).primaryColor.withValues(alpha: 0.6);
+Color getColorByBoolIsDeleted(bool isDeleted, BuildContext context) {
+  if (isDeleted) {
+    return Theme.of(context).colorScheme.error.withValues(alpha: 0.3);
+  } else {
+    return Theme.of(context).primaryColor.withValues(alpha: 0.6);
+  }
 }

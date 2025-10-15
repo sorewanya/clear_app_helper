@@ -12,7 +12,7 @@ class MyDetailPageWidget extends StatelessWidget {
 
   final void Function()? checkToPopMessage;
 
-  /// short entity name used in [showSaveBottomFlash]
+  /// short entity name used in [`showSaveBottomFlash`]
   final String entityInfo;
 
   /// send to [MyScaffoldWidget]
@@ -23,10 +23,10 @@ class MyDetailPageWidget extends StatelessWidget {
   /// A button displayed floating above [body], in the bottom right corner. Передаётся в [MyScaffoldWidget]
   final List<Widget> floatingActionButtonList;
 
-  /// sended to [showSaveBottomFlash]
+  /// sended to [`showSaveBottomFlash`]
   final Function() saveForm;
 
-  /// sended to [showSaveBottomFlash]
+  /// sended to [`showSaveBottomFlash`]
   final Function() pop;
 
   /// used in [MyPaddedDecoratedBoxWithOpacity]
@@ -39,15 +39,15 @@ class MyDetailPageWidget extends StatelessWidget {
 
   final ScrollController? singleChildScrollViewController;
   const MyDetailPageWidget({
-    super.key,
     required this.getShouldPop,
     required this.entityInfo,
-    this.appBarTitle,
     required this.body,
     required this.floatingActionButtonList,
     required this.saveForm,
     required this.pop,
     required this.formkey,
+    super.key,
+    this.appBarTitle,
     this.singleChildScrollViewController,
     this.isDelete,
     this.notScrollUpperWidgets,
@@ -56,7 +56,7 @@ class MyDetailPageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void check({Function? elseDo}) {
+    void check({Function()? elseDo}) {
       if (!getShouldPop()) {
         checkToPopMessage != null
             ? checkToPopMessage!()
@@ -77,7 +77,7 @@ class MyDetailPageWidget extends StatelessWidget {
         appBarTitle: appBarTitle,
         appBarLeading: TextButton(
           onPressed: () {
-            check(elseDo: () => pop());
+            check(elseDo: pop);
           },
           child: IconsHelper.getIconByEnum(IconSettingsEnum.goBack),
         ),
@@ -91,7 +91,7 @@ class MyDetailPageWidget extends StatelessWidget {
                   key: formkey,
                   child: MyPaddedDecoratedBoxWithOpacity(
                     color: getColorByBoolIsDeleted(isDelete != null && isDelete == true, context),
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8),
                     child: body,
                   ),
                 ),

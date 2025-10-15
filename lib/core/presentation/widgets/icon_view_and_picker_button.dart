@@ -5,7 +5,7 @@ import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:material_design_icons_flutter/icon_map.dart';
 
 class IconViewAndPickerButton extends StatelessWidget {
-  const IconViewAndPickerButton({super.key, this.setString, this.setInt, required this.initIconCode});
+  const IconViewAndPickerButton({required this.initIconCode, super.key, this.setString, this.setInt});
 
   /// new codePoint callbacks
   final Function(String? codeString)? setString;
@@ -15,27 +15,27 @@ class IconViewAndPickerButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, IconPickerIcon> myIconMap = {};
+    final Map<String, IconPickerIcon> myIconMap = {};
     iconMap.forEach(
       (key, value) => myIconMap[key] = IconPickerIcon(
         data: MdiIconData(value.codePoint),
-        name: "${value.codePoint}",
-        pack: IconPack.custom,
+        name: '${value.codePoint}',
+        pack: IconPack.custom.name,
       ),
     );
     return initIconCode != null
         ? TextButton(
             onPressed: () async {
-              IconData? icon = (await showIconPicker(
+              final IconData? icon = (await showIconPicker(
                 context,
                 configuration: SinglePickerConfiguration(iconPackModes: [IconPack.custom], customIconPack: myIconMap),
               ))?.data;
               if (icon != null) {
-                if (setString != null) setString!(icon.codePoint.toString());
-                if (setInt != null) setInt!(icon.codePoint);
+                setString?.call(icon.codePoint.toString());
+                setInt?.call(icon.codePoint);
               }
             },
-            child: Row(children: [Icon(MdiIconData(initIconCode!), size: 40), const Text(" Изменить иконку")]),
+            child: Row(children: [Icon(MdiIconData(initIconCode!), size: 40), const Text(' Изменить иконку')]),
           )
         : const SizedBox();
   }

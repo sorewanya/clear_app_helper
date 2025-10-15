@@ -11,22 +11,24 @@ class SettingsListOfValuesExtend extends SettingsEntity {
             confirmType: item.confirmType,
             type: item.type,
             values: item.values,
-            isDeleted: item.isDeleted)
+            isDeleted: item.isDeleted,
+          )
         : null;
   }
 
-  SettingsListOfValuesExtend(
-      {required super.id,
-      required super.name,
-      required super.defaultValue,
-      required super.userValue,
-      required super.confirmType,
-      required super.type,
-      required super.values,
-      required super.isDeleted});
+  SettingsListOfValuesExtend({
+    required super.id,
+    required super.name,
+    required super.defaultValue,
+    required super.userValue,
+    required super.confirmType,
+    required super.type,
+    required super.values,
+    required super.isDeleted,
+  });
 
   List<int> get getUserOrDefaultAsListOfIndexes =>
-      super.getUserOrDefaultValueAsString.split(',').map((e) => int.tryParse(e)).whereType<int>().toList();
+      super.getUserOrDefaultValueAsString.split(',').map(int.tryParse).whereType<int>().toList();
 
   List<String> getUserOrDefaultAsListOfString(SettingsEntity? Function(String name) blocGetByNamedFunc) {
     if (values == null) return [];

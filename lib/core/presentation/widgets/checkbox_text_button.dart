@@ -2,7 +2,7 @@ import 'package:clear_app_helper/core/presentation/widgets/icon_true_false.dart'
 import 'package:flutter/material.dart';
 
 class CheckboxTextButton extends StatelessWidget {
-  const CheckboxTextButton({super.key, this.onPressed, required this.check, required this.checkName});
+  const CheckboxTextButton({required this.check, required this.checkName, super.key, this.onPressed});
 
   final Function()? onPressed;
   final bool check;

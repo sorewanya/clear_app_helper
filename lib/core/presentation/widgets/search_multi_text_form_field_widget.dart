@@ -8,13 +8,13 @@ import 'package:flutter/material.dart';
 ///for [SearchElementIntSet] and [SearchElementStringSet]
 class SearchElementMultiTextFormFieldWidget<T extends SearchElement> extends StatelessWidget {
   const SearchElementMultiTextFormFieldWidget({
-    super.key,
     required this.label,
     required this.getElement,
     required this.setElement(T updatedElement),
-    this.defaultValue,
     required this.filtr,
     required this.setState,
+    super.key,
+    this.defaultValue,
   });
 
   /// send to [SearchElementMultiRow], as "$label: "
@@ -33,7 +33,7 @@ class SearchElementMultiTextFormFieldWidget<T extends SearchElement> extends Sta
   /// ```
   /// setState: (f) => setState(() => f()),
   /// ```
-  final Function(Function f) setState;
+  final Function(Function() f) setState;
 
   @override
   Widget build(BuildContext context) {
@@ -45,18 +45,17 @@ class SearchElementMultiTextFormFieldWidget<T extends SearchElement> extends Sta
         if (searchElement is SearchElementIntSet) {
           final int idToAdd = searchElement.intSet.contains(defaultValue ?? 0)
               ? 0
-              : int.tryParse(defaultValue ?? "") ?? 0;
+              : int.tryParse(defaultValue ?? '') ?? 0;
           searchElement.intSet.add(idToAdd);
         } else if (searchElement is SearchElementStringSet) {
-          final String stringToAdd = searchElement.stringSet.contains("") ? "" : defaultValue ?? "";
+          final String stringToAdd = searchElement.stringSet.contains('') ? '' : defaultValue ?? '';
           searchElement.stringSet.add(stringToAdd);
         }
         setElement(searchElement);
       }),
       children: searchElement is SearchElementIntSet
           ? searchElement.intSet.map((index) {
-              final TextEditingController controller = TextEditingController();
-              controller.text = index.toString();
+              final TextEditingController controller = TextEditingController()..text = index.toString();
               return SizedBox(
                 width: 250,
                 child: SearchTextFormFieldResetResetWidget(
@@ -65,7 +64,7 @@ class SearchElementMultiTextFormFieldWidget<T extends SearchElement> extends Sta
                   filtr: filtr,
                   setSearchParam: (i) {
                     searchElement.intSet.remove(index);
-                    if (i != "") searchElement.intSet.add(int.tryParse(i) ?? 0);
+                    if (i != '') searchElement.intSet.add(int.tryParse(i) ?? 0);
                   },
                   setState: setState,
                   variant: TextFieldVariant.integer(),
@@ -74,8 +73,7 @@ class SearchElementMultiTextFormFieldWidget<T extends SearchElement> extends Sta
             }).toList()
           : searchElement is SearchElementStringSet
           ? searchElement.stringSet.map((string) {
-              final TextEditingController controller = TextEditingController();
-              controller.text = string;
+              final TextEditingController controller = TextEditingController()..text = string;
               return SizedBox(
                 width: 250,
                 child: SearchTextFormFieldResetResetWidget(
@@ -84,13 +82,13 @@ class SearchElementMultiTextFormFieldWidget<T extends SearchElement> extends Sta
                   filtr: filtr,
                   setSearchParam: (i) {
                     searchElement.stringSet.remove(string);
-                    if (i != "") searchElement.stringSet.add(i);
+                    if (i != '') searchElement.stringSet.add(i);
                   },
                   setState: setState,
                 ),
               );
             }).toList()
-          : [loadingIndicator("SearchElementMultiTextFormFieldWidget: unimplemented type of SearchElement loaded")],
+          : [loadingIndicator('SearchElementMultiTextFormFieldWidget: unimplemented type of SearchElement loaded')],
     );
   }
 }

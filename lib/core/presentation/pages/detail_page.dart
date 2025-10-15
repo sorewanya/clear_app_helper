@@ -8,7 +8,7 @@ import 'package:get_it/get_it.dart';
 
 class DetailPage<Entity, EBloc extends EntityBloc<dynamic, dynamic, Entity, SE>, SE extends SearchEntity>
     extends StatelessWidget {
-  const DetailPage({super.key, required this.loadString, required this.child, required this.getIt});
+  const DetailPage({required this.loadString, required this.child, required this.getIt, super.key});
 
   final String loadString;
   final Widget Function(Entity entity) child;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 /// This builder mast be around [MaterialApp],
-/// to use returned values setup [MaterialApp] builder param with [MyThemeWithSizerBuilder]
+/// to use returned values setup [MaterialApp] builder param with [`MyThemeWithSizerBuilder`]
 /// Example:
 ///```
 /// SizerBuilder(

@@ -9,29 +9,30 @@ abstract class UseCaseParams<SEType extends SearchEntity> {
   UseCaseParams(this.searchEntity);
 }
 
+// ignore: avoid_types_as_parameter_names
 abstract class UseCase<Type extends AppEntity, SEType extends SearchEntity> {
   final Repository<Type, SEType> repository;
 
   UseCase(this.repository);
 
   Future<Either<Failure, List<Type>>> call(UseCaseParams<SEType> useCaseParams) async {
-    return await repository.getAll(useCaseParams.searchEntity);
+    return repository.getAll(useCaseParams.searchEntity);
   }
 
   Future<Either<Failure, Type>> getById(int id) async {
-    return await repository.getById(id);
+    return repository.getById(id);
   }
 
   Future<Either<Failure, int>> add(Type item) async {
-    return await repository.add(item);
+    return repository.add(item);
   }
 
   Future<Either<Failure, List<int>>> addMany(List<Type> itemList) async {
-    return await repository.addMany(itemList);
+    return repository.addMany(itemList);
   }
 
   Future<Either<Failure, int>?> update(Type item) async {
-    return await repository.update(item);
+    return repository.update(item);
   }
 
   Stream<Type?> getStream(int id) {
@@ -39,11 +40,11 @@ abstract class UseCase<Type extends AppEntity, SEType extends SearchEntity> {
   }
 
   Future<Either<Failure, List<int>>> getAllIds(UseCaseParams<SEType> params) async {
-    return await repository.getAllIds(params.searchEntity);
+    return repository.getAllIds(params.searchEntity);
   }
 
   Future<Either<Failure, int>> countOfFinded(UseCaseParams<SEType> params) async {
-    return await repository.countOfFinded(params.searchEntity);
+    return repository.countOfFinded(params.searchEntity);
   }
 
   Stream<void> watchObjectLazy(int? id) {
@@ -61,19 +62,19 @@ abstract class UseCase<Type extends AppEntity, SEType extends SearchEntity> {
 
 mixin UseCaseWithRevertDelete<Type extends AppEntity, SEType extends SearchEntity> on UseCase<Type, SEType> {
   Future<Either<Failure, int>?> revertDelete(Type item) async {
-    return await repository.revertDelete(item);
+    return repository.revertDelete(item);
   }
 }
 mixin UseCaseWithDelete<Type extends AppEntity, SEType extends SearchEntity> on UseCase<Type, SEType> {
   Future<Either<Failure, bool>> delete(int itemId) async {
-    return await repository.delete(itemId);
+    return repository.delete(itemId);
   }
 
   Future<Either<Failure, void>> deleteAll() async {
-    return await repository.deleteAll();
+    return repository.deleteAll();
   }
 
   Future<Either<Failure, int>> deleteMany(List<int> ids) async {
-    return await repository.deleteMany(ids);
+    return repository.deleteMany(ids);
   }
 }

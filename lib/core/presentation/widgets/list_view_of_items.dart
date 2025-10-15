@@ -11,13 +11,13 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 /// List widget, used [ListView.separated]
 class ListViewOfItems extends StatefulWidget {
   const ListViewOfItems({
-    super.key,
     required this.curentIdsList,
     required this.onTapRouteName,
     required this.emptySearchEntity,
     required this.cardWidget,
-    this.onLongPress,
     required this.controller,
+    super.key,
+    this.onLongPress,
   });
 
   /// elements ids
@@ -30,7 +30,7 @@ class ListViewOfItems extends StatefulWidget {
   final SearchEntity emptySearchEntity;
 
   /// callback to get cartWidget for item
-  /// [removeItemFromListView] - callback to remove from listView.
+  /// [`removeItemFromListView`] - callback to remove from listView.
   final Widget Function(int id, Function removeItemFromListView) cardWidget;
 
   /// Long tap callback
@@ -61,16 +61,17 @@ class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProv
     return Expanded(
       child: ListView.separated(
         controller: widget.controller,
-        itemBuilder: ((context, index) {
+        itemBuilder: (context, index) {
           final body = Padding(
             padding: const EdgeInsets.all(1.0),
             child: GestureDetector(
-              onTap: (() {
+              onTap: () {
                 RouteHelper.toNamed(
                   widget.onTapRouteName,
-                  arguments: widget.emptySearchEntity.copyWith(id: curentIdsList[index]),
+                  // ignore: avoid_dynamic_calls
+                  arguments: widget.emptySearchEntity.copyWith(id: curentIdsList[index]) as SearchEntity,
                 );
-              }),
+              },
               onLongPress: () => widget.onLongPress?.call(widget.curentIdsList[index]),
               child: ListTile(
                 title: widget.cardWidget(curentIdsList[index], () => setState(() => curentIdsList.removeAt(index))),
@@ -82,7 +83,7 @@ class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProv
             childFunc: (curentBloc) => curentBloc.itemActions != null
                 ? Builder(
                     builder: (context) {
-                      getSlidableActions(ItemActionEnum id) => switch (id) {
+                      SlidableAction getSlidableActions(ItemActionEnum id) => switch (id) {
                         ItemActionEnum.makeCopy => SlidableAction(
                           onPressed: (_) {
                             curentBloc.itemActions!.makeCopy(curentIdsList[index]);
@@ -169,7 +170,7 @@ class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProv
                   )
                 : body,
           );
-        }),
+        },
         separatorBuilder: (context, index) {
           return Divider(color: Colors.grey[400]);
         },

@@ -78,6 +78,9 @@ class SettingsEntity with AppEntityWithIsDeleted, AppEntityWithName, EquatableMi
   List<Object?> get props => [name, defaultValue, userValue, confirmType, type, values, isDeleted];
 
   String get getUserOrDefaultValueAsString => userValue ?? defaultValue;
+
+  ///dont have "next" in default type, use toType() to get true implement
+  // ignore: avoid_returning_this
   SettingsEntity getSettingsWithNextVariant() => this;
 
   factory SettingsEntity.fromJson(Map<String, dynamic> json) => _$SettingsEntityFromJson(json);

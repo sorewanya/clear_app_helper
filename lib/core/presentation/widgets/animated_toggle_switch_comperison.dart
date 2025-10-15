@@ -14,10 +14,10 @@ class AnimatedToggleSwitchComparison extends StatelessWidget {
   final List<Comparison>? values;
 
   const AnimatedToggleSwitchComparison({
-    super.key,
     required this.comparison,
     required this.setComparison,
     required this.values,
+    super.key,
   });
 
   @override
@@ -37,10 +37,10 @@ class AnimatedToggleSwitchComparison extends StatelessWidget {
             Comparison.equal,
             Comparison.notEqual,
           ],
-      onChanged: (i) => setComparison(i),
-      iconBuilder: ((value, foreground) {
+      onChanged: setComparison,
+      iconBuilder: (value, foreground) {
         return Icon(IconsHelper.getIconDataByString(Comparison.fromComparison(value)));
-      }),
+      },
     );
   }
 }

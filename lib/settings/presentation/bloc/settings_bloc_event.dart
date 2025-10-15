@@ -3,18 +3,14 @@ part of 'settings_bloc_bloc.dart';
 sealed class SettingsBlocEvent {
   const factory SettingsBlocEvent.errorShowed() = ErrorShowedSettingsBlocEvent;
   const factory SettingsBlocEvent.loadFullLists() = LoadFullListsSettingsBlocEvent;
-  const factory SettingsBlocEvent.load(
-    SettingsSearchEntity? searchEntity,
-  ) = LoadSettingsBlocEvent;
+  const factory SettingsBlocEvent.load(SettingsSearchEntity? searchEntity) = LoadSettingsBlocEvent;
   const factory SettingsBlocEvent.saveForm({
     required SettingsEntity? origItem,
     required SettingsEntity item,
     required Function() pop,
     required GlobalKey<FormState> formKey,
   }) = SaveFormSettingsBlocEvent;
-  const factory SettingsBlocEvent.update({
-    required SettingsEntity item,
-  }) = UpdateSettingsBlocEvent;
+  const factory SettingsBlocEvent.update({required SettingsEntity item}) = UpdateSettingsBlocEvent;
   const factory SettingsBlocEvent.resetToDefault(SettingsEntity item) = ResetToDefaultSettingsBlocEvent;
 }
 
@@ -47,9 +43,7 @@ class SaveFormSettingsBlocEvent implements SettingsBlocEvent {
 }
 
 class UpdateSettingsBlocEvent implements SettingsBlocEvent {
-  const UpdateSettingsBlocEvent({
-    required this.item,
-  });
+  const UpdateSettingsBlocEvent({required this.item});
 
   final SettingsEntity item;
 }

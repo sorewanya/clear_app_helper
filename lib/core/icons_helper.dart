@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
 import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
 import 'package:clear_app_helper/settings/domain/entities/enums_of_settings.dart';
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 ///Material Design Icons IconData class
 class MdiIconData extends IconData {
@@ -19,7 +18,7 @@ class IconsHelper {
   /// default: MdiIcons.crosshairsQuestion
   static IconData getIconData(String nameOfSettings) {
     return MdiIconData(
-      int.tryParse(GetIt.instance<SettingsBloc>().getUserOrDefaultValueByNamed(nameOfSettings) ?? "0xf1136") ?? 0xf1136,
+      int.tryParse(GetIt.instance<SettingsBloc>().getUserOrDefaultValueByNamed(nameOfSettings) ?? '0xf1136') ?? 0xf1136,
     );
   }
 
@@ -32,22 +31,22 @@ class IconsHelper {
   static IconData? getIconDataOrNullByString(String name) {
     IconData? data;
     final mapOfSettings = {
-      "<": IconSettingsEnum.less,
-      "<=": IconSettingsEnum.lessOrEqual,
-      ">": IconSettingsEnum.greater,
-      ">=": IconSettingsEnum.greaterOrEqual,
-      "=": IconSettingsEnum.equal,
-      "true": IconSettingsEnum.trueIcon,
-      "false": IconSettingsEnum.falseIcon,
-      "dark": IconSettingsEnum.themeDark,
-      "light": IconSettingsEnum.themeLight,
-      "systemLight": IconSettingsEnum.themeSystem,
-      "setTimeData": IconSettingsEnum.setTimeData,
-      "full": IconSettingsEnum.textFull,
-      "midl": IconSettingsEnum.textMidl,
-      "short": IconSettingsEnum.textShort,
-      "slider": IconSettingsEnum.slider,
-      "textField": IconSettingsEnum.textField,
+      '<': IconSettingsEnum.less,
+      '<=': IconSettingsEnum.lessOrEqual,
+      '>': IconSettingsEnum.greater,
+      '>=': IconSettingsEnum.greaterOrEqual,
+      '=': IconSettingsEnum.equal,
+      'true': IconSettingsEnum.trueIcon,
+      'false': IconSettingsEnum.falseIcon,
+      'dark': IconSettingsEnum.themeDark,
+      'light': IconSettingsEnum.themeLight,
+      'systemLight': IconSettingsEnum.themeSystem,
+      'setTimeData': IconSettingsEnum.setTimeData,
+      'full': IconSettingsEnum.textFull,
+      'midl': IconSettingsEnum.textMidl,
+      'short': IconSettingsEnum.textShort,
+      'slider': IconSettingsEnum.slider,
+      'textField': IconSettingsEnum.textField,
     };
     data = mapOfSettings.containsKey(name) ? getIconDataByEnum(mapOfSettings[name]!) : MdiIcons.fromString(name);
     return data;

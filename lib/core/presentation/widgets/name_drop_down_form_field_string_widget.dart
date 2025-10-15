@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 /// wrapper around [DropdownButtonFormField]\<String>
 class NameDropDownFormFieldStringWidget extends StatelessWidget {
   const NameDropDownFormFieldStringWidget({
-    super.key,
     required this.dropdownNameValue,
     required this.setState,
     required this.setDropdownNameValue,
     required this.setDropdownNameValueId,
     required this.curentMap,
+    super.key,
     this.setShouldPop,
     this.withoutUnderline = false,
   });
@@ -32,31 +32,31 @@ class NameDropDownFormFieldStringWidget extends StatelessWidget {
   /// ```
   /// setState:(f) => setState(() => f()),
   /// ```
-  final Function(Function f) setState;
+  final Function(Function() f) setState;
 
   /// if true variant "_" not added
   final bool withoutUnderline;
 
   @override
   Widget build(BuildContext context) {
-    List<DropdownMenuItem<String>> dropdownList = [];
+    final List<DropdownMenuItem<String>> dropdownList = [];
 
     curentMap.forEach((key, value) => dropdownList.add(DropdownMenuItem<String>(value: key, child: Text(key))));
     return DropdownButtonFormField<String>(
       value: dropdownNameValue,
-      icon: IconsHelper.getIconByEnum((IconSettingsEnum.dropDown)),
+      icon: IconsHelper.getIconByEnum(IconSettingsEnum.dropDown),
       elevation: 16,
       items: [
-        if (!withoutUnderline) const DropdownMenuItem<String>(value: "_", child: Text("_")),
+        if (!withoutUnderline) const DropdownMenuItem<String>(value: '_', child: Text('_')),
         ...dropdownList,
       ],
       onChanged: (newValue) {
         setState(() {
           if (newValue == dropdownNameValue) return;
-          if (setShouldPop != null) setShouldPop!(false);
+          setShouldPop?.call(false);
           if (newValue != null) {
             setDropdownNameValue(newValue);
-            if (newValue != "_") {
+            if (newValue != '_') {
               setDropdownNameValueId(curentMap[newValue]!);
             }
           }

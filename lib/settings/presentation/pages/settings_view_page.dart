@@ -1,9 +1,6 @@
 import 'package:animated_tree_view/tree_view/tree_node.dart';
-import 'package:clear_app_helper/core/i18n/core_i18n.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/material.dart';
-
 import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
+import 'package:clear_app_helper/core/i18n/core_i18n.dart';
 import 'package:clear_app_helper/core/presentation/bloc/curent_entity/curent_entity_bloc_bloc.dart';
 import 'package:clear_app_helper/core/presentation/functions.dart';
 import 'package:clear_app_helper/core/presentation/widgets/loading_indicator.dart';
@@ -17,11 +14,13 @@ import 'package:clear_app_helper/settings/domain/entities/settings_entity.dart';
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
 import 'package:clear_app_helper/settings/presentation/widgets/settings_card_widget.dart';
 import 'package:clear_app_helper/settings/presentation/widgets/settings_list_search_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SettingsViewPage extends StatelessWidget {
   final Widget drawer;
-  const SettingsViewPage({super.key, required this.drawer});
+  const SettingsViewPage({required this.drawer, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -78,24 +77,24 @@ class SettingsViewPage extends StatelessWidget {
                     builder: (context, snapshot) {
                       if (!snapshot.hasData && snapshot.data == null) return const SizedBox();
 
-                      TreeNode<int?> tree = TreeNode<int?>.root();
+                      final TreeNode<int?> tree = TreeNode<int?>.root();
 
-                      for (SettingsEntity item in snapshot.data!) {
+                      for (final SettingsEntity item in snapshot.data!) {
                         ///for example "global.logging.size.limit"
-                        final nameList = item.name.split(".");
+                        final nameList = item.name.split('.');
                         final rootChild = TreeNode<int?>(key: nameList[0], parent: tree.root);
                         if (!tree.root.childrenAsList.contains(rootChild)) {
                           tree.add(rootChild); //"global"
                         }
                         for (int index = 1; index < nameList.length - 1; index++) {
-                          final parentPath = nameList.sublist(0, index).join(".");
+                          final parentPath = nameList.sublist(0, index).join('.');
                           final node = TreeNode<int?>(key: nameList[index], parent: tree.elementAt(parentPath));
 
                           if (!tree.elementAt(parentPath).childrenAsList.contains(node)) {
                             tree.elementAt(parentPath).add(node); // first "logging", next "size"
                           }
                         }
-                        final parent = nameList.sublist(0, nameList.length - 1).join("."); //"size"
+                        final parent = nameList.sublist(0, nameList.length - 1).join('.'); //"size"
                         final finalNode = TreeNode<int?>(
                           key: nameList.last,
                           parent: tree.elementAt(parent),

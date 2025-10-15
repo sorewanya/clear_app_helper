@@ -11,6 +11,7 @@ class CurentEntityBloc<CurentEntity extends AppEntity, CurentSearchEntity extend
     extends Bloc<CurentEntityBlocEvent, CurentEntityBlocState> {
   CurentEntityBloc() : super(const EmptyCurentEntityBlocState()) {
     on<CurentEntityBlocEvent>((event, emit) async {
+      // ignore: strict_raw_type
       void emitLoaded(EntityBloc curentBloc) => emit.call(CurentEntityBlocState.loaded(curentBloc: curentBloc));
       switch (event) {
         case SetNewCurentsCurentEntityBlocEvent():

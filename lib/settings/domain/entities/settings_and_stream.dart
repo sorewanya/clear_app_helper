@@ -17,7 +17,7 @@ class BlocSettingsAndStream {
     });
   }
   BlocSettingsAndStream.fromDB({required this.setting, required this.settingsBloc}) {
-    name = setting?.name ?? "";
+    name = setting?.name ?? '';
     value = setting?.getUserOrDefaultValueAsString;
     stream = settingsBloc.getStreamById(setting?.id! ?? 0);
     stream.listen((event) {
@@ -29,7 +29,7 @@ class BlocSettingsAndStream {
 
 class BlocSettingsAndStreamInt extends BlocSettingsAndStream {
   BlocSettingsAndStreamInt({required super.name, required super.settingsBloc});
-  int? get getDefaultValueAsIntOrNull => int.tryParse(super.setting?.defaultValue ?? "");
-  int? get getUserOrDefaultValueAsIntOrNull => int.tryParse(super.value ?? "");
+  int? get getDefaultValueAsIntOrNull => int.tryParse(super.setting?.defaultValue ?? '');
+  int? get getUserOrDefaultValueAsIntOrNull => int.tryParse(super.value ?? '');
   int get getUserOrDefaultValueAsIntOrZero => getUserOrDefaultValueAsIntOrNull ?? 0;
 }

@@ -10,12 +10,12 @@ import 'package:get_it/get_it.dart';
 
 class MyTextFieldWidget extends StatefulWidget {
   const MyTextFieldWidget({
-    super.key,
     required this.text,
     required this.formFieldKey,
     //TODO remove getValue, add initialValue and use controllers
     required this.getValue,
     required this.setValue,
+    super.key,
     this.setShouldPop,
     this.validator,
     this.canBeEmpty,
@@ -40,7 +40,7 @@ class MyTextFieldWidget extends StatefulWidget {
   /// send to [TextFormField]
   final Key formFieldKey;
 
-  /// result (or "" if null) is set as [initialValue] at [TextFormField], if [controller] == null
+  /// result (or "" if null) is set as [`initialValue`] at [TextFormField], if [controller] == null
   final String? Function() getValue;
 
   /// if true validation =0 or ="" pass
@@ -59,12 +59,12 @@ class MyTextFieldWidget extends StatefulWidget {
   final Function(bool shouldPop)? setShouldPop;
 
   /// validator started after >0 and empty checks
-  final Function(String value)? validator;
+  final String? Function(String? value)? validator;
 
   /// send to [TextFormField]
   final Function(String)? onFieldSubmitted;
 
-  /// send to [TextFormField], if null use [getValue] or set "" in [initialValue]
+  /// send to [TextFormField], if null use [getValue] or set "" in [`initialValue`]
   final TextEditingController? controller;
 
   /// send to [TextFormField]
@@ -85,7 +85,7 @@ class _MyTextFieldWidgetState extends State<MyTextFieldWidget> {
 
   @override
   void initState() {
-    controller = widget.controller ?? TextEditingController(text: widget.getValue() ?? "");
+    controller = widget.controller ?? TextEditingController(text: widget.getValue() ?? '');
     super.initState();
   }
 
@@ -95,12 +95,12 @@ class _MyTextFieldWidgetState extends State<MyTextFieldWidget> {
     super.dispose();
   }
 
-  _sendValue(String value) {
+  void _sendValue(String value) {
     sendedValue = controller.text;
     widget.setValue(controller.text);
   }
 
-  trySendValue() {
+  void trySendValue() {
     if (timer == null) {
       _sendValue(controller.text);
 
@@ -132,10 +132,10 @@ class _MyTextFieldWidgetState extends State<MyTextFieldWidget> {
       autofocus: widget.autofocus ?? false,
       onFieldSubmitted: widget.onFieldSubmitted,
       onSaved: (value) {
-        if (widget.setShouldPop != null) widget.setShouldPop!(false);
+        widget.setShouldPop?.call(false);
         if (value != null) {
           if (widget.variant is DoubleTextFieldVariant) {
-            controller.text = value.replaceAll(",", ".");
+            controller.text = value.replaceAll(',', '.');
             trySendValue();
           } else {
             trySendValue();
@@ -143,9 +143,9 @@ class _MyTextFieldWidgetState extends State<MyTextFieldWidget> {
         }
       },
       onChanged: (value) {
-        if (widget.setShouldPop != null) widget.setShouldPop!(false);
+        widget.setShouldPop?.call(false);
         if (widget.variant is DoubleTextFieldVariant) {
-          controller.text = value.replaceAll(",", ".");
+          controller.text = value.replaceAll(',', '.');
           trySendValue();
         } else {
           trySendValue();
@@ -154,18 +154,18 @@ class _MyTextFieldWidgetState extends State<MyTextFieldWidget> {
       validator: (value) {
         //TODO use package form_field_validator?
         if (widget.canBeEmpty == null || widget.canBeEmpty == false) {
-          if (value == null || value == "") return '${widget.text} ${GetIt.instance<CoreI18n>().validatorNotEmpty}';
+          if (value == null || value == '') return '${widget.text} ${GetIt.instance<CoreI18n>().validatorNotEmpty}';
           switch (widget.variant) {
             case IntegerTextFieldVariant():
               if ((int.tryParse(value) ?? -1) < 0) return GetIt.instance<CoreI18n>().validatorIntegerNotLessZero;
             case DoubleTextFieldVariant():
-              final v = value.replaceAll(",", ".");
+              final v = value.replaceAll(',', '.');
               if ((double.tryParse(v) ?? -1) < 0) return GetIt.instance<CoreI18n>().validatorDoubleNotLessZero;
             default:
               break;
           }
         }
-        return (widget.validator != null) ? widget.validator!(value ?? "") : null;
+        return widget.validator?.call(value);
       },
     );
   }

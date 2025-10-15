@@ -1,2 +1,2 @@
-///see [ConfirmTypeWarning]
+///see [`ConfirmTypeWarning`]
 enum SettingsRequiredTypesEnum { required, requiredStop }

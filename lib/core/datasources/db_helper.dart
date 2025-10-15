@@ -24,18 +24,18 @@ abstract class DBHelper<T extends AppEntity> {
 
   Future<int> update({required T item});
 
-  ///It deletes, not sets the value [isDeleted]!
+  ///It deletes, not sets the value [`isDeleted`]!
   Future<bool> delete(int id);
 
-  ///It deletes, not sets the value [isDeleted]!
+  ///It deletes, not sets the value [`isDeleted`]!
   Future<int> deleteMany(List<int> ids);
 
-  ///It deletes, not sets the value [isDeleted]!
+  ///It deletes, not sets the value [`isDeleted`]!
   Future<void> deleteAll();
 
   Future<int> add({required T item});
 
-  Stream<T?> watchObject(id);
+  Stream<T?> watchObject(int id);
 
   Stream<void> watchObjectLazy(int? id);
 
@@ -47,7 +47,7 @@ mixin DBLogsHelper<T extends AppEntity> on DBHelper<T> {
 
   (int? type, int? count) loggingSizeLimited();
 
-  Future checkAndRemoveByCount(int count, bool byItem, int id);
+  Future<void> checkAndRemoveByCount(int count, bool byItem, int id);
 
-  Future<int> addLog({required T item, required id});
+  Future<int> addLog({required T item, required int id});
 }

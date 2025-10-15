@@ -17,17 +17,17 @@ class MyScaffoldListWidget<AppEntityType extends AppEntity> extends StatelessWid
     required this.curentSearchEntity,
     required this.appBarTitle,
     required this.listSearchWidget,
-    this.appBarLeading,
     required this.drawer,
+    required this.emptySearchEntity,
+    required this.cardWidget,
+    required this.resetSearch,
+    required this.controller,
+    this.appBarLeading,
     this.topInBodyColumn,
     this.endDrawer,
     super.key,
-    required this.emptySearchEntity,
-    required this.cardWidget,
     this.addButton = true,
     this.onLongPress,
-    required this.resetSearch,
-    required this.controller,
   });
 
   final Function()? resetSearch;

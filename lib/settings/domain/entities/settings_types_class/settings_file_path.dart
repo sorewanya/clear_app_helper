@@ -27,5 +27,5 @@ class SettingsFilePath extends SettingsEntity {
     required super.isDeleted,
   });
   FileType get getFileType => values != null ? FileType.values.byName(values![0]) : FileType.any;
-  List<String>? get getFileAllowedExtensions => (values?[0] == "custom") ? values!.sublist(1) : null;
+  List<String>? get getFileAllowedExtensions => (values?[0] == 'custom') ? values!.sublist(1) : null;
 }

@@ -24,25 +24,25 @@ class AnimatedToggleSwitchOrDropdown extends StatelessWidget {
   /// ```
   final Function(Function() f) setState;
   const AnimatedToggleSwitchOrDropdown({
-    super.key,
     required this.value,
     required this.values,
     required this.setValue,
     required this.setState,
     required this.hasIndexValue,
+    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final asInt = int.tryParse(value);
-    if (values == null || (hasIndexValue == true && asInt == null)) {
+    if (values == null || (hasIndexValue && asInt == null)) {
       return const SizedBox();
     }
 
     bool haveAllIcons = true;
-    final iconDatas = values!.map((e) => IconsHelper.getIconDataOrNullByString(e)).toList();
+    final iconDatas = values!.map(IconsHelper.getIconDataOrNullByString).toList();
     if (iconDatas.contains(null)) haveAllIcons = false;
-    final curentValue = hasIndexValue == true ? values![asInt!] : value;
+    final curentValue = hasIndexValue ? values![asInt!] : value;
 
     final size = Theme.of(context).iconTheme.size ?? 20;
 
@@ -53,21 +53,19 @@ class AnimatedToggleSwitchOrDropdown extends StatelessWidget {
             height: size * 2,
             borderWidth: size * 0.1,
             onChanged: (i) => setState(() => setValue(hasIndexValue == true ? values!.indexOf(i).toString() : i)),
-            iconBuilder: ((value, foreground) {
-              return Icon(IconsHelper.getIconDataByString(value));
-            }),
+            iconBuilder: (value, foreground) => Icon(IconsHelper.getIconDataByString(value)),
           )
         : DropdownButtonFormField<String>(
             value: curentValue,
-            icon: IconsHelper.getIconByEnum((IconSettingsEnum.dropDown)),
+            icon: IconsHelper.getIconByEnum(IconSettingsEnum.dropDown),
             elevation: 16,
             items: values!.map((e) {
               return DropdownMenuItem<String>(value: e, child: Text(e));
             }).toList(),
-            onChanged: ((value) {
-              final newValue = hasIndexValue == true ? values!.indexOf(value!).toString() : value!;
+            onChanged: (value) {
+              final newValue = hasIndexValue ? values!.indexOf(value!).toString() : value!;
               setState(() => setValue(newValue));
-            }),
+            },
           );
   }
 }

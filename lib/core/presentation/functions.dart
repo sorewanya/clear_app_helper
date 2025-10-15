@@ -58,18 +58,18 @@ class FunctionsHelper {
   }
 
   static Future<void> saveItemFromForm<T extends AppEntity>({
-    required Function(T item) blocAdd,
-    required Function(T item) blocUpdate,
+    required Future<int> Function(T item) blocAdd,
+    required Future<int> Function(T item) blocUpdate,
     required T item,
     required T? origItem,
     required String textSave,
     required String textValidFailed,
     required Function() pop,
-    Function(int id)? doAfterSave,
     required Function(int id) showItemNavifator,
     required GlobalKey<FormState> formKey,
+    Function(int id)? doAfterSave,
   }) async {
-    final isUpdated = origItem != null ? item != origItem : false;
+    final isUpdated = item != origItem;
     var id = 0;
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
@@ -90,7 +90,7 @@ class FunctionsHelper {
       await showAfterSaveItemInfobar(id: id, showItemNavifator: showItemNavifator, text: textSave);
       pop();
     } else {
-      FlashMessangerHelper.showErrorBarText(text: textValidFailed);
+      await FlashMessangerHelper.showErrorBarText(text: textValidFailed);
     }
   }
 
@@ -105,6 +105,7 @@ class FunctionsHelper {
   }
 
   static void setNextSettingsVariantByItem({required SettingsEntity? item}) {
+    SettingsEntity? result;
     if (item == null) return;
     if (item.type != SettingsTypeEnum.boolean.index && item.type != SettingsTypeEnum.value.index) {
       if (kDebugMode) {
@@ -112,7 +113,7 @@ class FunctionsHelper {
       }
       return;
     } else if (item.type == SettingsTypeEnum.boolean.index) {
-      item = SettingsBool.fromEntity(item)?.getSettingsWithNextVariant();
+      result = SettingsBool.fromEntity(item)?.getSettingsWithNextVariant();
     } else if (item.type == SettingsTypeEnum.value.index) {
       if (item.values == null) {
         if (kDebugMode) {
@@ -120,14 +121,14 @@ class FunctionsHelper {
         }
         return;
       }
-      item = SettingsValue.fromEntity(item)?.getSettingsWithNextVariant();
+      result = SettingsValue.fromEntity(item)?.getSettingsWithNextVariant();
     }
 
-    if (item == null) return;
-    GetIt.instance<SettingsBloc>().add(SettingsBlocEvent.update(item: item));
+    if (result == null) return;
+    GetIt.instance<SettingsBloc>().add(SettingsBlocEvent.update(item: result));
   }
 
-  static void showResetUpdateInfoBarOrFilter({required Function() filterSearchResults}) async {
+  static Future<void> showResetUpdateInfoBarOrFilter({required Function() filterSearchResults}) async {
     final sName = CoreSettingsEnum.searchUpdateListAfterReset.name;
     await setBoolSettingInFlash(
       settingName: sName,
@@ -156,9 +157,12 @@ class FunctionsHelper {
         noText: GetIt.instance<CoreI18n>().setup,
         then: (b) {
           if (b == true) {
-            GetIt.instance<SettingsBloc>().add(
-              SettingsBlocEvent.update(item: (setting as SettingsEntity).copyWith(userValue: setting?.defaultValue)),
-            );
+            if (setting != null) {
+              GetIt.instance<SettingsBloc>().add(
+                // ignore: avoid_dynamic_calls
+                SettingsBlocEvent.update(item: setting.copyWith(userValue: setting.defaultValue) as SettingsEntity),
+              );
+            }
           }
           if (b == false) {
             RouteHelper.offNamedUntil(
@@ -174,7 +178,7 @@ class FunctionsHelper {
     if (doIfFalse != null && setting?.getUserOrDefaultValueAsBool == false) await doIfFalse();
   }
 
-  static void showAutoSaveInfoBar() async {
+  static Future<void> showAutoSaveInfoBar() async {
     String? settings;
 
     settings = GetIt.instance<SettingsBloc>().getByEnum(CoreSettingsEnum.autoSaveOnPop)?.userValue;
@@ -198,26 +202,15 @@ class FunctionsHelper {
     return null;
   }
 
-  static T? firstLoadGetArgsItemBySearch<T extends SearchEntity, ItemT>({
-    required Function(ItemT item) setItem,
-    required blocGetById,
-  }) {
-    final argSearch = getArgs<T>();
-    if (argSearch != null && argSearch.id != null) {
-      blocGetById(argSearch.id!).then((value) => setItem(value));
-    }
-    return argSearch;
-  }
-
-  /// use [showDeleteOrRestoreBottomFlash], [revertDelete]
+  /// use [`showDeleteOrRestoreBottomFlash`], [revertDelete]
   static Future<void> showBottomFlashAndRevertDelete<T extends AppEntityWithIsDeleted>({
-    Function()? pop,
-    required dynamic item,
+    required T item,
     required Future<int> Function(T item, {bool revertDelete}) update,
-    required dynamic searchEntity,
+    required SearchEntity searchEntity,
     required String showBottomFlashText,
     required String revertDeleteText,
     required String routeName,
+    Function()? pop,
   }) async {
     await FlashMessangerHelper.showDeleteOrRestoreBottomFlash(
       isDeleted: item.isDeleted,
@@ -228,10 +221,8 @@ class FunctionsHelper {
           pop: pop ?? () {},
           item: item,
           text: revertDeleteText,
-          showItemNavifator: ((_) {
-            searchEntity.id = item.id;
-            RouteHelper.toNamed(routeName, arguments: searchEntity);
-          }),
+          // ignore: avoid_dynamic_calls
+          showItemNavifator: (_) => RouteHelper.toNamed(routeName, arguments: searchEntity.copyWith(id: item.id)),
         );
       },
       pop: () {},

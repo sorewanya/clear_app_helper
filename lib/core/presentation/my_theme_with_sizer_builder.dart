@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class MyThemeWithSizerBuilder extends StatelessWidget {
   const MyThemeWithSizerBuilder({
-    super.key,
     required this.fontSizeFactor,
     required this.fontSizeDelta,
     required this.iconThemeSize,
     required this.child,
+    super.key,
   });
   final double fontSizeFactor;
   final double fontSizeDelta;

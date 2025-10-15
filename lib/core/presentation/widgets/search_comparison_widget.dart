@@ -16,16 +16,16 @@ import 'package:flutter/material.dart';
 ///for [SearchElementDateTimeComparisons], [SearchElementIntegerComparisons], [SearchElementDoubleComparisons]
 class SearchElementComparisonWidget<T extends SearchElement> extends StatelessWidget {
   const SearchElementComparisonWidget({
-    super.key,
     required this.label,
     required this.getElement,
     required this.setElement(T updatedElement),
-    this.defaultComparison,
     required this.filtr,
     required this.setState,
+    super.key,
+    this.defaultComparison,
   });
 
-  /// send to [SearchElementMultiRow], as "$label: "
+  /// send to [`SearchElementMultiRow`], as "$label: "
   final String label;
 
   final T Function() getElement;
@@ -39,7 +39,7 @@ class SearchElementComparisonWidget<T extends SearchElement> extends StatelessWi
   /// ```
   /// setState: (f) => setState(() => f()),
   /// ```
-  final Function(Function f) setState;
+  final Function(Function() f) setState;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class SearchElementComparisonWidget<T extends SearchElement> extends StatelessWi
       children: [
         Column(
           children: [
-            SizedBox(width: 70, child: Text("$label: ")),
+            SizedBox(width: 70, child: Text('$label: ')),
             TextButton(
               onPressed: () => setState(() {
                 switch (searchElement) {
@@ -64,7 +64,7 @@ class SearchElementComparisonWidget<T extends SearchElement> extends StatelessWi
                   case SearchElementIntegerComparisons():
                     searchElement.comparisonList.add(ComparisonInteger(value: 0, comparison: defaultComparison));
                   case _:
-                    null;
+                    ;
                 }
                 setElement(searchElement);
               }),
@@ -97,15 +97,15 @@ class SearchElementComparisonWidget<T extends SearchElement> extends StatelessWi
                                 : null,
                             comparison: curentList[index].comparison,
                             setComparison: (newComparison) => setState(() {
-                              searchElement is SearchElementDateTimeComparisons
-                                  ? searchElement.comparisonList[index] = searchElement.comparisonList[index].copyWith(
-                                      comparison: newComparison,
-                                    )
-                                  : searchElement is SearchElementIntegerComparisons
-                                  ? searchElement.comparisonList[index] = searchElement.comparisonList[index].copyWith(
-                                      comparison: newComparison,
-                                    )
-                                  : null;
+                              if (searchElement is SearchElementDateTimeComparisons) {
+                                searchElement.comparisonList[index] = searchElement.comparisonList[index].copyWith(
+                                  comparison: newComparison,
+                                );
+                              } else if (searchElement is SearchElementIntegerComparisons) {
+                                searchElement.comparisonList[index] = searchElement.comparisonList[index].copyWith(
+                                  comparison: newComparison,
+                                );
+                              }
                               setElement(searchElement);
                             }),
                           ),
@@ -135,15 +135,15 @@ class SearchElementComparisonWidget<T extends SearchElement> extends StatelessWi
                                   child: MyTextFieldWidget(
                                     variant: const TextFieldVariant.integer(),
                                     text: label,
-                                    formFieldKey: ValueKey("label #$index"),
-                                    getValue: () => "${(item as ComparisonInteger).value}",
-                                    setValue: ((newValue) {
+                                    formFieldKey: ValueKey('label #$index'),
+                                    getValue: () => '${(item as ComparisonInteger).value}',
+                                    setValue: (newValue) {
                                       searchElement.comparisonList[index] = ComparisonInteger(
                                         value: int.tryParse(newValue) ?? 0,
                                         comparison: item.comparison,
                                       );
                                       setElement(searchElement);
-                                    }),
+                                    },
                                     decoration: getDefaultSearchInputDecorator(
                                       labelAndHintText: label,
                                       onPressed: filtr,
@@ -159,15 +159,15 @@ class SearchElementComparisonWidget<T extends SearchElement> extends StatelessWi
                                   child: MyTextFieldWidget(
                                     variant: const TextFieldVariant.double(),
                                     text: label,
-                                    formFieldKey: ValueKey("label #$index"),
-                                    getValue: () => "${(item as ComparisonDouble).value}",
-                                    setValue: ((newValue) {
+                                    formFieldKey: ValueKey('label #$index'),
+                                    getValue: () => '${(item as ComparisonDouble).value}',
+                                    setValue: (newValue) {
                                       searchElement.comparisonList[index] = ComparisonDouble(
-                                        value: double.tryParse(newValue.replaceAll(",", ".")) ?? 0,
+                                        value: double.tryParse(newValue.replaceAll(',', '.')) ?? 0,
                                         comparison: item.comparison,
                                       );
                                       setElement(searchElement);
-                                    }),
+                                    },
                                     decoration: getDefaultSearchInputDecorator(
                                       labelAndHintText: label,
                                       onPressed: filtr,
@@ -180,11 +180,11 @@ class SearchElementComparisonWidget<T extends SearchElement> extends StatelessWi
                     ),
                     ClearIconButton(
                       onPressed: () => setState(() {
-                        (searchElement is SearchElementDateTimeComparisons)
-                            ? searchElement.comparisonList.removeAt(index)
-                            : (searchElement is SearchElementIntegerComparisons)
-                            ? searchElement.comparisonList.removeAt(index)
-                            : null;
+                        if (searchElement is SearchElementDateTimeComparisons) {
+                          searchElement.comparisonList.removeAt(index);
+                        } else if (searchElement is SearchElementIntegerComparisons) {
+                          searchElement.comparisonList.removeAt(index);
+                        }
                         setElement(searchElement);
                       }),
                     ),

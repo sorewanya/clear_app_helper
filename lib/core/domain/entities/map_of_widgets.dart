@@ -10,5 +10,5 @@ class MapOfWidgets {
 
   Widget getWidget(String widgetName) =>
       mapOfWidgets[widgetName] ??
-      Text("${GetIt.instance<CoreI18n>().widget} $widgetName ${GetIt.instance<CoreI18n>().notFound.toLowerCase()}");
+      Text('${GetIt.instance<CoreI18n>().widget} $widgetName ${GetIt.instance<CoreI18n>().notFound.toLowerCase()}');
 }

@@ -3,7 +3,7 @@ import 'package:clear_app_helper/core/icons_helper.dart';
 import 'package:flutter/material.dart';
 
 class ItemDeleteIcon extends StatelessWidget {
-  const ItemDeleteIcon({super.key, required this.isDeleted, required this.onPressed});
+  const ItemDeleteIcon({required this.isDeleted, required this.onPressed, super.key});
 
   final bool isDeleted;
 

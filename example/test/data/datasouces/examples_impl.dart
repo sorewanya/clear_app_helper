@@ -14,7 +14,7 @@ class ExampleDBLogsHelper<T extends AppEntity> implements DBLogsHelper<T> {
   @override
   Future<int> add({required T item}) => throw UnimplementedError();
   @override
-  Future<int> addLog({required T item, required id}) => throw UnimplementedError();
+  Future<int> addLog({required T item, required int id}) => throw UnimplementedError();
   @override
   Future<List<int>> addMany({required List<T> itemList}) => throw UnimplementedError();
   @override
@@ -25,7 +25,7 @@ class ExampleDBLogsHelper<T extends AppEntity> implements DBLogsHelper<T> {
   }) => throw UnimplementedError();
   int addSync({required T item}) => throw UnimplementedError();
   @override
-  Future checkAndRemoveByCount(int count, bool byItem, int id) => throw UnimplementedError();
+  Future<void> checkAndRemoveByCount(int count, bool byItem, int id) => throw UnimplementedError();
   @override
   Future<bool> delete(int id) => throw UnimplementedError();
   @override
@@ -49,7 +49,7 @@ class ExampleDBLogsHelper<T extends AppEntity> implements DBLogsHelper<T> {
   @override
   Stream<void> watchLazy() => throw UnimplementedError();
   @override
-  Stream<T?> watchObject(id) => throw UnimplementedError();
+  Stream<T?> watchObject(int id) => throw UnimplementedError();
   @override
   Stream<void> watchObjectLazy(int? id) => throw UnimplementedError();
 }
@@ -93,6 +93,7 @@ class ExampleDBHelper<T extends AppEntity> implements DBHelper<T> {
   Stream<void> watchObjectLazy(int? id) => throw UnimplementedError();
 }
 
+// ignore: avoid_types_as_parameter_names
 class ExampleLocalDataSource<Type extends AppEntity, SEType extends SearchEntity>
     implements LocalDataSource<Type, SEType> {
   ExampleLocalDataSource();
@@ -111,7 +112,7 @@ class ExampleLocalDataSource<Type extends AppEntity, SEType extends SearchEntity
   @override
   Future<List<int>> getAllIds(SEType searchEntity) => throw UnimplementedError();
   @override
-  Future getById(int id) => throw UnimplementedError();
+  Future<Type?> getById(int id) => throw UnimplementedError();
   @override
   Stream<Type?> getStream(int id) => throw UnimplementedError();
   @override

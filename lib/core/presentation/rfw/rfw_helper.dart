@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:clear_app_helper/core/icons_helper.dart';
 import 'package:clear_app_helper/core/presentation/rfw/rfw_widget.dart';
 import 'package:clear_app_helper/core/presentation/widgets/icon_true_false.dart';
-import 'package:clear_app_helper/core/presentation/widgets/item_delete_icon.dart';
 import 'package:clear_app_helper/settings/domain/entities/enums_of_settings.dart';
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:rfw/rfw.dart';
 
 class RfwHelper {
@@ -12,20 +11,20 @@ class RfwHelper {
   final void Function(String, Map<String, Object?>)? onEvent;
   final SettingsBloc settingsBloc;
   RfwHelper({required this.values, required this.settingsBloc, this.onEvent});
-  //TODO есть некий decodeLibraryBlob, нужно понять - может в виде него и хранить подобную библиотеку что бы если что можно её было подменять?
+  //TODO use decodeLibraryBlob ?
   WidgetLibrary localWidgets = LocalWidgetLibrary(<String, LocalWidgetBuilder>{
     'CircleAvatar': (BuildContext context, DataSource source) {
-      return CircleAvatar(child: Text(source.v<String>(<Object>["text"]) ?? ""));
+      return CircleAvatar(child: Text(source.v<String>(<Object>['text']) ?? ''));
     },
     'IconTrueFalse': (BuildContext context, DataSource source) {
-      return IconTrueFalse(check: source.v<bool>(<Object>["check"]) ?? false);
+      return IconTrueFalse(check: source.v<bool>(<Object>['check']) ?? false);
     },
     //TODOLATE когда добавят в rfw fontPackage заменить на обычный Icon
     'MdiIcon': (BuildContext context, DataSource source) {
-      return Icon(MdiIconData(source.v<int>(<Object>["icon"]) ?? 0xf1136));
+      return Icon(MdiIconData(source.v<int>(<Object>['icon']) ?? 0xf1136));
     },
     'IconFromSettingsName': (BuildContext context, DataSource source) {
-      return IconsHelper.getIcon(source.v<String>(<Object>["settingName"]) ?? "");
+      return IconsHelper.getIcon(source.v<String>(<Object>['settingName']) ?? '');
     },
     //FIXME
     // 'ItemDeleteIcon': (BuildContext context, DataSource source) {
@@ -43,7 +42,7 @@ class RfwHelper {
 
   Widget getRfwWidgetBySettings(String rfwStringSettings) {
     final String? rfwString = settingsBloc.getByNamed(rfwStringSettings)?.getUserOrDefaultValueAsString;
-    return rfwString != null ? getRfwWidget(rfwString) : Text("Rfw:$rfwStringSettings!");
+    return rfwString != null ? getRfwWidget(rfwString) : Text('Rfw:$rfwStringSettings!');
   }
 
   Widget getRfwWidgetBySettingsEnum(EnumsOfSettings settings) {

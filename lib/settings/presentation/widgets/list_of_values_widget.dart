@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'package:clear_app_helper/core/presentation/widgets/icon_true_false.dart';
+import 'package:flutter/material.dart';
 
 class CheckedIndexedString {
   bool check;
@@ -15,7 +14,7 @@ class ListOfValuesWidget extends StatefulWidget {
   final List<String> values;
   final Function(String userValue) updateUserValue;
 
-  const ListOfValuesWidget({super.key, required this.userValue, required this.values, required this.updateUserValue});
+  const ListOfValuesWidget({required this.userValue, required this.values, required this.updateUserValue, super.key});
 
   @override
   State<ListOfValuesWidget> createState() => _ListOfValuesWidgetState();
@@ -25,8 +24,8 @@ class _ListOfValuesWidgetState extends State<ListOfValuesWidget> {
   List<CheckedIndexedString> list = [];
   @override
   void initState() {
-    final List<int> userValueList = widget.userValue.split(',').map((e) => int.tryParse(e)).whereType<int>().toList();
-    for (var index in userValueList) {
+    final List<int> userValueList = widget.userValue.split(',').map(int.tryParse).whereType<int>().toList();
+    for (final index in userValueList) {
       list.add(CheckedIndexedString(index: index, str: widget.values[index], check: true));
     }
     for (int index = 0; index < widget.values.length; index += 1) {
@@ -57,7 +56,7 @@ class _ListOfValuesWidgetState extends State<ListOfValuesWidget> {
             })
             .whereType<int>()
             .toList()
-            .join(","),
+            .join(','),
       );
     }
 
@@ -72,7 +71,7 @@ class _ListOfValuesWidgetState extends State<ListOfValuesWidget> {
         child: ReorderableListView.builder(
           padding: const EdgeInsets.symmetric(horizontal: 40),
           itemCount: list.length,
-          itemBuilder: (BuildContext context, int index) {
+          itemBuilder: (context, index) {
             return ListTile(
               key: Key('$index'),
               tileColor: index.isOdd ? oddItemColor : evenItemColor,
@@ -90,7 +89,7 @@ class _ListOfValuesWidgetState extends State<ListOfValuesWidget> {
               ),
             );
           },
-          onReorder: (int oldIndex, int newIndex) => setState(() {
+          onReorder: (oldIndex, newIndex) => setState(() {
             if (oldIndex < newIndex) {
               newIndex -= 1;
             }
