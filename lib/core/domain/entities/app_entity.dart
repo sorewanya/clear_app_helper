@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-abstract interface class AppEntity with EquatableMixin {
+abstract class AppEntity with EquatableMixin {
   AppEntity({this.id});
   final int? id;
   @override
