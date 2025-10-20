@@ -24,6 +24,7 @@ part './settings_types_class/settings_saved_search.dart';
 
 @CopyWith()
 @JsonSerializable()
+// ignore: avoid_implementing_value_types
 class SettingsEntity with AppEntityWithIsDeleted, AppEntityWithName, EquatableMixin implements AppEntity {
   @override
   final int? id;
@@ -87,5 +88,5 @@ class SettingsEntity with AppEntityWithIsDeleted, AppEntityWithName, EquatableMi
   @override
   Map<String, dynamic> toJson() => _$SettingsEntityToJson(this);
   @override
-  get copyWith => _$SettingsEntityCWProxyImpl(this);
+  dynamic get copyWith => _$SettingsEntityCWProxyImpl(this);
 }

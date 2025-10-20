@@ -68,7 +68,7 @@ class SearchElementComparisonWidget<T extends SearchElement> extends StatelessWi
                 }
                 setElement(searchElement);
               }),
-              child: IconsHelper.getIconByEnum((IconSettingsEnum.add)),
+              child: IconsHelper.getIconByEnum(IconSettingsEnum.add),
             ),
           ],
         ),

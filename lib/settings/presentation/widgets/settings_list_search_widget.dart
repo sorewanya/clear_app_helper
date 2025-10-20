@@ -58,7 +58,7 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
     }
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Column(
         children: [
           SearchResetTextAndIconButton(
@@ -114,7 +114,7 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
 
           ///SettingsRequiredType
           DropdownButtonFormField<String>(
-            value: dropdownSettingsRequiredTypeValue,
+            initialValue: dropdownSettingsRequiredTypeValue,
             icon: IconsHelper.getIconByEnum(IconSettingsEnum.dropDown),
             elevation: 16,
             items: [

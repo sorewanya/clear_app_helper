@@ -63,7 +63,7 @@ class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProv
         controller: widget.controller,
         itemBuilder: (context, index) {
           final body = Padding(
-            padding: const EdgeInsets.all(1.0),
+            padding: const EdgeInsets.all(1),
             child: GestureDetector(
               onTap: () {
                 RouteHelper.toNamed(

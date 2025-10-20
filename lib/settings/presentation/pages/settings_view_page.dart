@@ -34,10 +34,10 @@ class SettingsViewPage extends StatelessWidget {
         final bloc = context.read<SettingsBloc>();
         const onTapRouteName = SettingsRouteNames.settingsDetailPage;
         final appBarTitle = GetIt.instance<CoreI18n>().settings;
-        onLongPress(int id) => FunctionsHelper.setNextSettingsVariantById(id: id);
+        void onLongPress(int id) => FunctionsHelper.setNextSettingsVariantById(id: id);
 
         bloc.setItemActions(null); //не самый лучших способ установки, можно забыть...
-        resetSearch() => bloc.add(const SettingsBlocEvent.load(SettingsSearchEntity()));
+        void resetSearch() => bloc.add(const SettingsBlocEvent.load(SettingsSearchEntity()));
         return BlocBuilder<CurentEntityBloc, CurentEntityBlocState>(
           builder: (context, state) => switch (state) {
             EmptyCurentEntityBlocState() => Builder(

@@ -48,7 +48,7 @@ class FunctionsHelper {
           GetIt.instance<SettingsBloc>().getByEnum(CoreSettingsEnum.allAfterSaveItemShowInfobar),
         )?.getUserOrDefaultValueAsBool ??
         true;
-    if (settings == true) {
+    if (settings) {
       await FlashMessangerHelper.showInfoBarText(
         text: text,
         showItemNavifator: () => showItemNavifator(id),
@@ -234,7 +234,7 @@ class FunctionsHelper {
       FlashMessangerHelper.showErrorBarText(text: GetIt.instance<CoreI18n>().uidNotSetup);
       return false;
     } else {
-      if (checkFunc() == false) {
+      if (!checkFunc()) {
         FlashMessangerHelper.showErrorBarText(text: GetIt.instance<CoreI18n>().uidNotExist);
         return false;
       }

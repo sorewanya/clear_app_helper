@@ -19,7 +19,7 @@ class CardWidgetEditWidget extends StatelessWidget {
         .whereType<SettingsEntity>()
         .toList();
     final List<Widget> listOfWidget = [];
-    for (SettingsEntity item in listOfSettings) {
+    for (final SettingsEntity item in listOfSettings) {
       listOfWidget
         ..add(Text("${GetIt.instance<CoreI18n>().widgetEditPartsIn} ${item.name.split(',').last}:"))
         ..add(

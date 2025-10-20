@@ -52,11 +52,11 @@ class AnimatedToggleSwitchOrDropdown extends StatelessWidget {
             values: values!,
             height: size * 2,
             borderWidth: size * 0.1,
-            onChanged: (i) => setState(() => setValue(hasIndexValue == true ? values!.indexOf(i).toString() : i)),
+            onChanged: (i) => setState(() => setValue(hasIndexValue ? values!.indexOf(i).toString() : i)),
             iconBuilder: (value, foreground) => Icon(IconsHelper.getIconDataByString(value)),
           )
         : DropdownButtonFormField<String>(
-            value: curentValue,
+            initialValue: curentValue,
             icon: IconsHelper.getIconByEnum(IconSettingsEnum.dropDown),
             elevation: 16,
             items: values!.map((e) {

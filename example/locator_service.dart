@@ -14,28 +14,28 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 final getIt = GetIt.instance;
 
-init() {
+void init() {
   ///
   /// !!!!!WARNING!!!!
   ///
   /// UNCOMENT NEXT LINE AND ADD YOUR DefaultData !!
   // getIt.registerLazySingleton<AbstractDefaultData>(() => DefaultData());
 
-  getIt.registerLazySingleton<MyThemeData>(() => MyThemeData());
-  getIt.registerLazySingleton<CoreI18n>(() => CoreI18nRu());
-  getIt.registerLazySingleton<SharedPreferencesHelper>(() => SharedPreferencesHelper());
-
-  getIt.registerLazySingleton<SettingsBloc>(
-    () => SettingsBloc(settingsUseCase: getIt(), settingsDescriptionUseCase: getIt(), defaults: getIt()),
-  );
-  getIt.registerLazySingleton<CurentEntityBloc>(() => CurentEntityBloc());
-  getIt.registerLazySingleton(() => SettingsUseCase(getIt<SettingsRepository>()));
-  getIt.registerLazySingleton(() => SettingsDescriptionUseCase(getIt<SettingsDescriptionRepository>()));
-  getIt.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(getIt()));
+  getIt
+    ..registerLazySingleton<MyThemeData>(MyThemeData.new)
+    ..registerLazySingleton<CoreI18n>(CoreI18nRu.new)
+    ..registerLazySingleton<SharedPreferencesHelper>(SharedPreferencesHelper.new)
+    ..registerLazySingleton<SettingsBloc>(
+      () => SettingsBloc(settingsUseCase: getIt(), settingsDescriptionUseCase: getIt(), defaults: getIt()),
+    )
+    ..registerLazySingleton<CurentEntityBloc>(CurentEntityBloc.new)
+    ..registerLazySingleton(() => SettingsUseCase(getIt<SettingsRepository>()))
+    ..registerLazySingleton(() => SettingsDescriptionUseCase(getIt<SettingsDescriptionRepository>()))
+    ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(getIt()));
 
   final internetConnectionChecker = InternetConnectionChecker.createInstance(
     addresses: List<AddressCheckOption>.unmodifiable(<AddressCheckOption>[
-      AddressCheckOption(uri: Uri.https("google.com")),
+      AddressCheckOption(uri: Uri.https('google.com')),
     ]),
     slowConnectionConfig: SlowConnectionConfig(
       enableToCheckForSlowConnection: true,

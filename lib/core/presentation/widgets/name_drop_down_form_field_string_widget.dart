@@ -43,7 +43,7 @@ class NameDropDownFormFieldStringWidget extends StatelessWidget {
 
     curentMap.forEach((key, value) => dropdownList.add(DropdownMenuItem<String>(value: key, child: Text(key))));
     return DropdownButtonFormField<String>(
-      value: dropdownNameValue,
+      initialValue: dropdownNameValue,
       icon: IconsHelper.getIconByEnum(IconSettingsEnum.dropDown),
       elevation: 16,
       items: [

@@ -155,14 +155,14 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
       } else if (type == SettingsTypeEnum.value.index) {
         return (values != null && values?.isNotEmpty == true)
             ? AnimatedToggleSwitchOrDropdown(
-                values: values!,
+                values: values,
                 value: userValue ?? defaultValue,
                 hasIndexValue: true,
                 setState: (f) => setState(() => f()),
                 setValue: (value) {
                   if (userValue != value) {
                     shouldPop = false;
-                    userValue = value!;
+                    userValue = value;
                   }
                 },
               )
@@ -219,11 +219,11 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
       }
     }
 
-    void getById() async {
+    Future<void> getById() async {
       if (firstLoad) {
         final se = FunctionsHelper.getArgs<SettingsSearchEntity>();
         origItem = settingsBloc.getByIdSync(se?.id);
-        id = origItem?.id!;
+        id = origItem?.id;
         name = origItem?.name ?? '';
         defaultValue = origItem?.defaultValue ?? '';
         userValue = origItem?.getUserOrDefaultValueAsString;

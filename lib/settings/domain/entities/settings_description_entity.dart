@@ -7,6 +7,7 @@ part 'settings_description_entity.g.dart';
 
 @CopyWith()
 @JsonSerializable()
+// ignore: avoid_implementing_value_types
 class SettingsDescriptionEntity with EquatableMixin implements AppEntity {
   @override
   // ignore: overridden_fields
@@ -24,5 +25,5 @@ class SettingsDescriptionEntity with EquatableMixin implements AppEntity {
   @override
   Map<String, dynamic> toJson() => _$SettingsDescriptionEntityToJson(this);
   @override
-  get copyWith => _$SettingsDescriptionEntityCWProxyImpl(this);
+  dynamic get copyWith => _$SettingsDescriptionEntityCWProxyImpl(this);
 }

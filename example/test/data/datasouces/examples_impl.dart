@@ -88,7 +88,7 @@ class ExampleDBHelper<T extends AppEntity> implements DBHelper<T> {
   @override
   Stream<void> watchLazy() => throw UnimplementedError();
   @override
-  Stream<T?> watchObject(id) => throw UnimplementedError();
+  Stream<T?> watchObject(int id) => throw UnimplementedError();
   @override
   Stream<void> watchObjectLazy(int? id) => throw UnimplementedError();
 }
@@ -116,7 +116,7 @@ class ExampleLocalDataSource<Type extends AppEntity, SEType extends SearchEntity
   @override
   Stream<Type?> getStream(int id) => throw UnimplementedError();
   @override
-  setHelpers(DBHelper<Type> dbHelper, [DBLogsHelper<AppEntity>? dbLogsHelper]) => throw UnimplementedError();
+  Never setHelpers(DBHelper<Type> dbHelper, [DBLogsHelper<AppEntity>? dbLogsHelper]) => throw UnimplementedError();
   @override
   Future<int> update(Type item) => throw UnimplementedError();
   @override

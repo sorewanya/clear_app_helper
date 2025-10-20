@@ -84,7 +84,7 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
       void updateFullMap(List<SettingsEntity> list) {
         fullMap
           ..clear()
-          ..addAll({for (var e in list) e.id!: BlocSettingsAndStream.fromDB(setting: e, settingsBloc: this)});
+          ..addAll({for (final e in list) e.id!: BlocSettingsAndStream.fromDB(setting: e, settingsBloc: this)});
         add(SettingsBlocEvent.load(settingsIdsFinded.se));
       }
 

@@ -45,7 +45,7 @@ class _TreeViewOfItemsState extends State<TreeViewOfItems> {
                       child: Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8),
                             child: SizedBox(
                               height: 100,
                               child: Image.file(File(node.key.replaceAll(RegExp(r'\ͺ'), '.')), fit: BoxFit.fitHeight),

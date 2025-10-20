@@ -20,7 +20,7 @@ import 'package:sizer/sizer.dart';
 ///```
 //TODO add max and min, create system to use orientation in widgets
 class SizerBuilder extends StatelessWidget {
-  const SizerBuilder({super.key, required this.builder, this.fontSizeFactor, this.fontSizeDelta, this.iconThemeSize});
+  const SizerBuilder({required this.builder, super.key, this.fontSizeFactor, this.fontSizeDelta, this.iconThemeSize});
   final double? fontSizeFactor;
   final double? fontSizeDelta;
   final double? iconThemeSize;

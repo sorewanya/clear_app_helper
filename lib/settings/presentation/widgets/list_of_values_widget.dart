@@ -52,7 +52,7 @@ class _ListOfValuesWidgetState extends State<ListOfValuesWidget> {
       widget.updateUserValue(
         list
             .map((e) {
-              if (e.check == true) return e.index;
+              if (e.check) return e.index;
             })
             .whereType<int>()
             .toList()
