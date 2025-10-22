@@ -52,7 +52,7 @@ class _GraphViewOfItemsState<AppEntityType extends AppEntity> extends State<Grap
 
   @override
   Widget build(BuildContext context) {
-    final curentGraph = widget.graph;
+    final currentGraph = widget.graph;
 
     ///Layered
     final SugiyamaConfiguration builder = SugiyamaConfiguration()
@@ -68,7 +68,7 @@ class _GraphViewOfItemsState<AppEntityType extends AppEntity> extends State<Grap
         minScale: 0.001,
         maxScale: 100,
         child: GraphView(
-          graph: curentGraph,
+          graph: currentGraph,
           algorithm: SugiyamaAlgorithm(builder),
           paint: Paint()
             ..color = Colors.green

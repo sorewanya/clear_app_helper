@@ -10,7 +10,7 @@ import 'package:get_it/get_it.dart';
 class SettingsBuilderWidget extends StatelessWidget {
   const SettingsBuilderWidget({required this.childFunc, super.key});
 
-  /// callback curent IdsFinded
+  /// callback current IdsFinded
   final Widget Function(IdsFinded<SettingsSearchEntity> settingsIdsFinded) childFunc;
 
   @override

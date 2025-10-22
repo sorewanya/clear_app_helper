@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 ///
 /// else DropdownButtonFormField with this values
 class AnimatedToggleSwitchOrDropdown extends StatelessWidget {
-  /// curent Value
+  /// current Value
   final String value;
 
   final List<String>? values;
@@ -42,13 +42,13 @@ class AnimatedToggleSwitchOrDropdown extends StatelessWidget {
     bool haveAllIcons = true;
     final iconDatas = values!.map(IconsHelper.getIconDataOrNullByString).toList();
     if (iconDatas.contains(null)) haveAllIcons = false;
-    final curentValue = hasIndexValue ? values![asInt!] : value;
+    final currentValue = hasIndexValue ? values![asInt!] : value;
 
     final size = Theme.of(context).iconTheme.size ?? 20;
 
     return haveAllIcons
         ? AnimatedToggleSwitch<String>.rolling(
-            current: curentValue,
+            current: currentValue,
             values: values!,
             height: size * 2,
             borderWidth: size * 0.1,
@@ -56,7 +56,7 @@ class AnimatedToggleSwitchOrDropdown extends StatelessWidget {
             iconBuilder: (value, foreground) => Icon(IconsHelper.getIconDataByString(value)),
           )
         : DropdownButtonFormField<String>(
-            initialValue: curentValue,
+            initialValue: currentValue,
             icon: IconsHelper.getIconByEnum(IconSettingsEnum.dropDown),
             elevation: 16,
             items: values!.map((e) {

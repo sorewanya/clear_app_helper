@@ -74,14 +74,14 @@ class SearchElementComparisonWidget<T extends SearchElement> extends StatelessWi
         ),
         Builder(
           builder: (context) {
-            List<ComparisonTypes> curentList = [];
+            List<ComparisonTypes> currentList = [];
             if (searchElement is SearchElementDateTimeComparisons) {
-              curentList = searchElement.comparisonList;
+              currentList = searchElement.comparisonList;
             } else if (searchElement is SearchElementIntegerComparisons) {
-              curentList = searchElement.comparisonList;
+              currentList = searchElement.comparisonList;
             }
             return Column(
-              children: curentList.indexed.map((map) {
+              children: currentList.indexed.map((map) {
                 final int index = map.$1;
                 final item = map.$2;
                 return Row(
@@ -95,7 +95,7 @@ class SearchElementComparisonWidget<T extends SearchElement> extends StatelessWi
                             values: searchElement is SearchElementDateTimeComparisons
                                 ? const [Comparison.greaterThan, Comparison.lessThan, Comparison.equal]
                                 : null,
-                            comparison: curentList[index].comparison,
+                            comparison: currentList[index].comparison,
                             setComparison: (newComparison) => setState(() {
                               if (searchElement is SearchElementDateTimeComparisons) {
                                 searchElement.comparisonList[index] = searchElement.comparisonList[index].copyWith(

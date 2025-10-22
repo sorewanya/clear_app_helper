@@ -17,8 +17,8 @@ import 'package:graphview/GraphView.dart';
 class MyScaffoldGraphWidget<AppEntityType extends AppEntity> extends StatelessWidget {
   MyScaffoldGraphWidget({
     required this.onTapRouteName,
-    required this.curentGraph,
-    required this.curentSearchEntity,
+    required this.currentGraph,
+    required this.currentSearchEntity,
     required this.appBarTitle,
     required this.listSearchWidget,
     required this.drawer,
@@ -43,14 +43,14 @@ class MyScaffoldGraphWidget<AppEntityType extends AppEntity> extends StatelessWi
   /// Route name ([RouteHelper.toNamed]), sended to [GraphViewOfItems]
   final String onTapRouteName;
 
-  /// curent list of objects, sended to [ViewsPagesEmptyCheckerWidget] and [GraphViewOfItems]
-  final Graph curentGraph;
+  /// current list of objects, sended to [ViewsPagesEmptyCheckerWidget] and [GraphViewOfItems]
+  final Graph currentGraph;
 
   /// see [MyScaffoldWidget]
   final String appBarTitle;
 
   /// sended to [FloatingPlusIconButton] and [ViewsPagesEmptyCheckerWidget]
-  final SearchEntity curentSearchEntity;
+  final SearchEntity currentSearchEntity;
 
   /// sended to [ViewsPagesEmptyCheckerWidget] and [GraphViewOfItems]
   final SearchEntity emptySearchEntity;
@@ -88,12 +88,12 @@ class MyScaffoldGraphWidget<AppEntityType extends AppEntity> extends StatelessWi
         children: [
           if (topInBodyColumn != null) topInBodyColumn!,
           ViewsPagesEmptyCheckerWidget(
-            curentListIsEmpty: !curentGraph.hasNodes(),
-            searchEntity: curentSearchEntity,
+            currentListIsEmpty: !currentGraph.hasNodes(),
+            searchEntity: currentSearchEntity,
             resetSearch: resetSearch,
           ),
           GraphViewOfItems<AppEntityType>(
-            graph: curentGraph,
+            graph: currentGraph,
             onTapRouteName: onTapRouteName,
             onLongPress: onLongPress,
             emptySearchEntity: emptySearchEntity,
@@ -103,7 +103,7 @@ class MyScaffoldGraphWidget<AppEntityType extends AppEntity> extends StatelessWi
       ),
       drawer: drawer,
       floatingActionButton: addButton
-          ? FloatingPlusIconButton(onPressed: () => RouteHelper.toNamed(onTapRouteName, arguments: curentSearchEntity))
+          ? FloatingPlusIconButton(onPressed: () => RouteHelper.toNamed(onTapRouteName, arguments: currentSearchEntity))
           : const SizedBox(),
       endDrawer: endDrawer ?? Column(children: [const SearchDrawerTitleWidget(), listSearchWidget]),
     );

@@ -15,7 +15,7 @@ class TextButtonsPlusToInt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final curentIntSet =
+    final currentIntSet =
         intSet ??
         context
             .read<SettingsBloc>()
@@ -27,7 +27,7 @@ class TextButtonsPlusToInt extends StatelessWidget {
     return SizedBox(
       child: Wrap(
         children: [
-          ...curentIntSet.map(
+          ...currentIntSet.map(
             (e) => SizedBox(
               child: TextButton(
                 onPressed: () {

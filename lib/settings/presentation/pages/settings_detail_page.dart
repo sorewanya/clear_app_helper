@@ -192,7 +192,7 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
       } else if (type == SettingsTypeEnum.dirPath.index) {
         return Column(
           children: [
-            Text('${GetIt.instance<CoreI18n>().filePathCurent}: ${userValue ?? defaultValue}'),
+            Text('${GetIt.instance<CoreI18n>().filePathCurrent}: ${userValue ?? defaultValue}'),
             TextButton(
               onPressed: () {
                 FilePicker.platform.getDirectoryPath().then((path) {

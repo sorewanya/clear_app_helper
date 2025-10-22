@@ -16,7 +16,7 @@ abstract class AbstractDefaultData {
   late final List<SettingsDescriptionEntity> getDefaultSettingDescriptionList = [];
 }
 
-final curentTime = DateTime.now().toString();
+final currentTime = DateTime.now().toString();
 
 SettingsEntity coreSettingsEnumSettings(CoreSettingsEnum e) => switch (e) {
   CoreSettingsEnum.viewDefault => SettingsEntity.fromEnum(e: e, defaultValue: '0', values: ['settings']),
@@ -88,10 +88,10 @@ SettingsEntity coreSettingsEnumSettings(CoreSettingsEnum e) => switch (e) {
     defaultValue: '',
     values: ItemActionEnum.values.map((e) => e.name).toList(),
   ),
-  CoreSettingsEnum.globalQuery => SettingsEntity.fromEnum(e: e, defaultValue: curentTime),
+  CoreSettingsEnum.globalQuery => SettingsEntity.fromEnum(e: e, defaultValue: currentTime),
   CoreSettingsEnum.globalTr => SettingsEntity.fromEnum(
     e: e,
-    defaultValue: sha512.convert(utf8.encode(curentTime)).toString(),
+    defaultValue: sha512.convert(utf8.encode(currentTime)).toString(),
   ),
 };
 

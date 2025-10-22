@@ -13,8 +13,8 @@ import 'package:flutter/material.dart';
 class MyScaffoldTreeWidget<AppEntityType extends AppEntity> extends StatelessWidget {
   MyScaffoldTreeWidget({
     required this.onTapRouteName,
-    required this.curentTree,
-    required this.curentSearchEntity,
+    required this.currentTree,
+    required this.currentSearchEntity,
     required this.appBarTitle,
     required this.listSearchWidget,
     required this.drawer,
@@ -38,13 +38,13 @@ class MyScaffoldTreeWidget<AppEntityType extends AppEntity> extends StatelessWid
   final String onTapRouteName;
 
   /// send to [ViewsPagesEmptyCheckerWidget], [TreeViewOfItems]
-  final TreeNode<int?> curentTree;
+  final TreeNode<int?> currentTree;
 
   /// send to [MyScaffoldWidget]
   final String appBarTitle;
 
   /// send to [FloatingPlusIconButton], [ViewsPagesEmptyCheckerWidget]
-  final SearchEntity curentSearchEntity;
+  final SearchEntity currentSearchEntity;
 
   /// send to [ViewsPagesEmptyCheckerWidget], [TreeViewOfItems]
   final SearchEntity emptySearchEntity;
@@ -81,12 +81,12 @@ class MyScaffoldTreeWidget<AppEntityType extends AppEntity> extends StatelessWid
         children: [
           if (topInBodyColumn != null) topInBodyColumn!,
           ViewsPagesEmptyCheckerWidget(
-            curentListIsEmpty: curentTree.childrenAsList.isEmpty,
-            searchEntity: curentSearchEntity,
+            currentListIsEmpty: currentTree.childrenAsList.isEmpty,
+            searchEntity: currentSearchEntity,
             resetSearch: resetSearch,
           ),
           TreeViewOfItems(
-            tree: curentTree,
+            tree: currentTree,
             onTapRouteName: onTapRouteName,
             onLongPress: onLongPress,
             emptySearchEntity: emptySearchEntity,
@@ -96,7 +96,7 @@ class MyScaffoldTreeWidget<AppEntityType extends AppEntity> extends StatelessWid
       ),
       drawer: drawer,
       floatingActionButton: addButton
-          ? FloatingPlusIconButton(onPressed: () => RouteHelper.toNamed(onTapRouteName, arguments: curentSearchEntity))
+          ? FloatingPlusIconButton(onPressed: () => RouteHelper.toNamed(onTapRouteName, arguments: currentSearchEntity))
           : const SizedBox(),
       endDrawer: endDrawer ?? Column(children: [const SearchDrawerTitleWidget(), listSearchWidget]),
     );

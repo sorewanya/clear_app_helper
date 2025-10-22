@@ -1,5 +1,5 @@
 import 'package:clear_app_helper/core/presentation/table_consts.dart';
-import 'package:clear_app_helper/core/presentation/widgets/builders/curent_entity_builder.dart';
+import 'package:clear_app_helper/core/presentation/widgets/builders/current_entity_builder.dart';
 import 'package:clear_app_helper/core/presentation/widgets/table_cell_slidable_action_open.dart';
 import 'package:flutter/material.dart';
 
@@ -24,14 +24,14 @@ class CardWidgetTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CurentEntityBuilder(
-      childFunc: (curentBloc) => Table(
+    return CurrentEntityBuilder(
+      childFunc: (currentBloc) => Table(
         columnWidths: columnWidthsWithBothActionOpen,
         children: [
           TableRow(
             decoration: tableDecoration(context, isDeleted),
             children: [
-              if (curentBloc.itemActions?.getItemSwipeLeftToRight(context)?.isNotEmpty ?? false)
+              if (currentBloc.itemActions?.getItemSwipeLeftToRight(context)?.isNotEmpty ?? false)
                 const TableCellSlidableActionOpen()
               else
                 const SizedBox(width: 20),
@@ -41,7 +41,7 @@ class CardWidgetTable extends StatelessWidget {
                 children: [...centerWidgets, if (centerExtendedWidgetsNames.isNotEmpty) centerExtendedWidget],
               ),
               ...rightWidgets,
-              if (curentBloc.itemActions?.getItemSwipeRightToLeft(context)?.isNotEmpty ?? false)
+              if (currentBloc.itemActions?.getItemSwipeRightToLeft(context)?.isNotEmpty ?? false)
                 const TableCellSlidableActionOpen(right: true)
               else
                 const SizedBox(width: 20),

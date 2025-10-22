@@ -10,7 +10,7 @@ class CoreI18nRu implements CoreI18n {
   String get cancel => 'Отмена';
   String get caseSensitiveSearchWarning => 'Поиск регистро зависим! настройка:';
   String get changeDataIn => 'Вы изменили данные в';
-  String get curentEntityLoading => 'Загрузка CurentEntity';
+  String get currentEntityLoading => 'Загрузка CurrentEntity';
   String get dateTimeLocale => 'ru';
   String get defaultAppBarTitle => 'Clear App Helper';
   String get delete => 'Удалить';
@@ -24,7 +24,7 @@ class CoreI18nRu implements CoreI18n {
   String get filePath => 'Путь к файлу';
   String get filePathAllowedExtensions => 'Разрешенные расширения файлов';
   String get filePathChange => 'Изменить путь';
-  String get filePathCurent => 'Текущий путь';
+  String get filePathCurrent => 'Текущий путь';
   String get find => 'Найти';
   String get loadSettingInfoToCard => 'Загрузка информации о настройке в карточку';
   String get lock => 'Заблокировать';

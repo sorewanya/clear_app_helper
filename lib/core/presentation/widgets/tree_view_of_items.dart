@@ -33,7 +33,7 @@ class TreeViewOfItems extends StatefulWidget {
 class _TreeViewOfItemsState extends State<TreeViewOfItems> {
   @override
   Widget build(BuildContext context) {
-    final TreeNode<int?> curentTree = widget.tree;
+    final TreeNode<int?> currentTree = widget.tree;
     return Expanded(
       child: TreeView.simpleTyped<int?, TreeNode<int?>>(
         expansionBehavior: ExpansionBehavior.snapToTop,
@@ -66,10 +66,10 @@ class _TreeViewOfItemsState extends State<TreeViewOfItems> {
                 onLongPress: () => widget.onLongPress != null ? widget.onLongPress!(node.data!) : {},
                 child: widget.cardWidget(
                   node.data!,
-                  () => setState(() => curentTree.removeWhere((element) => element == node)),
+                  () => setState(() => currentTree.removeWhere((element) => element == node)),
                 ),
               ),
-        tree: curentTree,
+        tree: currentTree,
       ),
     );
   }

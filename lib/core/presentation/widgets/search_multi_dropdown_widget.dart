@@ -64,7 +64,7 @@ class SearchElementMultiDropdownWidget<T extends SearchElementIntSet> extends St
                   searchElement.intSet.add(i);
                   setElement(searchElement);
                 },
-                curentMap: {for (final e in dropdownList) e.name: e.id},
+                currentMap: {for (final e in dropdownList) e.name: e.id},
                 setState: setState,
               ),
             ),

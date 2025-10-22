@@ -1,7 +1,7 @@
 import 'package:animated_tree_view/tree_view/tree_node.dart';
 import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
 import 'package:clear_app_helper/core/i18n/core_i18n.dart';
-import 'package:clear_app_helper/core/presentation/bloc/curent_entity/curent_entity_bloc_bloc.dart';
+import 'package:clear_app_helper/core/presentation/bloc/current_entity/current_entity_bloc_bloc.dart';
 import 'package:clear_app_helper/core/presentation/functions.dart';
 import 'package:clear_app_helper/core/presentation/widgets/loading_indicator.dart';
 import 'package:clear_app_helper/core/presentation/widgets/my_scaffold_list_widget.dart';
@@ -38,21 +38,21 @@ class SettingsViewPage extends StatelessWidget {
 
         bloc.setItemActions(null); //не самый лучших способ установки, можно забыть...
         void resetSearch() => bloc.add(const SettingsBlocEvent.load(SettingsSearchEntity()));
-        return BlocBuilder<CurentEntityBloc, CurentEntityBlocState>(
+        return BlocBuilder<CurrentEntityBloc, CurrentEntityBlocState>(
           builder: (context, state) => switch (state) {
-            EmptyCurentEntityBlocState() => Builder(
+            EmptyCurrentEntityBlocState() => Builder(
               builder: (context) {
-                context.read<CurentEntityBloc>().add(
-                  CurentEntityBlocEvent.setNewCurents(curentBloc: context.read<SettingsBloc>()),
+                context.read<CurrentEntityBloc>().add(
+                  CurrentEntityBlocEvent.setNewCurrents(currentBloc: context.read<SettingsBloc>()),
                 );
-                return loadingIndicator(GetIt.instance<CoreI18n>().curentEntityLoading);
+                return loadingIndicator(GetIt.instance<CoreI18n>().currentEntityLoading);
               },
             ),
-            LoadedCurentEntityBlocState() => Builder(
+            LoadedCurrentEntityBlocState() => Builder(
               builder: (context) {
-                if (state.curentBloc is! SettingsBloc) {
-                  context.read<CurentEntityBloc>().add(
-                    CurentEntityBlocEvent.setNewCurents(curentBloc: context.read<SettingsBloc>()),
+                if (state.currentBloc is! SettingsBloc) {
+                  context.read<CurrentEntityBloc>().add(
+                    CurrentEntityBlocEvent.setNewCurrents(currentBloc: context.read<SettingsBloc>()),
                   );
                 }
                 return ViewDefaultCaseWidget(
@@ -62,8 +62,8 @@ class SettingsViewPage extends StatelessWidget {
                     addButton: false,
                     appBarTitle: appBarTitle,
                     onTapRouteName: onTapRouteName,
-                    curentIdsList: sf.list,
-                    curentSearchEntity: sf.se,
+                    currentIdsList: sf.list,
+                    currentSearchEntity: sf.se,
                     emptySearchEntity: emptySearchEntity,
                     listSearchWidget: listSearchWidget,
                     cardWidget: (id, _) => SettingsCardWidget(id: id),
@@ -104,8 +104,8 @@ class SettingsViewPage extends StatelessWidget {
                       }
                       return MyScaffoldTreeWidget<SettingsEntity>(
                         onTapRouteName: SettingsRouteNames.settingsDetailPage,
-                        curentTree: tree,
-                        curentSearchEntity: sf.se,
+                        currentTree: tree,
+                        currentSearchEntity: sf.se,
                         appBarTitle: appBarTitle,
                         listSearchWidget: listSearchWidget,
                         drawer: drawer,

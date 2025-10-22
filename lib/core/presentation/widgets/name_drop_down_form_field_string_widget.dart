@@ -9,17 +9,17 @@ class NameDropDownFormFieldStringWidget extends StatelessWidget {
     required this.setState,
     required this.setDropdownNameValue,
     required this.setDropdownNameValueId,
-    required this.curentMap,
+    required this.currentMap,
     super.key,
     this.setShouldPop,
     this.withoutUnderline = false,
   });
 
-  /// curent value
+  /// current value
   final String dropdownNameValue;
 
   /// value variants name:id
-  final Map<String, int> curentMap;
+  final Map<String, int> currentMap;
 
   /// callback new value
   final Function(String s) setDropdownNameValue;
@@ -41,7 +41,7 @@ class NameDropDownFormFieldStringWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<DropdownMenuItem<String>> dropdownList = [];
 
-    curentMap.forEach((key, value) => dropdownList.add(DropdownMenuItem<String>(value: key, child: Text(key))));
+    currentMap.forEach((key, value) => dropdownList.add(DropdownMenuItem<String>(value: key, child: Text(key))));
     return DropdownButtonFormField<String>(
       initialValue: dropdownNameValue,
       icon: IconsHelper.getIconByEnum(IconSettingsEnum.dropDown),
@@ -57,7 +57,7 @@ class NameDropDownFormFieldStringWidget extends StatelessWidget {
           if (newValue != null) {
             setDropdownNameValue(newValue);
             if (newValue != '_') {
-              setDropdownNameValueId(curentMap[newValue]!);
+              setDropdownNameValueId(currentMap[newValue]!);
             }
           }
         });
