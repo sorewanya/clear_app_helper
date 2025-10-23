@@ -1,4 +1,9 @@
 ## 0.1.1
+* Spell checker
+* Many work with analysis_options
+* Fix many bugs
+
+## 0.1.1
 * add MyThemeData to manage themes
 * add MyThemeWithSizerBuilder, SizerBuilder with example to add support package:sizer
 * fix CubitHelper to use CubitState as sealed class
