@@ -1,7 +1,7 @@
 import 'package:clear_app_helper/core/domain/entities/item_actions.dart';
 import 'package:clear_app_helper/core/domain/entities/search_entity.dart';
 import 'package:clear_app_helper/core/i18n/core_i18n.dart';
-import 'package:clear_app_helper/core/presentation/widgets/builders/curent_entity_builder.dart';
+import 'package:clear_app_helper/core/presentation/widgets/builders/current_entity_builder.dart';
 import 'package:clear_app_helper/core/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -11,17 +11,17 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 /// List widget, used [ListView.separated]
 class ListViewOfItems extends StatefulWidget {
   const ListViewOfItems({
-    super.key,
-    required this.curentIdsList,
+    required this.currentIdsList,
     required this.onTapRouteName,
     required this.emptySearchEntity,
     required this.cardWidget,
-    this.onLongPress,
     required this.controller,
+    super.key,
+    this.onLongPress,
   });
 
   /// elements ids
-  final List<int> curentIdsList;
+  final List<int> currentIdsList;
 
   /// name of page [RouteHelper.toNamed]
   final String onTapRouteName;
@@ -30,7 +30,7 @@ class ListViewOfItems extends StatefulWidget {
   final SearchEntity emptySearchEntity;
 
   /// callback to get cartWidget for item
-  /// [removeItemFromListView] - callback to remove from listView.
+  /// [`removeItemFromListView`] - callback to remove from listView.
   final Widget Function(int id, Function removeItemFromListView) cardWidget;
 
   /// Long tap callback
@@ -43,16 +43,16 @@ class ListViewOfItems extends StatefulWidget {
 }
 
 class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProviderStateMixin {
-  List<int> curentIdsList = [];
+  List<int> currentIdsList = [];
   @override
   void initState() {
-    curentIdsList.addAll(widget.curentIdsList);
+    currentIdsList.addAll(widget.currentIdsList);
     super.initState();
   }
 
   @override
   void dispose() {
-    curentIdsList = [];
+    currentIdsList = [];
     super.dispose();
   }
 
@@ -61,31 +61,32 @@ class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProv
     return Expanded(
       child: ListView.separated(
         controller: widget.controller,
-        itemBuilder: ((context, index) {
+        itemBuilder: (context, index) {
           final body = Padding(
-            padding: const EdgeInsets.all(1.0),
+            padding: const EdgeInsets.all(1),
             child: GestureDetector(
-              onTap: (() {
+              onTap: () {
                 RouteHelper.toNamed(
                   widget.onTapRouteName,
-                  arguments: widget.emptySearchEntity.copyWith(id: curentIdsList[index]),
+                  // ignore: avoid_dynamic_calls
+                  arguments: widget.emptySearchEntity.copyWith(id: currentIdsList[index]) as SearchEntity,
                 );
-              }),
-              onLongPress: () => widget.onLongPress?.call(widget.curentIdsList[index]),
+              },
+              onLongPress: () => widget.onLongPress?.call(widget.currentIdsList[index]),
               child: ListTile(
-                title: widget.cardWidget(curentIdsList[index], () => setState(() => curentIdsList.removeAt(index))),
+                title: widget.cardWidget(currentIdsList[index], () => setState(() => currentIdsList.removeAt(index))),
               ),
             ),
           );
 
-          return CurentEntityBuilder(
-            childFunc: (curentBloc) => curentBloc.itemActions != null
+          return CurrentEntityBuilder(
+            childFunc: (currentBloc) => currentBloc.itemActions != null
                 ? Builder(
                     builder: (context) {
-                      getSlidableActions(ItemActionEnum id) => switch (id) {
+                      SlidableAction getSlidableActions(ItemActionEnum id) => switch (id) {
                         ItemActionEnum.makeCopy => SlidableAction(
                           onPressed: (_) {
-                            curentBloc.itemActions!.makeCopy(curentIdsList[index]);
+                            currentBloc.itemActions!.makeCopy(currentIdsList[index]);
                           },
                           backgroundColor: const Color(0xFF0392CF),
                           foregroundColor: Colors.white,
@@ -96,7 +97,7 @@ class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProv
                           borderRadius: BorderRadius.circular(10),
                           padding: const EdgeInsets.all(4),
                           onPressed: (_) {
-                            curentBloc.itemActions!.lock(curentIdsList[index]);
+                            currentBloc.itemActions!.lock(currentIdsList[index]);
                           },
                           backgroundColor: const Color(0xFF7BC043),
                           foregroundColor: Colors.white,
@@ -105,7 +106,7 @@ class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProv
                         ),
                         ItemActionEnum.share => SlidableAction(
                           onPressed: (_) {
-                            curentBloc.itemActions!.share(curentIdsList[index]);
+                            currentBloc.itemActions!.share(currentIdsList[index]);
                           },
                           backgroundColor: const Color(0xFF21B7CA),
                           foregroundColor: Colors.white,
@@ -114,7 +115,7 @@ class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProv
                         ),
                         ItemActionEnum.delete => SlidableAction(
                           onPressed: (_) {
-                            curentBloc.itemActions!.delete(curentIdsList[index]);
+                            currentBloc.itemActions!.delete(currentIdsList[index]);
                           },
                           backgroundColor: const Color(0xFFFE4A49),
                           foregroundColor: Colors.white,
@@ -124,11 +125,11 @@ class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProv
                         ItemActionEnum.export => throw UnimplementedError(),
                       };
                       final itemSwipeRightToLeftIndexes =
-                          (curentBloc.itemActions!.getItemSwipeRightToLeftIndexes(context) ?? []).nonNulls
+                          (currentBloc.itemActions!.getItemSwipeRightToLeftIndexes(context) ?? []).nonNulls
                               .map((e) => getSlidableActions(ItemActionEnum.values[e]))
                               .toList();
                       final itemSwipeLeftToRightIndexes =
-                          (curentBloc.itemActions!.getItemSwipeLeftToRightIndexes(context) ?? []).nonNulls
+                          (currentBloc.itemActions!.getItemSwipeLeftToRightIndexes(context) ?? []).nonNulls
                               .map((e) => getSlidableActions(ItemActionEnum.values[e]))
                               .toList();
                       return Slidable(
@@ -138,10 +139,10 @@ class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProv
                                 // A motion is a widget used to control how the pane animates.
                                 motion: const ScrollMotion(),
 
-                                dismissible: curentBloc.itemActions!.itemDismissAction != null
+                                dismissible: currentBloc.itemActions!.itemDismissAction != null
                                     ? DismissiblePane(
                                         onDismissed: () {
-                                          curentBloc.itemActions!.dismiss(curentIdsList[index]);
+                                          currentBloc.itemActions!.dismiss(currentIdsList[index]);
                                         },
                                       )
                                     : null,
@@ -153,10 +154,10 @@ class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProv
                             ? ActionPane(
                                 // A motion is a widget used to control how the pane animates.
                                 motion: const ScrollMotion(),
-                                dismissible: curentBloc.itemActions!.itemDismissAction != null
+                                dismissible: currentBloc.itemActions!.itemDismissAction != null
                                     ? DismissiblePane(
                                         onDismissed: () {
-                                          curentBloc.itemActions!.dismiss(curentIdsList[index]);
+                                          currentBloc.itemActions!.dismiss(currentIdsList[index]);
                                         },
                                       )
                                     : null,
@@ -169,11 +170,11 @@ class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProv
                   )
                 : body,
           );
-        }),
+        },
         separatorBuilder: (context, index) {
           return Divider(color: Colors.grey[400]);
         },
-        itemCount: curentIdsList.length,
+        itemCount: currentIdsList.length,
         padding: const EdgeInsets.only(bottom: 60, left: 4, right: 4, top: 4),
       ),
     );

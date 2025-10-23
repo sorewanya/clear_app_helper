@@ -8,6 +8,6 @@ class ClearIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(onPressed: onPressed, child: IconsHelper.getIconByEnum((IconSettingsEnum.close)));
+    return TextButton(onPressed: onPressed, child: IconsHelper.getIconByEnum(IconSettingsEnum.close));
   }
 }

@@ -24,6 +24,7 @@ part './settings_types_class/settings_saved_search.dart';
 
 @CopyWith()
 @JsonSerializable()
+// ignore: avoid_implementing_value_types
 class SettingsEntity with AppEntityWithIsDeleted, AppEntityWithName, EquatableMixin implements AppEntity {
   @override
   final int? id;
@@ -63,7 +64,7 @@ class SettingsEntity with AppEntityWithIsDeleted, AppEntityWithName, EquatableMi
       SettingsTypeEnum.listOfValuesExtend => SettingsListOfValuesExtend.fromEntity(this) ?? this,
       SettingsTypeEnum.savedSearch => SettingsSavedSearch.fromEntity(this) ?? this,
       SettingsTypeEnum.rfwWidget => this,
-      SettingsTypeEnum.doublee => SettingsInt.fromEntity(this) ?? this,
+      SettingsTypeEnum.doublee => SettingsDouble.fromEntity(this) ?? this,
     };
   }
 
@@ -78,11 +79,14 @@ class SettingsEntity with AppEntityWithIsDeleted, AppEntityWithName, EquatableMi
   List<Object?> get props => [name, defaultValue, userValue, confirmType, type, values, isDeleted];
 
   String get getUserOrDefaultValueAsString => userValue ?? defaultValue;
+
+  ///dont have "next" in default type, use toType() to get true implement
+  // ignore: avoid_returning_this
   SettingsEntity getSettingsWithNextVariant() => this;
 
   factory SettingsEntity.fromJson(Map<String, dynamic> json) => _$SettingsEntityFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$SettingsEntityToJson(this);
   @override
-  get copyWith => _$SettingsEntityCWProxyImpl(this);
+  dynamic get copyWith => _$SettingsEntityCWProxyImpl(this);
 }

@@ -11,19 +11,21 @@ class SettingsListOfString extends SettingsEntity {
             confirmType: item.confirmType,
             type: item.type,
             values: item.values,
-            isDeleted: item.isDeleted)
+            isDeleted: item.isDeleted,
+          )
         : null;
   }
 
-  SettingsListOfString(
-      {required super.id,
-      required super.name,
-      required super.defaultValue,
-      required super.userValue,
-      required super.confirmType,
-      required super.type,
-      required super.values,
-      required super.isDeleted});
+  SettingsListOfString({
+    required super.id,
+    required super.name,
+    required super.defaultValue,
+    required super.userValue,
+    required super.confirmType,
+    required super.type,
+    required super.values,
+    required super.isDeleted,
+  });
 
   List<String> get getUserOrDefaultAsListOfString => super.getUserOrDefaultValueAsString.split(',');
 }

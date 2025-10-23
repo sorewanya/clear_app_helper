@@ -8,9 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SettingsBuilderWidget extends StatelessWidget {
-  const SettingsBuilderWidget({super.key, required this.childFunc});
+  const SettingsBuilderWidget({required this.childFunc, super.key});
 
-  /// callback curent IdsFinded
+  /// callback current IdsFinded
   final Widget Function(IdsFinded<SettingsSearchEntity> settingsIdsFinded) childFunc;
 
   @override
@@ -26,10 +26,10 @@ class SettingsBuilderWidget extends StatelessWidget {
           ),
           LoadedSettingsBlocState() => childFunc(state.settingsIdsFinded),
           LoadingErrorSettingsBlocState() => loadingIndicator(
-            "${GetIt.instance<CoreI18n>().settingsBuilderStateLoadingError}: ${state.errorMessage}",
+            '${GetIt.instance<CoreI18n>().settingsBuilderStateLoadingError}: ${state.errorMessage}',
           ),
           SavingErrorSettingsBlocState() => loadingIndicator(
-            "${GetIt.instance<CoreI18n>().settingsBuilderStateSavingError}: ${state.errorMessage}",
+            '${GetIt.instance<CoreI18n>().settingsBuilderStateSavingError}: ${state.errorMessage}',
           ),
           _ => loadingIndicator(GetIt.instance<CoreI18n>().settingsBuilderWork),
         };

@@ -1,17 +1,16 @@
-import 'package:clear_app_helper/core/domain/entities/search_entity.dart';
-import 'package:dartz/dartz.dart';
-
 import 'package:clear_app_helper/core/domain/entities/app_entity.dart';
+import 'package:clear_app_helper/core/domain/entities/search_entity.dart';
 import 'package:clear_app_helper/core/error/failure.dart';
 import 'package:clear_app_helper/core/error/map_failure_to_message.dart';
 import 'package:clear_app_helper/core/usecases/usecase.dart';
+import 'package:dartz/dartz.dart';
 
 ///simple bloc helper
 class BlocHelper<T extends AppEntity, SEType extends SearchEntity> {
   BlocHelper({required this.useCase});
 
   UseCase<T, SEType> useCase;
-  _mapFailureToMessage(Failure error) => mapFailureToMessage(error);
+  String _mapFailureToMessage(Failure error) => mapFailureToMessage(error);
 
   Future<T?> getById(int? itemId, Function(String error)? loadingError) async {
     if (itemId == null) return null;
@@ -41,7 +40,7 @@ class BlocHelper<T extends AppEntity, SEType extends SearchEntity> {
     );
   }
 
-  Stream<T?> getStream(id) {
+  Stream<T?> getStream(int id) {
     return useCase.getStream(id);
   }
 
@@ -85,7 +84,7 @@ class BlocHelper<T extends AppEntity, SEType extends SearchEntity> {
   }
 
   Future<List<int>> getIdsList(Future<Either<Failure, List<int>>> get, Function(String error)? loadingError) async {
-    return await get.then((value) async {
+    return get.then((value) async {
       return await value.fold(
         (error) {
           if (loadingError != null) loadingError(_mapFailureToMessage(error));
@@ -99,7 +98,7 @@ class BlocHelper<T extends AppEntity, SEType extends SearchEntity> {
   }
 
   Future<int> getCount(Future<Either<Failure, int>> get, Function(String error)? loadingError) async {
-    return await get.then((value) async {
+    return get.then((value) async {
       return await value.fold(
         (error) {
           if (loadingError != null) loadingError(_mapFailureToMessage(error));

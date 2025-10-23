@@ -11,19 +11,22 @@ class TestSearchEntity implements SearchEntity {
   final bool? isDeleted;
   final TestSearchCreatedOn? createdOn;
 
+  // ignore: avoid_unused_constructor_parameters
   factory TestSearchEntity.fromJson(Map<String, dynamic> json) => throw UnimplementedError();
   @override
   Map<String, dynamic> toJson() => throw UnimplementedError();
 
   @override
-  bool isEmpty() => this == const TestSearchEntity() ? true : false;
+  bool isEmpty() => this == const TestSearchEntity();
 
   @override
-  get copyWith => throw UnimplementedError();
+  dynamic get copyWith => throw UnimplementedError();
 }
 
 class TestSearchCreatedOn extends SearchElement with SearchElementDateTimeComparisons {
   TestSearchCreatedOn();
+  // ignore: avoid_unused_constructor_parameters
   factory TestSearchCreatedOn.fromJson(Map<String, dynamic> json) => throw UnimplementedError();
+  @override
   Map<String, dynamic> toJson() => throw UnimplementedError();
 }

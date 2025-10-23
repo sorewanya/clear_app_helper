@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 class SetDateTimeIconButtonWidget extends StatelessWidget {
   const SetDateTimeIconButtonWidget({
-    super.key,
     required this.dateTimeSet,
-    this.ifDayOnly,
     required this.label,
     required this.dateTime,
+    super.key,
+    this.ifDayOnly,
   });
 
   /// base dateTime
@@ -27,7 +27,7 @@ class SetDateTimeIconButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () async {
-        var selectedDate = await showDatePicker(
+        final selectedDate = await showDatePicker(
           context: context,
           initialDate: dateTime ?? DateTime.now(),
           firstDate: DateTime(1900),
@@ -36,8 +36,8 @@ class SetDateTimeIconButtonWidget extends StatelessWidget {
           currentDate: DateTime.now(),
         );
 
-        if (selectedDate != null) {
-          var selectedTime = await showTimePicker(
+        if (selectedDate != null && context.mounted) {
+          final selectedTime = await showTimePicker(
             context: context,
             initialTime: TimeOfDay(
               hour: dateTime?.hour ?? DateTime.now().hour,

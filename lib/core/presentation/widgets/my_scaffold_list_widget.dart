@@ -13,21 +13,21 @@ import 'package:flutter/material.dart';
 class MyScaffoldListWidget<AppEntityType extends AppEntity> extends StatelessWidget {
   MyScaffoldListWidget({
     required this.onTapRouteName,
-    required this.curentIdsList,
-    required this.curentSearchEntity,
+    required this.currentIdsList,
+    required this.currentSearchEntity,
     required this.appBarTitle,
     required this.listSearchWidget,
-    this.appBarLeading,
     required this.drawer,
+    required this.emptySearchEntity,
+    required this.cardWidget,
+    required this.resetSearch,
+    required this.controller,
+    this.appBarLeading,
     this.topInBodyColumn,
     this.endDrawer,
     super.key,
-    required this.emptySearchEntity,
-    required this.cardWidget,
     this.addButton = true,
     this.onLongPress,
-    required this.resetSearch,
-    required this.controller,
   });
 
   final Function()? resetSearch;
@@ -39,13 +39,13 @@ class MyScaffoldListWidget<AppEntityType extends AppEntity> extends StatelessWid
   final String onTapRouteName;
 
   /// send to [ViewsPagesEmptyCheckerWidget] and [ListViewOfItems]
-  final List<int> curentIdsList;
+  final List<int> currentIdsList;
 
   /// send to [MyScaffoldWidget]
   final String appBarTitle;
 
   /// send to [FloatingPlusIconButton] and [ViewsPagesEmptyCheckerWidget]
-  final SearchEntity curentSearchEntity;
+  final SearchEntity currentSearchEntity;
 
   /// send to [ViewsPagesEmptyCheckerWidget] and [ListViewOfItems]
   final SearchEntity emptySearchEntity;
@@ -84,12 +84,12 @@ class MyScaffoldListWidget<AppEntityType extends AppEntity> extends StatelessWid
         children: [
           if (topInBodyColumn != null) topInBodyColumn!,
           ViewsPagesEmptyCheckerWidget(
-            curentListIsEmpty: curentIdsList.isEmpty,
-            searchEntity: curentSearchEntity,
+            currentListIsEmpty: currentIdsList.isEmpty,
+            searchEntity: currentSearchEntity,
             resetSearch: resetSearch,
           ),
           ListViewOfItems(
-            curentIdsList: curentIdsList,
+            currentIdsList: currentIdsList,
             onTapRouteName: onTapRouteName,
             onLongPress: onLongPress,
             emptySearchEntity: emptySearchEntity,

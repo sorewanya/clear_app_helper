@@ -14,16 +14,19 @@ class AnimatedToggleSwitchComparison extends StatelessWidget {
   final List<Comparison>? values;
 
   const AnimatedToggleSwitchComparison({
-    super.key,
     required this.comparison,
     required this.setComparison,
     required this.values,
+    super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    final size = Theme.of(context).iconTheme.size ?? 20;
     return AnimatedToggleSwitch<Comparison>.rolling(
       current: comparison,
+      height: size * 2,
+      borderWidth: size * 0.1,
       values:
           values ??
           const [
@@ -34,10 +37,10 @@ class AnimatedToggleSwitchComparison extends StatelessWidget {
             Comparison.equal,
             Comparison.notEqual,
           ],
-      onChanged: (i) => setComparison(i),
-      iconBuilder: ((value, foreground) {
+      onChanged: setComparison,
+      iconBuilder: (value, foreground) {
         return Icon(IconsHelper.getIconDataByString(Comparison.fromComparison(value)));
-      }),
+      },
     );
   }
 }

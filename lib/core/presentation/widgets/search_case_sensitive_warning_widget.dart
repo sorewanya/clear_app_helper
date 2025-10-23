@@ -14,8 +14,8 @@ class SearchCaseSensitiveWarningWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool caseSensitive =
-        context.read<SettingsBloc>().getUserOrDefaultValueByNamed(CoreSettingsEnum.searchCaseSensitive.name) == "true";
+    final bool caseSensitive =
+        context.read<SettingsBloc>().getUserOrDefaultValueByNamed(CoreSettingsEnum.searchCaseSensitive.name) == 'true';
     return caseSensitive
         ? Row(
             children: [
@@ -23,9 +23,9 @@ class SearchCaseSensitiveWarningWidget extends StatelessWidget {
               TextButton(
                 onPressed: () => RouteHelper.toNamed(
                   SettingsRouteNames.settingsViewPage,
-                  arguments: const SettingsSearchEntity(name: "search.caseSensitive"),
+                  arguments: const SettingsSearchEntity(name: 'search.caseSensitive'),
                 ),
-                child: IconsHelper.getIconByEnum((IconSettingsEnum.settingsItem)),
+                child: IconsHelper.getIconByEnum(IconSettingsEnum.settingsItem),
               ),
             ],
           )

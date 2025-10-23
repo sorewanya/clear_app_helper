@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 class SettingsIconButton extends StatelessWidget {
   final String routeName;
 
-  const SettingsIconButton({super.key, required this.routeName});
+  const SettingsIconButton({required this.routeName, super.key});
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () => RouteHelper.offNamedUntil(routeName, (route) => false),
-      child: IconsHelper.getIconByEnum((IconSettingsEnum.settingsItem)),
+      child: IconsHelper.getIconByEnum(IconSettingsEnum.settingsItem),
     );
   }
 }

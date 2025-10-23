@@ -7,6 +7,7 @@ import 'examples_impl.dart';
 class TestLocalDataSource extends ExampleLocalDataSource<TestEntity, TestSearchEntity> with LDSWithRevertDelete {
   TestLocalDataSource() {
     setHelpers(ExampleDBHelper(), ExampleDBLogsHelper<TestLog>());
+    // ignore: dead_code
     addDefaults();
   }
 

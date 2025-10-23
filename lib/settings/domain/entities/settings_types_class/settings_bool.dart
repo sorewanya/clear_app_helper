@@ -27,20 +27,22 @@ class SettingsBool extends SettingsEntity {
     required super.isDeleted,
   });
 
-  bool get getUserOrDefaultValueAsBool => (super.getUserOrDefaultValueAsString) == "true";
-  bool? get getUserValueAsBool => userValue == "true"
+  bool get getUserOrDefaultValueAsBool => (super.getUserOrDefaultValueAsString) == 'true';
+  bool? get getUserValueAsBool => userValue == 'true'
       ? true
-      : userValue == "false"
+      : userValue == 'false'
       ? false
       : null;
   @override
   SettingsEntity getSettingsWithNextVariant() {
+    // ignore: avoid_dynamic_calls
     return copyWith(
-      userValue: userValue == null
-          ? (defaultValue == "true" ? "false" : "true")
-          : userValue == "true"
-          ? "false"
-          : "true",
-    );
+          userValue: userValue == null
+              ? (defaultValue == 'true' ? 'false' : 'true')
+              : userValue == 'true'
+              ? 'false'
+              : 'true',
+        )
+        as SettingsBool;
   }
 }

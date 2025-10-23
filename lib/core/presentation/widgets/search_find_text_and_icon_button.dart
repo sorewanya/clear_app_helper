@@ -14,11 +14,10 @@ class SearchFindTextAndIconButton extends StatelessWidget {
       onPressed: onTap,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(GetIt.instance<CoreI18n>().find),
           const SizedBox(width: 10),
-          IconsHelper.getIconByEnum((IconSettingsEnum.searchSearch)),
+          IconsHelper.getIconByEnum(IconSettingsEnum.searchSearch),
         ],
       ),
     );

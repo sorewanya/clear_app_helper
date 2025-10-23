@@ -32,11 +32,11 @@ class SettingsValue extends SettingsEntity {
     return asInt != null
         ? values != null
               ? values![asInt]
-              : ""
-        : "";
+              : ''
+        : '';
   }
 
-  String get getUserOrDefaultValueStringOrEmpty => getUserOrDefaultValueStringOrNull ?? "";
+  String get getUserOrDefaultValueStringOrEmpty => getUserOrDefaultValueStringOrNull ?? '';
 
   int? get getUserOrDefaultValueIndexOrNull => int.tryParse(super.getUserOrDefaultValueAsString);
   int get getUserOrDefaultValueIndexOrZero => getUserOrDefaultValueIndexOrNull ?? 0;
@@ -45,10 +45,13 @@ class SettingsValue extends SettingsEntity {
   SettingsEntity getSettingsWithNextVariant() {
     final index = getUserOrDefaultValueIndexOrNull;
     return values != null && index != null
-        ? copyWith(userValue: values!.length - 1 > index ? (index + 1).toString() : "0")
+        // ignore: avoid_dynamic_calls
+        ? copyWith(userValue: values!.length - 1 > index ? (index + 1).toString() : '0') as SettingsValue
         : this;
   }
 
-  bool getUserOrDefaultCompareToNamedOfValues(String name) =>
-      values != null ? getUserOrDefaultValueIndexOrNull == values!.indexOf(name) : false;
+  bool getUserOrDefaultCompareToNamedOfValues(String name) {
+    if (values == null) return false;
+    return getUserOrDefaultValueIndexOrNull == values!.indexOf(name);
+  }
 }

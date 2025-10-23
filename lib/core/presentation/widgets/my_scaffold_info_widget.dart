@@ -12,12 +12,12 @@ import 'package:get_it/get_it.dart';
 class MyScaffoldInfoWidget extends StatelessWidget {
   const MyScaffoldInfoWidget({
     required this.appBarTitle,
-    this.appBarLeading,
-    super.key,
     required this.drawer,
     required this.description,
     required this.textButtonsMap,
     required this.settingsSearchName,
+    this.appBarLeading,
+    super.key,
   });
 
   /// send to [MyScaffoldWidget]
@@ -40,7 +40,7 @@ class MyScaffoldInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> textButtons = [];
+    final List<Widget> textButtons = [];
     textButtonsMap.forEach((key, value) => textButtons.add(TextButton(onPressed: value, child: key)));
 
     return MyScaffoldWidget(

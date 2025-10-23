@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// "+1 +5 +10" buttons
 class TextButtonsPlusToInt extends StatelessWidget {
-  const TextButtonsPlusToInt({super.key, required this.plusIntValue, this.intSet});
+  const TextButtonsPlusToInt({required this.plusIntValue, super.key, this.intSet});
 
   /// value to plus callback
   final Function(int value) plusIntValue;
@@ -15,31 +15,29 @@ class TextButtonsPlusToInt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final curentIntSet =
+    final currentIntSet =
         intSet ??
         context
             .read<SettingsBloc>()
             .getStringsListUserOrDefaultValueByNamed(CoreSettingsEnum.plusIntValues.name)
-            .map((e) => int.tryParse(e))
+            .map(int.tryParse)
             .whereType<int>()
             .toSet();
 
     return SizedBox(
-      height: 30,
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 60,
-          childAspectRatio: 3 / 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 20,
-        ),
-        itemCount: curentIntSet.length,
-        itemBuilder: (context, index) => TextButton(
-          onPressed: (() {
-            plusIntValue(curentIntSet.elementAt(index));
-          }),
-          child: Text("+${curentIntSet.elementAt(index)}"),
-        ),
+      child: Wrap(
+        children: [
+          ...currentIntSet.map(
+            (e) => SizedBox(
+              child: TextButton(
+                onPressed: () {
+                  plusIntValue(e);
+                },
+                child: Text('+$e'),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

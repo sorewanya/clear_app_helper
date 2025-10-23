@@ -8,15 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:graphview/GraphView.dart';
 
-/// graph widget, used [GraphView.simpleTyped]
+/// graph widget, used [`GraphView.simpleTyped`]
 class GraphViewOfItems<AppEntityType extends AppEntity> extends StatefulWidget {
   const GraphViewOfItems({
-    super.key,
     required this.onTapRouteName,
-    this.onLongPress,
     required this.cardWidget,
     required this.graph,
     required this.emptySearchEntity,
+    super.key,
+    this.onLongPress,
   });
 
   /// elements to show, is being filled by graph.addEdge()
@@ -52,13 +52,13 @@ class _GraphViewOfItemsState<AppEntityType extends AppEntity> extends State<Grap
 
   @override
   Widget build(BuildContext context) {
-    var curentGraph = widget.graph;
+    final currentGraph = widget.graph;
 
     ///Layered
-    SugiyamaConfiguration builder = SugiyamaConfiguration()..bendPointShape = CurvedBendPointShape(curveLength: 20);
-    builder
-      ..nodeSeparation = (35)
-      ..levelSeparation = (35)
+    final SugiyamaConfiguration builder = SugiyamaConfiguration()
+      ..bendPointShape = CurvedBendPointShape(curveLength: 20)
+      ..nodeSeparation = 35
+      ..levelSeparation = 35
       ..orientation = SugiyamaConfiguration.ORIENTATION_LEFT_RIGHT;
 
     return Expanded(
@@ -68,19 +68,23 @@ class _GraphViewOfItemsState<AppEntityType extends AppEntity> extends State<Grap
         minScale: 0.001,
         maxScale: 100,
         child: GraphView(
-          graph: curentGraph,
+          graph: currentGraph,
           algorithm: SugiyamaAlgorithm(builder),
           paint: Paint()
             ..color = Colors.green
             ..strokeWidth = 1
             ..style = PaintingStyle.fill,
-          builder: (Node node) {
-            var id = node.key!.value;
+          builder: (node) {
+            final id = node.key!.value;
             return node.key!.value != null
                 ? GestureDetector(
-                    onTap: (() {
-                      RouteHelper.toNamed(widget.onTapRouteName, arguments: widget.emptySearchEntity.copyWith(id: id));
-                    }),
+                    onTap: () {
+                      RouteHelper.toNamed(
+                        widget.onTapRouteName,
+                        // ignore: avoid_dynamic_calls
+                        arguments: widget.emptySearchEntity.copyWith(id: id) as SearchEntity,
+                      );
+                    },
                     onLongPress: () => widget.onLongPress?.call(id),
                     child: widget.cardWidget(id as int),
                   )

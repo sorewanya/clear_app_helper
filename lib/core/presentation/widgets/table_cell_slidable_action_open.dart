@@ -13,7 +13,6 @@ class TableCellSlidableActionOpen extends StatelessWidget {
       child: GestureDetector(
         onTap: () => right ? Slidable.of(context)?.openEndActionPane() : Slidable.of(context)?.openStartActionPane(),
         child: Align(
-          alignment: Alignment.center,
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColorLight.withValues(alpha: 0.3),
@@ -21,7 +20,7 @@ class TableCellSlidableActionOpen extends StatelessWidget {
                   ? const BorderRadius.only(topRight: Radius.circular(10), bottomRight: Radius.circular(10))
                   : const BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10)),
             ),
-            child: Icon(IconsHelper.getIconDataOrNullByString(right ? ">" : "<")),
+            child: Icon(IconsHelper.getIconDataOrNullByString(right ? '>' : '<')),
           ),
         ),
       ),

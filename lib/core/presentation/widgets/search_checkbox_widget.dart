@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 
 class SearchCheckboxWidget extends StatelessWidget {
   const SearchCheckboxWidget({
-    super.key,
     required this.param,
     required this.setParam,
     required this.filtr,
     required this.setState,
     required this.text,
+    super.key,
   });
 
   /// text befor checkbox
@@ -27,7 +27,7 @@ class SearchCheckboxWidget extends StatelessWidget {
   /// ```
   /// setState: (f) => setState(() => f()),
   /// ```
-  final Function(Function f) setState;
+  final Function(Function() f) setState;
 
   @override
   Widget build(BuildContext context) {

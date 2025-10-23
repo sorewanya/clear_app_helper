@@ -6,6 +6,6 @@ InputDecoration getDefaultInputDecorator({required String labelAndHintText, Text
     labelText: labelAndHintText,
     hintText: labelAndHintText,
     labelStyle: labelStyle ?? Get.theme.textTheme.headlineMedium,
-    border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(25.0))),
+    border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(25))),
   );
 }

@@ -16,120 +16,120 @@ abstract class AbstractDefaultData {
   late final List<SettingsDescriptionEntity> getDefaultSettingDescriptionList = [];
 }
 
-final curentTime = DateTime.now().toString();
+final currentTime = DateTime.now().toString();
 
 SettingsEntity coreSettingsEnumSettings(CoreSettingsEnum e) => switch (e) {
-  CoreSettingsEnum.viewDefault => SettingsEntity.fromEnum(e: e, defaultValue: "0", values: ["settings"]),
-  CoreSettingsEnum.showDeleted => SettingsEntity.fromEnum(e: e, defaultValue: "false"),
+  CoreSettingsEnum.viewDefault => SettingsEntity.fromEnum(e: e, defaultValue: '0', values: ['settings']),
+  CoreSettingsEnum.showDeleted => SettingsEntity.fromEnum(e: e, defaultValue: 'false'),
   CoreSettingsEnum.themeMode => SettingsEntity.fromEnum(
     e: e,
-    defaultValue: "2",
-    values: ["dark", "light", "systemLight"],
+    defaultValue: '2',
+    values: ['dark', 'light', 'systemLight'],
   ),
-  CoreSettingsEnum.autoSaveOnPop => SettingsEntity.fromEnum(e: e, defaultValue: "false"),
-  CoreSettingsEnum.allAfterSaveItemShowInfobar => SettingsEntity.fromEnum(e: e, defaultValue: "true"),
+  CoreSettingsEnum.autoSaveOnPop => SettingsEntity.fromEnum(e: e, defaultValue: 'false'),
+  CoreSettingsEnum.allAfterSaveItemShowInfobar => SettingsEntity.fromEnum(e: e, defaultValue: 'true'),
   CoreSettingsEnum.allAfterRemoveItemReloadList => SettingsEntity.fromEnum(
     e: e,
-    defaultValue: "false",
+    defaultValue: 'false',
     confirmType: SettingsRequiredTypesEnum.requiredStop.index,
   ),
-  CoreSettingsEnum.searchUpdateListAfterReset => SettingsEntity.fromEnum(e: e, defaultValue: "true"),
-  CoreSettingsEnum.plusIntValues => SettingsEntity.fromEnum(e: e, defaultValue: "1,5,10,30"),
-  CoreSettingsEnum.searchCaseSensitive => SettingsEntity.fromEnum(e: e, defaultValue: "false"),
-  CoreSettingsEnum.datetimeDefaultPersonalFormat => SettingsEntity.fromEnum(e: e, defaultValue: ""),
+  CoreSettingsEnum.searchUpdateListAfterReset => SettingsEntity.fromEnum(e: e, defaultValue: 'true'),
+  CoreSettingsEnum.plusIntValues => SettingsEntity.fromEnum(e: e, defaultValue: '1,5,10,30'),
+  CoreSettingsEnum.searchCaseSensitive => SettingsEntity.fromEnum(e: e, defaultValue: 'false'),
+  CoreSettingsEnum.datetimeDefaultPersonalFormat => SettingsEntity.fromEnum(e: e, defaultValue: ''),
   //TODO use I18n to defaultValue
   CoreSettingsEnum.datetimeDefaultFormat => SettingsEntity.fromEnum(
     e: e,
-    defaultValue: "0",
+    defaultValue: '0',
     values: [
-      "E-d/M yy, HH:mm",
-      "E d/M yy, HH:mm",
-      "dd MM yy, HH:mm",
-      "MM dd yy, HH:mm",
-      "yyyy-MM-dd hh:mm",
-      "dd-MM-yyyy, HH:mm",
-      "MM-dd-yyyy, HH:mm",
-      "MM dd yyyy, HH:mm",
+      'E-d/M yy, HH:mm',
+      'E d/M yy, HH:mm',
+      'dd MM yy, HH:mm',
+      'MM dd yy, HH:mm',
+      'yyyy-MM-dd hh:mm',
+      'dd-MM-yyyy, HH:mm',
+      'MM-dd-yyyy, HH:mm',
+      'MM dd yyyy, HH:mm',
     ],
   ),
   //TODO use I18n
-  CoreSettingsEnum.datetimeLanguage => SettingsEntity.fromEnum(e: e, defaultValue: "0", values: ["ru", "en"]),
-  CoreSettingsEnum.searchAddParentToChildList => SettingsEntity.fromEnum(e: e, defaultValue: "false"),
-  CoreSettingsEnum.globalLoggingEnable => SettingsEntity.fromEnum(e: e, defaultValue: "true"),
+  CoreSettingsEnum.datetimeLanguage => SettingsEntity.fromEnum(e: e, defaultValue: '0', values: ['ru', 'en']),
+  CoreSettingsEnum.searchAddParentToChildList => SettingsEntity.fromEnum(e: e, defaultValue: 'false'),
+  CoreSettingsEnum.globalLoggingEnable => SettingsEntity.fromEnum(e: e, defaultValue: 'true'),
   CoreSettingsEnum.globalLoggingSizeLimitType => SettingsEntity.fromEnum(
     e: e,
-    defaultValue: "2",
-    values: ["disabled", "byItem", "byClass"],
+    defaultValue: '2',
+    values: ['disabled', 'byItem', 'byClass'],
   ),
 
   /// 0 - no limit
-  CoreSettingsEnum.globalLoggingSizeLimitCount => SettingsEntity.fromEnum(e: e, defaultValue: "1000"),
+  CoreSettingsEnum.globalLoggingSizeLimitCount => SettingsEntity.fromEnum(e: e, defaultValue: '1000'),
   //TODO
   CoreSettingsEnum.globalSwipeBaseList => SettingsEntity.fromEnum(
     e: e,
-    defaultValue: "",
+    defaultValue: '',
     values: [
-      "update.list",
-      "show.actions", //1
-      "edit", //2
-      "delete", //3
+      'update.list',
+      'show.actions', //1
+      'edit', //2
+      'delete', //3
     ],
   ),
   CoreSettingsEnum.globalSwipeLeftToRight => SettingsEntity.fromEnum(
     e: e,
-    defaultValue: "3",
+    defaultValue: '3',
     values: [CoreSettingsEnum.globalSwipeBaseList.name],
   ),
-  CoreSettingsEnum.globalSwipeRightToLeft => SettingsEntity.fromEnum(e: e, defaultValue: ""),
-  CoreSettingsEnum.globalSwipeTopToDown => SettingsEntity.fromEnum(e: e, defaultValue: ""),
-  CoreSettingsEnum.globalSwipeDownToTop => SettingsEntity.fromEnum(e: e, defaultValue: ""),
+  CoreSettingsEnum.globalSwipeRightToLeft => SettingsEntity.fromEnum(e: e, defaultValue: ''),
+  CoreSettingsEnum.globalSwipeTopToDown => SettingsEntity.fromEnum(e: e, defaultValue: ''),
+  CoreSettingsEnum.globalSwipeDownToTop => SettingsEntity.fromEnum(e: e, defaultValue: ''),
   CoreSettingsEnum.itemSwipeBaseList => SettingsEntity.fromEnum(
     e: e,
-    defaultValue: "",
+    defaultValue: '',
     values: ItemActionEnum.values.map((e) => e.name).toList(),
   ),
-  CoreSettingsEnum.globalQuery => SettingsEntity.fromEnum(e: e, defaultValue: curentTime),
+  CoreSettingsEnum.globalQuery => SettingsEntity.fromEnum(e: e, defaultValue: currentTime),
   CoreSettingsEnum.globalTr => SettingsEntity.fromEnum(
     e: e,
-    defaultValue: sha512.convert(utf8.encode(curentTime)).toString(),
+    defaultValue: sha512.convert(utf8.encode(currentTime)).toString(),
   ),
 };
 
 SettingsEntity settingsSettingsEnumSettings(SettingsSettingsEnum e) => switch (e) {
-  SettingsSettingsEnum.viewDefault => SettingsEntity.fromEnum(e: e, defaultValue: "0", values: ["list", "tree"]),
-  SettingsSettingsEnum.loggingEnable => SettingsEntity.fromEnum(e: e, defaultValue: "true"),
-  SettingsSettingsEnum.savedSearch => SettingsEntity.fromEnum(e: e, defaultValue: "", values: []),
+  SettingsSettingsEnum.viewDefault => SettingsEntity.fromEnum(e: e, defaultValue: '0', values: ['list', 'tree']),
+  SettingsSettingsEnum.loggingEnable => SettingsEntity.fromEnum(e: e, defaultValue: 'true'),
+  SettingsSettingsEnum.savedSearch => SettingsEntity.fromEnum(e: e, defaultValue: '', values: []),
 
   ///TODO blank to add new types of settings inside the app
   SettingsSettingsEnum.typesNames => SettingsEntity.fromEnum(
     e: e,
-    defaultValue: "",
+    defaultValue: '',
     values: [
-      "integer",
-      "boolean",
-      "icon",
-      "string",
-      "dirPath",
-      "filePath",
-      "value",
-      "listOfInt",
-      "listOfValues",
-      "listOfString",
-      "listOfValuesBase",
-      "listOfValuesExtend",
-      "savedSearch",
-      "rfwWidget",
+      'integer',
+      'boolean',
+      'icon',
+      'string',
+      'dirPath',
+      'filePath',
+      'value',
+      'listOfInt',
+      'listOfValues',
+      'listOfString',
+      'listOfValuesBase',
+      'listOfValuesExtend',
+      'savedSearch',
+      'rfwWidget',
     ],
   ),
-  SettingsSettingsEnum.version => SettingsEntity.fromEnum(e: e, defaultValue: ""),
+  SettingsSettingsEnum.version => SettingsEntity.fromEnum(e: e, defaultValue: ''),
   SettingsSettingsEnum.itemSwipeLeftToRight => SettingsEntity.fromEnum(
     e: e,
-    defaultValue: "",
+    defaultValue: '',
     values: [CoreSettingsEnum.itemSwipeBaseList.name],
   ),
   SettingsSettingsEnum.itemSwipeRightToLeft => SettingsEntity.fromEnum(
     e: e,
-    defaultValue: "",
+    defaultValue: '',
     values: [CoreSettingsEnum.itemSwipeBaseList.name],
   ),
 };

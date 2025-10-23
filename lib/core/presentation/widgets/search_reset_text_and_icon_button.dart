@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 class SearchResetTextAndIconButton extends StatelessWidget {
-  const SearchResetTextAndIconButton({super.key, required this.onTap, this.openEndDrawer});
+  const SearchResetTextAndIconButton({required this.onTap, super.key, this.openEndDrawer});
 
   final Function()? onTap;
 
@@ -16,7 +16,6 @@ class SearchResetTextAndIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         TextButton(
           onPressed: onTap,
@@ -24,13 +23,13 @@ class SearchResetTextAndIconButton extends StatelessWidget {
             children: [
               Text(GetIt.instance<CoreI18n>().searchResetButtonText),
               const SizedBox(width: 10),
-              IconsHelper.getIconByEnum((IconSettingsEnum.searchReset)),
+              IconsHelper.getIconByEnum(IconSettingsEnum.searchReset),
             ],
           ),
         ),
         if (openEndDrawer != null)
           TextButton(
-            onPressed: (() => Scaffold.of(context).openEndDrawer()),
+            onPressed: () => Scaffold.of(context).openEndDrawer(),
             child: Text(GetIt.instance<CoreI18n>().searchShowSettings),
           ),
       ],

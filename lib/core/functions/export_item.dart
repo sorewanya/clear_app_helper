@@ -12,11 +12,11 @@ import 'package:path_provider/path_provider.dart';
 ///export item to 'filename ${item.id}.$fileExtension'
 class ExportItem extends StatelessWidget {
   const ExportItem({
-    super.key,
     required this.filename,
     required this.items,
+    super.key,
     this.showIconOnly = false,
-    this.fileExtension = "xml",
+    this.fileExtension = 'xml',
   });
 
   final String filename;
@@ -30,28 +30,25 @@ class ExportItem extends StatelessWidget {
       future: getDownloadsDirectory(),
       builder: (context, future) {
         if (!future.hasData && future.data == null) {
-          return loadingIndicator("load getDownloadsDirectory");
+          return loadingIndicator('load getDownloadsDirectory');
         }
-        Directory directory = future.data!;
+        final Directory directory = future.data!;
         return IconButton(
           onPressed: () {
-            for (var item in items) {
-              String fullpath = join(directory.path, '$filename ${item.id}.$fileExtension');
-              File file = File(fullpath);
-              var exportString = "${item.runtimeType}:::${json.encode(item.toJson())}\n";
+            for (final item in items) {
+              final String fullpath = join(directory.path, '$filename ${item.id}.$fileExtension');
+              final File file = File(fullpath);
+              final exportString = '${item.runtimeType}:::${json.encode(item.toJson())}\n';
               file.writeAsStringSync(exportString);
             }
           },
           icon: Row(
             children: [
               const Icon(Icons.save_as_outlined),
-              ...showIconOnly == false
-                  ? [
-                      Text(
-                        "${GetIt.instance<CoreI18n>().exportElements} ($filename) ${GetIt.instance<CoreI18n>().exportElementsInDiffFiles} $fileExtension",
-                      ),
-                    ]
-                  : [],
+              if (!showIconOnly)
+                Text(
+                  '${GetIt.instance<CoreI18n>().exportElements} ($filename) ${GetIt.instance<CoreI18n>().exportElementsInDiffFiles} $fileExtension',
+                ),
             ],
           ),
         );

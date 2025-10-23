@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class IconTrueFalse extends StatelessWidget {
   final bool check;
 
-  const IconTrueFalse({super.key, required this.check});
+  const IconTrueFalse({required this.check, super.key});
 
   @override
   Widget build(BuildContext context) {

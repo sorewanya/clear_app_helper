@@ -1,8 +1,5 @@
-import 'package:clear_app_helper/core/i18n/core_i18n.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
+import 'package:clear_app_helper/core/i18n/core_i18n.dart';
 import 'package:clear_app_helper/core/icons_helper.dart';
 import 'package:clear_app_helper/core/presentation/theme_data.dart';
 import 'package:clear_app_helper/core/presentation/widgets/checkbox_text_button.dart';
@@ -12,11 +9,13 @@ import 'package:clear_app_helper/settings/domain/entities/settings_entity.dart';
 import 'package:clear_app_helper/settings/domain/entities/settings_types.dart';
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
 import 'package:clear_app_helper/settings/presentation/widgets/confirm_type_warning.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SettingsCardWidget extends StatelessWidget {
   final int id;
-  const SettingsCardWidget({super.key, required this.id});
+  const SettingsCardWidget({required this.id, super.key});
   @override
   Widget build(BuildContext context) {
     final settingsBloc = context.read<SettingsBloc>();
@@ -34,20 +33,19 @@ class SettingsCardWidget extends StatelessWidget {
           return (item.type != SettingsTypeEnum.listOfValues.index &&
                   item.type != SettingsTypeEnum.listOfValuesExtend.index)
               ? Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     iconWidget,
                     Text(string),
                     //icon?
-                    (item.type == SettingsTypeEnum.icon.index && valueAsInt != null)
-                        ? Icon(MdiIconData(valueAsInt), size: 40)
-                        //value of values List?
-                        : (item.type == SettingsTypeEnum.value.index && valueAsInt != null)
-                        ? Text(item.values?[valueAsInt] ?? "")
-                        : Text(value),
+                    if (item.type == SettingsTypeEnum.icon.index && valueAsInt != null)
+                      Icon(MdiIconData(valueAsInt), size: 40)
+                    else
+                      (item.type == SettingsTypeEnum.value.index && valueAsInt != null)
+                          ? Text(item.values?[valueAsInt] ?? '')
+                          : Text(value),
                   ],
                 )
-              : Text("$string ${value.split(",").map((e) => int.tryParse(e)).whereType<int>().toList().toString()}");
+              : Text("$string ${value.split(",").map(int.tryParse).whereType<int>().toList()}");
         }
 
         return Padding(
@@ -88,10 +86,10 @@ class SettingsCardWidget extends StatelessWidget {
                       Text(item.name),
 
                       ///default value
-                      if (item.defaultValue != "")
+                      if (item.defaultValue != '')
                         valueView(
                           item.defaultValue,
-                          "${GetIt.instance<CoreI18n>().setDefaultInSettings}: ",
+                          '${GetIt.instance<CoreI18n>().setDefaultInSettings}: ',
                           IconsHelper.getIconByEnum(IconSettingsEnum.defaultValue),
                         ),
 
@@ -100,24 +98,20 @@ class SettingsCardWidget extends StatelessWidget {
                       if (item.userValue != null)
                         valueView(
                           item.userValue!,
-                          "${GetIt.instance<CoreI18n>().settingUserValue}: ",
+                          '${GetIt.instance<CoreI18n>().settingUserValue}: ',
                           IconsHelper.getIconByEnum(IconSettingsEnum.userValue),
                         ),
 
                       ///values List
                       if (item.values != null && item.type != SettingsTypeEnum.listOfValuesExtend.index)
-                        Text(
-                          "${GetIt.instance<CoreI18n>().settingVariants}: ${(item.values as List<String>).asMap().toString()}",
-                        )
+                        Text('${GetIt.instance<CoreI18n>().settingVariants}: ${(item.values!).asMap()}')
                       else if (item.values != null)
                         Builder(
                           builder: (context) {
                             final i = SettingsListOfValuesExtend.fromEntity(item);
                             final values = i?.getValuesFromBase(settingsBloc.getByNamed);
                             if (values != null) {
-                              return Text(
-                                "${GetIt.instance<CoreI18n>().settingVariants}: ${values.asMap().toString()}",
-                              );
+                              return Text('${GetIt.instance<CoreI18n>().settingVariants}: ${values.asMap()}');
                             }
                             return const SizedBox();
                           },
@@ -127,9 +121,8 @@ class SettingsCardWidget extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    final list = item.name.split(".");
-                    list.removeLast();
-                    settingsBloc.add(SettingsBlocEvent.load(SettingsSearchEntity(name: list.join("."))));
+                    final list = item.name.split('.')..removeLast();
+                    settingsBloc.add(SettingsBlocEvent.load(SettingsSearchEntity(name: list.join('.'))));
                   },
                   icon: IconsHelper.getIconByEnum(IconSettingsEnum.searchSearch),
                 ),

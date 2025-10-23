@@ -1,9 +1,6 @@
-import 'package:clear_app_helper/core/i18n/core_i18n.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
+import 'package:clear_app_helper/core/i18n/core_i18n.dart';
 import 'package:clear_app_helper/core/icons_helper.dart';
-
 import 'package:clear_app_helper/core/presentation/functions.dart';
 import 'package:clear_app_helper/core/presentation/widgets/search_case_sensitive_warning_widget.dart';
 import 'package:clear_app_helper/core/presentation/widgets/search_checkbox_widget.dart';
@@ -14,11 +11,13 @@ import 'package:clear_app_helper/settings/domain/entities/search/settings_search
 import 'package:clear_app_helper/settings/domain/entities/settings_required_types.dart';
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
 import 'package:clear_app_helper/settings/presentation/widgets/saved_search_entity.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SettingsListSearchWidget extends StatefulWidget {
   final SettingsSearchEntity searchEntity;
-  const SettingsListSearchWidget({super.key, required this.searchEntity});
+  const SettingsListSearchWidget({required this.searchEntity, super.key});
 
   @override
   State<SettingsListSearchWidget> createState() => _SettingsListSearchWidgetState();
@@ -33,10 +32,11 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
 
   @override
   void initState() {
-    _searchEntity = widget.searchEntity.copyWith();
-    idController.text = _searchEntity.id?.toString() ?? "";
-    nameController.text = _searchEntity.name ?? "";
-    dropdownSettingsRequiredTypeValue = "_";
+    // ignore: avoid_dynamic_calls
+    _searchEntity = widget.searchEntity.copyWith() as SettingsSearchEntity;
+    idController.text = _searchEntity.id?.toString() ?? '';
+    nameController.text = _searchEntity.name ?? '';
+    dropdownSettingsRequiredTypeValue = '_';
 
     super.initState();
   }
@@ -58,11 +58,11 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
     }
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: Column(
         children: [
           SearchResetTextAndIconButton(
-            onTap: (() {
+            onTap: () {
               setState(() {
                 idController.clear();
                 nameController.clear();
@@ -75,7 +75,7 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
                   },
                 );
               });
-            }),
+            },
           ),
           const SizedBox(height: 10),
           Builder(
@@ -87,7 +87,7 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
                 setSearchEntity: (se) {
                   settingsBloc.add(SettingsBlocEvent.load(se));
                 },
-                setState: (f) => setState(() => f()),
+                setState: (f) => mounted ? setState(() => f()) : null,
               );
             },
           ),
@@ -97,7 +97,8 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
             controller: nameController,
             labelAndHintText: GetIt.instance<CoreI18n>().searchName,
             filtr: filterSearchResults,
-            setSearchParam: (s) => _searchEntity = _searchEntity.copyWith(name: s),
+            // ignore: avoid_dynamic_calls
+            setSearchParam: (s) => _searchEntity = _searchEntity.copyWith(name: s) as SettingsSearchEntity,
             setState: (f) => setState(() => f()),
           ),
 
@@ -105,25 +106,29 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
           SearchCheckboxWidget(
             filtr: filterSearchResults,
             param: _searchEntity.isDeleted,
-            setParam: (b) => _searchEntity = _searchEntity.copyWith(isDeleted: b),
+            // ignore: avoid_dynamic_calls
+            setParam: (b) => _searchEntity = _searchEntity.copyWith(isDeleted: b) as SettingsSearchEntity,
             text: GetIt.instance<CoreI18n>().searchShowDeleted,
             setState: (f) => setState(() => f()),
           ),
 
           ///SettingsRequiredType
           DropdownButtonFormField<String>(
-            value: dropdownSettingsRequiredTypeValue,
+            initialValue: dropdownSettingsRequiredTypeValue,
             icon: IconsHelper.getIconByEnum(IconSettingsEnum.dropDown),
             elevation: 16,
             items: [
-              const DropdownMenuItem<String>(value: "_", child: Text("_")),
+              const DropdownMenuItem<String>(value: '_', child: Text('_')),
               ...SettingsRequiredTypesEnum.values.map(
                 (e) => DropdownMenuItem<String>(value: e.index.toString(), child: Text(e.name)),
               ),
             ],
             onChanged: (value) => setState(() {
-              dropdownSettingsRequiredTypeValue = value ?? "_";
-              _searchEntity = _searchEntity.copyWith(confirmType: int.tryParse(dropdownSettingsRequiredTypeValue));
+              dropdownSettingsRequiredTypeValue = value ?? '_';
+              _searchEntity =
+                  // ignore: avoid_dynamic_calls
+                  _searchEntity.copyWith(confirmType: int.tryParse(dropdownSettingsRequiredTypeValue))
+                      as SettingsSearchEntity;
             }),
           ),
 
@@ -131,7 +136,8 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
           SearchCheckboxWidget(
             filtr: filterSearchResults,
             param: _searchEntity.isChanged,
-            setParam: (b) => _searchEntity = _searchEntity.copyWith(isChanged: b),
+            // ignore: avoid_dynamic_calls
+            setParam: (b) => _searchEntity = _searchEntity.copyWith(isChanged: b) as SettingsSearchEntity,
             text: GetIt.instance<CoreI18n>().searchShowChanged,
             setState: (f) => setState(() => f()),
           ),
@@ -139,11 +145,9 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
           const SearchCaseSensitiveWarningWidget(),
           const SizedBox(height: 10),
           SearchFindTextAndIconButton(
-            onTap: (() {
-              setState(() {
-                filterSearchResults();
-              });
-            }),
+            onTap: () {
+              setState(filterSearchResults);
+            },
           ),
         ],
       ),

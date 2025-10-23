@@ -11,17 +11,19 @@ class SettingsSavedSearch extends SettingsEntity {
             confirmType: item.confirmType,
             type: item.type,
             values: item.values,
-            isDeleted: item.isDeleted)
+            isDeleted: item.isDeleted,
+          )
         : null;
   }
 
-  SettingsSavedSearch(
-      {required super.id,
-      required super.name,
-      required super.defaultValue,
-      required super.userValue,
-      required super.confirmType,
-      required super.type,
-      required super.values,
-      required super.isDeleted});
+  SettingsSavedSearch({
+    required super.id,
+    required super.name,
+    required super.defaultValue,
+    required super.userValue,
+    required super.confirmType,
+    required super.type,
+    required super.values,
+    required super.isDeleted,
+  });
 }

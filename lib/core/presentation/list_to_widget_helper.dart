@@ -7,13 +7,17 @@ class ListToWidgetHelper {
   final MapOfWidgets mapOfWidgets;
   Widget _getWidgetByName(String name) => widgetsList.contains(name) ? mapOfWidgets.getWidget(name) : const SizedBox();
 
-  Widget _getRowFromList(List<String> listOfNames, {mainAxisAlignment, crossAxisAlignment}) => Row(
+  Widget _getRowFromList(
+    List<String> listOfNames, {
+    MainAxisAlignment? mainAxisAlignment,
+    CrossAxisAlignment? crossAxisAlignment,
+  }) => Row(
     crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.start,
     mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
-    children: listOfNames.map((e) => _getWidgetByName(e)).toList(),
+    children: listOfNames.map(_getWidgetByName).toList(),
   );
   Widget _getColumnFromList(List<String> listOfNames, {mainAxisAlignment, crossAxisAlignment}) =>
-      Column(children: listOfNames.map((e) => _getWidgetByName(e)).toList());
+      Column(children: listOfNames.map(_getWidgetByName).toList());
 
   void getWidgetByName(
     Function(

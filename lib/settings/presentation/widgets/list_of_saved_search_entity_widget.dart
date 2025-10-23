@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
 import 'package:clear_app_helper/core/icons_helper.dart';
+import 'package:flutter/material.dart';
 
 class IndexedString {
   final int index;
@@ -12,7 +12,7 @@ class ListOfSavedSearchEntityWidget extends StatefulWidget {
   final List<String> values;
   final Function(List<String> values) updateValues;
 
-  const ListOfSavedSearchEntityWidget({super.key, required this.values, required this.updateValues});
+  const ListOfSavedSearchEntityWidget({required this.values, required this.updateValues, super.key});
 
   @override
   State<ListOfSavedSearchEntityWidget> createState() => _ListOfSavedSearchEntityWidgetState();
@@ -54,7 +54,7 @@ class _ListOfSavedSearchEntityWidgetState extends State<ListOfSavedSearchEntityW
         child: ReorderableListView.builder(
           padding: const EdgeInsets.symmetric(horizontal: 40),
           itemCount: list.length,
-          itemBuilder: (BuildContext context, int index) {
+          itemBuilder: (context, index) {
             return ListTile(
               key: Key('$index'),
               tileColor: index.isOdd ? oddItemColor : evenItemColor,
@@ -72,7 +72,7 @@ class _ListOfSavedSearchEntityWidgetState extends State<ListOfSavedSearchEntityW
               ),
             );
           },
-          onReorder: (int oldIndex, int newIndex) => setState(() {
+          onReorder: (oldIndex, newIndex) => setState(() {
             if (oldIndex < newIndex) {
               newIndex -= 1;
             }

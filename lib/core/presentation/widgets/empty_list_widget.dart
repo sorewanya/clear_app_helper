@@ -5,7 +5,7 @@ import 'package:get_it/get_it.dart';
 
 /// Show SearchResetTextAndIconButton and text about empty search
 class EmptyListWidget extends StatelessWidget {
-  const EmptyListWidget({super.key, required this.onTap});
+  const EmptyListWidget({required this.onTap, super.key});
 
   /// send to [SearchResetTextAndIconButton]
   final Function()? onTap;

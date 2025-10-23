@@ -12,7 +12,7 @@ class CardExtendWidget extends StatelessWidget {
   final List<Widget> widgets;
   final List<Widget>? middleWidgets;
 
-  const CardExtendWidget({super.key, required this.cardWidgetSizeSetting, required this.widgets, this.middleWidgets});
+  const CardExtendWidget({required this.cardWidgetSizeSetting, required this.widgets, super.key, this.middleWidgets});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,8 @@ class CardExtendWidget extends StatelessWidget {
         }
         final cardWidgetSize = SettingsValue.fromEntity(cardWidgetSizeSnapshot.data);
 
-        final bool notSmall = !(cardWidgetSize?.getUserOrDefaultCompareToNamedOfValues("small") ?? false);
-        final bool isBig = cardWidgetSize?.getUserOrDefaultCompareToNamedOfValues("big") ?? false;
+        final bool notSmall = !(cardWidgetSize?.getUserOrDefaultCompareToNamedOfValues('small') ?? false);
+        final bool isBig = cardWidgetSize?.getUserOrDefaultCompareToNamedOfValues('big') ?? false;
 
         return notSmall
             ? Column(

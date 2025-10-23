@@ -24,7 +24,7 @@ class ItemActions {
   final Function(int itemId) export;
 
   //FIXME make Functions Future?
-  dismiss(int itemId) {
+  void dismiss(int itemId) {
     if (itemDismissAction == null) return;
     switch (itemDismissAction!) {
       case ItemActionEnum.makeCopy:

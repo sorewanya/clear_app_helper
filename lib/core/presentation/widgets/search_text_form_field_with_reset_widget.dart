@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 
 class SearchTextFormFieldResetResetWidget extends StatelessWidget {
   const SearchTextFormFieldResetResetWidget({
-    super.key,
-    this.autofocus = false,
     required this.controller,
     required this.setSearchParam,
     required this.labelAndHintText,
     required this.setState,
     required this.filtr,
+    super.key,
+    this.autofocus = false,
     this.validator,
     this.variant = const TextFieldVariant.text(),
   });
@@ -30,7 +30,7 @@ class SearchTextFormFieldResetResetWidget extends StatelessWidget {
   /// ```
   /// setState: (f) => setState(() => f()),
   /// ```
-  final Function(Function f) setState;
+  final Function(Function() f) setState;
 
   final Function() filtr;
 
@@ -56,25 +56,25 @@ class SearchTextFormFieldResetResetWidget extends StatelessWidget {
             keyboardType: variant?.keyboardType,
             inputFormatters: variant?.inputFormatters,
             onSaved: (value) {
-              setSearchParam(value ?? "");
+              setSearchParam(value ?? '');
               filtr();
             },
             onFieldSubmitted: (value) {
               setSearchParam(value);
               filtr();
             },
-            onChanged: (value) => setSearchParam(value),
+            onChanged: setSearchParam,
             validator: validator,
           ),
         ),
         ClearIconButton(
-          onPressed: (() {
+          onPressed: () {
             setState(() {
-              setSearchParam("");
+              setSearchParam('');
               controller.clear();
               FunctionsHelper.showResetUpdateInfoBarOrFilter(filterSearchResults: filtr);
             });
-          }),
+          },
         ),
       ],
     );

@@ -2,18 +2,19 @@ import 'package:clear_app_helper/core/datasources/db_helper.dart';
 import 'package:clear_app_helper/core/domain/entities/app_entity.dart';
 import 'package:clear_app_helper/core/domain/entities/search_entity.dart';
 
+// ignore: avoid_types_as_parameter_names
 abstract class LocalDataSource<Type extends AppEntity, SEType extends SearchEntity> {
   late DBHelper<Type> dbHelper;
   DBLogsHelper? dbLogsHelper;
   LocalDataSource();
-  setHelpers(DBHelper<Type> dbHelper, [DBLogsHelper? dbLogsHelper]) {
+  void setHelpers(DBHelper<Type> dbHelper, [DBLogsHelper? dbLogsHelper]) {
     this.dbHelper = dbHelper;
     this.dbLogsHelper = dbLogsHelper;
   }
 
   Future<List<int>> getAllIds(SEType searchEntity);
-  Future<dynamic> getById(int id) async {
-    return await dbHelper.getById(id: id);
+  Future<Type?> getById(int id) async {
+    return dbHelper.getById(id: id);
   }
 
   Future<int> countOfFinded(SEType searchEntity);
@@ -26,6 +27,8 @@ abstract class LocalDataSource<Type extends AppEntity, SEType extends SearchEnti
   Stream<void> watchObjectLazy(int? id) {
     return dbHelper.watchObjectLazy(id);
   }
+
+  Stream<List<Type>?> watch(SEType searchEntity);
 
   Stream<void> watchLazy() {
     return dbHelper.watchLazy();

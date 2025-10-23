@@ -8,11 +8,11 @@ class RfwWidget extends StatefulWidget {
   final WidgetLibrary localWidgets;
   final void Function(String name, Map<String, Object?> arguments)? onEvent;
   const RfwWidget({
-    super.key,
     required this.rfwString,
     required this.values,
     required this.localWidgets,
     required this.onEvent,
+    super.key,
   });
 
   @override
@@ -34,11 +34,12 @@ class _RfwWidgetState extends State<RfwWidget> {
   void initState() {
     super.initState();
     // Local widget library:
-    _runtime.update(coreName, createCoreWidgets());
-    _runtime.update(materialName, createMaterialWidgets());
-    _runtime.update(localName, widget.localWidgets);
-    // Remote widget library:
-    _runtime.update(mainName, _remoteWidgets);
+    _runtime
+      ..update(coreName, createCoreWidgets())
+      ..update(materialName, createMaterialWidgets())
+      ..update(localName, widget.localWidgets)
+      // Remote widget library:
+      ..update(mainName, _remoteWidgets);
     // Configuration data:
     _data.update(widget.values.$1, widget.values.$2);
   }

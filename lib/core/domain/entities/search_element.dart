@@ -14,6 +14,7 @@ class SearchElement {
 class SearchCreatedOn extends SearchElement with SearchElementDateTimeComparisons {
   SearchCreatedOn();
   factory SearchCreatedOn.fromJson(Map<String, dynamic> json) => _$SearchCreatedOnFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$SearchCreatedOnToJson(this);
 }
 
@@ -21,6 +22,7 @@ class SearchCreatedOn extends SearchElement with SearchElementDateTimeComparison
 class SearchUpdatedOn extends SearchElement with SearchElementDateTimeComparisons {
   SearchUpdatedOn();
   factory SearchUpdatedOn.fromJson(Map<String, dynamic> json) => _$SearchUpdatedOnFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$SearchUpdatedOnToJson(this);
 }
 

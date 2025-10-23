@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 
 class SearchElementMultiDropdownWidget<T extends SearchElementIntSet> extends StatelessWidget {
   const SearchElementMultiDropdownWidget({
-    super.key,
     required this.label,
     required this.getElement,
     required this.setElement(T updatedElement),
-    this.defaultValue,
     required this.filtr,
     required this.setState,
     required this.dropdownList,
+    super.key,
+    this.defaultValue,
   });
 
   /// send to [SearchElementMultiRow], as "$label: "
@@ -33,7 +33,7 @@ class SearchElementMultiDropdownWidget<T extends SearchElementIntSet> extends St
   /// ```
   /// setState: (f) => setState(() => f()),
   /// ```
-  final Function(Function f) setState;
+  final Function(Function() f) setState;
 
   final List<IdAndName> dropdownList;
 
@@ -57,14 +57,14 @@ class SearchElementMultiDropdownWidget<T extends SearchElementIntSet> extends St
             SizedBox(
               width: 120,
               child: NameDropDownFormFieldStringWidget(
-                dropdownNameValue: dropdownList.where((element) => element.id == index).firstOrNull?.name ?? "_",
+                dropdownNameValue: dropdownList.where((element) => element.id == index).firstOrNull?.name ?? '_',
                 setDropdownNameValue: (_) {},
                 setDropdownNameValueId: (i) {
                   searchElement.intSet.remove(index);
                   searchElement.intSet.add(i);
                   setElement(searchElement);
                 },
-                curentMap: {for (var e in dropdownList) e.name: e.id},
+                currentMap: {for (final e in dropdownList) e.name: e.id},
                 setState: setState,
               ),
             ),

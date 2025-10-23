@@ -11,19 +11,21 @@ class SettingsInt extends SettingsEntity {
             confirmType: item.confirmType,
             type: item.type,
             values: item.values,
-            isDeleted: item.isDeleted)
+            isDeleted: item.isDeleted,
+          )
         : null;
   }
 
-  SettingsInt(
-      {required super.id,
-      required super.name,
-      required super.defaultValue,
-      required super.userValue,
-      required super.confirmType,
-      required super.type,
-      required super.values,
-      required super.isDeleted});
+  SettingsInt({
+    required super.id,
+    required super.name,
+    required super.defaultValue,
+    required super.userValue,
+    required super.confirmType,
+    required super.type,
+    required super.values,
+    required super.isDeleted,
+  });
 
   int? get getUserOrDefaultValueAsIntOrNull => int.tryParse(super.getUserOrDefaultValueAsString);
   int get getUserOrDefaultValueAsIntOrZero => getUserOrDefaultValueAsIntOrNull ?? 0;

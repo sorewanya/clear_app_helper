@@ -3,7 +3,7 @@ import 'package:clear_app_helper/core/icons_helper.dart';
 import 'package:flutter/material.dart';
 
 class SearchElementMultiRow extends StatelessWidget {
-  const SearchElementMultiRow({super.key, required this.label, required this.children, required this.onPressedAdd});
+  const SearchElementMultiRow({required this.label, required this.children, required this.onPressedAdd, super.key});
 
   final String label;
 
@@ -17,8 +17,8 @@ class SearchElementMultiRow extends StatelessWidget {
       children: [
         Column(
           children: [
-            SizedBox(width: 250, child: Text("$label: ")),
-            TextButton(onPressed: onPressedAdd, child: IconsHelper.getIconByEnum((IconSettingsEnum.add))),
+            SizedBox(width: 250, child: Text('$label: ')),
+            TextButton(onPressed: onPressedAdd, child: IconsHelper.getIconByEnum(IconSettingsEnum.add)),
             ...children,
           ],
         ),

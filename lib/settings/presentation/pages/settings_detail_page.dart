@@ -1,11 +1,6 @@
+import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
 import 'package:clear_app_helper/core/domain/entities/text_field_variant.dart';
 import 'package:clear_app_helper/core/i18n/core_i18n.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:file_picker/file_picker.dart';
-
-import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
 import 'package:clear_app_helper/core/icons_helper.dart';
 import 'package:clear_app_helper/core/presentation/functions.dart';
 import 'package:clear_app_helper/core/presentation/widgets/animated_toggle_switch_or_dropdown.dart';
@@ -23,6 +18,9 @@ import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.d
 import 'package:clear_app_helper/settings/presentation/widgets/confirm_type_warning.dart';
 import 'package:clear_app_helper/settings/presentation/widgets/list_of_saved_search_entity_widget.dart';
 import 'package:clear_app_helper/settings/presentation/widgets/list_of_values_widget.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SettingsDetailPage extends StatefulWidget {
@@ -84,10 +82,10 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
       );
     }
 
-    checkSettingsType() {
+    Widget checkSettingsType() {
       if (type == SettingsTypeEnum.boolean.index) {
         return AnimatedToggleSwitchOrDropdown(
-          values: const ["false", "true"],
+          values: const ['false', 'true'],
           hasIndexValue: false,
           value: userValue ?? defaultValue,
           setState: (f) => setState(() => f()),
@@ -103,8 +101,8 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
           type == SettingsTypeEnum.listOfString.index ||
           type == SettingsTypeEnum.doublee.index) {
         return MyTextFieldWidget(
-          text: "${GetIt.instance<CoreI18n>().userValue}: ",
-          formFieldKey: const ValueKey("userValue"),
+          text: '${GetIt.instance<CoreI18n>().userValue}: ',
+          formFieldKey: const ValueKey('userValue'),
           getValue: () => userValue ?? defaultValue,
           setValue: (s) => userValue = s,
           setShouldPop: (b) => shouldPop = b,
@@ -112,6 +110,7 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
           variant: type == SettingsTypeEnum.integer.index ? TextFieldVariant.integer() : null,
           validator: type == SettingsTypeEnum.listOfInt.index
               ? ((value) {
+                  if (value == null || value == '') return 'must be not empty';
                   String? str;
                   value.split(',').forEach((element) {
                     if (int.tryParse(element) == null) {
@@ -129,11 +128,11 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
           updateUserValue: (newUserValue) => setState(() => userValue = newUserValue),
         );
       } else if (type == SettingsTypeEnum.listOfValuesBase.index) {
-        return Text("${GetIt.instance<CoreI18n>().settingsNotEditedSetting} ${values.toString()}");
+        return Text('${GetIt.instance<CoreI18n>().settingsNotEditedSetting} $values');
       } else if (type == SettingsTypeEnum.savedSearch.index) {
         return ListOfSavedSearchEntityWidget(
           values: values ?? [],
-          updateValues: (newValues) => setState(() => values = newValues),
+          updateValues: (newValues) => mounted ? setState(() => values = newValues) : null,
         );
       } else if (type == SettingsTypeEnum.listOfValuesExtend.index) {
         final i = SettingsListOfValuesExtend.fromEntity(origItem);
@@ -156,14 +155,14 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
       } else if (type == SettingsTypeEnum.value.index) {
         return (values != null && values?.isNotEmpty == true)
             ? AnimatedToggleSwitchOrDropdown(
-                values: values!,
+                values: values,
                 value: userValue ?? defaultValue,
                 hasIndexValue: true,
                 setState: (f) => setState(() => f()),
                 setValue: (value) {
                   if (userValue != value) {
                     shouldPop = false;
-                    userValue = value!;
+                    userValue = value;
                   }
                 },
               )
@@ -171,19 +170,18 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
       } else if (type == SettingsTypeEnum.filePath.index) {
         return Column(
           children: [
-            Text("${GetIt.instance<CoreI18n>().filePath}: ${userValue ?? defaultValue}"),
-            Text("${GetIt.instance<CoreI18n>().filePathAllowedExtensions}: ${values?[0]}"),
+            Text('${GetIt.instance<CoreI18n>().filePath}: ${userValue ?? defaultValue}'),
+            Text('${GetIt.instance<CoreI18n>().filePathAllowedExtensions}: ${values?[0]}'),
             TextButton(
               onPressed: () {
                 FilePicker.platform
                     .pickFiles(
-                      allowMultiple: false,
                       type: SettingsFilePath.fromEntity(origItem)?.getFileType ?? FileType.any,
                       allowedExtensions: SettingsFilePath.fromEntity(origItem)?.getFileAllowedExtensions,
                     )
                     .then((path) {
                       if (path != null) {
-                        setState(() => userValue = path.paths.first);
+                        if (mounted) setState(() => userValue = path.paths.first);
                       }
                     });
               },
@@ -194,12 +192,12 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
       } else if (type == SettingsTypeEnum.dirPath.index) {
         return Column(
           children: [
-            Text("${GetIt.instance<CoreI18n>().filePathCurent}: ${userValue ?? defaultValue}"),
+            Text('${GetIt.instance<CoreI18n>().filePathCurrent}: ${userValue ?? defaultValue}'),
             TextButton(
               onPressed: () {
                 FilePicker.platform.getDirectoryPath().then((path) {
                   if (path != null) {
-                    setState(() => userValue = path);
+                    if (mounted) setState(() => userValue = path);
                   }
                 });
               },
@@ -209,8 +207,8 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
         );
       } else if (type == SettingsTypeEnum.string.index || type == SettingsTypeEnum.rfwWidget.index) {
         return MyTextFieldWidget(
-          text: "${GetIt.instance<CoreI18n>().userValue}: ",
-          formFieldKey: const ValueKey("userValue"),
+          text: '${GetIt.instance<CoreI18n>().userValue}: ',
+          formFieldKey: const ValueKey('userValue'),
           getValue: () => userValue ?? defaultValue,
           setValue: (s) => userValue = s,
           setShouldPop: (b) => shouldPop = b,
@@ -221,13 +219,13 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
       }
     }
 
-    void getById() async {
+    Future<void> getById() async {
       if (firstLoad) {
         final se = FunctionsHelper.getArgs<SettingsSearchEntity>();
         origItem = settingsBloc.getByIdSync(se?.id);
-        id = origItem?.id!;
-        name = origItem?.name ?? "";
-        defaultValue = origItem?.defaultValue ?? "";
+        id = origItem?.id;
+        name = origItem?.name ?? '';
+        defaultValue = origItem?.defaultValue ?? '';
         userValue = origItem?.getUserOrDefaultValueAsString;
         type = origItem?.type ?? 0;
         confirmType = origItem?.confirmType;
@@ -240,7 +238,7 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
 
     //<form params>
     _formkey = GlobalKey<FormState>();
-    ValueKey nameKey = const ValueKey("name");
+    final ValueKey<String> nameKey = const ValueKey('name');
 
     //Get arguments
     getById();
@@ -249,34 +247,33 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
       formkey: _formkey,
       isDelete: isDeleted,
       getShouldPop: () => shouldPop,
-      entityInfo: "${GetIt.instance<CoreI18n>().setting} $name:",
+      entityInfo: '${GetIt.instance<CoreI18n>().setting} $name:',
       saveForm: saveForm,
       pop: pop,
       appBarTitle: Text(
-        id == null ? "${GetIt.instance<CoreI18n>().settingAdd}:" : "${GetIt.instance<CoreI18n>().setting} $name:",
+        id == null ? '${GetIt.instance<CoreI18n>().settingAdd}:' : '${GetIt.instance<CoreI18n>().setting} $name:',
       ),
       body: Column(
         children: [
           MyTextFieldWidget(
-            text: "${GetIt.instance<CoreI18n>().name}: ",
+            text: '${GetIt.instance<CoreI18n>().name}: ',
             formFieldKey: nameKey,
             getValue: () => name,
             setValue: (s) => name = s,
             setShouldPop: (b) => shouldPop = b,
           ),
 
-          Text("${GetIt.instance<CoreI18n>().settingDefaultValue}:$defaultValue"),
+          Text('${GetIt.instance<CoreI18n>().settingDefaultValue}:$defaultValue'),
 
           ConfirmTypeWarning(confirmType: confirmType),
-          Text("${GetIt.instance<CoreI18n>().settingType}: $type"),
-          id != null ? checkSettingsType() : const Text("settings add not implaemented"),
+          Text('${GetIt.instance<CoreI18n>().settingType}: $type'),
+          if (id != null) checkSettingsType() else const Text('settings add not implaemented'),
           TextButton(
             onPressed: () {
-              final list = name.split(".");
-              list.removeLast();
+              final list = name.split('.')..removeLast();
               RouteHelper.toNamed(
                 SettingsRouteNames.settingsViewPage,
-                arguments: SettingsSearchEntity(name: list.join(".")),
+                arguments: SettingsSearchEntity(name: list.join('.')),
               );
             },
             child: Text(GetIt.instance<CoreI18n>().settingsFindRelatedUp),
@@ -290,7 +287,7 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
         FloatingActionButton(
           heroTag: const ValueKey('reset'),
           onPressed: () => settingsBloc.add(SettingsBlocEvent.resetToDefault(createItem())),
-          child: IconsHelper.getIconByEnum((IconSettingsEnum.settingsResetToDefault)),
+          child: IconsHelper.getIconByEnum(IconSettingsEnum.settingsResetToDefault),
         ),
       ],
     );

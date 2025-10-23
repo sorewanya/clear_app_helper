@@ -6,6 +6,7 @@ import 'package:clear_app_helper/core/error/failure.dart';
 import 'package:clear_app_helper/core/platform/network_info.dart';
 import 'package:dartz/dartz.dart';
 
+// ignore: avoid_types_as_parameter_names
 abstract class Repository<Type extends AppEntity, SEType extends SearchEntity> {
   NetworkInfo networkInfo;
   LocalDataSource<Type, SEType> localDataSource;
@@ -14,39 +15,39 @@ abstract class Repository<Type extends AppEntity, SEType extends SearchEntity> {
 
   Future<Either<Failure, Type>> getById(int id) async {
     if (await networkInfo.isConnected) {
-      return await tryGetLocalById(id);
+      return tryGetLocalById(id);
     } else {
-      return await tryGetLocalById(id);
+      return tryGetLocalById(id);
     }
   }
 
   Future<Either<Failure, List<Type>>> getAll(SEType searchEntity) async {
     if (await networkInfo.isConnected) {
-      return await tryGetLocalList(searchEntity);
+      return tryGetLocalList(searchEntity);
     } else {
-      return await tryGetLocalList(searchEntity);
+      return tryGetLocalList(searchEntity);
     }
   }
 
   Future<Either<Failure, List<int>>> getAllIds(SEType searchEntity) async {
     if (await networkInfo.isConnected) {
-      return await tryGetLocalIdsList(searchEntity);
+      return tryGetLocalIdsList(searchEntity);
     } else {
-      return await tryGetLocalIdsList(searchEntity);
+      return tryGetLocalIdsList(searchEntity);
     }
   }
 
   Future<Either<Failure, int>> countOfFinded(SEType searchEntity) async {
     if (await networkInfo.isConnected) {
-      return await tryGetLocalCountOfFinded(searchEntity);
+      return tryGetLocalCountOfFinded(searchEntity);
     } else {
-      return await tryGetLocalCountOfFinded(searchEntity);
+      return tryGetLocalCountOfFinded(searchEntity);
     }
   }
 
   Future<Either<Failure, int>> add(Type item) async {
     try {
-      int addedItem = await localDataSource.add(item);
+      final int addedItem = await localDataSource.add(item);
       return Right(addedItem);
     } on CacheException catch (text, stackTrace) {
       return Left(Failure.cacheFailure(text, stackTrace));
@@ -55,7 +56,7 @@ abstract class Repository<Type extends AppEntity, SEType extends SearchEntity> {
 
   Future<Either<Failure, List<int>>> addMany(List<Type> itemList) async {
     try {
-      List<int> addedItem = await localDataSource.addMany(itemList);
+      final List<int> addedItem = await localDataSource.addMany(itemList);
       return Right(addedItem);
     } on CacheException catch (text, stackTrace) {
       return Left(Failure.cacheFailure(text, stackTrace));
@@ -127,6 +128,10 @@ abstract class Repository<Type extends AppEntity, SEType extends SearchEntity> {
     return localDataSource.watchObjectLazy(id);
   }
 
+  Stream<List<Type>?> watch(SEType searchEntity) {
+    return localDataSource.watch(searchEntity);
+  }
+
   Stream<void> watchLazy() {
     return localDataSource.watchLazy();
   }
@@ -164,7 +169,7 @@ abstract class Repository<Type extends AppEntity, SEType extends SearchEntity> {
     }
   }
 
-  Future<Either<Failure, List<Type>>> tryGetLocalList(searchEntity) async {
+  Future<Either<Failure, List<Type>>> tryGetLocalList(SEType searchEntity) async {
     try {
       final localItemList = await localDataSource.getAll(searchEntity);
       // if (localItemList.isEmpty) {

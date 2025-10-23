@@ -19,7 +19,7 @@ class FloatingPlusIconButton extends StatelessWidget {
           heroTag: const ValueKey('plus'),
           tooltip: GetIt.instance<CoreI18n>().newItem,
           onPressed: onPressed,
-          child: IconsHelper.getIconByEnum((IconSettingsEnum.add)),
+          child: IconsHelper.getIconByEnum(IconSettingsEnum.add),
         ),
       ],
     );

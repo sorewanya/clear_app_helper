@@ -39,9 +39,9 @@ class SettingsSearchEntity implements SearchEntity {
   Map<String, dynamic> toJson() => _$SettingsSearchEntityToJson(this);
 
   @override
-  bool isEmpty() => this == const SettingsSearchEntity() ? true : false;
+  bool isEmpty() => this == const SettingsSearchEntity();
 
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
-  get copyWith => _$SettingsSearchEntityCWProxyImpl(this);
+  dynamic get copyWith => _$SettingsSearchEntityCWProxyImpl(this);
 }

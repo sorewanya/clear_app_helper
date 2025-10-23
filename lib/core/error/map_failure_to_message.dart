@@ -7,6 +7,6 @@ String mapFailureToMessage(Failure failure) {
     Failure.serverFailure => GetIt.instance<CoreI18n>().serverFailureMessage,
     Failure.emptyLocalStorageFailure => GetIt.instance<CoreI18n>().emptyLocalStorageFailureMessage,
     Failure.cacheFailure => GetIt.instance<CoreI18n>().cachedFailureMessage,
-    _ => "Unexpected Error $failure",
+    _ => 'Unexpected Error $failure',
   };
 }

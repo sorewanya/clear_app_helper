@@ -3,17 +3,12 @@ import 'package:clear_app_helper/core/icons_helper.dart';
 import 'package:flutter/material.dart';
 
 class SearchButtonWidget extends StatelessWidget {
-  const SearchButtonWidget({super.key, required this.onPressed});
+  const SearchButtonWidget({required this.onPressed, super.key});
 
-  final Function onPressed;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        onPressed();
-      },
-      child: IconsHelper.getIconByEnum((IconSettingsEnum.searchSearch)),
-    );
+    return TextButton(onPressed: onPressed, child: IconsHelper.getIconByEnum(IconSettingsEnum.searchSearch));
   }
 }

@@ -11,19 +11,21 @@ class SettingsDouble extends SettingsEntity {
             confirmType: item.confirmType,
             type: item.type,
             values: item.values,
-            isDeleted: item.isDeleted)
+            isDeleted: item.isDeleted,
+          )
         : null;
   }
 
-  SettingsDouble(
-      {required super.id,
-      required super.name,
-      required super.defaultValue,
-      required super.userValue,
-      required super.confirmType,
-      required super.type,
-      required super.values,
-      required super.isDeleted});
+  SettingsDouble({
+    required super.id,
+    required super.name,
+    required super.defaultValue,
+    required super.userValue,
+    required super.confirmType,
+    required super.type,
+    required super.values,
+    required super.isDeleted,
+  });
 
   double? get getUserOrDefaultValueAsDoubleOrNull => double.tryParse(super.getUserOrDefaultValueAsString);
   double get getUserOrDefaultValueAsDoubleOrZero => getUserOrDefaultValueAsDoubleOrNull ?? 0;
