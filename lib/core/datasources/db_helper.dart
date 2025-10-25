@@ -3,16 +3,7 @@ import 'package:clear_app_helper/core/domain/entities/app_entity.dart';
 abstract class DBHelper<T extends AppEntity> {
   bool defaultChecked = false;
 
-  ///Global setting: Case sensitive in search queries
-  bool getCaseSensitiveSettings();
-
-  ///Global setting: whether to show the parent when searching for heirs
-  bool getSearchAddParentToChildListSettings();
-
-  ///Global setting: show deleted
-  bool getShowDeletedSettings();
-
-  Future<T?> getById({required int id});
+  Future<int> add({required T item});
 
   Future<List<int>> addMany({required List<T> itemList});
 
@@ -22,32 +13,41 @@ abstract class DBHelper<T extends AppEntity> {
     Function()? doIfAddDefaultsInsideTxn,
   });
 
-  Future<int> update({required T item});
-
   ///It deletes, not sets the value [`isDeleted`]!
   Future<bool> delete(int id);
 
   ///It deletes, not sets the value [`isDeleted`]!
-  Future<int> deleteMany(List<int> ids);
-
-  ///It deletes, not sets the value [`isDeleted`]!
   Future<void> deleteAll();
 
-  Future<int> add({required T item});
+  ///It deletes, not sets the value [`isDeleted`]!
+  Future<int> deleteMany(List<int> ids);
+
+  Future<T?> getById({required int id});
+
+  ///Global setting: Case sensitive in search queries
+  bool getCaseSensitiveSettings();
+
+  ///Global setting: whether to show the parent when searching for heirs
+  bool getSearchAddParentToChildListSettings();
+
+  ///Global setting: show deleted
+  bool getShowDeletedSettings();
+
+  Future<int> update({required T item});
+
+  Stream<void> watchLazy();
 
   Stream<T?> watchObject(int id);
 
   Stream<void> watchObjectLazy(int? id);
-
-  Stream<void> watchLazy();
 }
 
 mixin DBLogsHelper<T extends AppEntity> on DBHelper<T> {
-  bool isLoggingEnabled();
-
-  (int? type, int? count) loggingSizeLimited();
+  Future<int> addLog({required T item, required int id});
 
   Future<void> checkAndRemoveByCount(int count, bool byItem, int id);
 
-  Future<int> addLog({required T item, required int id});
+  bool isLoggingEnabled();
+
+  (int? type, int? count) loggingSizeLimited();
 }

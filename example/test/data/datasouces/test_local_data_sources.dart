@@ -11,10 +11,15 @@ class TestLocalDataSource extends ExampleLocalDataSource<TestEntity, TestSearchE
     addDefaults();
   }
 
+  @override
+  Future<int> add(TestEntity item) async => throw UnimplementedError();
+
   void addDefaults() {
     dbHelper.addManyDefault(itemList: () => throw UnimplementedError());
   }
 
+  @override
+  Future<List<int>> addMany(List<TestEntity> itemList) async => throw UnimplementedError();
   @override
   Future<int> countOfFinded(TestSearchEntity searchEntity) async => throw UnimplementedError();
   @override
@@ -22,11 +27,7 @@ class TestLocalDataSource extends ExampleLocalDataSource<TestEntity, TestSearchE
   @override
   Future<List<int>> getAllIds(TestSearchEntity searchEntity) async => throw UnimplementedError();
   @override
-  Future<List<int>> addMany(List<TestEntity> itemList) async => throw UnimplementedError();
-  @override
-  Future<int> add(TestEntity item) async => throw UnimplementedError();
+  Future<int> revertDelete(TestEntity item) async => throw UnimplementedError();
   @override
   Future<int> update(TestEntity item) async => throw UnimplementedError();
-  @override
-  Future<int> revertDelete(TestEntity item) async => throw UnimplementedError();
 }

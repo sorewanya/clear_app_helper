@@ -11,11 +11,6 @@ import 'package:clear_app_helper/settings/domain/entities/settings_required_type
 import 'package:crypto/crypto.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-abstract class AbstractDefaultData {
-  late final List<SettingsEntity> getDefaultSettingList = [];
-  late final List<SettingsDescriptionEntity> getDefaultSettingDescriptionList = [];
-}
-
 final currentTime = DateTime.now().toString();
 
 SettingsEntity coreSettingsEnumSettings(CoreSettingsEnum e) => switch (e) {
@@ -92,45 +87,6 @@ SettingsEntity coreSettingsEnumSettings(CoreSettingsEnum e) => switch (e) {
   CoreSettingsEnum.globalTr => SettingsEntity.fromEnum(
     e: e,
     defaultValue: sha512.convert(utf8.encode(currentTime)).toString(),
-  ),
-};
-
-SettingsEntity settingsSettingsEnumSettings(SettingsSettingsEnum e) => switch (e) {
-  SettingsSettingsEnum.viewDefault => SettingsEntity.fromEnum(e: e, defaultValue: '0', values: ['list', 'tree']),
-  SettingsSettingsEnum.loggingEnable => SettingsEntity.fromEnum(e: e, defaultValue: 'true'),
-  SettingsSettingsEnum.savedSearch => SettingsEntity.fromEnum(e: e, defaultValue: '', values: []),
-
-  ///TODO blank to add new types of settings inside the app
-  SettingsSettingsEnum.typesNames => SettingsEntity.fromEnum(
-    e: e,
-    defaultValue: '',
-    values: [
-      'integer',
-      'boolean',
-      'icon',
-      'string',
-      'dirPath',
-      'filePath',
-      'value',
-      'listOfInt',
-      'listOfValues',
-      'listOfString',
-      'listOfValuesBase',
-      'listOfValuesExtend',
-      'savedSearch',
-      'rfwWidget',
-    ],
-  ),
-  SettingsSettingsEnum.version => SettingsEntity.fromEnum(e: e, defaultValue: ''),
-  SettingsSettingsEnum.itemSwipeLeftToRight => SettingsEntity.fromEnum(
-    e: e,
-    defaultValue: '',
-    values: [CoreSettingsEnum.itemSwipeBaseList.name],
-  ),
-  SettingsSettingsEnum.itemSwipeRightToLeft => SettingsEntity.fromEnum(
-    e: e,
-    defaultValue: '',
-    values: [CoreSettingsEnum.itemSwipeBaseList.name],
   ),
 };
 
@@ -230,6 +186,50 @@ SettingsEntity iconSettingsEnumSettings(IconSettingsEnum e) => switch (e) {
   ),
   IconSettingsEnum.import => SettingsEntity.fromEnum(e: e, defaultValue: MdiIcons.import.codePoint.toString()),
 };
+
+SettingsEntity settingsSettingsEnumSettings(SettingsSettingsEnum e) => switch (e) {
+  SettingsSettingsEnum.viewDefault => SettingsEntity.fromEnum(e: e, defaultValue: '0', values: ['list', 'tree']),
+  SettingsSettingsEnum.loggingEnable => SettingsEntity.fromEnum(e: e, defaultValue: 'true'),
+  SettingsSettingsEnum.savedSearch => SettingsEntity.fromEnum(e: e, defaultValue: '', values: []),
+
+  ///TODO blank to add new types of settings inside the app
+  SettingsSettingsEnum.typesNames => SettingsEntity.fromEnum(
+    e: e,
+    defaultValue: '',
+    values: [
+      'integer',
+      'boolean',
+      'icon',
+      'string',
+      'dirPath',
+      'filePath',
+      'value',
+      'listOfInt',
+      'listOfValues',
+      'listOfString',
+      'listOfValuesBase',
+      'listOfValuesExtend',
+      'savedSearch',
+      'rfwWidget',
+    ],
+  ),
+  SettingsSettingsEnum.version => SettingsEntity.fromEnum(e: e, defaultValue: ''),
+  SettingsSettingsEnum.itemSwipeLeftToRight => SettingsEntity.fromEnum(
+    e: e,
+    defaultValue: '',
+    values: [CoreSettingsEnum.itemSwipeBaseList.name],
+  ),
+  SettingsSettingsEnum.itemSwipeRightToLeft => SettingsEntity.fromEnum(
+    e: e,
+    defaultValue: '',
+    values: [CoreSettingsEnum.itemSwipeBaseList.name],
+  ),
+};
+
+abstract class AbstractDefaultData {
+  late final List<SettingsEntity> getDefaultSettingList = [];
+  late final List<SettingsDescriptionEntity> getDefaultSettingDescriptionList = [];
+}
 
 class SettingsDefaultData implements AbstractDefaultData {
   @override

@@ -4,13 +4,49 @@ import 'package:clear_app_helper/core/datasources/local_data_source.dart';
 import 'package:clear_app_helper/core/domain/entities/app_entity.dart';
 import 'package:clear_app_helper/core/domain/entities/search_entity.dart';
 
-///only for example, this classes implements in clear_app_helper_isar,... packages
-abstract class ExampleLog extends DBLog {}
-
-class ExampleDBLogsHelper<T extends AppEntity> implements DBLogsHelper<T> {
+class ExampleDBHelper<T extends AppEntity> implements DBHelper<T> {
+  ExampleDBHelper();
   @override
   bool defaultChecked = false;
+  @override
+  Future<int> add({required T item}) => throw UnimplementedError();
+  @override
+  Future<List<int>> addMany({required List<T> itemList}) => throw UnimplementedError();
+  @override
+  Future<List<int>>? addManyDefault({
+    required List<T> Function() itemList,
+    int? idToEmptyCheck,
+    Function()? doIfAddDefaultsInsideTxn,
+  }) => throw UnimplementedError();
+
+  @override
+  Future<bool> delete(int id) => throw UnimplementedError();
+  @override
+  Future<void> deleteAll() => throw UnimplementedError();
+  @override
+  Future<int> deleteMany(List<int> ids) => throw UnimplementedError();
+  @override
+  Future<T?> getById({required int id}) => throw UnimplementedError();
+  @override
+  bool getCaseSensitiveSettings() => throw UnimplementedError();
+  @override
+  bool getSearchAddParentToChildListSettings() => throw UnimplementedError();
+  @override
+  bool getShowDeletedSettings() => throw UnimplementedError();
+  @override
+  Future<int> update({required T item}) => throw UnimplementedError();
+  @override
+  Stream<void> watchLazy() => throw UnimplementedError();
+  @override
+  Stream<T?> watchObject(int id) => throw UnimplementedError();
+  @override
+  Stream<void> watchObjectLazy(int? id) => throw UnimplementedError();
+}
+
+class ExampleDBLogsHelper<T extends AppEntity> implements DBLogsHelper<T> {
   ExampleDBLogsHelper();
+  @override
+  bool defaultChecked = false;
   @override
   Future<int> add({required T item}) => throw UnimplementedError();
   @override
@@ -54,45 +90,6 @@ class ExampleDBLogsHelper<T extends AppEntity> implements DBLogsHelper<T> {
   Stream<void> watchObjectLazy(int? id) => throw UnimplementedError();
 }
 
-class ExampleDBHelper<T extends AppEntity> implements DBHelper<T> {
-  @override
-  bool defaultChecked = false;
-  ExampleDBHelper();
-  @override
-  Future<int> add({required T item}) => throw UnimplementedError();
-  @override
-  Future<List<int>> addMany({required List<T> itemList}) => throw UnimplementedError();
-  @override
-  Future<List<int>>? addManyDefault({
-    required List<T> Function() itemList,
-    int? idToEmptyCheck,
-    Function()? doIfAddDefaultsInsideTxn,
-  }) => throw UnimplementedError();
-
-  @override
-  Future<bool> delete(int id) => throw UnimplementedError();
-  @override
-  Future<void> deleteAll() => throw UnimplementedError();
-  @override
-  Future<int> deleteMany(List<int> ids) => throw UnimplementedError();
-  @override
-  Future<T?> getById({required int id}) => throw UnimplementedError();
-  @override
-  bool getCaseSensitiveSettings() => throw UnimplementedError();
-  @override
-  bool getSearchAddParentToChildListSettings() => throw UnimplementedError();
-  @override
-  bool getShowDeletedSettings() => throw UnimplementedError();
-  @override
-  Future<int> update({required T item}) => throw UnimplementedError();
-  @override
-  Stream<void> watchLazy() => throw UnimplementedError();
-  @override
-  Stream<T?> watchObject(int id) => throw UnimplementedError();
-  @override
-  Stream<void> watchObjectLazy(int? id) => throw UnimplementedError();
-}
-
 // ignore: avoid_types_as_parameter_names
 class ExampleLocalDataSource<Type extends AppEntity, SEType extends SearchEntity>
     implements LocalDataSource<Type, SEType> {
@@ -120,9 +117,12 @@ class ExampleLocalDataSource<Type extends AppEntity, SEType extends SearchEntity
   @override
   Future<int> update(Type item) => throw UnimplementedError();
   @override
+  Stream<List<Type>?> watch(SEType searchEntity) => throw UnimplementedError();
+  @override
   Stream<void> watchLazy() => throw UnimplementedError();
   @override
   Stream<void> watchObjectLazy(int? id) => throw UnimplementedError();
-  @override
-  Stream<List<Type>?> watch(SEType searchEntity) => throw UnimplementedError();
 }
+
+///only for example, this classes implements in clear_app_helper_isar,... packages
+abstract class ExampleLog extends DBLog {}
