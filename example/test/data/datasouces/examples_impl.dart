@@ -90,34 +90,32 @@ class ExampleDBLogsHelper<T extends AppEntity> implements DBLogsHelper<T> {
   Stream<void> watchObjectLazy(int? id) => throw UnimplementedError();
 }
 
-// ignore: avoid_types_as_parameter_names
-class ExampleLocalDataSource<Type extends AppEntity, SEType extends SearchEntity>
-    implements LocalDataSource<Type, SEType> {
+class ExampleLocalDataSource<T extends AppEntity, SEType extends SearchEntity> implements LocalDataSource<T, SEType> {
   ExampleLocalDataSource();
   @override
-  DBHelper<Type> dbHelper = ExampleDBHelper();
+  DBHelper<T> dbHelper = ExampleDBHelper();
   @override
   DBLogsHelper<AppEntity>? dbLogsHelper;
   @override
-  Future<int> add(Type item) => throw UnimplementedError();
+  Future<int> add(T item) => throw UnimplementedError();
   @override
-  Future<List<int>> addMany(List<Type> itemList) => throw UnimplementedError();
+  Future<List<int>> addMany(List<T> itemList) => throw UnimplementedError();
   @override
   Future<int> countOfFinded(SEType searchEntity) => throw UnimplementedError();
   @override
-  Future<List<Type>> getAll(SEType searchEntity) => throw UnimplementedError();
+  Future<List<T>> getAll(SEType searchEntity) => throw UnimplementedError();
   @override
   Future<List<int>> getAllIds(SEType searchEntity) => throw UnimplementedError();
   @override
-  Future<Type?> getById(int id) => throw UnimplementedError();
+  Future<T?> getById(int id) => throw UnimplementedError();
   @override
-  Stream<Type?> getStream(int id) => throw UnimplementedError();
+  Stream<T?> getStream(int id) => throw UnimplementedError();
   @override
-  Never setHelpers(DBHelper<Type> dbHelper, [DBLogsHelper<AppEntity>? dbLogsHelper]) => throw UnimplementedError();
+  Never setHelpers(DBHelper<T> dbHelper, [DBLogsHelper<AppEntity>? dbLogsHelper]) => throw UnimplementedError();
   @override
-  Future<int> update(Type item) => throw UnimplementedError();
+  Future<int> update(T item) => throw UnimplementedError();
   @override
-  Stream<List<Type>?> watch(SEType searchEntity) => throw UnimplementedError();
+  Stream<List<T>?> watch(SEType searchEntity) => throw UnimplementedError();
   @override
   Stream<void> watchLazy() => throw UnimplementedError();
   @override

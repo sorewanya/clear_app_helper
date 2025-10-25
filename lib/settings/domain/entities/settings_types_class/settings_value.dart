@@ -31,8 +31,7 @@ class SettingsValue extends SettingsEntity {
   SettingsEntity getSettingsWithNextVariant() {
     final index = getUserOrDefaultValueIndexOrNull;
     return values != null && index != null
-        // ignore: avoid_dynamic_calls
-        ? copyWith(userValue: values!.length - 1 > index ? (index + 1).toString() : '0') as SettingsValue
+        ? copyWith(userValue: values!.length - 1 > index ? (index + 1).toString() : '0')
         : this;
   }
 

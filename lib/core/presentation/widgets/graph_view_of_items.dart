@@ -70,7 +70,6 @@ class _GraphViewOfItemsState<AppEntityType extends AppEntity> extends State<Grap
                     onTap: () {
                       RouteHelper.toNamed(
                         widget.onTapRouteName,
-                        // ignore: avoid_dynamic_calls
                         arguments: (widget.emptySearchEntity as dynamic).copyWith(id: id) as SearchEntity,
                       );
                     },

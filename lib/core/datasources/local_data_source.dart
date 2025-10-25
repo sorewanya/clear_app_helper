@@ -2,45 +2,45 @@ import 'package:clear_app_helper/core/datasources/db_helper.dart';
 import 'package:clear_app_helper/core/domain/entities/app_entity.dart';
 import 'package:clear_app_helper/core/domain/entities/search_entity.dart';
 
-mixin LDSWithDelete<Type extends AppEntity, SEType extends SearchEntity> on LocalDataSource<Type, SEType> {
+mixin LDSWithDelete<T extends AppEntity, SEType extends SearchEntity> on LocalDataSource<T, SEType> {
   Future<bool> delete(int id);
   Future<void> deleteAll();
   Future<int> deleteMany(List<int> ids);
 }
 
-mixin LDSWithRevertDelete<Type extends AppEntity, SEType extends SearchEntity> on LocalDataSource<Type, SEType> {
-  Future<int> revertDelete(Type item);
+mixin LDSWithRevertDelete<T extends AppEntity, SEType extends SearchEntity> on LocalDataSource<T, SEType> {
+  Future<int> revertDelete(T item);
 }
 
 // ignore: avoid_types_as_parameter_names
-abstract class LocalDataSource<Type extends AppEntity, SEType extends SearchEntity> {
+abstract class LocalDataSource<T extends AppEntity, SEType extends SearchEntity> {
   LocalDataSource();
-  late DBHelper<Type> dbHelper;
+  late DBHelper<T> dbHelper;
   DBLogsHelper? dbLogsHelper;
-  Future<int> add(Type item);
+  Future<int> add(T item);
 
-  Future<List<int>> addMany(List<Type> itemList);
+  Future<List<int>> addMany(List<T> itemList);
   Future<int> countOfFinded(SEType searchEntity);
 
-  Future<List<Type>> getAll(SEType searchEntity);
+  Future<List<T>> getAll(SEType searchEntity);
   Future<List<int>> getAllIds(SEType searchEntity);
 
-  Future<Type?> getById(int id) async {
+  Future<T?> getById(int id) async {
     return dbHelper.getById(id: id);
   }
 
-  Stream<Type?> getStream(int id) {
+  Stream<T?> getStream(int id) {
     return dbHelper.watchObject(id);
   }
 
-  void setHelpers(DBHelper<Type> dbHelper, [DBLogsHelper? dbLogsHelper]) {
+  void setHelpers(DBHelper<T> dbHelper, [DBLogsHelper? dbLogsHelper]) {
     this.dbHelper = dbHelper;
     this.dbLogsHelper = dbLogsHelper;
   }
 
-  Future<int> update(Type item);
+  Future<int> update(T item);
 
-  Stream<List<Type>?> watch(SEType searchEntity);
+  Stream<List<T>?> watch(SEType searchEntity);
   Stream<void> watchLazy() {
     return dbHelper.watchLazy();
   }

@@ -102,16 +102,14 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
                       item.setting?.type != newSetting.type ||
                       item.setting?.values != newSetting.values)) {
                 if (kDebugMode) log('update setting from default: ${newSetting.name}');
-                // ignore: avoid_dynamic_calls
-                await updateSetting(newSetting.copyWith(userValue: item.setting!.userValue) as SettingsEntity);
+                await updateSetting(newSetting.copyWith(userValue: item.setting!.userValue));
               }
               if (newDescription != null) {
                 await updateSettingDescription(newDescription);
               }
             }
           }
-          // ignore: avoid_dynamic_calls
-          if (version != null) await updateSetting(version.copyWith(userValue: lastUpdateVersion) as SettingsEntity);
+          if (version != null) await updateSetting(version.copyWith(userValue: lastUpdateVersion));
         }
       }
 
@@ -128,13 +126,10 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
           await FunctionsHelper.saveItemFromForm<SettingsEntity>(
             blocAdd: (item) async => addSetting(item),
             blocUpdate: (item) async => updateSetting(item),
-            // ignore: avoid_dynamic_calls
             item: value.item,
-            // ignore: avoid_dynamic_calls
             origItem: value.origItem,
             textSave: GetIt.instance<CoreI18n>().settingIsSave,
             textValidFailed: GetIt.instance<CoreI18n>().settingIsNotSaved,
-            // ignore: avoid_dynamic_calls
             pop: value.pop,
             showItemNavigator: (id) =>
                 RouteHelper.toNamed(SettingsRouteNames.settingsDetailPage, arguments: SettingsSearchEntity(id: id)),
@@ -184,10 +179,7 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
         LoadSettingsBlocEvent() => onLoad(event),
         SaveFormSettingsBlocEvent() => onSaveForm(event),
         UpdateSettingsBlocEvent() => onUpdate(event),
-        ResetToDefaultSettingsBlocEvent() => updateSetting(
-          // ignore: avoid_dynamic_calls
-          event.item.copyWith(userValue: null) as SettingsEntity,
-        ),
+        ResetToDefaultSettingsBlocEvent() => updateSetting(event.item.copyWith()),
       };
     }, transformer: sequential());
   }
@@ -360,8 +352,7 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
   }
 
   Function(String?) updateUserValueCallback(SettingsEntity item) {
-    // ignore: avoid_dynamic_calls
-    return (newValue) => add(SettingsBlocEvent.update(item: item.copyWith(userValue: newValue) as SettingsEntity));
+    return (newValue) => add(SettingsBlocEvent.update(item: item.copyWith(userValue: newValue)));
   }
 
   @override

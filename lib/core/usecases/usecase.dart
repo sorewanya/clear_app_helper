@@ -5,20 +5,20 @@ import 'package:clear_app_helper/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 
 // ignore: avoid_types_as_parameter_names
-abstract class UseCase<Type extends AppEntity, SEType extends SearchEntity> {
+abstract class UseCase<T extends AppEntity, SEType extends SearchEntity> {
   UseCase(this.repository);
 
-  final Repository<Type, SEType> repository;
+  final Repository<T, SEType> repository;
 
-  Future<Either<Failure, int>> add(Type item) async {
+  Future<Either<Failure, int>> add(T item) async {
     return repository.add(item);
   }
 
-  Future<Either<Failure, List<int>>> addMany(List<Type> itemList) async {
+  Future<Either<Failure, List<int>>> addMany(List<T> itemList) async {
     return repository.addMany(itemList);
   }
 
-  Future<Either<Failure, List<Type>>> call(UseCaseParams<SEType> useCaseParams) async {
+  Future<Either<Failure, List<T>>> call(UseCaseParams<SEType> useCaseParams) async {
     return repository.getAll(useCaseParams.searchEntity);
   }
 
@@ -30,19 +30,19 @@ abstract class UseCase<Type extends AppEntity, SEType extends SearchEntity> {
     return repository.getAllIds(params.searchEntity);
   }
 
-  Future<Either<Failure, Type>> getById(int id) async {
+  Future<Either<Failure, T>> getById(int id) async {
     return repository.getById(id);
   }
 
-  Stream<Type?> getStream(int id) {
+  Stream<T?> getStream(int id) {
     return repository.getStream(id);
   }
 
-  Future<Either<Failure, int>?> update(Type item) async {
+  Future<Either<Failure, int>?> update(T item) async {
     return repository.update(item);
   }
 
-  Stream<List<Type>?> watch(UseCaseParams<SEType> params) {
+  Stream<List<T>?> watch(UseCaseParams<SEType> params) {
     return repository.watch(params.searchEntity);
   }
 
@@ -60,7 +60,7 @@ abstract class UseCaseParams<SEType extends SearchEntity> {
   final SEType searchEntity;
 }
 
-mixin UseCaseWithDelete<Type extends AppEntity, SEType extends SearchEntity> on UseCase<Type, SEType> {
+mixin UseCaseWithDelete<T extends AppEntity, SEType extends SearchEntity> on UseCase<T, SEType> {
   Future<Either<Failure, bool>> delete(int itemId) async {
     return repository.delete(itemId);
   }
@@ -73,8 +73,8 @@ mixin UseCaseWithDelete<Type extends AppEntity, SEType extends SearchEntity> on 
     return repository.deleteMany(ids);
   }
 }
-mixin UseCaseWithRevertDelete<Type extends AppEntity, SEType extends SearchEntity> on UseCase<Type, SEType> {
-  Future<Either<Failure, int>?> revertDelete(Type item) async {
+mixin UseCaseWithRevertDelete<T extends AppEntity, SEType extends SearchEntity> on UseCase<T, SEType> {
+  Future<Either<Failure, int>?> revertDelete(T item) async {
     return repository.revertDelete(item);
   }
 }

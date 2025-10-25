@@ -78,8 +78,7 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
             controller: nameController,
             labelAndHintText: GetIt.instance<CoreI18n>().searchName,
             filtr: filterSearchResults,
-            // ignore: avoid_dynamic_calls
-            setSearchParam: (s) => _searchEntity = _searchEntity.copyWith(name: s) as SettingsSearchEntity,
+            setSearchParam: (s) => _searchEntity = _searchEntity.copyWith(name: s),
             setState: (f) => setState(() => f()),
           ),
 
@@ -87,8 +86,7 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
           SearchCheckboxWidget(
             filtr: filterSearchResults,
             param: _searchEntity.isDeleted,
-            // ignore: avoid_dynamic_calls
-            setParam: (b) => _searchEntity = _searchEntity.copyWith(isDeleted: b) as SettingsSearchEntity,
+            setParam: (b) => _searchEntity = _searchEntity.copyWith(isDeleted: b),
             text: GetIt.instance<CoreI18n>().searchShowDeleted,
             setState: (f) => setState(() => f()),
           ),
@@ -106,10 +104,7 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
             ],
             onChanged: (value) => setState(() {
               dropdownSettingsRequiredTypeValue = value ?? '_';
-              _searchEntity =
-                  // ignore: avoid_dynamic_calls
-                  _searchEntity.copyWith(confirmType: int.tryParse(dropdownSettingsRequiredTypeValue))
-                      as SettingsSearchEntity;
+              _searchEntity = _searchEntity.copyWith(confirmType: int.tryParse(dropdownSettingsRequiredTypeValue));
             }),
           ),
 
@@ -117,8 +112,7 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
           SearchCheckboxWidget(
             filtr: filterSearchResults,
             param: _searchEntity.isChanged,
-            // ignore: avoid_dynamic_calls
-            setParam: (b) => _searchEntity = _searchEntity.copyWith(isChanged: b) as SettingsSearchEntity,
+            setParam: (b) => _searchEntity = _searchEntity.copyWith(isChanged: b),
             text: GetIt.instance<CoreI18n>().searchShowChanged,
             setState: (f) => setState(() => f()),
           ),
@@ -145,8 +139,7 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
 
   @override
   void initState() {
-    // ignore: avoid_dynamic_calls
-    _searchEntity = widget.searchEntity.copyWith() as SettingsSearchEntity;
+    _searchEntity = widget.searchEntity.copyWith();
     idController.text = _searchEntity.id?.toString() ?? '';
     nameController.text = _searchEntity.name ?? '';
     dropdownSettingsRequiredTypeValue = '_';

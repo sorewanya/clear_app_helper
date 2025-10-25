@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 
 import '../../data/datasouces/examples_impl.dart';
 
-// ignore: avoid_implementing_value_types
 class TestEntity with AppEntityWithIsDeleted, EquatableMixin implements AppEntity {
   TestEntity({required this.id, required this.uid, required this.title, required this.isDeleted});
 
@@ -11,7 +10,6 @@ class TestEntity with AppEntityWithIsDeleted, EquatableMixin implements AppEntit
   // ignore: avoid_unused_constructor_parameters
   factory TestEntity.fromJson(Map<String, dynamic> json) => throw UnimplementedError();
   @override
-  // ignore: overridden_fields
   final int? id;
   final String uid;
 

@@ -103,7 +103,6 @@ class FunctionsHelper {
           if (b == true) {
             if (setting != null) {
               GetIt.instance<SettingsBloc>().add(
-                // ignore: avoid_dynamic_calls
                 SettingsBlocEvent.update(item: setting.copyWith(userValue: setting.defaultValue)),
               );
             }
@@ -211,7 +210,6 @@ class FunctionsHelper {
           pop: pop ?? () {},
           item: item,
           text: revertDeleteText,
-          // ignore: avoid_dynamic_calls
           showItemNavigator: (_) =>
               RouteHelper.toNamed(routeName, arguments: (searchEntity as dynamic).copyWith(id: item.id)),
         );

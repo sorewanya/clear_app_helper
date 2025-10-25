@@ -14,8 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-// ignore: avoid_types_as_parameter_names
-class SavedSearchEntity<Type extends SearchEntity> extends StatelessWidget {
+class SavedSearchEntity<T extends SearchEntity> extends StatelessWidget {
   const SavedSearchEntity({
     required this.searchEntity,
     required this.setState,
@@ -24,7 +23,7 @@ class SavedSearchEntity<Type extends SearchEntity> extends StatelessWidget {
     required this.fromJson,
     super.key,
   });
-  final Type searchEntity;
+  final T searchEntity;
 
   /// ```
   /// setState: (f) => setState(() => f()),
@@ -32,8 +31,8 @@ class SavedSearchEntity<Type extends SearchEntity> extends StatelessWidget {
   final Function(Function() f) setState;
 
   /// Функция возвращает установленное значение
-  final Function(Type newSearchEntity) setSearchEntity;
-  final Type Function(Map<String, dynamic> json) fromJson;
+  final Function(T newSearchEntity) setSearchEntity;
+  final T Function(Map<String, dynamic> json) fromJson;
   final EnumsOfSettings setting;
 
   @override
@@ -43,12 +42,12 @@ class SavedSearchEntity<Type extends SearchEntity> extends StatelessWidget {
 
     if (s == null) return const SizedBox();
 
-    final List<NamedSearchEntity<Type>> list =
+    final List<NamedSearchEntity<T>> list =
         s.values
             ?.map((e) {
               final m = json.decode(e) as Map<String, dynamic>;
               if (m.entries.isNotEmpty) {
-                return NamedSearchEntity<Type>(
+                return NamedSearchEntity<T>(
                   m.entries.first.key,
                   fromJson(m.entries.first.value as Map<String, dynamic>),
                 );
@@ -59,13 +58,12 @@ class SavedSearchEntity<Type extends SearchEntity> extends StatelessWidget {
             .toList() ??
         [];
 
-    void setSavedList(List<NamedSearchEntity<Type>> list) {
+    void setSavedList(List<NamedSearchEntity<T>> list) {
       final List<String> l = [];
       for (final element in list) {
         l.add(json.encode({element.name: element.searchEntity.toJson()}));
       }
-      // ignore: avoid_dynamic_calls
-      settingsBloc.add(SettingsBlocEvent.update(item: s.copyWith(values: l) as SettingsEntity));
+      settingsBloc.add(SettingsBlocEvent.update(item: s.copyWith(values: l)));
     }
 
     return SizedBox(
@@ -103,7 +101,7 @@ class SavedSearchEntity<Type extends SearchEntity> extends StatelessWidget {
                               ifYes: () {
                                 setState(() {
                                   final i = list[index];
-                                  list[index] = NamedSearchEntity<Type>(editingController.text, i.searchEntity);
+                                  list[index] = NamedSearchEntity<T>(editingController.text, i.searchEntity);
                                   setSavedList(list);
                                 });
                               },
@@ -124,7 +122,7 @@ class SavedSearchEntity<Type extends SearchEntity> extends StatelessWidget {
                             FlashMessengerHelper.showBottomFlashSearch(
                               ifYes: () {
                                 setState(() {
-                                  list[index] = NamedSearchEntity<Type>(list[index].name, searchEntity);
+                                  list[index] = NamedSearchEntity<T>(list[index].name, searchEntity);
                                   setSavedList(list);
                                 });
                               },

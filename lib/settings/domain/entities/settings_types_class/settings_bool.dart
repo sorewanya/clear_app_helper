@@ -21,15 +21,13 @@ class SettingsBool extends SettingsEntity {
       : null;
   @override
   SettingsEntity getSettingsWithNextVariant() {
-    // ignore: avoid_dynamic_calls
     return copyWith(
-          userValue: userValue == null
-              ? (defaultValue == 'true' ? 'false' : 'true')
-              : userValue == 'true'
-              ? 'false'
-              : 'true',
-        )
-        as SettingsBool;
+      userValue: userValue == null
+          ? (defaultValue == 'true' ? 'false' : 'true')
+          : userValue == 'true'
+          ? 'false'
+          : 'true',
+    );
   }
 
   static SettingsBool? fromEntity(SettingsEntity? item) {

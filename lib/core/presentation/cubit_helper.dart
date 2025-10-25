@@ -63,9 +63,8 @@ class CubitHelper {
   /// call update from useCase
   /// * [revertDelete] mast be true if item updated with change isDeleted
   /// * [ifRightUpdate] Function start if item correct updated
-  // ignore: avoid_types_as_parameter_names
-  Future<void> update<Type extends AppEntity>({
-    required Type itemToUpdate,
+  Future<void> update<T extends AppEntity>({
+    required T itemToUpdate,
     required bool revertDelete,
     required Function(int id) ifRightUpdate,
   }) async {
