@@ -39,17 +39,6 @@ class GraphViewOfItems<AppEntityType extends AppEntity> extends StatefulWidget {
 }
 
 class _GraphViewOfItemsState<AppEntityType extends AppEntity> extends State<GraphViewOfItems<AppEntityType>> {
-  Widget rectangWidget(int? i) {
-    return MyPaddedDecoratedBoxWithOpacity(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
-        boxShadow: const [BoxShadow(color: Colors.blue, spreadRadius: 1)],
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Text('${GetIt.instance<CoreI18n>().nodeInGraphName} $i'),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final currentGraph = widget.graph;
@@ -99,6 +88,17 @@ class _GraphViewOfItemsState<AppEntityType extends AppEntity> extends State<Grap
           },
         ),
       ),
+    );
+  }
+
+  Widget rectangWidget(int? i) {
+    return MyPaddedDecoratedBoxWithOpacity(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4),
+        boxShadow: const [BoxShadow(color: Colors.blue, spreadRadius: 1)],
+      ),
+      padding: const EdgeInsets.all(16),
+      child: Text('${GetIt.instance<CoreI18n>().nodeInGraphName} $i'),
     );
   }
 }

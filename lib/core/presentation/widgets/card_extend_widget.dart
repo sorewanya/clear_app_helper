@@ -8,11 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CardExtendWidget extends StatelessWidget {
+  const CardExtendWidget({required this.cardWidgetSizeSetting, required this.widgets, super.key, this.middleWidgets});
   final EnumsOfSettings cardWidgetSizeSetting;
   final List<Widget> widgets;
-  final List<Widget>? middleWidgets;
 
-  const CardExtendWidget({required this.cardWidgetSizeSetting, required this.widgets, super.key, this.middleWidgets});
+  final List<Widget>? middleWidgets;
 
   @override
   Widget build(BuildContext context) {

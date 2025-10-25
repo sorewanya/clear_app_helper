@@ -1,21 +1,6 @@
 part of '../settings_entity.dart';
 
 class SettingsBool extends SettingsEntity {
-  static SettingsBool? fromEntity(SettingsEntity? item) {
-    return item != null && item.type == SettingsTypeEnum.boolean.index
-        ? SettingsBool(
-            id: item.id,
-            name: item.name,
-            defaultValue: item.defaultValue,
-            userValue: item.userValue,
-            confirmType: item.confirmType,
-            type: item.type,
-            values: item.values,
-            isDeleted: item.isDeleted,
-          )
-        : null;
-  }
-
   SettingsBool({
     required super.id,
     required super.name,
@@ -28,6 +13,7 @@ class SettingsBool extends SettingsEntity {
   });
 
   bool get getUserOrDefaultValueAsBool => (super.getUserOrDefaultValueAsString) == 'true';
+
   bool? get getUserValueAsBool => userValue == 'true'
       ? true
       : userValue == 'false'
@@ -44,5 +30,20 @@ class SettingsBool extends SettingsEntity {
               : 'true',
         )
         as SettingsBool;
+  }
+
+  static SettingsBool? fromEntity(SettingsEntity? item) {
+    return item != null && item.type == SettingsTypeEnum.boolean.index
+        ? SettingsBool(
+            id: item.id,
+            name: item.name,
+            defaultValue: item.defaultValue,
+            userValue: item.userValue,
+            confirmType: item.confirmType,
+            type: item.type,
+            values: item.values,
+            isDeleted: item.isDeleted,
+          )
+        : null;
   }
 }

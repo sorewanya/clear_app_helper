@@ -5,14 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-///Material Design Icons IconData class
-class MdiIconData extends IconData {
-  const MdiIconData(super.codePoint)
-    : super(fontFamily: 'Material Design Icons', fontPackage: 'material_design_icons_flutter');
-}
-
 class IconsHelper {
-  static IconData getIconDataByString(String name) => getIconDataOrNullByString(name) ?? MdiIcons.crosshairsQuestion;
+  static Widget getIcon(String nameOfSettings) => Icon(getIconData(nameOfSettings));
+
+  static Widget getIconByEnum(EnumsOfSettings settings) => Icon(getIconData(settings.name));
 
   /// Try to get IconData from [nameOfSettings]
   /// default: MdiIcons.crosshairsQuestion
@@ -23,9 +19,7 @@ class IconsHelper {
   }
 
   static IconData getIconDataByEnum(EnumsOfSettings settings) => getIconData(settings.name);
-
-  static Widget getIcon(String nameOfSettings) => Icon(getIconData(nameOfSettings));
-  static Widget getIconByEnum(EnumsOfSettings settings) => Icon(getIconData(settings.name));
+  static IconData getIconDataByString(String name) => getIconDataOrNullByString(name) ?? MdiIcons.crosshairsQuestion;
 
   /// take IconData from added to settings in [IconSettingsEnum] or from [MdiIcons.fromString]
   static IconData? getIconDataOrNullByString(String name) {
@@ -51,4 +45,10 @@ class IconsHelper {
     data = mapOfSettings.containsKey(name) ? getIconDataByEnum(mapOfSettings[name]!) : MdiIcons.fromString(name);
     return data;
   }
+}
+
+///Material Design Icons IconData class
+class MdiIconData extends IconData {
+  const MdiIconData(super.codePoint)
+    : super(fontFamily: 'Material Design Icons', fontPackage: 'material_design_icons_flutter');
 }

@@ -18,7 +18,7 @@ class SettingsInfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MyScaffoldInfoWidget(
       appBarTitle: GetIt.instance<CoreI18n>().settings,
-      description: Text(GetIt.instance<CoreI18n>().settingsMainDiscription),
+      description: Text(GetIt.instance<CoreI18n>().settingsMainDescription),
       settingsSearchName: '',
       drawer: drawer,
       textButtonsMap:

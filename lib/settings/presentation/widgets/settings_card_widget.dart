@@ -14,8 +14,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SettingsCardWidget extends StatelessWidget {
-  final int id;
   const SettingsCardWidget({required this.id, super.key});
+  final int id;
   @override
   Widget build(BuildContext context) {
     final settingsBloc = context.read<SettingsBloc>();

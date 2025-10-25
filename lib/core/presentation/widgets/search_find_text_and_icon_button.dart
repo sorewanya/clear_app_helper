@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 class SearchFindTextAndIconButton extends StatelessWidget {
-  final Function()? onTap;
   const SearchFindTextAndIconButton({super.key, this.onTap});
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {

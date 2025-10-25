@@ -5,8 +5,6 @@ import 'package:clear_app_helper/core/error/map_failure_to_message.dart';
 import 'package:clear_app_helper/core/usecases/usecase.dart';
 import 'package:dartz/dartz.dart';
 
-enum CubitStateStatus { inited, loading, loaded, emptyList, filtred, error, someElse }
-
 ///simple Cubit helper
 class CubitHelper {
   CubitHelper({
@@ -44,14 +42,22 @@ class CubitHelper {
   /// set filtred state
   final Function(SearchEntity se)? stateFiltred;
 
+  void emitError(Failure error) => stateError?.call(mapFailureToMessage(error));
+
+  void emitFlitr(SearchEntity searchEntity) => stateFiltred?.call(searchEntity);
+
+  void emitLoaded() => stateLoaded?.call();
+
+  void emitLoading() => stateLoading?.call();
+
+  Future<T?> getById<T extends AppEntity>(int itemId) async {
+    return useCase.getById(itemId).then((value) => value.fold((error) => null, (item) => item as T));
+  }
+
   /// emitLoading && load
   void goToLoading() {
     emitLoading();
     load();
-  }
-
-  Future<T?> getById<T extends AppEntity>(int itemId) async {
-    return useCase.getById(itemId).then((value) => value.fold((error) => null, (item) => item as T));
   }
 
   /// call update from useCase
@@ -74,12 +80,6 @@ class CubitHelper {
       });
     });
   }
-
-  void emitError(Failure error) => stateError?.call(mapFailureToMessage(error));
-
-  void emitLoading() => stateLoading?.call();
-
-  void emitLoaded() => stateLoaded?.call();
-
-  void emitFlitr(SearchEntity searchEntity) => stateFiltred?.call(searchEntity);
 }
+
+enum CubitStateStatus { inited, loading, loaded, emptyList, filtred, error, someElse }

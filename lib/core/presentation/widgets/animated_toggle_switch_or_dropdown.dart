@@ -8,6 +8,15 @@ import 'package:flutter/material.dart';
 ///
 /// else DropdownButtonFormField with this values
 class AnimatedToggleSwitchOrDropdown extends StatelessWidget {
+  const AnimatedToggleSwitchOrDropdown({
+    required this.value,
+    required this.values,
+    required this.setValue,
+    required this.setState,
+    required this.hasIndexValue,
+    super.key,
+  });
+
   /// current Value
   final String value;
 
@@ -23,14 +32,6 @@ class AnimatedToggleSwitchOrDropdown extends StatelessWidget {
   /// setState: (f) => setState(() => f()),
   /// ```
   final Function(Function() f) setState;
-  const AnimatedToggleSwitchOrDropdown({
-    required this.value,
-    required this.values,
-    required this.setValue,
-    required this.setState,
-    required this.hasIndexValue,
-    super.key,
-  });
 
   @override
   Widget build(BuildContext context) {

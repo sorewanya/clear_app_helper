@@ -16,8 +16,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SettingsListSearchWidget extends StatefulWidget {
-  final SettingsSearchEntity searchEntity;
   const SettingsListSearchWidget({required this.searchEntity, super.key});
+  final SettingsSearchEntity searchEntity;
 
   @override
   State<SettingsListSearchWidget> createState() => _SettingsListSearchWidgetState();
@@ -29,25 +29,6 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
   TextEditingController idController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   late String dropdownSettingsRequiredTypeValue;
-
-  @override
-  void initState() {
-    // ignore: avoid_dynamic_calls
-    _searchEntity = widget.searchEntity.copyWith() as SettingsSearchEntity;
-    idController.text = _searchEntity.id?.toString() ?? '';
-    nameController.text = _searchEntity.name ?? '';
-    dropdownSettingsRequiredTypeValue = '_';
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    idController.dispose();
-    nameController.dispose();
-
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -152,5 +133,24 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    idController.dispose();
+    nameController.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    // ignore: avoid_dynamic_calls
+    _searchEntity = widget.searchEntity.copyWith() as SettingsSearchEntity;
+    idController.text = _searchEntity.id?.toString() ?? '';
+    nameController.text = _searchEntity.name ?? '';
+    dropdownSettingsRequiredTypeValue = '_';
+
+    super.initState();
   }
 }

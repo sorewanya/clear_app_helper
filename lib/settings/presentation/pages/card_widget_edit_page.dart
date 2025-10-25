@@ -8,8 +8,8 @@ import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 
 class CardWidgetEditPage extends StatelessWidget {
-  final Widget drawer;
   const CardWidgetEditPage({required this.drawer, super.key});
+  final Widget drawer;
 
   @override
   Widget build(BuildContext context) {

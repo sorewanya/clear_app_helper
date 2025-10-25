@@ -56,6 +56,10 @@ analyzer:
     annotate_overrides: error
     no_literal_bool_comparisons: error
     unnecessary_nullable_for_final_variable_declarations: error
+    sort_unnamed_constructors_first: error
+    sort_constructors_first: error
+    file_names: error
+    prefer_constructors_over_static_methods: error
 
 formatter:
   page_width: 120
@@ -233,7 +237,7 @@ linter:
     sized_box_shrink_expand: true
     slash_for_doc_comments: true
     sort_child_properties_last: false
-    sort_constructors_first: false
+    sort_constructors_first: true
     sort_unnamed_constructors_first: false
     tighten_type_of_initializing_formals: true
     type_annotate_public_apis: true

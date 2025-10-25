@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 ///Icon to show true or false
 class IconTrueFalse extends StatelessWidget {
-  final bool check;
-
   const IconTrueFalse({required this.check, super.key});
+
+  final bool check;
 
   @override
   Widget build(BuildContext context) {

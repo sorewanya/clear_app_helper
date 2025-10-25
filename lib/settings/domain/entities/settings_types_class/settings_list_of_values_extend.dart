@@ -1,21 +1,6 @@
 part of '../settings_entity.dart';
 
 class SettingsListOfValuesExtend extends SettingsEntity {
-  static SettingsListOfValuesExtend? fromEntity(SettingsEntity? item) {
-    return item != null && item.type == SettingsTypeEnum.listOfValuesExtend.index
-        ? SettingsListOfValuesExtend(
-            id: item.id,
-            name: item.name,
-            defaultValue: item.defaultValue,
-            userValue: item.userValue,
-            confirmType: item.confirmType,
-            type: item.type,
-            values: item.values,
-            isDeleted: item.isDeleted,
-          )
-        : null;
-  }
-
   SettingsListOfValuesExtend({
     required super.id,
     required super.name,
@@ -45,5 +30,20 @@ class SettingsListOfValuesExtend extends SettingsEntity {
     if (settings == null) return [];
     if (settings.values == null) return [];
     return settings.values!;
+  }
+
+  static SettingsListOfValuesExtend? fromEntity(SettingsEntity? item) {
+    return item != null && item.type == SettingsTypeEnum.listOfValuesExtend.index
+        ? SettingsListOfValuesExtend(
+            id: item.id,
+            name: item.name,
+            defaultValue: item.defaultValue,
+            userValue: item.userValue,
+            confirmType: item.confirmType,
+            type: item.type,
+            values: item.values,
+            isDeleted: item.isDeleted,
+          )
+        : null;
   }
 }

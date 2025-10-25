@@ -2,11 +2,6 @@ import 'package:clear_app_helper/settings/domain/entities/settings_entity.dart';
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
 
 class BlocSettingsAndStream {
-  late final String name;
-  late Stream<SettingsEntity?> stream;
-  String? value;
-  SettingsEntity? setting;
-  final SettingsBloc settingsBloc;
   BlocSettingsAndStream({required this.name, required this.settingsBloc}) {
     setting = settingsBloc.getByNamed(name)?.toType();
     value = setting?.getUserOrDefaultValueAsString;
@@ -25,6 +20,11 @@ class BlocSettingsAndStream {
       setting = event?.toType();
     });
   }
+  late final String name;
+  late Stream<SettingsEntity?> stream;
+  String? value;
+  SettingsEntity? setting;
+  final SettingsBloc settingsBloc;
 }
 
 class BlocSettingsAndStreamInt extends BlocSettingsAndStream {

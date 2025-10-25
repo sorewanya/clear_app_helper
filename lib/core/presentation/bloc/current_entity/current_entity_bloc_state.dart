@@ -13,7 +13,7 @@ class EmptyCurrentEntityBlocState implements CurrentEntityBlocState {
 }
 
 class LoadedCurrentEntityBlocState implements CurrentEntityBlocState {
+  const LoadedCurrentEntityBlocState({required this.currentBloc});
   // ignore: strict_raw_type
   final EntityBloc currentBloc;
-  const LoadedCurrentEntityBlocState({required this.currentBloc});
 }

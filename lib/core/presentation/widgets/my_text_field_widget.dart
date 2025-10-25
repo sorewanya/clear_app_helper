@@ -84,49 +84,6 @@ class _MyTextFieldWidgetState extends State<MyTextFieldWidget> {
   String sendedValue = '';
 
   @override
-  void initState() {
-    controller = widget.controller ?? TextEditingController(text: widget.getValue() ?? '');
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  void _sendValue(String value) {
-    sendedValue = controller.text;
-    widget.setValue(controller.text);
-  }
-
-  void trySendValue() {
-    if (timer == null) {
-      _sendValue(controller.text);
-
-      timer = Timer(waitTime, () {
-        if (sendedValue != controller.text) {
-          _sendValue(controller.text);
-        }
-        timer = null;
-      });
-    }
-  }
-
-  Future<void> _pasteFromClipboard() async {
-    final data = await Clipboard.getData('text/plain');
-    if (data != null && data.text != null) {
-      final selection = controller.selection;
-      final start = selection.start;
-      final end = selection.end;
-
-      controller.text = controller.text.replaceRange(start, end, data.text!);
-
-      controller.selection = TextSelection.fromPosition(TextPosition(offset: start + data.text!.length));
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return KeyboardListener(
       focusNode: FocusNode(),
@@ -191,5 +148,48 @@ class _MyTextFieldWidgetState extends State<MyTextFieldWidget> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    controller = widget.controller ?? TextEditingController(text: widget.getValue() ?? '');
+    super.initState();
+  }
+
+  void trySendValue() {
+    if (timer == null) {
+      _sendValue(controller.text);
+
+      timer = Timer(waitTime, () {
+        if (sendedValue != controller.text) {
+          _sendValue(controller.text);
+        }
+        timer = null;
+      });
+    }
+  }
+
+  Future<void> _pasteFromClipboard() async {
+    final data = await Clipboard.getData('text/plain');
+    if (data != null && data.text != null) {
+      final selection = controller.selection;
+      final start = selection.start;
+      final end = selection.end;
+
+      controller.text = controller.text.replaceRange(start, end, data.text!);
+
+      controller.selection = TextSelection.fromPosition(TextPosition(offset: start + data.text!.length));
+    }
+  }
+
+  void _sendValue(String value) {
+    sendedValue = controller.text;
+    widget.setValue(controller.text);
   }
 }

@@ -4,24 +4,11 @@ import 'package:clear_app_helper/core/domain/entities/search_entity.dart';
 import 'package:clear_app_helper/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 
-abstract class UseCaseParams<SEType extends SearchEntity> {
-  final SEType searchEntity;
-  UseCaseParams(this.searchEntity);
-}
-
 // ignore: avoid_types_as_parameter_names
 abstract class UseCase<Type extends AppEntity, SEType extends SearchEntity> {
-  final Repository<Type, SEType> repository;
-
   UseCase(this.repository);
 
-  Future<Either<Failure, List<Type>>> call(UseCaseParams<SEType> useCaseParams) async {
-    return repository.getAll(useCaseParams.searchEntity);
-  }
-
-  Future<Either<Failure, Type>> getById(int id) async {
-    return repository.getById(id);
-  }
+  final Repository<Type, SEType> repository;
 
   Future<Either<Failure, int>> add(Type item) async {
     return repository.add(item);
@@ -31,24 +18,28 @@ abstract class UseCase<Type extends AppEntity, SEType extends SearchEntity> {
     return repository.addMany(itemList);
   }
 
-  Future<Either<Failure, int>?> update(Type item) async {
-    return repository.update(item);
-  }
-
-  Stream<Type?> getStream(int id) {
-    return repository.getStream(id);
-  }
-
-  Future<Either<Failure, List<int>>> getAllIds(UseCaseParams<SEType> params) async {
-    return repository.getAllIds(params.searchEntity);
+  Future<Either<Failure, List<Type>>> call(UseCaseParams<SEType> useCaseParams) async {
+    return repository.getAll(useCaseParams.searchEntity);
   }
 
   Future<Either<Failure, int>> countOfFinded(UseCaseParams<SEType> params) async {
     return repository.countOfFinded(params.searchEntity);
   }
 
-  Stream<void> watchObjectLazy(int? id) {
-    return repository.watchObjectLazy(id);
+  Future<Either<Failure, List<int>>> getAllIds(UseCaseParams<SEType> params) async {
+    return repository.getAllIds(params.searchEntity);
+  }
+
+  Future<Either<Failure, Type>> getById(int id) async {
+    return repository.getById(id);
+  }
+
+  Stream<Type?> getStream(int id) {
+    return repository.getStream(id);
+  }
+
+  Future<Either<Failure, int>?> update(Type item) async {
+    return repository.update(item);
   }
 
   Stream<List<Type>?> watch(UseCaseParams<SEType> params) {
@@ -58,13 +49,17 @@ abstract class UseCase<Type extends AppEntity, SEType extends SearchEntity> {
   Stream<void> watchLazy() {
     return repository.watchLazy();
   }
-}
 
-mixin UseCaseWithRevertDelete<Type extends AppEntity, SEType extends SearchEntity> on UseCase<Type, SEType> {
-  Future<Either<Failure, int>?> revertDelete(Type item) async {
-    return repository.revertDelete(item);
+  Stream<void> watchObjectLazy(int? id) {
+    return repository.watchObjectLazy(id);
   }
 }
+
+abstract class UseCaseParams<SEType extends SearchEntity> {
+  UseCaseParams(this.searchEntity);
+  final SEType searchEntity;
+}
+
 mixin UseCaseWithDelete<Type extends AppEntity, SEType extends SearchEntity> on UseCase<Type, SEType> {
   Future<Either<Failure, bool>> delete(int itemId) async {
     return repository.delete(itemId);
@@ -76,5 +71,10 @@ mixin UseCaseWithDelete<Type extends AppEntity, SEType extends SearchEntity> on 
 
   Future<Either<Failure, int>> deleteMany(List<int> ids) async {
     return repository.deleteMany(ids);
+  }
+}
+mixin UseCaseWithRevertDelete<Type extends AppEntity, SEType extends SearchEntity> on UseCase<Type, SEType> {
+  Future<Either<Failure, int>?> revertDelete(Type item) async {
+    return repository.revertDelete(item);
   }
 }

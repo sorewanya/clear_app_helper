@@ -16,6 +16,15 @@ import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 
 class FunctionsHelper {
+  static T? getArgs<T extends SearchEntity>() {
+    if (Get.arguments != null) {
+      if (Get.arguments is T) {
+        return Get.arguments as T;
+      }
+    }
+    return null;
+  }
+
   ///used in [showBottomFlashAndRevertDelete]
   static Future<void> revertDelete<T extends AppEntityWithIsDeleted>({
     required Future<int> Function(T, {bool revertDelete}) update,
@@ -34,27 +43,6 @@ class FunctionsHelper {
     );
 
     pop();
-  }
-
-  /// use setting CoreSettingsEnum.allAfterSaveItemShowInfobar
-  static Future<void> showAfterSaveItemInfobar({
-    required String text,
-    required Function(int id) showItemNavifator,
-    required int id,
-  }) async {
-    bool settings = false;
-    settings =
-        SettingsBool.fromEntity(
-          GetIt.instance<SettingsBloc>().getByEnum(CoreSettingsEnum.allAfterSaveItemShowInfobar),
-        )?.getUserOrDefaultValueAsBool ??
-        true;
-    if (settings) {
-      await FlashMessangerHelper.showInfoBarText(
-        text: text,
-        showItemNavifator: () => showItemNavifator(id),
-        doNotShowSettingsName: CoreSettingsEnum.allAfterSaveItemShowInfobar.name,
-      );
-    }
   }
 
   static Future<void> saveItemFromForm<T extends AppEntity>({
@@ -92,50 +80,6 @@ class FunctionsHelper {
     } else {
       await FlashMessangerHelper.showErrorBarText(text: textValidFailed);
     }
-  }
-
-  static void setNextSettingsVariantByName({required String name}) {
-    setNextSettingsVariantByItem(item: GetIt.instance<SettingsBloc>().getByNamed(name));
-  }
-
-  static void setNextSettingsVariantByEnum(EnumsOfSettings e) => setNextSettingsVariantByName(name: e.name);
-
-  static void setNextSettingsVariantById({required int id}) {
-    setNextSettingsVariantByItem(item: GetIt.instance<SettingsBloc>().getByIdSync(id));
-  }
-
-  static void setNextSettingsVariantByItem({required SettingsEntity? item}) {
-    SettingsEntity? result;
-    if (item == null) return;
-    if (item.type != SettingsTypeEnum.boolean.index && item.type != SettingsTypeEnum.value.index) {
-      if (kDebugMode) {
-        debugPrint("WARNING!: try use setNextSettingsVariantByName with type '${SettingsTypeEnum.values[item.type]}'");
-      }
-      return;
-    } else if (item.type == SettingsTypeEnum.boolean.index) {
-      result = SettingsBool.fromEntity(item)?.getSettingsWithNextVariant();
-    } else if (item.type == SettingsTypeEnum.value.index) {
-      if (item.values == null) {
-        if (kDebugMode) {
-          debugPrint("WARNING!: try use setNextSettingsVariantByName with type 'value', but values is empty!");
-        }
-        return;
-      }
-      result = SettingsValue.fromEntity(item)?.getSettingsWithNextVariant();
-    }
-
-    if (result == null) return;
-    GetIt.instance<SettingsBloc>().add(SettingsBlocEvent.update(item: result));
-  }
-
-  static Future<void> showResetUpdateInfoBarOrFilter({required Function() filterSearchResults}) async {
-    final sName = CoreSettingsEnum.searchUpdateListAfterReset.name;
-    await setBoolSettingInFlash(
-      settingName: sName,
-      text: GetIt.instance<CoreI18n>().searchUpdateListAfterReset,
-      doIfTrue: filterSearchResults,
-      duration: const Duration(seconds: 6),
-    );
   }
 
   static Future<void> setBoolSettingInFlash({
@@ -178,6 +122,61 @@ class FunctionsHelper {
     if (doIfFalse != null && setting?.getUserOrDefaultValueAsBool == false) await doIfFalse();
   }
 
+  static void setNextSettingsVariantByEnum(EnumsOfSettings e) => setNextSettingsVariantByName(name: e.name);
+
+  static void setNextSettingsVariantById({required int id}) {
+    setNextSettingsVariantByItem(item: GetIt.instance<SettingsBloc>().getByIdSync(id));
+  }
+
+  static void setNextSettingsVariantByItem({required SettingsEntity? item}) {
+    SettingsEntity? result;
+    if (item == null) return;
+    if (item.type != SettingsTypeEnum.boolean.index && item.type != SettingsTypeEnum.value.index) {
+      if (kDebugMode) {
+        debugPrint("WARNING!: try use setNextSettingsVariantByName with type '${SettingsTypeEnum.values[item.type]}'");
+      }
+      return;
+    } else if (item.type == SettingsTypeEnum.boolean.index) {
+      result = SettingsBool.fromEntity(item)?.getSettingsWithNextVariant();
+    } else if (item.type == SettingsTypeEnum.value.index) {
+      if (item.values == null) {
+        if (kDebugMode) {
+          debugPrint("WARNING!: try use setNextSettingsVariantByName with type 'value', but values is empty!");
+        }
+        return;
+      }
+      result = SettingsValue.fromEntity(item)?.getSettingsWithNextVariant();
+    }
+
+    if (result == null) return;
+    GetIt.instance<SettingsBloc>().add(SettingsBlocEvent.update(item: result));
+  }
+
+  static void setNextSettingsVariantByName({required String name}) {
+    setNextSettingsVariantByItem(item: GetIt.instance<SettingsBloc>().getByNamed(name));
+  }
+
+  /// use setting CoreSettingsEnum.allAfterSaveItemShowInfobar
+  static Future<void> showAfterSaveItemInfobar({
+    required String text,
+    required Function(int id) showItemNavifator,
+    required int id,
+  }) async {
+    bool settings = false;
+    settings =
+        SettingsBool.fromEntity(
+          GetIt.instance<SettingsBloc>().getByEnum(CoreSettingsEnum.allAfterSaveItemShowInfobar),
+        )?.getUserOrDefaultValueAsBool ??
+        true;
+    if (settings) {
+      await FlashMessangerHelper.showInfoBarText(
+        text: text,
+        showItemNavifator: () => showItemNavifator(id),
+        doNotShowSettingsName: CoreSettingsEnum.allAfterSaveItemShowInfobar.name,
+      );
+    }
+  }
+
   static Future<void> showAutoSaveInfoBar() async {
     String? settings;
 
@@ -191,15 +190,6 @@ class FunctionsHelper {
         showItemNavifator: null,
       );
     }
-  }
-
-  static T? getArgs<T extends SearchEntity>() {
-    if (Get.arguments != null) {
-      if (Get.arguments is T) {
-        return Get.arguments as T;
-      }
-    }
-    return null;
   }
 
   /// use [`showDeleteOrRestoreBottomFlash`], [revertDelete]
@@ -226,6 +216,16 @@ class FunctionsHelper {
         );
       },
       pop: () {},
+    );
+  }
+
+  static Future<void> showResetUpdateInfoBarOrFilter({required Function() filterSearchResults}) async {
+    final sName = CoreSettingsEnum.searchUpdateListAfterReset.name;
+    await setBoolSettingInFlash(
+      settingName: sName,
+      text: GetIt.instance<CoreI18n>().searchUpdateListAfterReset,
+      doIfTrue: filterSearchResults,
+      duration: const Duration(seconds: 6),
     );
   }
 

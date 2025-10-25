@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class TableCellSlidableActionOpen extends StatelessWidget {
-  final bool right;
   const TableCellSlidableActionOpen({super.key, this.right = false});
+  final bool right;
 
   @override
   Widget build(BuildContext context) {

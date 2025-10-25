@@ -8,8 +8,6 @@ import 'package:intl/intl.dart';
 class SettingsHelper {
   static final SettingsBloc bloc = GetIt.instance<SettingsBloc>();
 
-  static SettingsEntity? get getDatetimePersonalFormat =>
-      bloc.getByEnum(CoreSettingsEnum.datetimeDefaultPersonalFormat);
   static String get getDatetimeDefaultFormat =>
       (getDatetimePersonalFormat != null && getDatetimePersonalFormat!.userValue != null)
       ? getDatetimePersonalFormat!.userValue!
@@ -17,5 +15,7 @@ class SettingsHelper {
   static String get getDatetimeLanguage =>
       bloc.getUserOrDefaultValueByNamed(CoreSettingsEnum.datetimeLanguage.name) ??
       GetIt.instance<CoreI18n>().dateTimeLocale;
+  static SettingsEntity? get getDatetimePersonalFormat =>
+      bloc.getByEnum(CoreSettingsEnum.datetimeDefaultPersonalFormat);
   static DateFormat get getDefaultDateFormat => DateFormat(getDatetimeDefaultFormat, getDatetimeLanguage);
 }

@@ -4,9 +4,9 @@ import 'package:clear_app_helper/core/route_helper.dart';
 import 'package:flutter/material.dart';
 
 class SettingsIconButton extends StatelessWidget {
-  final String routeName;
-
   const SettingsIconButton({required this.routeName, super.key});
+
+  final String routeName;
 
   @override
   Widget build(BuildContext context) {

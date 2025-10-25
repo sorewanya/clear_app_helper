@@ -45,18 +45,6 @@ class ListViewOfItems extends StatefulWidget {
 class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProviderStateMixin {
   List<int> currentIdsList = [];
   @override
-  void initState() {
-    currentIdsList.addAll(widget.currentIdsList);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    currentIdsList = [];
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: ListView.separated(
@@ -178,5 +166,17 @@ class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProv
         padding: const EdgeInsets.only(bottom: 60, left: 4, right: 4, top: 4),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    currentIdsList = [];
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    currentIdsList.addAll(widget.currentIdsList);
+    super.initState();
   }
 }

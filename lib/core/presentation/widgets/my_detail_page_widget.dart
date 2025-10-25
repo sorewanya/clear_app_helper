@@ -8,6 +8,22 @@ import 'package:flutter/material.dart';
 
 /// wraper arround [PopScope] and [MyScaffoldWidget] for DetailPage's
 class MyDetailPageWidget extends StatelessWidget {
+  const MyDetailPageWidget({
+    required this.getShouldPop,
+    required this.entityInfo,
+    required this.body,
+    required this.floatingActionButtonList,
+    required this.saveForm,
+    required this.pop,
+    required this.formkey,
+    super.key,
+    this.appBarTitle,
+    this.singleChildScrollViewController,
+    this.isDelete,
+    this.notScrollUpperWidgets,
+    this.checkToPopMessage,
+  });
+
   final bool Function() getShouldPop;
 
   final void Function()? checkToPopMessage;
@@ -36,23 +52,7 @@ class MyDetailPageWidget extends StatelessWidget {
   final GlobalKey<FormState> formkey;
 
   final List<Widget>? notScrollUpperWidgets;
-
   final ScrollController? singleChildScrollViewController;
-  const MyDetailPageWidget({
-    required this.getShouldPop,
-    required this.entityInfo,
-    required this.body,
-    required this.floatingActionButtonList,
-    required this.saveForm,
-    required this.pop,
-    required this.formkey,
-    super.key,
-    this.appBarTitle,
-    this.singleChildScrollViewController,
-    this.isDelete,
-    this.notScrollUpperWidgets,
-    this.checkToPopMessage,
-  });
 
   @override
   Widget build(BuildContext context) {

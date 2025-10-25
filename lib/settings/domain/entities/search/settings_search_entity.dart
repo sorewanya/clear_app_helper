@@ -20,6 +20,7 @@ class SettingsSearchEntity implements SearchEntity {
     this.isChanged,
   });
 
+  factory SettingsSearchEntity.fromJson(Map<String, dynamic> json) => _$SettingsSearchEntityFromJson(json);
   @override
   final String? viewStyle;
   @override
@@ -31,17 +32,16 @@ class SettingsSearchEntity implements SearchEntity {
   final int? type;
   final int? confirmType;
   final bool? isDeleted;
+
   final bool? isChanged;
 
-  factory SettingsSearchEntity.fromJson(Map<String, dynamic> json) => _$SettingsSearchEntityFromJson(json);
-
   @override
-  Map<String, dynamic> toJson() => _$SettingsSearchEntityToJson(this);
+  @JsonKey(includeToJson: false, includeFromJson: false)
+  dynamic get copyWith => _$SettingsSearchEntityCWProxyImpl(this);
 
   @override
   bool isEmpty() => this == const SettingsSearchEntity();
 
   @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  dynamic get copyWith => _$SettingsSearchEntityCWProxyImpl(this);
+  Map<String, dynamic> toJson() => _$SettingsSearchEntityToJson(this);
 }

@@ -6,7 +6,6 @@ import 'package:clear_app_helper/core/presentation/widgets/my_scaffold_widget.da
 import 'package:clear_app_helper/core/presentation/widgets/search_drawer_title_widget.dart';
 import 'package:clear_app_helper/core/presentation/widgets/views_pages_empty_checker_widget.dart';
 import 'package:clear_app_helper/core/route_helper.dart';
-
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
 //TODO use PageController? its remove needed to shimmers

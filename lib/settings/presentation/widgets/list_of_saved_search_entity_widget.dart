@@ -3,16 +3,16 @@ import 'package:clear_app_helper/core/icons_helper.dart';
 import 'package:flutter/material.dart';
 
 class IndexedString {
+  IndexedString({required this.index, required this.str});
   final int index;
   final String str;
-  IndexedString({required this.index, required this.str});
 }
 
 class ListOfSavedSearchEntityWidget extends StatefulWidget {
-  final List<String> values;
-  final Function(List<String> values) updateValues;
-
   const ListOfSavedSearchEntityWidget({required this.values, required this.updateValues, super.key});
+  final List<String> values;
+
+  final Function(List<String> values) updateValues;
 
   @override
   State<ListOfSavedSearchEntityWidget> createState() => _ListOfSavedSearchEntityWidgetState();
@@ -20,20 +20,6 @@ class ListOfSavedSearchEntityWidget extends StatefulWidget {
 
 class _ListOfSavedSearchEntityWidgetState extends State<ListOfSavedSearchEntityWidget> {
   List<IndexedString> list = [];
-  @override
-  void initState() {
-    for (int index = 0; index < widget.values.length; index += 1) {
-      list.add(IndexedString(index: index, str: widget.values[index]));
-    }
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    list.clear();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -83,5 +69,19 @@ class _ListOfSavedSearchEntityWidgetState extends State<ListOfSavedSearchEntityW
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    list.clear();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    for (int index = 0; index < widget.values.length; index += 1) {
+      list.add(IndexedString(index: index, str: widget.values[index]));
+    }
+    super.initState();
   }
 }
