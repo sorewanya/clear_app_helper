@@ -5,7 +5,7 @@ import 'package:clear_app_helper/core/domain/entities/search_entity.dart';
 import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
 import 'package:clear_app_helper/core/i18n/core_i18n.dart';
 import 'package:clear_app_helper/core/icons_helper.dart';
-import 'package:clear_app_helper/core/presentation/flash_messanger.dart';
+import 'package:clear_app_helper/core/presentation/flash_messenger.dart';
 import 'package:clear_app_helper/settings/domain/entities/enums_of_settings.dart';
 import 'package:clear_app_helper/settings/domain/entities/named_entity.dart';
 import 'package:clear_app_helper/settings/domain/entities/settings_entity.dart';
@@ -98,7 +98,7 @@ class SavedSearchEntity<Type extends SearchEntity> extends StatelessWidget {
                           onPressed: () => setState(() {
                             final TextEditingController editingController = TextEditingController()
                               ..text = list[index].name;
-                            FlashMessangerHelper.showBottomFlashWithTextFormField(
+                            FlashMessengerHelper.showBottomFlashWithTextFormField(
                               editingController: editingController,
                               ifYes: () {
                                 setState(() {
@@ -121,7 +121,7 @@ class SavedSearchEntity<Type extends SearchEntity> extends StatelessWidget {
                         //update
                         IconButton(
                           onPressed: () => setState(() {
-                            FlashMessangerHelper.showBottomFlashSearch(
+                            FlashMessengerHelper.showBottomFlashSearch(
                               ifYes: () {
                                 setState(() {
                                   list[index] = NamedSearchEntity<Type>(list[index].name, searchEntity);
@@ -161,7 +161,7 @@ class SavedSearchEntity<Type extends SearchEntity> extends StatelessWidget {
             TextButton(
               onPressed: () {
                 final editingController = TextEditingController();
-                FlashMessangerHelper.showBottomFlashWithTextFormField(
+                FlashMessengerHelper.showBottomFlashWithTextFormField(
                   editingController: editingController,
                   ifYes: () {
                     list.add(NamedSearchEntity(editingController.text, searchEntity));

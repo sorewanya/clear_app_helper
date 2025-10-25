@@ -1,6 +1,6 @@
 import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
 import 'package:clear_app_helper/core/icons_helper.dart';
-import 'package:clear_app_helper/core/presentation/flash_messanger.dart';
+import 'package:clear_app_helper/core/presentation/flash_messenger.dart';
 import 'package:clear_app_helper/core/presentation/theme_data.dart';
 import 'package:clear_app_helper/core/presentation/widgets/my_padded_decorated_box_with_opacity.dart';
 import 'package:clear_app_helper/core/presentation/widgets/my_scaffold_widget.dart';
@@ -60,7 +60,7 @@ class MyDetailPageWidget extends StatelessWidget {
       if (!getShouldPop()) {
         checkToPopMessage != null
             ? checkToPopMessage!()
-            : FlashMessangerHelper.showSaveBottomFlash(entityInfo: entityInfo, ifYes: saveForm, pop: pop);
+            : FlashMessengerHelper.showSaveBottomFlash(entityInfo: entityInfo, ifYes: saveForm, pop: pop);
       } else {
         if (elseDo != null) {
           elseDo();

@@ -16,10 +16,6 @@ class SettingsDescriptionSearchEntity implements SearchEntity {
   final String? description;
 
   @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  dynamic get copyWith => _$SettingsDescriptionSearchEntityCWProxyImpl;
-
-  @override
   String? get viewStyle => null;
 
   @override

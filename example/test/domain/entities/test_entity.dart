@@ -21,8 +21,6 @@ class TestEntity with AppEntityWithIsDeleted, EquatableMixin implements AppEntit
   final bool isDeleted;
 
   @override
-  dynamic get copyWith => throw UnimplementedError();
-  @override
   List<Object?> get props => [uid, title, isDeleted];
   @override
   Map<String, dynamic> toJson() => throw UnimplementedError();
@@ -42,10 +40,7 @@ class TestLog with EquatableMixin implements ExampleLog {
   @override
   final int itemId;
   final String jsonString;
-  //END Equatable
-  @override
-  dynamic get copyWith => throw UnimplementedError();
-  //Equatable
+
   @override
   List<Object?> get props => [id, timestamp, itemId, jsonString];
   @override

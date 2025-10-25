@@ -71,7 +71,7 @@ class _GraphViewOfItemsState<AppEntityType extends AppEntity> extends State<Grap
                       RouteHelper.toNamed(
                         widget.onTapRouteName,
                         // ignore: avoid_dynamic_calls
-                        arguments: widget.emptySearchEntity.copyWith(id: id) as SearchEntity,
+                        arguments: (widget.emptySearchEntity as dynamic).copyWith(id: id) as SearchEntity,
                       );
                     },
                     onLongPress: () => widget.onLongPress?.call(id),

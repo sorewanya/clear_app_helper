@@ -2,7 +2,7 @@ import 'package:clear_app_helper/core/domain/entities/app_entity.dart';
 import 'package:clear_app_helper/core/domain/entities/search_entity.dart';
 import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
 import 'package:clear_app_helper/core/i18n/core_i18n.dart';
-import 'package:clear_app_helper/core/presentation/flash_messanger.dart';
+import 'package:clear_app_helper/core/presentation/flash_messenger.dart';
 import 'package:clear_app_helper/core/route_helper.dart';
 import 'package:clear_app_helper/core/settings_route_names.dart';
 import 'package:clear_app_helper/settings/domain/entities/enums_of_settings.dart';
@@ -29,12 +29,12 @@ class FunctionsHelper {
   static Future<void> revertDelete<T extends AppEntityWithIsDeleted>({
     required Future<int> Function(T, {bool revertDelete}) update,
     required Function() pop,
-    required Function(int id) showItemNavifator,
+    required Function(int id) showItemNavigator,
     required T item,
     required String text,
   }) async {
     await update(item, revertDelete: true);
-    await showAfterSaveItemInfobar(id: item.id!, showItemNavifator: showItemNavifator, text: text);
+    await showAfterSaveItemInfobar(id: item.id!, showItemNavigator: showItemNavigator, text: text);
 
     await setBoolSettingInFlash(
       settingName: CoreSettingsEnum.allAfterRemoveItemReloadList.name,
@@ -53,7 +53,7 @@ class FunctionsHelper {
     required String textSave,
     required String textValidFailed,
     required Function() pop,
-    required Function(int id) showItemNavifator,
+    required Function(int id) showItemNavigator,
     required GlobalKey<FormState> formKey,
     Function(int id)? doAfterSave,
   }) async {
@@ -75,10 +75,10 @@ class FunctionsHelper {
       if (Get.context != null && doAfterSave != null) {
         await doAfterSave(id);
       }
-      await showAfterSaveItemInfobar(id: id, showItemNavifator: showItemNavifator, text: textSave);
+      await showAfterSaveItemInfobar(id: id, showItemNavigator: showItemNavigator, text: textSave);
       pop();
     } else {
-      await FlashMessangerHelper.showErrorBarText(text: textValidFailed);
+      await FlashMessengerHelper.showErrorBarText(text: textValidFailed);
     }
   }
 
@@ -93,7 +93,7 @@ class FunctionsHelper {
     setting = SettingsBool.fromEntity(GetIt.instance<SettingsBloc>().getByNamed(settingName));
 
     if (setting?.getUserValueAsBool == null) {
-      await FlashMessangerHelper.showFlashf(
+      await FlashMessengerHelper.showFlashf(
         duration: duration,
         titleText: GetIt.instance<CoreI18n>().settingChange,
         content: Text(text),
@@ -104,7 +104,7 @@ class FunctionsHelper {
             if (setting != null) {
               GetIt.instance<SettingsBloc>().add(
                 // ignore: avoid_dynamic_calls
-                SettingsBlocEvent.update(item: setting.copyWith(userValue: setting.defaultValue) as SettingsEntity),
+                SettingsBlocEvent.update(item: setting.copyWith(userValue: setting.defaultValue)),
               );
             }
           }
@@ -159,7 +159,7 @@ class FunctionsHelper {
   /// use setting CoreSettingsEnum.allAfterSaveItemShowInfobar
   static Future<void> showAfterSaveItemInfobar({
     required String text,
-    required Function(int id) showItemNavifator,
+    required Function(int id) showItemNavigator,
     required int id,
   }) async {
     bool settings = false;
@@ -169,9 +169,9 @@ class FunctionsHelper {
         )?.getUserOrDefaultValueAsBool ??
         true;
     if (settings) {
-      await FlashMessangerHelper.showInfoBarText(
+      await FlashMessengerHelper.showInfoBarText(
         text: text,
-        showItemNavifator: () => showItemNavifator(id),
+        showItemNavigator: () => showItemNavigator(id),
         doNotShowSettingsName: CoreSettingsEnum.allAfterSaveItemShowInfobar.name,
       );
     }
@@ -182,12 +182,12 @@ class FunctionsHelper {
 
     settings = GetIt.instance<SettingsBloc>().getByEnum(CoreSettingsEnum.autoSaveOnPop)?.userValue;
     if (settings == null) {
-      await FlashMessangerHelper.showInfoBarText(
+      await FlashMessengerHelper.showInfoBarText(
         doNotShowSettingsName: CoreSettingsEnum.autoSaveOnPop.name,
         duration: const Duration(seconds: 6),
         text: GetIt.instance<CoreI18n>().autoSaveOnPop,
         buttonText: GetIt.instance<CoreI18n>().settingChange,
-        showItemNavifator: null,
+        showItemNavigator: null,
       );
     }
   }
@@ -202,7 +202,7 @@ class FunctionsHelper {
     required String routeName,
     Function()? pop,
   }) async {
-    await FlashMessangerHelper.showDeleteOrRestoreBottomFlash(
+    await FlashMessengerHelper.showDeleteOrRestoreBottomFlash(
       isDeleted: item.isDeleted,
       entityInfo: showBottomFlashText,
       ifYes: () async {
@@ -212,7 +212,8 @@ class FunctionsHelper {
           item: item,
           text: revertDeleteText,
           // ignore: avoid_dynamic_calls
-          showItemNavifator: (_) => RouteHelper.toNamed(routeName, arguments: searchEntity.copyWith(id: item.id)),
+          showItemNavigator: (_) =>
+              RouteHelper.toNamed(routeName, arguments: (searchEntity as dynamic).copyWith(id: item.id)),
         );
       },
       pop: () {},
@@ -231,11 +232,11 @@ class FunctionsHelper {
 
   static bool uidValidate({required String uid, required bool Function() checkFunc}) {
     if (uid == '') {
-      FlashMessangerHelper.showErrorBarText(text: GetIt.instance<CoreI18n>().uidNotSetup);
+      FlashMessengerHelper.showErrorBarText(text: GetIt.instance<CoreI18n>().uidNotSetup);
       return false;
     } else {
       if (!checkFunc()) {
-        FlashMessangerHelper.showErrorBarText(text: GetIt.instance<CoreI18n>().uidNotExist);
+        FlashMessengerHelper.showErrorBarText(text: GetIt.instance<CoreI18n>().uidNotExist);
         return false;
       }
     }

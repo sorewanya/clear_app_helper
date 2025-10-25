@@ -136,7 +136,7 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
             textValidFailed: GetIt.instance<CoreI18n>().settingIsNotSaved,
             // ignore: avoid_dynamic_calls
             pop: value.pop,
-            showItemNavifator: (id) =>
+            showItemNavigator: (id) =>
                 RouteHelper.toNamed(SettingsRouteNames.settingsDetailPage, arguments: SettingsSearchEntity(id: id)),
             formKey: value.formKey,
           );

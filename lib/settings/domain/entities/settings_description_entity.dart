@@ -18,11 +18,7 @@ class SettingsDescriptionEntity with EquatableMixin implements AppEntity {
   final int? id;
 
   final String description;
-  //END Equatable
 
-  @override
-  dynamic get copyWith => _$SettingsDescriptionEntityCWProxyImpl(this);
-  //Equatable
   @override
   List<Object?> get props => [description];
   @override

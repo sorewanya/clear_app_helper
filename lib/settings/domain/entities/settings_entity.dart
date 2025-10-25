@@ -56,9 +56,6 @@ class SettingsEntity with AppEntityWithIsDeleted, AppEntityWithName, EquatableMi
   @override
   final bool isDeleted;
 
-  @override
-  dynamic get copyWith => _$SettingsEntityCWProxyImpl(this);
-
   String get getUserOrDefaultValueAsString => userValue ?? defaultValue;
 
   @override

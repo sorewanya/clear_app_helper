@@ -15,7 +15,7 @@ class CubitHelper {
     this.stateError,
     this.stateLoading,
     this.stateLoaded,
-    this.stateFiltred,
+    this.stateFiltered,
   });
   CubitStateStatus Function() stateStatus;
 
@@ -39,12 +39,12 @@ class CubitHelper {
   /// set loaded state
   final Function()? stateLoaded;
 
-  /// set filtred state
-  final Function(SearchEntity se)? stateFiltred;
+  /// set filtered state
+  final Function(SearchEntity se)? stateFiltered;
 
   void emitError(Failure error) => stateError?.call(mapFailureToMessage(error));
 
-  void emitFlitr(SearchEntity searchEntity) => stateFiltred?.call(searchEntity);
+  void emitFlitr(SearchEntity searchEntity) => stateFiltered?.call(searchEntity);
 
   void emitLoaded() => stateLoaded?.call();
 
@@ -82,4 +82,4 @@ class CubitHelper {
   }
 }
 
-enum CubitStateStatus { inited, loading, loaded, emptyList, filtred, error, someElse }
+enum CubitStateStatus { inited, loading, loaded, emptyList, filtered, error, someElse }

@@ -21,8 +21,6 @@ class TestSearchEntity implements SearchEntity {
   final bool? isDeleted;
 
   final TestSearchCreatedOn? createdOn;
-  @override
-  dynamic get copyWith => throw UnimplementedError();
 
   @override
   bool isEmpty() => this == const TestSearchEntity();

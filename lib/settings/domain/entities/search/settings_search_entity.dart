@@ -36,10 +36,6 @@ class SettingsSearchEntity implements SearchEntity {
   final bool? isChanged;
 
   @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  dynamic get copyWith => _$SettingsSearchEntityCWProxyImpl(this);
-
-  @override
   bool isEmpty() => this == const SettingsSearchEntity();
 
   @override

@@ -14,7 +14,7 @@ import 'package:get_it/get_it.dart';
 
 //TODO make as fifo
 //TODO make interface and impl
-class FlashMessangerHelper {
+class FlashMessengerHelper {
   /// * [ifYes] user say yes
   /// * [pop] user say no(button "Not save" etc)
   /// * [titleText] title
@@ -274,13 +274,13 @@ class FlashMessangerHelper {
 
   /// * [text]
   /// * [buttonText]
-  /// * [showItemNavifator] callback tap to button with [buttonText], usually RouteHelper.toNamed to right now created item
+  /// * [showItemNavigator] callback tap to button with [buttonText], usually RouteHelper.toNamed to right now created item
   /// * [duration] ?? const Duration(seconds: 3)
   /// * [doNotShowSettingsName] SettingsEntity name, what setted by 'Do Not Show Again!',
   /// used in [`setNextSettingsVariantByName`], this value not checked in this place!
   static Future<void> showInfoBarText({
     required String text,
-    required void Function()? showItemNavifator,
+    required void Function()? showItemNavigator,
     required String doNotShowSettingsName,
     String? buttonText,
     Duration? duration,
@@ -304,9 +304,9 @@ class FlashMessangerHelper {
                 onPressed: () => FunctionsHelper.setNextSettingsVariantByName(name: doNotShowSettingsName),
                 child: Text(GetIt.instance<CoreI18n>().settingsDoNotShowAgain, style: TextStyle(color: Colors.amber)),
               ),
-              if (showItemNavifator != null)
+              if (showItemNavigator != null)
                 TextButton(
-                  onPressed: showItemNavifator,
+                  onPressed: showItemNavigator,
                   child: Text(
                     buttonText ?? GetIt.instance<CoreI18n>().sHOW,
                     style: const TextStyle(color: Colors.amber),
@@ -344,7 +344,7 @@ class FlashMessangerHelper {
               duration: const Duration(seconds: 6),
               text: GetIt.instance<CoreI18n>().exitSaveConfirm,
               buttonText: GetIt.instance<CoreI18n>().settingChange,
-              showItemNavifator: null,
+              showItemNavigator: null,
             );
           }
           await ifYes();
