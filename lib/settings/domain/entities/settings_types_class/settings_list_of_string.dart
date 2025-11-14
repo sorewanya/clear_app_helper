@@ -14,6 +14,8 @@ class SettingsListOfString extends SettingsEntity {
 
   List<String> get getUserOrDefaultAsListOfString => super.getUserOrDefaultValueAsString.split(',');
 
+  SettingsListOfString updateUserValueByList(List<String> list) => fromEntity(copyWith(userValue: list.join(',')))!;
+
   static SettingsListOfString? fromEntity(SettingsEntity? item) {
     return item != null && item.type == SettingsTypeEnum.listOfString.index
         ? SettingsListOfString(
