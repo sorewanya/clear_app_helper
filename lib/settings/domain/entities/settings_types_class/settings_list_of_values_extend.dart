@@ -12,8 +12,9 @@ class SettingsListOfValuesExtend extends SettingsEntity {
     required super.isDeleted,
   });
 
-  List<int> get getUserOrDefaultAsListOfIndexes =>
-      super.getUserOrDefaultValueAsString.split(',').map(int.tryParse).whereType<int>().toList();
+  List<int> get getUserOrDefaultAsListOfIndexes => super.getUserOrDefaultValueAsString != ''
+      ? super.getUserOrDefaultValueAsString.split(',').map(int.tryParse).whereType<int>().toList()
+      : [];
 
   List<String> getUserOrDefaultAsListOfString(SettingsEntity? Function(String name) blocGetByNamedFunc) {
     if (values == null) return [];

@@ -12,7 +12,8 @@ class SettingsListOfString extends SettingsEntity {
     required super.isDeleted,
   });
 
-  List<String> get getUserOrDefaultAsListOfString => super.getUserOrDefaultValueAsString.split(',');
+  List<String> get getUserOrDefaultAsListOfString =>
+      super.getUserOrDefaultValueAsString != '' ? super.getUserOrDefaultValueAsString.split(',') : [];
 
   SettingsListOfString updateUserValueByList(List<String> list) => fromEntity(copyWith(userValue: list.join(',')))!;
 

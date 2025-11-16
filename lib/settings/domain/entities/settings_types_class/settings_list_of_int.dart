@@ -12,8 +12,9 @@ class SettingsListOfInt extends SettingsEntity {
     required super.isDeleted,
   });
 
-  List<int> get getUserOrDefaultAsListOfInt =>
-      (userValue ?? defaultValue).split(',').map(int.tryParse).whereType<int>().toList();
+  List<int> get getUserOrDefaultAsListOfInt => super.getUserOrDefaultValueAsString != ''
+      ? super.getUserOrDefaultValueAsString.split(',').map(int.tryParse).whereType<int>().toList()
+      : [];
 
   Set<int> get getUserOrDefaultAsSetOfInt => getUserOrDefaultAsListOfInt.toSet();
   static SettingsListOfInt? fromEntity(SettingsEntity? item) {
