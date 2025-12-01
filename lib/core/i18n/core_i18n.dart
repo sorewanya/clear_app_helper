@@ -21,7 +21,7 @@ class CoreI18n {
   String get defaultAppBarTitle => 'Clear App Helper';
   String get delete => 'Delete';
   String get deleteConfirm => 'Delete?';
-  String get doURealyWant => 'Do you really want to';
+  String get doUReallyWant => 'Do you really want to';
   String get emptyLocalStorageFailureMessage => 'Nothing found!';
   String get errorGettingItemId => 'Error getting itemId';
   String get exitSaveConfirm => 'By default, when exiting editing, a confirmation message is asked, you can change this in the settings (after changing the setting (either true or false) this message will not be shown!)';
@@ -87,7 +87,7 @@ class CoreI18n {
   String get settingsIsRequired => 'This setting has the logic of being mandatory-set by the user\nUntil the user sets the value, he will be asked for confirmation/clarification each time';
   String get settingsIsRequiredStop => 'This setting has the logic of mandatory-set by the user\nUntil the user sets the value, the task associated with this setting cannot be performed';
   String get settingsList => 'Settings list';
-  String get settingsMainDiscription => 'Settings allow users to change the functionality and appearance of the system according to their preferences.';
+  String get settingsMainDescription => 'Settings allow users to change the functionality and appearance of the system according to their preferences.';
   String get settingsNotEditedSetting => 'This setting is not editable, it stores a set of options for other settings. Values:';
   String get settingsSetAsDefault => 'Set as default';
   String get settingsValueNotIntWarning => "one of value in string is not int! use '1,5,10' style";
@@ -96,7 +96,7 @@ class CoreI18n {
   String get settingType => 'Type';
   String get settingUserValue => 'UserValue';
   String get settingVariants => 'Variants';
-  String get settintsTypeNotFound => 'Setting type not found';
+  String get settingTypeNotFound => 'Setting type not found';
   String get setup => 'Setup';
   String get share => 'Share';
   String get sHOW => 'SHOW';
@@ -141,15 +141,6 @@ class CoreI18n {
     CoreSettingsEnum.themeMode => 'Light/dark theme',
     CoreSettingsEnum.viewDefault => 'Default page to open',
   };
-  String descriptionSettingsSettingsEnum(SettingsSettingsEnum setting) => switch (setting) {
-    SettingsSettingsEnum.itemSwipeLeftToRight => 'Reaction options for right direction',
-    SettingsSettingsEnum.itemSwipeRightToLeft => 'Reaction options for left direction',
-    SettingsSettingsEnum.loggingEnable => 'Settings changes logging',
-    SettingsSettingsEnum.savedSearch => 'Saved search queries',
-    SettingsSettingsEnum.typesNames => 'Settings types as list',
-    SettingsSettingsEnum.version => 'Stores the last version for ',
-    SettingsSettingsEnum.viewDefault => 'Settings list view as list or tree',
-  };
   String descriptionIconSettingsEnum(IconSettingsEnum setting) => switch (setting) {
     //TODO
     IconSettingsEnum.add => 'Icon for ',
@@ -186,5 +177,14 @@ class CoreI18n {
     IconSettingsEnum.themeSystem => 'Icon for ',
     IconSettingsEnum.trueIcon => 'Icon for ',
     IconSettingsEnum.userValue => 'Icon for ',
+  };
+  String descriptionSettingsSettingsEnum(SettingsSettingsEnum setting) => switch (setting) {
+    SettingsSettingsEnum.itemSwipeLeftToRight => 'Reaction options for right direction',
+    SettingsSettingsEnum.itemSwipeRightToLeft => 'Reaction options for left direction',
+    SettingsSettingsEnum.loggingEnable => 'Settings changes logging',
+    SettingsSettingsEnum.savedSearch => 'Saved search queries',
+    SettingsSettingsEnum.typesNames => 'Settings types as list',
+    SettingsSettingsEnum.version => 'Stores the last version for ',
+    SettingsSettingsEnum.viewDefault => 'Settings list view as list or tree',
   };
 }

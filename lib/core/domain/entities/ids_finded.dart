@@ -6,9 +6,9 @@ part 'ids_finded.g.dart';
 
 @CopyWith()
 class IdsFinded<T extends SearchEntity> {
+  IdsFinded(this.list, this.se, this.controller);
   final List<int> list;
   final T se;
-  final ScrollController controller;
 
-  IdsFinded(this.list, this.se, this.controller);
+  final ScrollController controller;
 }

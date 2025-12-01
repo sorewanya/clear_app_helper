@@ -14,6 +14,16 @@ enum ItemActionEnum {
 
 ///ItemActions - swipe actions of item
 class ItemActions {
+  ItemActions({
+    required this.itemSwipeLeftToRightSetting,
+    required this.itemSwipeRightToLeftSetting,
+    required this.itemDismissAction,
+    required this.makeCopy,
+    required this.lock,
+    required this.share,
+    required this.delete,
+    required this.export,
+  });
   final EnumsOfSettings itemSwipeLeftToRightSetting;
   final EnumsOfSettings itemSwipeRightToLeftSetting;
   final ItemActionEnum? itemDismissAction;
@@ -21,6 +31,7 @@ class ItemActions {
   final Function(int itemId) lock;
   final Function(int itemId) share;
   final Function(int itemId) delete;
+
   final Function(int itemId) export;
 
   //FIXME make Functions Future?
@@ -39,17 +50,6 @@ class ItemActions {
         export(itemId);
     }
   }
-
-  ItemActions({
-    required this.itemSwipeLeftToRightSetting,
-    required this.itemSwipeRightToLeftSetting,
-    required this.itemDismissAction,
-    required this.makeCopy,
-    required this.lock,
-    required this.share,
-    required this.delete,
-    required this.export,
-  });
 
   List<String>? getItemSwipeLeftToRight(BuildContext context) {
     final blocGet = context.read<SettingsBloc>().getByNamed;

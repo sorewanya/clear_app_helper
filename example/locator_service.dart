@@ -8,7 +8,6 @@ import 'package:clear_app_helper/settings/domain/usecase/settings_description_us
 import 'package:clear_app_helper/settings/domain/usecase/settings_use_case.dart';
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
 import 'package:clear_app_helper/shared_preferences.dart';
-
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 

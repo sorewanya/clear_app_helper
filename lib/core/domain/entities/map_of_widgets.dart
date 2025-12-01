@@ -4,9 +4,9 @@ import 'package:get_it/get_it.dart';
 
 ///FIXME refactoring to [Map<String, Widget Function(Type itemCO)>] ?
 class MapOfWidgets {
-  final Map<String, Widget> mapOfWidgets;
-
   MapOfWidgets(this.mapOfWidgets);
+
+  final Map<String, Widget> mapOfWidgets;
 
   Widget getWidget(String widgetName) =>
       mapOfWidgets[widgetName] ??

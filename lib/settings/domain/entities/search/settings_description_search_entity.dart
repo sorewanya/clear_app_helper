@@ -8,23 +8,19 @@ part 'settings_description_search_entity.g.dart';
 @CopyWith()
 class SettingsDescriptionSearchEntity implements SearchEntity {
   const SettingsDescriptionSearchEntity({this.id, this.description});
-  @override
-  final int? id;
-  final String? description;
-
   factory SettingsDescriptionSearchEntity.fromJson(Map<String, dynamic> json) =>
       _$SettingsDescriptionSearchEntityFromJson(json);
-
   @override
-  Map<String, dynamic> toJson() => _$SettingsDescriptionSearchEntityToJson(this);
+  final int? id;
 
-  @override
-  bool isEmpty() => this == const SettingsDescriptionSearchEntity();
+  final String? description;
 
   @override
   String? get viewStyle => null;
 
   @override
-  @JsonKey(includeToJson: false, includeFromJson: false)
-  dynamic get copyWith => _$SettingsDescriptionSearchEntityCWProxyImpl;
+  bool isEmpty() => this == const SettingsDescriptionSearchEntity();
+
+  @override
+  Map<String, dynamic> toJson() => _$SettingsDescriptionSearchEntityToJson(this);
 }

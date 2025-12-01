@@ -10,16 +10,6 @@ class BlocHelper<T extends AppEntity, SEType extends SearchEntity> {
   BlocHelper({required this.useCase});
 
   UseCase<T, SEType> useCase;
-  String _mapFailureToMessage(Failure error) => mapFailureToMessage(error);
-
-  Future<T?> getById(int? itemId, Function(String error)? loadingError) async {
-    if (itemId == null) return null;
-    final itemOrErorr = await useCase.getById(itemId);
-    return await itemOrErorr.fold((error) {
-      if (loadingError != null) loadingError(_mapFailureToMessage(error));
-      return null;
-    }, (item) => item);
-  }
 
   /// call add from useCase
   /// * [ifRightAdd] Function start if item correct added
@@ -36,6 +26,57 @@ class BlocHelper<T extends AppEntity, SEType extends SearchEntity> {
           ifRightAdd(id);
         }
         return id;
+      },
+    );
+  }
+
+  Future<T?> getById(int? itemId, Function(String error)? loadingError) async {
+    if (itemId == null) return null;
+    final itemOrErorr = await useCase.getById(itemId);
+    return await itemOrErorr.fold((error) {
+      if (loadingError != null) loadingError(_mapFailureToMessage(error));
+      return null;
+    }, (item) => item);
+  }
+
+  Future<int> getCount(Future<Either<Failure, int>> get, Function(String error)? loadingError) async {
+    return get.then((value) async {
+      return await value.fold(
+        (error) {
+          if (loadingError != null) loadingError(_mapFailureToMessage(error));
+          return 0;
+        },
+        (count) {
+          return count;
+        },
+      );
+    });
+  }
+
+  Future<List<int>> getIdsList(Future<Either<Failure, List<int>>> get, Function(String error)? loadingError) async {
+    return get.then((value) async {
+      return await value.fold(
+        (error) {
+          if (loadingError != null) loadingError(_mapFailureToMessage(error));
+          return [];
+        },
+        (list) {
+          return list;
+        },
+      );
+    });
+  }
+
+  Future<List<T>> getList(Future<Either<Failure, List<T>>> get, Function(String error)? loadingError) async {
+    final Either<Failure, List<T>> failureOrList = await get;
+
+    return await failureOrList.fold(
+      (error) {
+        if (loadingError != null) loadingError(_mapFailureToMessage(error));
+        return [];
+      },
+      (list) {
+        return list;
       },
     );
   }
@@ -69,45 +110,5 @@ class BlocHelper<T extends AppEntity, SEType extends SearchEntity> {
     );
   }
 
-  Future<List<T>> getList(Future<Either<Failure, List<T>>> get, Function(String error)? loadingError) async {
-    final Either<Failure, List<T>> failureOrList = await get;
-
-    return await failureOrList.fold(
-      (error) {
-        if (loadingError != null) loadingError(_mapFailureToMessage(error));
-        return [];
-      },
-      (list) {
-        return list;
-      },
-    );
-  }
-
-  Future<List<int>> getIdsList(Future<Either<Failure, List<int>>> get, Function(String error)? loadingError) async {
-    return get.then((value) async {
-      return await value.fold(
-        (error) {
-          if (loadingError != null) loadingError(_mapFailureToMessage(error));
-          return [];
-        },
-        (list) {
-          return list;
-        },
-      );
-    });
-  }
-
-  Future<int> getCount(Future<Either<Failure, int>> get, Function(String error)? loadingError) async {
-    return get.then((value) async {
-      return await value.fold(
-        (error) {
-          if (loadingError != null) loadingError(_mapFailureToMessage(error));
-          return 0;
-        },
-        (count) {
-          return count;
-        },
-      );
-    });
-  }
+  String _mapFailureToMessage(Failure error) => mapFailureToMessage(error);
 }

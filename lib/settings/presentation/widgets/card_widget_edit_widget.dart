@@ -8,9 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class CardWidgetEditWidget extends StatelessWidget {
+  const CardWidgetEditWidget({required this.listOfNames, required this.routeName, super.key});
   final List<String> listOfNames;
   final String routeName;
-  const CardWidgetEditWidget({required this.listOfNames, required this.routeName, super.key});
 
   @override
   Widget build(BuildContext context) {

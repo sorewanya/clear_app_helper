@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 
+//TODO remove, use color directly in Theme
+Color getColorByBoolIsDeleted(bool isDeleted, BuildContext context) {
+  if (isDeleted) {
+    return Theme.of(context).colorScheme.error.withValues(alpha: 0.3);
+  } else {
+    return Theme.of(context).primaryColor.withValues(alpha: 0.6);
+  }
+}
+
 ///```
 ///MaterialApp(
 /// theme: GetIt.instance<MyThemeData>().light,
@@ -10,11 +19,8 @@ import 'package:flutter/material.dart';
 /// ```
 //TODO create user settings
 class MyThemeData {
-  late ThemeData light;
-  late ThemeData dark;
-  late ThemeMode mode;
-
-  static MyThemeData? _instance;
+  factory MyThemeData({ThemeData? light, ThemeData? dark, ThemeMode? mode}) =>
+      _instance ?? MyThemeData._internal(light, dark, mode);
   MyThemeData._internal(ThemeData? light, ThemeData? dark, ThemeMode? mode) {
     this.mode = mode ?? ThemeMode.system;
     this.light = light ?? ThemeData(useMaterial3: true, colorSchemeSeed: Colors.indigo);
@@ -39,15 +45,9 @@ class MyThemeData {
         );
     _instance = this;
   }
-  factory MyThemeData({ThemeData? light, ThemeData? dark, ThemeMode? mode}) =>
-      _instance ?? MyThemeData._internal(light, dark, mode);
-}
+  static MyThemeData? _instance;
 
-//TODO remove, use color directly in Theme
-Color getColorByBoolIsDeleted(bool isDeleted, BuildContext context) {
-  if (isDeleted) {
-    return Theme.of(context).colorScheme.error.withValues(alpha: 0.3);
-  } else {
-    return Theme.of(context).primaryColor.withValues(alpha: 0.6);
-  }
+  late ThemeData light;
+  late ThemeData dark;
+  late ThemeMode mode;
 }

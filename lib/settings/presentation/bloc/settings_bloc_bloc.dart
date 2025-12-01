@@ -31,32 +31,6 @@ part 'settings_bloc_event.dart';
 part 'settings_bloc_state.dart';
 
 class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, SettingsEntity, SettingsSearchEntity> {
-  final SettingsUseCase settingsUseCase;
-  final SettingsDescriptionUseCase settingsDescriptionUseCase;
-  final SettingsDefaultData settingsDefaultData = SettingsDefaultData();
-  AbstractDefaultData defaults;
-  //LOCAL values
-
-  Map<int, BlocSettingsAndStream> fullMap = {};
-  StreamSubscription<SettingsEntity?>? themeModeStream;
-  late BlocHelper<SettingsEntity, SettingsSearchEntity> settingsBlocHelper = BlocHelper(useCase: settingsUseCase);
-  late BlocHelper<SettingsDescriptionEntity, SettingsDescriptionSearchEntity> settingsDescriptionBlocHelper =
-      BlocHelper(useCase: settingsDescriptionUseCase);
-  static const emptySearchEntity = SettingsSearchEntity();
-
-  final ScrollController controller = ScrollController();
-  late IdsFinded<SettingsSearchEntity> settingsIdsFinded = IdsFinded<SettingsSearchEntity>(
-    [],
-    emptySearchEntity,
-    controller,
-  );
-
-  @override
-  Future<void> close() {
-    themeModeStream?.cancel();
-    return super.close();
-  }
-
   SettingsBloc({required this.settingsUseCase, required this.settingsDescriptionUseCase, required this.defaults})
     : super(const InitialSettingsBlocState()) {
     ///
@@ -128,16 +102,14 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
                       item.setting?.type != newSetting.type ||
                       item.setting?.values != newSetting.values)) {
                 if (kDebugMode) log('update setting from default: ${newSetting.name}');
-                // ignore: avoid_dynamic_calls
-                await updateSetting(newSetting.copyWith(userValue: item.setting!.userValue) as SettingsEntity);
+                await updateSetting(newSetting.copyWith(userValue: item.setting!.userValue));
               }
               if (newDescription != null) {
                 await updateSettingDescription(newDescription);
               }
             }
           }
-          // ignore: avoid_dynamic_calls
-          if (version != null) await updateSetting(version.copyWith(userValue: lastUpdateVersion) as SettingsEntity);
+          if (version != null) await updateSetting(version.copyWith(userValue: lastUpdateVersion));
         }
       }
 
@@ -154,15 +126,12 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
           await FunctionsHelper.saveItemFromForm<SettingsEntity>(
             blocAdd: (item) async => addSetting(item),
             blocUpdate: (item) async => updateSetting(item),
-            // ignore: avoid_dynamic_calls
             item: value.item,
-            // ignore: avoid_dynamic_calls
             origItem: value.origItem,
             textSave: GetIt.instance<CoreI18n>().settingIsSave,
             textValidFailed: GetIt.instance<CoreI18n>().settingIsNotSaved,
-            // ignore: avoid_dynamic_calls
             pop: value.pop,
-            showItemNavifator: (id) =>
+            showItemNavigator: (id) =>
                 RouteHelper.toNamed(SettingsRouteNames.settingsDetailPage, arguments: SettingsSearchEntity(id: id)),
             formKey: value.formKey,
           );
@@ -210,33 +179,66 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
         LoadSettingsBlocEvent() => onLoad(event),
         SaveFormSettingsBlocEvent() => onSaveForm(event),
         UpdateSettingsBlocEvent() => onUpdate(event),
-        ResetToDefaultSettingsBlocEvent() => updateSetting(
-          // ignore: avoid_dynamic_calls
-          event.item.copyWith(userValue: null) as SettingsEntity,
-        ),
+        ResetToDefaultSettingsBlocEvent() => updateSetting(event.item.copyWith()),
       };
     }, transformer: sequential());
   }
+  static const emptySearchEntity = SettingsSearchEntity();
+  final SettingsUseCase settingsUseCase;
+  final SettingsDescriptionUseCase settingsDescriptionUseCase;
+  final SettingsDefaultData settingsDefaultData = SettingsDefaultData();
+  AbstractDefaultData defaults;
+  //LOCAL values
+
+  Map<int, BlocSettingsAndStream> fullMap = {};
+  StreamSubscription<SettingsEntity?>? themeModeStream;
+  late BlocHelper<SettingsEntity, SettingsSearchEntity> settingsBlocHelper = BlocHelper(useCase: settingsUseCase);
+
+  late BlocHelper<SettingsDescriptionEntity, SettingsDescriptionSearchEntity> settingsDescriptionBlocHelper =
+      BlocHelper(useCase: settingsDescriptionUseCase);
+  final ScrollController controller = ScrollController();
+
+  late IdsFinded<SettingsSearchEntity> settingsIdsFinded = IdsFinded<SettingsSearchEntity>(
+    [],
+    emptySearchEntity,
+    controller,
+  );
 
   @override
-  Stream<SettingsEntity?> getStreamById(int id) {
-    return settingsUseCase.getStream(id);
+  Future<void> close() {
+    themeModeStream?.cancel();
+    return super.close();
   }
 
   @override
-  Stream<void> watchObjectLazy(int? id) {
-    if (id == null) {
-      return const Stream.empty();
-    }
-    return settingsUseCase.watchObjectLazy(id);
-  }
+  Stream<SettingsEntity> get(SettingsSearchEntity searchEntity) {
+    // ignore: close_sinks
+    final controller = StreamController<SettingsEntity>()..add(getByIdSync(searchEntity.id));
 
-  Stream<SettingsEntity?> getStreamByEnum(EnumsOfSettings e) => getStreamByNamed(e.name);
-  Stream<SettingsEntity?> getStreamByNamed(String name) {
-    return settingsUseCase.getStream(getByNamed(name)?.id ?? 0);
+    watchObjectLazy(searchEntity.id).listen((event) async {
+      controller.add(getByIdSync(searchEntity.id));
+    });
+    return controller.stream;
   }
 
   SettingsEntity? getByEnum(EnumsOfSettings e) => getByNamed(e.name);
+
+  @override
+  Future<SettingsEntity?> getById(int? itemId) async => itemId != null ? getByIdSync(itemId) : null;
+  SettingsEntity getByIdSync(int? itemId) {
+    return fullMap[itemId]?.setting ??
+        SettingsEntity(
+          id: null,
+          name: GetIt.instance<CoreI18n>().newSetting,
+          defaultValue: '',
+          userValue: null,
+          confirmType: null,
+          type: SettingsTypeEnum.string.index,
+          values: null,
+          isDeleted: false,
+        );
+  }
+
   SettingsEntity? getByNamed(String name) {
     final id = fastHash(name);
     final setting = fullMap.values.where((element) => element.setting?.id == id).firstOrNull?.setting;
@@ -269,6 +271,67 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
     return result;
   }
 
+  int? getIdByEnum(EnumsOfSettings e) => getIdByNamed(e.name);
+
+  int? getIdByNamed(String name) {
+    return getByNamed(name)?.id;
+  }
+
+  Future<List<SettingsEntity>> getList(SettingsSearchEntity searchEntity) async {
+    return settingsBlocHelper.getList(settingsUseCase.call(SettingsUseCaseParams(searchEntity)), (e) {
+      if (kDebugMode) log('SettingsBlocEvent.getListById error:$e');
+    });
+  }
+
+  List<SettingsEntity> getListStartedWithNamed(String startedWith) {
+    return fullMap.values
+        .where((element) => element.name.startsWith(startedWith))
+        .map((e) => e.setting)
+        .whereType<SettingsEntity>()
+        .toList();
+  }
+
+  Stream<SettingsEntity?> getStreamByEnum(EnumsOfSettings e) => getStreamByNamed(e.name);
+
+  @override
+  Stream<SettingsEntity?> getStreamById(int id) {
+    return settingsUseCase.getStream(id);
+  }
+
+  Stream<SettingsEntity?> getStreamByNamed(String name) {
+    return settingsUseCase.getStream(getByNamed(name)?.id ?? 0);
+  }
+
+  List<String> getStringsListUserOrDefaultValueByNamed(String name) {
+    return getUserOrDefaultValueByNamed(name)?.split(',') ?? [];
+  }
+
+  String? getUserOrDefaultValueByEnum(EnumsOfSettings e) => getUserOrDefaultValueByNamed(e.name);
+
+  String? getUserOrDefaultValueByNamed(String name) {
+    final item = getByNamed(name);
+    final value = item?.getUserOrDefaultValueAsString;
+    final asInt = int.tryParse(value ?? '');
+    return item?.type == SettingsTypeEnum.value.index
+        ? asInt != null
+              ? item?.values![asInt]
+              : value
+        : value;
+  }
+
+  String? getValueNameFromUserOrDefaultValueByEnum(EnumsOfSettings e) =>
+      getValueNameFromUserOrDefaultValueByNamed(e.name);
+
+  String? getValueNameFromUserOrDefaultValueByNamed(String name) {
+    return SettingsValue.fromEntity(getByNamed(name))?.getUserOrDefaultValueStringOrNull;
+  }
+
+  ///Set darkMode from settings, add stream listener
+  void themeModeChecker() {
+    _themeModeChecker(getByEnum(CoreSettingsEnum.themeMode));
+    themeModeStream = getStreamByEnum(CoreSettingsEnum.themeMode).listen(_themeModeChecker);
+  }
+
   SettingsDescriptionEntity? tryGetNewSettingDescriptionFromDefaults(int id) {
     SettingsDescriptionEntity? newSettingDescription = defaults.getDefaultSettingDescriptionList
         .where((element) => element.id == id)
@@ -288,65 +351,16 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
     return newSetting;
   }
 
-  int? getIdByNamed(String name) {
-    return getByNamed(name)?.id;
+  Function(String?) updateUserValueCallback(SettingsEntity item) {
+    return (newValue) => add(SettingsBlocEvent.update(item: item.copyWith(userValue: newValue)));
   }
-
-  int? getIdByEnum(EnumsOfSettings e) => getIdByNamed(e.name);
 
   @override
-  Future<SettingsEntity?> getById(int? itemId) async => itemId != null ? getByIdSync(itemId) : null;
-
-  SettingsEntity getByIdSync(int? itemId) {
-    return fullMap[itemId]?.setting ??
-        SettingsEntity(
-          id: null,
-          name: GetIt.instance<CoreI18n>().newSetting,
-          defaultValue: '',
-          userValue: null,
-          confirmType: null,
-          type: SettingsTypeEnum.string.index,
-          values: null,
-          isDeleted: false,
-        );
-  }
-
-  List<SettingsEntity> getListStartedWithNamed(String startedWith) {
-    return fullMap.values
-        .where((element) => element.name.startsWith(startedWith))
-        .map((e) => e.setting)
-        .whereType<SettingsEntity>()
-        .toList();
-  }
-
-  String? getUserOrDefaultValueByNamed(String name) {
-    final item = getByNamed(name);
-    final value = item?.getUserOrDefaultValueAsString;
-    final asInt = int.tryParse(value ?? '');
-    return item?.type == SettingsTypeEnum.value.index
-        ? asInt != null
-              ? item?.values![asInt]
-              : value
-        : value;
-  }
-
-  String? getUserOrDefaultValueByEnum(EnumsOfSettings e) => getUserOrDefaultValueByNamed(e.name);
-
-  List<String> getStringsListUserOrDefaultValueByNamed(String name) {
-    return getUserOrDefaultValueByNamed(name)?.split(',') ?? [];
-  }
-
-  String? getValueNameFromUserOrDefaultValueByNamed(String name) {
-    return SettingsValue.fromEntity(getByNamed(name))?.getUserOrDefaultValueStringOrNull;
-  }
-
-  String? getValueNameFromUserOrDefaultValueByEnum(EnumsOfSettings e) =>
-      getValueNameFromUserOrDefaultValueByNamed(e.name);
-
-  ///Set darkMode from settings, add stream listener
-  void themeModeChecker() {
-    _themeModeChecker(getByEnum(CoreSettingsEnum.themeMode));
-    themeModeStream = getStreamByEnum(CoreSettingsEnum.themeMode).listen(_themeModeChecker);
+  Stream<void> watchObjectLazy(int? id) {
+    if (id == null) {
+      return const Stream.empty();
+    }
+    return settingsUseCase.watchObjectLazy(id);
   }
 
   void _themeModeChecker(SettingsEntity? themeMode) {
@@ -363,27 +377,5 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
         Get.changeThemeMode(ThemeMode.system);
       }
     }
-  }
-
-  Function(String?) updateUserValueCallback(SettingsEntity item) {
-    // ignore: avoid_dynamic_calls
-    return (newValue) => add(SettingsBlocEvent.update(item: item.copyWith(userValue: newValue) as SettingsEntity));
-  }
-
-  Future<List<SettingsEntity>> getList(SettingsSearchEntity searchEntity) async {
-    return settingsBlocHelper.getList(settingsUseCase.call(SettingsUseCaseParams(searchEntity)), (e) {
-      if (kDebugMode) log('SettingsBlocEvent.getListById error:$e');
-    });
-  }
-
-  @override
-  Stream<SettingsEntity> get(SettingsSearchEntity searchEntity) {
-    // ignore: close_sinks
-    final controller = StreamController<SettingsEntity>()..add(getByIdSync(searchEntity.id));
-
-    watchObjectLazy(searchEntity.id).listen((event) async {
-      controller.add(getByIdSync(searchEntity.id));
-    });
-    return controller.stream;
   }
 }

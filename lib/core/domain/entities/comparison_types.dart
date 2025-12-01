@@ -4,43 +4,43 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'comparison_types.g.dart';
 
-abstract class ComparisonTypes {
-  final Comparison comparison;
-  ComparisonTypes({required this.comparison});
-}
-
 @JsonSerializable()
 @CopyWith()
 class ComparisonDateTime implements ComparisonTypes {
   const ComparisonDateTime({required this.value, required this.comparison});
-  final DateTime value;
-  @override
-  final Comparison comparison;
-
   factory ComparisonDateTime.fromJson(Map<String, dynamic> json) => _$ComparisonDateTimeFromJson(json);
-  Map<String, dynamic> toJson() => _$ComparisonDateTimeToJson(this);
-}
+  final DateTime value;
 
-@JsonSerializable()
-@CopyWith()
-class ComparisonInteger implements ComparisonTypes {
-  const ComparisonInteger({required this.value, required this.comparison});
-  final int value;
   @override
   final Comparison comparison;
-
-  factory ComparisonInteger.fromJson(Map<String, dynamic> json) => _$ComparisonIntegerFromJson(json);
-  Map<String, dynamic> toJson() => _$ComparisonIntegerToJson(this);
+  Map<String, dynamic> toJson() => _$ComparisonDateTimeToJson(this);
 }
 
 @JsonSerializable()
 @CopyWith()
 class ComparisonDouble implements ComparisonTypes {
   const ComparisonDouble({required this.value, required this.comparison});
+  factory ComparisonDouble.fromJson(Map<String, dynamic> json) => _$ComparisonDoubleFromJson(json);
   final double value;
+
   @override
   final Comparison comparison;
-
-  factory ComparisonDouble.fromJson(Map<String, dynamic> json) => _$ComparisonDoubleFromJson(json);
   Map<String, dynamic> toJson() => _$ComparisonDoubleToJson(this);
+}
+
+@JsonSerializable()
+@CopyWith()
+class ComparisonInteger implements ComparisonTypes {
+  const ComparisonInteger({required this.value, required this.comparison});
+  factory ComparisonInteger.fromJson(Map<String, dynamic> json) => _$ComparisonIntegerFromJson(json);
+  final int value;
+
+  @override
+  final Comparison comparison;
+  Map<String, dynamic> toJson() => _$ComparisonIntegerToJson(this);
+}
+
+abstract class ComparisonTypes {
+  ComparisonTypes({required this.comparison});
+  final Comparison comparison;
 }

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 class ConfirmTypeWarning extends StatelessWidget {
-  final int? confirmType;
   const ConfirmTypeWarning({super.key, this.confirmType});
+  final int? confirmType;
 
   @override
   Widget build(BuildContext context) {

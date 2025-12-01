@@ -1,19 +1,5 @@
 part of 'settings_bloc_bloc.dart';
 
-sealed class SettingsBlocEvent {
-  const factory SettingsBlocEvent.errorShowed() = ErrorShowedSettingsBlocEvent;
-  const factory SettingsBlocEvent.loadFullLists() = LoadFullListsSettingsBlocEvent;
-  const factory SettingsBlocEvent.load(SettingsSearchEntity? searchEntity) = LoadSettingsBlocEvent;
-  const factory SettingsBlocEvent.saveForm({
-    required SettingsEntity? origItem,
-    required SettingsEntity item,
-    required Function() pop,
-    required GlobalKey<FormState> formKey,
-  }) = SaveFormSettingsBlocEvent;
-  const factory SettingsBlocEvent.update({required SettingsEntity item}) = UpdateSettingsBlocEvent;
-  const factory SettingsBlocEvent.resetToDefault(SettingsEntity item) = ResetToDefaultSettingsBlocEvent;
-}
-
 class ErrorShowedSettingsBlocEvent implements SettingsBlocEvent {
   const ErrorShowedSettingsBlocEvent();
 }
@@ -26,6 +12,12 @@ class LoadSettingsBlocEvent implements SettingsBlocEvent {
   const LoadSettingsBlocEvent(this.searchEntity);
 
   final SettingsSearchEntity? searchEntity;
+}
+
+class ResetToDefaultSettingsBlocEvent implements SettingsBlocEvent {
+  const ResetToDefaultSettingsBlocEvent(this.item);
+
+  final SettingsEntity item;
 }
 
 class SaveFormSettingsBlocEvent implements SettingsBlocEvent {
@@ -42,14 +34,22 @@ class SaveFormSettingsBlocEvent implements SettingsBlocEvent {
   final GlobalKey<FormState> formKey;
 }
 
-class UpdateSettingsBlocEvent implements SettingsBlocEvent {
-  const UpdateSettingsBlocEvent({required this.item});
-
-  final SettingsEntity item;
+sealed class SettingsBlocEvent {
+  const factory SettingsBlocEvent.errorShowed() = ErrorShowedSettingsBlocEvent;
+  const factory SettingsBlocEvent.load(SettingsSearchEntity? searchEntity) = LoadSettingsBlocEvent;
+  const factory SettingsBlocEvent.loadFullLists() = LoadFullListsSettingsBlocEvent;
+  const factory SettingsBlocEvent.resetToDefault(SettingsEntity item) = ResetToDefaultSettingsBlocEvent;
+  const factory SettingsBlocEvent.saveForm({
+    required SettingsEntity? origItem,
+    required SettingsEntity item,
+    required Function() pop,
+    required GlobalKey<FormState> formKey,
+  }) = SaveFormSettingsBlocEvent;
+  const factory SettingsBlocEvent.update({required SettingsEntity item}) = UpdateSettingsBlocEvent;
 }
 
-class ResetToDefaultSettingsBlocEvent implements SettingsBlocEvent {
-  const ResetToDefaultSettingsBlocEvent(this.item);
+class UpdateSettingsBlocEvent implements SettingsBlocEvent {
+  const UpdateSettingsBlocEvent({required this.item});
 
   final SettingsEntity item;
 }

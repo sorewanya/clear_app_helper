@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:rfw/rfw.dart';
 
 class RfwHelper {
+  RfwHelper({required this.values, required this.settingsBloc, this.onEvent});
   (String, Map<String, Object>) values;
   final void Function(String, Map<String, Object?>)? onEvent;
   final SettingsBloc settingsBloc;
-  RfwHelper({required this.values, required this.settingsBloc, this.onEvent});
   //TODO use decodeLibraryBlob ?
   WidgetLibrary localWidgets = LocalWidgetLibrary(<String, LocalWidgetBuilder>{
     'CircleAvatar': (BuildContext context, DataSource source) {
@@ -40,6 +40,10 @@ class RfwHelper {
     // },
   });
 
+  Widget getRfwWidget(String rfwString) {
+    return RfwWidget(rfwString: rfwString, values: values, localWidgets: localWidgets, onEvent: onEvent);
+  }
+
   Widget getRfwWidgetBySettings(String rfwStringSettings) {
     final String? rfwString = settingsBloc.getByNamed(rfwStringSettings)?.getUserOrDefaultValueAsString;
     return rfwString != null ? getRfwWidget(rfwString) : Text('Rfw:$rfwStringSettings!');
@@ -47,9 +51,5 @@ class RfwHelper {
 
   Widget getRfwWidgetBySettingsEnum(EnumsOfSettings settings) {
     return getRfwWidgetBySettings(settings.name);
-  }
-
-  Widget getRfwWidget(String rfwString) {
-    return RfwWidget(rfwString: rfwString, values: values, localWidgets: localWidgets, onEvent: onEvent);
   }
 }

@@ -30,6 +30,9 @@ enum CoreSettingsEnum with EnumsOfSettings implements Enum {
   globalTr;
 
   @override
+  String get description => GetIt.instance.get<CoreI18n>().descriptionCoreSettingsEnum(this);
+
+  @override
   String get name => switch (this) {
     CoreSettingsEnum.viewDefault => 'core.view.default',
     CoreSettingsEnum.showDeleted => 'core.show.deleted',
@@ -84,44 +87,6 @@ enum CoreSettingsEnum with EnumsOfSettings implements Enum {
     CoreSettingsEnum.globalQuery => SettingsTypeEnum.string,
     CoreSettingsEnum.globalTr => SettingsTypeEnum.integer,
   };
-
-  @override
-  String get description => GetIt.instance.get<CoreI18n>().descriptionCoreSettingsEnum(this);
-}
-
-enum SettingsSettingsEnum with EnumsOfSettings implements Enum {
-  viewDefault,
-  loggingEnable,
-  savedSearch,
-  typesNames,
-  version,
-  itemSwipeLeftToRight,
-  itemSwipeRightToLeft;
-
-  @override
-  String get name => switch (this) {
-    SettingsSettingsEnum.viewDefault => 'settings.view.default',
-    SettingsSettingsEnum.loggingEnable => 'settings.logging.enable',
-    SettingsSettingsEnum.savedSearch => 'settings.saved.search',
-    SettingsSettingsEnum.typesNames => 'settings.types.names',
-    SettingsSettingsEnum.version => 'settings.version',
-    SettingsSettingsEnum.itemSwipeLeftToRight => 'settings.item.swipe.left.to.right',
-    SettingsSettingsEnum.itemSwipeRightToLeft => 'settings.item.swipe.right.to.left',
-  };
-
-  @override
-  SettingsTypeEnum get type => switch (this) {
-    SettingsSettingsEnum.viewDefault => SettingsTypeEnum.value,
-    SettingsSettingsEnum.loggingEnable => SettingsTypeEnum.boolean,
-    SettingsSettingsEnum.savedSearch => SettingsTypeEnum.savedSearch,
-    SettingsSettingsEnum.typesNames => SettingsTypeEnum.listOfValuesBase,
-    SettingsSettingsEnum.version => SettingsTypeEnum.string,
-    SettingsSettingsEnum.itemSwipeLeftToRight => SettingsTypeEnum.listOfValuesExtend,
-    SettingsSettingsEnum.itemSwipeRightToLeft => SettingsTypeEnum.listOfValuesExtend,
-  };
-
-  @override
-  String get description => GetIt.instance.get<CoreI18n>().descriptionSettingsSettingsEnum(this);
 }
 
 enum IconSettingsEnum with EnumsOfSettings implements Enum {
@@ -162,6 +127,9 @@ enum IconSettingsEnum with EnumsOfSettings implements Enum {
   themeDark,
   themeSystem,
   import;
+
+  @override
+  String get description => GetIt.instance.get<CoreI18n>().descriptionIconSettingsEnum(this);
 
   @override
   String get name => switch (this) {
@@ -238,7 +206,39 @@ enum IconSettingsEnum with EnumsOfSettings implements Enum {
     IconSettingsEnum.themeSystem => SettingsTypeEnum.icon,
     IconSettingsEnum.import => SettingsTypeEnum.icon,
   };
+}
+
+enum SettingsSettingsEnum with EnumsOfSettings implements Enum {
+  viewDefault,
+  loggingEnable,
+  savedSearch,
+  typesNames,
+  version,
+  itemSwipeLeftToRight,
+  itemSwipeRightToLeft;
 
   @override
-  String get description => GetIt.instance.get<CoreI18n>().descriptionIconSettingsEnum(this);
+  String get description => GetIt.instance.get<CoreI18n>().descriptionSettingsSettingsEnum(this);
+
+  @override
+  String get name => switch (this) {
+    SettingsSettingsEnum.viewDefault => 'settings.view.default',
+    SettingsSettingsEnum.loggingEnable => 'settings.logging.enable',
+    SettingsSettingsEnum.savedSearch => 'settings.saved.search',
+    SettingsSettingsEnum.typesNames => 'settings.types.names',
+    SettingsSettingsEnum.version => 'settings.version',
+    SettingsSettingsEnum.itemSwipeLeftToRight => 'settings.item.swipe.left.to.right',
+    SettingsSettingsEnum.itemSwipeRightToLeft => 'settings.item.swipe.right.to.left',
+  };
+
+  @override
+  SettingsTypeEnum get type => switch (this) {
+    SettingsSettingsEnum.viewDefault => SettingsTypeEnum.value,
+    SettingsSettingsEnum.loggingEnable => SettingsTypeEnum.boolean,
+    SettingsSettingsEnum.savedSearch => SettingsTypeEnum.savedSearch,
+    SettingsSettingsEnum.typesNames => SettingsTypeEnum.listOfValuesBase,
+    SettingsSettingsEnum.version => SettingsTypeEnum.string,
+    SettingsSettingsEnum.itemSwipeLeftToRight => SettingsTypeEnum.listOfValuesExtend,
+    SettingsSettingsEnum.itemSwipeRightToLeft => SettingsTypeEnum.listOfValuesExtend,
+  };
 }

@@ -5,6 +5,13 @@ import 'package:flutter/material.dart';
 
 ///AnimatedToggleSwitch with ```> >= < <= = !=``` in  [values]
 class AnimatedToggleSwitchComparison extends StatelessWidget {
+  const AnimatedToggleSwitchComparison({
+    required this.comparison,
+    required this.setComparison,
+    required this.values,
+    super.key,
+  });
+
   /// initial comparison
   final Comparison comparison;
 
@@ -12,13 +19,6 @@ class AnimatedToggleSwitchComparison extends StatelessWidget {
   final Function(Comparison) setComparison;
 
   final List<Comparison>? values;
-
-  const AnimatedToggleSwitchComparison({
-    required this.comparison,
-    required this.setComparison,
-    required this.values,
-    super.key,
-  });
 
   @override
   Widget build(BuildContext context) {

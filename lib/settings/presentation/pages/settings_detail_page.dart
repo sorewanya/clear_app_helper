@@ -48,13 +48,6 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
   late bool isDeleted;
 
   @override
-  void initState() {
-    shouldPop = true;
-    firstLoad = true;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final settingsBloc = context.read<SettingsBloc>();
     //LOCAL SCOPE FUNCTIONS
@@ -215,7 +208,7 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
           canBeEmpty: true,
         );
       } else {
-        return Text(GetIt.instance<CoreI18n>().settintsTypeNotFound);
+        return Text(GetIt.instance<CoreI18n>().settingTypeNotFound);
       }
     }
 
@@ -291,5 +284,12 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
         ),
       ],
     );
+  }
+
+  @override
+  void initState() {
+    shouldPop = true;
+    firstLoad = true;
+    super.initState();
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TextWarning extends StatelessWidget {
-  final String text;
   const TextWarning(this.text, {super.key});
+  final String text;
 
   @override
   Widget build(BuildContext context) {

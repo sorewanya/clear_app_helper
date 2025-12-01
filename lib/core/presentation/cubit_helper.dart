@@ -5,8 +5,6 @@ import 'package:clear_app_helper/core/error/map_failure_to_message.dart';
 import 'package:clear_app_helper/core/usecases/usecase.dart';
 import 'package:dartz/dartz.dart';
 
-enum CubitStateStatus { inited, loading, loaded, emptyList, filtred, error, someElse }
-
 ///simple Cubit helper
 class CubitHelper {
   CubitHelper({
@@ -17,7 +15,7 @@ class CubitHelper {
     this.stateError,
     this.stateLoading,
     this.stateLoaded,
-    this.stateFiltred,
+    this.stateFiltered,
   });
   CubitStateStatus Function() stateStatus;
 
@@ -41,8 +39,20 @@ class CubitHelper {
   /// set loaded state
   final Function()? stateLoaded;
 
-  /// set filtred state
-  final Function(SearchEntity se)? stateFiltred;
+  /// set filtered state
+  final Function(SearchEntity se)? stateFiltered;
+
+  void emitError(Failure error) => stateError?.call(mapFailureToMessage(error));
+
+  void emitFlitr(SearchEntity searchEntity) => stateFiltered?.call(searchEntity);
+
+  void emitLoaded() => stateLoaded?.call();
+
+  void emitLoading() => stateLoading?.call();
+
+  Future<T?> getById<T extends AppEntity>(int itemId) async {
+    return useCase.getById(itemId).then((value) => value.fold((error) => null, (item) => item as T));
+  }
 
   /// emitLoading && load
   void goToLoading() {
@@ -50,16 +60,11 @@ class CubitHelper {
     load();
   }
 
-  Future<T?> getById<T extends AppEntity>(int itemId) async {
-    return useCase.getById(itemId).then((value) => value.fold((error) => null, (item) => item as T));
-  }
-
   /// call update from useCase
   /// * [revertDelete] mast be true if item updated with change isDeleted
   /// * [ifRightUpdate] Function start if item correct updated
-  // ignore: avoid_types_as_parameter_names
-  Future<void> update<Type extends AppEntity>({
-    required Type itemToUpdate,
+  Future<void> update<T extends AppEntity>({
+    required T itemToUpdate,
     required bool revertDelete,
     required Function(int id) ifRightUpdate,
   }) async {
@@ -74,12 +79,6 @@ class CubitHelper {
       });
     });
   }
-
-  void emitError(Failure error) => stateError?.call(mapFailureToMessage(error));
-
-  void emitLoading() => stateLoading?.call();
-
-  void emitLoaded() => stateLoaded?.call();
-
-  void emitFlitr(SearchEntity searchEntity) => stateFiltred?.call(searchEntity);
 }
+
+enum CubitStateStatus { inited, loading, loaded, emptyList, filtered, error, someElse }

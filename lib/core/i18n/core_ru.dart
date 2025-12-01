@@ -15,7 +15,7 @@ class CoreI18nRu implements CoreI18n {
   String get defaultAppBarTitle => 'Clear App Helper';
   String get delete => 'Удалить';
   String get deleteConfirm => 'Удалить?';
-  String get doURealyWant => 'Вы действительно хотите';
+  String get doUReallyWant => 'Вы действительно хотите';
   String get emptyLocalStorageFailureMessage => 'Ничего не найдено!';
   String get errorGettingItemId => 'Ошибка получения itemId';
   String get exitSaveConfirm => 'По умолчанию при выходе из редактирования запрашивается подтверждение, вы можете изменить это в настройках(после изменения настройки (как в true, так и false) это сообщение не будет показываться!)';
@@ -81,7 +81,7 @@ class CoreI18nRu implements CoreI18n {
   String get settingsIsRequired => 'Данная настройка имеет логику обязательно-выставляемой пользователем\nПока пользователь не выставил значение у него каждый раз будет запрашиваться подтверждение/уточнение';
   String get settingsIsRequiredStop => 'Данная настройка имеет логику обязательно-выставляемой пользователем\nПока пользователь не выставил значение выполнение задачи связанной с этой настройкой невозможно';
   String get settingsList => 'Список настроек';
-  String get settingsMainDiscription => 'Настройки позволяют пользователю изменять функциональность и внешний вид системы в соответствии с его предпочтениями.';
+  String get settingsMainDescription => 'Настройки позволяют пользователю изменять функциональность и внешний вид системы в соответствии с его предпочтениями.';
   String get settingsNotEditedSetting => 'Данная настройка не редактируемая, она хранит набор вариантов для других настроек. Значения:';
   String get settingsSetAsDefault => 'Подтвердить по умолчанию';
   String get settingsValueNotIntWarning => "одно из значений в строке не int! Используйте '1,5,10' стиль";
@@ -90,7 +90,7 @@ class CoreI18nRu implements CoreI18n {
   String get settingType => 'Тип';
   String get settingUserValue => 'Пользовательское значение';
   String get settingVariants => 'Варианты';
-  String get settintsTypeNotFound => 'Тип настройки не найден';
+  String get settingTypeNotFound => 'Тип настройки не найден';
   String get setup => 'Настроить';
   String get share => 'Поделиться';
   String get sHOW => 'ПОКАЗАТЬ';
@@ -135,16 +135,6 @@ class CoreI18nRu implements CoreI18n {
     CoreSettingsEnum.themeMode => 'Светлая/темная тема',
     CoreSettingsEnum.viewDefault => 'Открываемая по умолчанию страница',
   };
-  String descriptionSettingsSettingsEnum(SettingsSettingsEnum setting) => switch (setting) {
-    SettingsSettingsEnum.itemSwipeLeftToRight => 'Варианты реакций для направления вправо',
-    SettingsSettingsEnum.itemSwipeRightToLeft => 'Варианты реакций для направления влево',
-    SettingsSettingsEnum.loggingEnable => 'Логирование изменений настроек',
-    SettingsSettingsEnum.savedSearch => 'Сохранённые поисковые запросы',
-    SettingsSettingsEnum.typesNames => 'Типы настроек в виде списка',
-    SettingsSettingsEnum.version => 'Хранит последнюю версию для ',
-    SettingsSettingsEnum.viewDefault => 'Отображение списка настроек в виде списка или дерева',
-  };
-
   String descriptionIconSettingsEnum(IconSettingsEnum setting) => switch (setting) {
     //TODO
     IconSettingsEnum.add => 'Иконка для ',
@@ -181,5 +171,15 @@ class CoreI18nRu implements CoreI18n {
     IconSettingsEnum.themeSystem => 'Иконка для ',
     IconSettingsEnum.trueIcon => 'Иконка для ',
     IconSettingsEnum.userValue => 'Иконка для ',
+  };
+
+  String descriptionSettingsSettingsEnum(SettingsSettingsEnum setting) => switch (setting) {
+    SettingsSettingsEnum.itemSwipeLeftToRight => 'Варианты реакций для направления вправо',
+    SettingsSettingsEnum.itemSwipeRightToLeft => 'Варианты реакций для направления влево',
+    SettingsSettingsEnum.loggingEnable => 'Логирование изменений настроек',
+    SettingsSettingsEnum.savedSearch => 'Сохранённые поисковые запросы',
+    SettingsSettingsEnum.typesNames => 'Типы настроек в виде списка',
+    SettingsSettingsEnum.version => 'Хранит последнюю версию для ',
+    SettingsSettingsEnum.viewDefault => 'Отображение списка настроек в виде списка или дерева',
   };
 }

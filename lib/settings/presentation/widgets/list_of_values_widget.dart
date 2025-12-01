@@ -2,19 +2,19 @@ import 'package:clear_app_helper/core/presentation/widgets/icon_true_false.dart'
 import 'package:flutter/material.dart';
 
 class CheckedIndexedString {
+  CheckedIndexedString({required this.index, required this.str, this.check = false});
   bool check;
   final int index;
   final String str;
-  CheckedIndexedString({required this.index, required this.str, this.check = false});
 }
 
 ///used in SettingsDetailPage
 class ListOfValuesWidget extends StatefulWidget {
+  const ListOfValuesWidget({required this.userValue, required this.values, required this.updateUserValue, super.key});
   final String userValue;
   final List<String> values;
-  final Function(String userValue) updateUserValue;
 
-  const ListOfValuesWidget({required this.userValue, required this.values, required this.updateUserValue, super.key});
+  final Function(String userValue) updateUserValue;
 
   @override
   State<ListOfValuesWidget> createState() => _ListOfValuesWidgetState();
@@ -22,27 +22,6 @@ class ListOfValuesWidget extends StatefulWidget {
 
 class _ListOfValuesWidgetState extends State<ListOfValuesWidget> {
   List<CheckedIndexedString> list = [];
-  @override
-  void initState() {
-    final List<int> userValueList = widget.userValue.split(',').map(int.tryParse).whereType<int>().toList();
-    for (final index in userValueList) {
-      list.add(CheckedIndexedString(index: index, str: widget.values[index], check: true));
-    }
-    for (int index = 0; index < widget.values.length; index += 1) {
-      if (!userValueList.contains(index)) {
-        list.add(CheckedIndexedString(index: index, str: widget.values[index]));
-      }
-    }
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    list.clear();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -100,5 +79,26 @@ class _ListOfValuesWidgetState extends State<ListOfValuesWidget> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    list.clear();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    final List<int> userValueList = widget.userValue.split(',').map(int.tryParse).whereType<int>().toList();
+    for (final index in userValueList) {
+      list.add(CheckedIndexedString(index: index, str: widget.values[index], check: true));
+    }
+    for (int index = 0; index < widget.values.length; index += 1) {
+      if (!userValueList.contains(index)) {
+        list.add(CheckedIndexedString(index: index, str: widget.values[index]));
+      }
+    }
+
+    super.initState();
   }
 }

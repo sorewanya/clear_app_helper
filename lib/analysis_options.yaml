@@ -8,7 +8,11 @@ analyzer:
     strict-casts: true
     strict-raw-types: true
   errors:
+    # comment_references: error
+    always_put_required_named_parameters_first: error
     always_use_package_imports: error
+    annotate_overrides: error
+    avoid_bool_literals_in_conditional_expressions: error
     avoid_dynamic_calls: error
     avoid_empty_else: error
     avoid_print: error
@@ -17,45 +21,46 @@ analyzer:
     avoid_slow_async_io: error
     avoid_type_to_string: error
     avoid_types_as_parameter_names: error
+    avoid_void_async: error
     avoid_web_libraries_in_flutter: error
     cancel_subscriptions: error
     close_sinks: error
-    # comment_references: error
     control_flow_in_finally: error
+    curly_braces_in_flow_control_structures: error
+    directives_ordering: error
     empty_statements: error
+    file_names: error
     hash_and_equals: error
     iterable_contains_unrelated_type: error
     list_remove_unrelated_type: error
     literal_only_boolean_expressions: error
     no_adjacent_strings_in_list: error
     no_duplicate_case_values: error
+    no_literal_bool_comparisons: error
     no_logic_in_create_state: error
+    no_wildcard_variable_uses: error
+    prefer_constructors_over_static_methods: error
+    prefer_final_in_for_each: error
+    prefer_final_locals: error
+    prefer_if_elements_to_conditional_expressions: error
+    prefer_int_literals: error
+    prefer_single_quotes: error
     prefer_void_to_null: error
+    sort_constructors_first: error
+    sort_unnamed_constructors_first: error
     test_types_in_equals: error
     throw_in_finally: error
+    type_annotate_public_apis: error
+    unawaited_futures: error
+    unnecessary_lambdas: error
+    unnecessary_null_checks: error
+    unnecessary_nullable_for_final_variable_declarations: error
     unnecessary_statements: error
     unrelated_type_equality_checks: error
     unsafe_html: error
     use_build_context_synchronously: error
     use_key_in_widget_constructors: error
     valid_regexps: error
-    no_wildcard_variable_uses: error
-    prefer_single_quotes: error
-    directives_ordering: error
-    unnecessary_lambdas: error
-    unawaited_futures: error
-    prefer_final_locals: error
-    always_put_required_named_parameters_first: error
-    prefer_final_in_for_each: error
-    prefer_if_elements_to_conditional_expressions: error
-    prefer_int_literals: error
-    avoid_void_async: error
-    unnecessary_null_checks: error
-    avoid_bool_literals_in_conditional_expressions: error
-    type_annotate_public_apis: error
-    annotate_overrides: error
-    no_literal_bool_comparisons: error
-    unnecessary_nullable_for_final_variable_declarations: error
 
 formatter:
   page_width: 120
@@ -233,7 +238,7 @@ linter:
     sized_box_shrink_expand: true
     slash_for_doc_comments: true
     sort_child_properties_last: false
-    sort_constructors_first: false
+    sort_constructors_first: true
     sort_unnamed_constructors_first: false
     tighten_type_of_initializing_formals: true
     type_annotate_public_apis: true

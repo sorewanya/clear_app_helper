@@ -9,21 +9,18 @@ part 'settings_description_entity.g.dart';
 @JsonSerializable()
 // ignore: avoid_implementing_value_types
 class SettingsDescriptionEntity with EquatableMixin implements AppEntity {
-  @override
-  // ignore: overridden_fields
-  final int? id;
-  final String description;
   SettingsDescriptionEntity({required this.id, required this.description});
-
-  //Equatable
-  @override
-  List<Object?> get props => [description];
-  //END Equatable
 
   ///JSON
   factory SettingsDescriptionEntity.fromJson(Map<String, dynamic> json) => _$SettingsDescriptionEntityFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$SettingsDescriptionEntityToJson(this);
+  // ignore: overridden_fields
+  final int? id;
+
+  final String description;
+
   @override
-  dynamic get copyWith => _$SettingsDescriptionEntityCWProxyImpl(this);
+  List<Object?> get props => [description];
+  @override
+  Map<String, dynamic> toJson() => _$SettingsDescriptionEntityToJson(this);
 }

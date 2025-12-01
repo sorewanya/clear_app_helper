@@ -1,6 +1,22 @@
 part of '../settings_entity.dart';
 
 class SettingsListOfString extends SettingsEntity {
+  SettingsListOfString({
+    required super.id,
+    required super.name,
+    required super.defaultValue,
+    required super.userValue,
+    required super.confirmType,
+    required super.type,
+    required super.values,
+    required super.isDeleted,
+  });
+
+  List<String> get getUserOrDefaultAsListOfString =>
+      super.getUserOrDefaultValueAsString != '' ? super.getUserOrDefaultValueAsString.split(',') : [];
+
+  SettingsListOfString updateUserValueByList(List<String> list) => fromEntity(copyWith(userValue: list.join(',')))!;
+
   static SettingsListOfString? fromEntity(SettingsEntity? item) {
     return item != null && item.type == SettingsTypeEnum.listOfString.index
         ? SettingsListOfString(
@@ -15,17 +31,4 @@ class SettingsListOfString extends SettingsEntity {
           )
         : null;
   }
-
-  SettingsListOfString({
-    required super.id,
-    required super.name,
-    required super.defaultValue,
-    required super.userValue,
-    required super.confirmType,
-    required super.type,
-    required super.values,
-    required super.isDeleted,
-  });
-
-  List<String> get getUserOrDefaultAsListOfString => super.getUserOrDefaultValueAsString.split(',');
 }

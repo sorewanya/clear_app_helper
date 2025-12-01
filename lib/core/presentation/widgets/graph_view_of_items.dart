@@ -39,17 +39,6 @@ class GraphViewOfItems<AppEntityType extends AppEntity> extends StatefulWidget {
 }
 
 class _GraphViewOfItemsState<AppEntityType extends AppEntity> extends State<GraphViewOfItems<AppEntityType>> {
-  Widget rectangWidget(int? i) {
-    return MyPaddedDecoratedBoxWithOpacity(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
-        boxShadow: const [BoxShadow(color: Colors.blue, spreadRadius: 1)],
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Text('${GetIt.instance<CoreI18n>().nodeInGraphName} $i'),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final currentGraph = widget.graph;
@@ -81,8 +70,7 @@ class _GraphViewOfItemsState<AppEntityType extends AppEntity> extends State<Grap
                     onTap: () {
                       RouteHelper.toNamed(
                         widget.onTapRouteName,
-                        // ignore: avoid_dynamic_calls
-                        arguments: widget.emptySearchEntity.copyWith(id: id) as SearchEntity,
+                        arguments: (widget.emptySearchEntity as dynamic).copyWith(id: id) as SearchEntity,
                       );
                     },
                     onLongPress: () => widget.onLongPress?.call(id),
@@ -99,6 +87,17 @@ class _GraphViewOfItemsState<AppEntityType extends AppEntity> extends State<Grap
           },
         ),
       ),
+    );
+  }
+
+  Widget rectangWidget(int? i) {
+    return MyPaddedDecoratedBoxWithOpacity(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4),
+        boxShadow: const [BoxShadow(color: Colors.blue, spreadRadius: 1)],
+      ),
+      padding: const EdgeInsets.all(16),
+      child: Text('${GetIt.instance<CoreI18n>().nodeInGraphName} $i'),
     );
   }
 }

@@ -6,46 +6,13 @@ import 'package:clear_app_helper/core/error/failure.dart';
 import 'package:clear_app_helper/core/platform/network_info.dart';
 import 'package:dartz/dartz.dart';
 
-// ignore: avoid_types_as_parameter_names
-abstract class Repository<Type extends AppEntity, SEType extends SearchEntity> {
-  NetworkInfo networkInfo;
-  LocalDataSource<Type, SEType> localDataSource;
-
+abstract class Repository<T extends AppEntity, SEType extends SearchEntity> {
   Repository({required this.networkInfo, required this.localDataSource});
+  NetworkInfo networkInfo;
 
-  Future<Either<Failure, Type>> getById(int id) async {
-    if (await networkInfo.isConnected) {
-      return tryGetLocalById(id);
-    } else {
-      return tryGetLocalById(id);
-    }
-  }
+  LocalDataSource<T, SEType> localDataSource;
 
-  Future<Either<Failure, List<Type>>> getAll(SEType searchEntity) async {
-    if (await networkInfo.isConnected) {
-      return tryGetLocalList(searchEntity);
-    } else {
-      return tryGetLocalList(searchEntity);
-    }
-  }
-
-  Future<Either<Failure, List<int>>> getAllIds(SEType searchEntity) async {
-    if (await networkInfo.isConnected) {
-      return tryGetLocalIdsList(searchEntity);
-    } else {
-      return tryGetLocalIdsList(searchEntity);
-    }
-  }
-
-  Future<Either<Failure, int>> countOfFinded(SEType searchEntity) async {
-    if (await networkInfo.isConnected) {
-      return tryGetLocalCountOfFinded(searchEntity);
-    } else {
-      return tryGetLocalCountOfFinded(searchEntity);
-    }
-  }
-
-  Future<Either<Failure, int>> add(Type item) async {
+  Future<Either<Failure, int>> add(T item) async {
     try {
       final int addedItem = await localDataSource.add(item);
       return Right(addedItem);
@@ -54,7 +21,7 @@ abstract class Repository<Type extends AppEntity, SEType extends SearchEntity> {
     }
   }
 
-  Future<Either<Failure, List<int>>> addMany(List<Type> itemList) async {
+  Future<Either<Failure, List<int>>> addMany(List<T> itemList) async {
     try {
       final List<int> addedItem = await localDataSource.addMany(itemList);
       return Right(addedItem);
@@ -63,24 +30,11 @@ abstract class Repository<Type extends AppEntity, SEType extends SearchEntity> {
     }
   }
 
-  Future<Either<Failure, int>> update(Type item) async {
-    try {
-      return Right(await localDataSource.update(item));
-    } on CacheException catch (text, stackTrace) {
-      return Left(Failure.cacheFailure(text, stackTrace));
-    }
-  }
-
-  Future<Either<Failure, int>> revertDelete(Type item) async {
-    try {
-      if (localDataSource is LDSWithRevertDelete) {
-        return Right(await (localDataSource as LDSWithRevertDelete).revertDelete(item));
-      } else {
-        return const Left(Failure.castDeleteOnUndeleted());
-      }
-    } on CacheException catch (text, stackTrace) {
-      //FIXME call emit error, check
-      return Left(Failure.cacheFailure(text, stackTrace));
+  Future<Either<Failure, int>> countOfFinded(SEType searchEntity) async {
+    if (await networkInfo.isConnected) {
+      return tryGetLocalCountOfFinded(searchEntity);
+    } else {
+      return tryGetLocalCountOfFinded(searchEntity);
     }
   }
 
@@ -120,35 +74,48 @@ abstract class Repository<Type extends AppEntity, SEType extends SearchEntity> {
     }
   }
 
-  Stream<Type?> getStream(int id) {
+  Future<Either<Failure, List<T>>> getAll(SEType searchEntity) async {
+    if (await networkInfo.isConnected) {
+      return tryGetLocalList(searchEntity);
+    } else {
+      return tryGetLocalList(searchEntity);
+    }
+  }
+
+  Future<Either<Failure, List<int>>> getAllIds(SEType searchEntity) async {
+    if (await networkInfo.isConnected) {
+      return tryGetLocalIdsList(searchEntity);
+    } else {
+      return tryGetLocalIdsList(searchEntity);
+    }
+  }
+
+  Future<Either<Failure, T>> getById(int id) async {
+    if (await networkInfo.isConnected) {
+      return tryGetLocalById(id);
+    } else {
+      return tryGetLocalById(id);
+    }
+  }
+
+  Stream<T?> getStream(int id) {
     return localDataSource.getStream(id);
   }
 
-  Stream<void> watchObjectLazy(int? id) {
-    return localDataSource.watchObjectLazy(id);
-  }
-
-  Stream<List<Type>?> watch(SEType searchEntity) {
-    return localDataSource.watch(searchEntity);
-  }
-
-  Stream<void> watchLazy() {
-    return localDataSource.watchLazy();
-  }
-
-  Future<Either<Failure, List<int>>> tryGetLocalIdsList(SEType searchEntity) async {
+  Future<Either<Failure, int>> revertDelete(T item) async {
     try {
-      final localItemList = await localDataSource.getAllIds(searchEntity);
-      if (localItemList.isEmpty) {
-        return const Left(Failure.emptyLocalStorageFailure());
+      if (localDataSource is LDSWithRevertDelete) {
+        return Right(await (localDataSource as LDSWithRevertDelete).revertDelete(item));
+      } else {
+        return const Left(Failure.castDeleteOnUndeleted());
       }
-      return Right(localItemList);
     } on CacheException catch (text, stackTrace) {
+      //FIXME call emit error, check
       return Left(Failure.cacheFailure(text, stackTrace));
     }
   }
 
-  Future<Either<Failure, Type>> tryGetLocalById(int id) async {
+  Future<Either<Failure, T>> tryGetLocalById(int id) async {
     try {
       final localItem = await localDataSource.getById(id);
       if (localItem != null) {
@@ -169,7 +136,19 @@ abstract class Repository<Type extends AppEntity, SEType extends SearchEntity> {
     }
   }
 
-  Future<Either<Failure, List<Type>>> tryGetLocalList(SEType searchEntity) async {
+  Future<Either<Failure, List<int>>> tryGetLocalIdsList(SEType searchEntity) async {
+    try {
+      final localItemList = await localDataSource.getAllIds(searchEntity);
+      if (localItemList.isEmpty) {
+        return const Left(Failure.emptyLocalStorageFailure());
+      }
+      return Right(localItemList);
+    } on CacheException catch (text, stackTrace) {
+      return Left(Failure.cacheFailure(text, stackTrace));
+    }
+  }
+
+  Future<Either<Failure, List<T>>> tryGetLocalList(SEType searchEntity) async {
     try {
       final localItemList = await localDataSource.getAll(searchEntity);
       // if (localItemList.isEmpty) {
@@ -179,5 +158,25 @@ abstract class Repository<Type extends AppEntity, SEType extends SearchEntity> {
     } on CacheException catch (text, stackTrace) {
       return Left(Failure.cacheFailure(text, stackTrace));
     }
+  }
+
+  Future<Either<Failure, int>> update(T item) async {
+    try {
+      return Right(await localDataSource.update(item));
+    } on CacheException catch (text, stackTrace) {
+      return Left(Failure.cacheFailure(text, stackTrace));
+    }
+  }
+
+  Stream<List<T>?> watch(SEType searchEntity) {
+    return localDataSource.watch(searchEntity);
+  }
+
+  Stream<void> watchLazy() {
+    return localDataSource.watchLazy();
+  }
+
+  Stream<void> watchObjectLazy(int? id) {
+    return localDataSource.watchObjectLazy(id);
   }
 }

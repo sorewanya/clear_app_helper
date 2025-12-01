@@ -2,48 +2,50 @@ import 'package:clear_app_helper/core/datasources/db_helper.dart';
 import 'package:clear_app_helper/core/domain/entities/app_entity.dart';
 import 'package:clear_app_helper/core/domain/entities/search_entity.dart';
 
+mixin LDSWithDelete<T extends AppEntity, SEType extends SearchEntity> on LocalDataSource<T, SEType> {
+  Future<bool> delete(int id);
+  Future<void> deleteAll();
+  Future<int> deleteMany(List<int> ids);
+}
+
+mixin LDSWithRevertDelete<T extends AppEntity, SEType extends SearchEntity> on LocalDataSource<T, SEType> {
+  Future<int> revertDelete(T item);
+}
+
 // ignore: avoid_types_as_parameter_names
-abstract class LocalDataSource<Type extends AppEntity, SEType extends SearchEntity> {
-  late DBHelper<Type> dbHelper;
-  DBLogsHelper? dbLogsHelper;
+abstract class LocalDataSource<T extends AppEntity, SEType extends SearchEntity> {
   LocalDataSource();
-  void setHelpers(DBHelper<Type> dbHelper, [DBLogsHelper? dbLogsHelper]) {
+  late DBHelper<T> dbHelper;
+  DBLogsHelper? dbLogsHelper;
+  Future<int> add(T item);
+
+  Future<List<int>> addMany(List<T> itemList);
+  Future<int> countOfFinded(SEType searchEntity);
+
+  Future<List<T>> getAll(SEType searchEntity);
+  Future<List<int>> getAllIds(SEType searchEntity);
+
+  Future<T?> getById(int id) async {
+    return dbHelper.getById(id: id);
+  }
+
+  Stream<T?> getStream(int id) {
+    return dbHelper.watchObject(id);
+  }
+
+  void setHelpers(DBHelper<T> dbHelper, [DBLogsHelper? dbLogsHelper]) {
     this.dbHelper = dbHelper;
     this.dbLogsHelper = dbLogsHelper;
   }
 
-  Future<List<int>> getAllIds(SEType searchEntity);
-  Future<Type?> getById(int id) async {
-    return dbHelper.getById(id: id);
-  }
+  Future<int> update(T item);
 
-  Future<int> countOfFinded(SEType searchEntity);
-  Future<List<Type>> getAll(SEType searchEntity);
-
-  Stream<Type?> getStream(int id) {
-    return dbHelper.watchObject(id);
+  Stream<List<T>?> watch(SEType searchEntity);
+  Stream<void> watchLazy() {
+    return dbHelper.watchLazy();
   }
 
   Stream<void> watchObjectLazy(int? id) {
     return dbHelper.watchObjectLazy(id);
   }
-
-  Stream<List<Type>?> watch(SEType searchEntity);
-
-  Stream<void> watchLazy() {
-    return dbHelper.watchLazy();
-  }
-
-  Future<int> update(Type item);
-  Future<int> add(Type item);
-  Future<List<int>> addMany(List<Type> itemList);
-}
-
-mixin LDSWithDelete<Type extends AppEntity, SEType extends SearchEntity> on LocalDataSource<Type, SEType> {
-  Future<bool> delete(int id);
-  Future<void> deleteAll();
-  Future<int> deleteMany(List<int> ids);
-}
-mixin LDSWithRevertDelete<Type extends AppEntity, SEType extends SearchEntity> on LocalDataSource<Type, SEType> {
-  Future<int> revertDelete(Type item);
 }
