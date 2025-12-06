@@ -1,6 +1,6 @@
 name: clear_app_helper
 description: "Widgets, Entities and functions to create Clear App implement Clean Architecture pattern. Contain ready to use Settings"
-version: 0.1.3
+version: 0.1.4
 homepage: https://github.com/sorewanya/clear_app_helper
 
 environment:
