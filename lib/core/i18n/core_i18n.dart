@@ -19,6 +19,7 @@ class CoreI18n {
   String get currentEntityLoading => 'Loading CurrentEntity';
   String get dateTimeLocale => 'en';
   String get defaultAppBarTitle => 'Clear App Helper';
+  String get defaultUpdateText => 'App is updated! Some fixes and performance updates.';
   String get delete => 'Delete';
   String get deleteConfirm => 'Delete?';
   String get doUReallyWant => 'Do you really want to';
@@ -94,9 +95,9 @@ class CoreI18n {
   String get settingsValueTypeError => 'ERROR! Type is value, but values is empty!';
   String get settingsViewStyleDefault => 'Default settings view style';
   String get settingType => 'Type';
+  String get settingTypeNotFound => 'Setting type not found';
   String get settingUserValue => 'UserValue';
   String get settingVariants => 'Variants';
-  String get settingTypeNotFound => 'Setting type not found';
   String get setup => 'Setup';
   String get share => 'Share';
   String get sHOW => 'SHOW';
@@ -140,6 +141,7 @@ class CoreI18n {
     CoreSettingsEnum.showDeleted => 'Show deleted items? global setting',
     CoreSettingsEnum.themeMode => 'Light/dark theme',
     CoreSettingsEnum.viewDefault => 'Default page to open',
+    CoreSettingsEnum.showChangelog => 'Show changelog on app update. Automatically updated parameter.',
   };
   String descriptionIconSettingsEnum(IconSettingsEnum setting) => switch (setting) {
     //TODO

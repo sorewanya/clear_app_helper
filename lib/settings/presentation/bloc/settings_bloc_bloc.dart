@@ -109,6 +109,9 @@ class SettingsBloc extends EntityBloc<SettingsBlocEvent, SettingsBlocState, Sett
               }
             }
           }
+          //update bool to show changelog for user
+          final showChangelog = getByEnum(CoreSettingsEnum.showChangelog)?.copyWith(userValue: 'true');
+          if (showChangelog != null) await updateSetting(showChangelog);
           if (version != null) await updateSetting(version.copyWith(userValue: lastUpdateVersion));
         }
       }

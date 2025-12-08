@@ -13,6 +13,7 @@ class CoreI18nRu implements CoreI18n {
   String get currentEntityLoading => 'Загрузка CurrentEntity';
   String get dateTimeLocale => 'ru';
   String get defaultAppBarTitle => 'Clear App Helper';
+  String get defaultUpdateText => 'Приложение обновлено! Исправления и улучшения производительности.';
   String get delete => 'Удалить';
   String get deleteConfirm => 'Удалить?';
   String get doUReallyWant => 'Вы действительно хотите';
@@ -88,9 +89,9 @@ class CoreI18nRu implements CoreI18n {
   String get settingsValueTypeError => 'ERROR! Тип настройки SettingsTypeEnum.value, но values пустое!';
   String get settingsViewStyleDefault => 'Настройка вида списка по умолчанию';
   String get settingType => 'Тип';
+  String get settingTypeNotFound => 'Тип настройки не найден';
   String get settingUserValue => 'Пользовательское значение';
   String get settingVariants => 'Варианты';
-  String get settingTypeNotFound => 'Тип настройки не найден';
   String get setup => 'Настроить';
   String get share => 'Поделиться';
   String get sHOW => 'ПОКАЗАТЬ';
@@ -134,6 +135,7 @@ class CoreI18nRu implements CoreI18n {
     CoreSettingsEnum.showDeleted => 'Отображать удалённые элементы? глобальная настройка',
     CoreSettingsEnum.themeMode => 'Светлая/темная тема',
     CoreSettingsEnum.viewDefault => 'Открываемая по умолчанию страница',
+    CoreSettingsEnum.showChangelog => 'Показывать список изменений при обновлении приложения. Автоматически обновляемый параметр.',
   };
   String descriptionIconSettingsEnum(IconSettingsEnum setting) => switch (setting) {
     //TODO

@@ -88,6 +88,7 @@ SettingsEntity coreSettingsEnumSettings(CoreSettingsEnum e) => switch (e) {
     e: e,
     defaultValue: sha512.convert(utf8.encode(currentTime)).toString(),
   ),
+  CoreSettingsEnum.showChangelog => SettingsEntity.fromEnum(e: e, defaultValue: 'false'),
 };
 
 SettingsEntity iconSettingsEnumSettings(IconSettingsEnum e) => switch (e) {
