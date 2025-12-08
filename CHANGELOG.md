@@ -1,4 +1,10 @@
-## 0.1.1
+## 0.1.4
+* add country_icons in AnimatedToggleSwitchOrDropdown
+## 0.1.3
+* add codeActionsOnSave - sortMembers
+* some fix
+* add updateUserValue in SettingsUseCase
+## 0.1.2
 * Spell checker
 * Many work with analysis_options
 * Fix many bugs
