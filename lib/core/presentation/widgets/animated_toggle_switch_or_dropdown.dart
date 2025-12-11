@@ -15,6 +15,7 @@ class AnimatedToggleSwitchOrDropdown extends StatelessWidget {
     required this.setValue,
     required this.setState,
     required this.hasIndexValue,
+    this.isBool = false,
     super.key,
   });
 
@@ -29,6 +30,8 @@ class AnimatedToggleSwitchOrDropdown extends StatelessWidget {
   /// new value callback
   final Function(String? s) setValue;
 
+  final bool isBool;
+
   /// ```
   /// setState: (f) => setState(() => f()),
   /// ```
@@ -37,24 +40,26 @@ class AnimatedToggleSwitchOrDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final asInt = int.tryParse(value);
-    if (values == null || (hasIndexValue && asInt == null)) {
+    if (values == null && !isBool || (hasIndexValue && asInt == null)) {
       return const SizedBox();
     }
 
     bool haveAllIcons = true;
-    final iconDatas = values!.map(IconsHelper.getIconDataOrNullByString).toList();
-    if (iconDatas.contains(null)) haveAllIcons = false;
     final Map<String, Widget> countryIcons = {};
-    if (values!.first.contains('_')) {
-      for (final e in values!) {
-        try {
-          final locale = e.split('_').first;
-          countryIcons[e] = SizedBox(
-            width: Theme.of(context).iconTheme.size,
-            height: Theme.of(context).iconTheme.size,
-            child: CountryIcons.getSvgFlag(locale == 'en' ? 'gb' : locale),
-          );
-        } finally {}
+    if (!isBool) {
+      final iconDatas = values!.map(IconsHelper.getIconDataOrNullByString).toList();
+      if (iconDatas.contains(null)) haveAllIcons = false;
+      if (values!.first.contains('_')) {
+        for (final e in values!) {
+          try {
+            final locale = e.split('_').first;
+            countryIcons[e] = SizedBox(
+              width: Theme.of(context).iconTheme.size,
+              height: Theme.of(context).iconTheme.size,
+              child: CountryIcons.getSvgFlag(locale == 'en' ? 'gb' : locale),
+            );
+          } finally {}
+        }
       }
       if (values!.length == countryIcons.length) {
         haveAllIcons = true;
@@ -67,7 +72,7 @@ class AnimatedToggleSwitchOrDropdown extends StatelessWidget {
     return haveAllIcons
         ? AnimatedToggleSwitch<String>.rolling(
             current: currentValue,
-            values: values!,
+            values: isBool ? ['false', 'true'] : values!,
             height: size * 2,
             borderWidth: size * 0.1,
             onChanged: (i) => setState(() => setValue(hasIndexValue ? values!.indexOf(i).toString() : i)),

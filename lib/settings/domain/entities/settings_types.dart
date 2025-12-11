@@ -35,7 +35,7 @@ enum SettingsTypeEnum {
   /// 4
   dirPath,
 
-  ///User(Default)Value as file path_picker parametr
+  ///User(Default)Value as file path_picker parameter
   ///
   /// ```values[0] = FileType._.name```
   ///
