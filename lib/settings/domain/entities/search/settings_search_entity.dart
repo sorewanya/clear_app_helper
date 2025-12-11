@@ -36,6 +36,9 @@ class SettingsSearchEntity implements SearchEntity {
   final bool? isChanged;
 
   @override
+  SearchEntity copyWithId(int id) => copyWith(id: id);
+
+  @override
   bool isEmpty() => this == const SettingsSearchEntity();
 
   @override

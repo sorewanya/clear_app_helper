@@ -4,6 +4,7 @@ abstract class SearchEntity {
   SearchEntity.fromJson(Map<String, dynamic> json);
   int? get id => null;
   String? get viewStyle => null;
+  SearchEntity copyWithId(int id);
   bool isEmpty() => true;
   Map<String, dynamic> toJson();
 }

@@ -19,6 +19,9 @@ class SettingsDescriptionSearchEntity implements SearchEntity {
   String? get viewStyle => null;
 
   @override
+  SearchEntity copyWithId(int id) => copyWith(id: id);
+
+  @override
   bool isEmpty() => this == const SettingsDescriptionSearchEntity();
 
   @override

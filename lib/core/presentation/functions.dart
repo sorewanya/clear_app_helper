@@ -210,8 +210,9 @@ class FunctionsHelper {
           pop: pop ?? () {},
           item: item,
           text: revertDeleteText,
-          showItemNavigator: (_) =>
-              RouteHelper.toNamed(routeName, arguments: (searchEntity as dynamic).copyWith(id: item.id)),
+          showItemNavigator: (_) {
+            if (item.id != null) RouteHelper.toNamed(routeName, arguments: searchEntity.copyWithId(item.id!));
+          },
         );
       },
       pop: () {},

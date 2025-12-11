@@ -23,6 +23,10 @@ class TestSearchEntity implements SearchEntity {
   final TestSearchCreatedOn? createdOn;
 
   @override
+  // SearchEntity copyWithId(int id) => copyWith(id: id);
+  SearchEntity copyWithId(int id) => throw UnimplementedError();
+
+  @override
   bool isEmpty() => this == const TestSearchEntity();
 
   @override

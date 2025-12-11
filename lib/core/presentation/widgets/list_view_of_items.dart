@@ -56,7 +56,7 @@ class _ListViewOfItemsState extends State<ListViewOfItems> with SingleTickerProv
               onTap: () {
                 RouteHelper.toNamed(
                   widget.onTapRouteName,
-                  arguments: (widget.emptySearchEntity as dynamic).copyWith(id: currentIdsList[index]) as SearchEntity,
+                  arguments: widget.emptySearchEntity.copyWithId(currentIdsList[index]),
                 );
               },
               onLongPress: () => widget.onLongPress?.call(widget.currentIdsList[index]),

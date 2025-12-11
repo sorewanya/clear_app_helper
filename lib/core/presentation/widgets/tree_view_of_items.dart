@@ -59,7 +59,7 @@ class _TreeViewOfItemsState extends State<TreeViewOfItems> {
                 onTap: () {
                   RouteHelper.toNamed(
                     widget.onTapRouteName,
-                    arguments: (widget.emptySearchEntity as dynamic).copyWith(id: node.data!) as SearchEntity,
+                    arguments: widget.emptySearchEntity.copyWithId(node.data!),
                   );
                 },
                 onLongPress: () => widget.onLongPress != null ? widget.onLongPress!(node.data!) : {},

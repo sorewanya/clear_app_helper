@@ -68,10 +68,7 @@ class _GraphViewOfItemsState<AppEntityType extends AppEntity> extends State<Grap
             return node.key!.value != null
                 ? GestureDetector(
                     onTap: () {
-                      RouteHelper.toNamed(
-                        widget.onTapRouteName,
-                        arguments: (widget.emptySearchEntity as dynamic).copyWith(id: id) as SearchEntity,
-                      );
+                      RouteHelper.toNamed(widget.onTapRouteName, arguments: widget.emptySearchEntity.copyWithId(id));
                     },
                     onLongPress: () => widget.onLongPress?.call(id),
                     child: widget.cardWidget(id as int),
