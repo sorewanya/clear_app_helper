@@ -10,6 +10,8 @@ class CoreI18nRu implements CoreI18n {
   String get cancel => 'Отмена';
   String get caseSensitiveSearchWarning => 'Поиск регистро зависим! настройка:';
   String get changeDataIn => 'Вы изменили данные в';
+  String get changeLang => 'Сменить язык';
+  String get changeThemeMode => 'Переключить тему день/ночь';
   String get currentEntityLoading => 'Загрузка CurrentEntity';
   String get dateTimeLocale => 'ru';
   String get defaultAppBarTitle => 'Clear App Helper';
@@ -27,6 +29,7 @@ class CoreI18nRu implements CoreI18n {
   String get filePathChange => 'Изменить путь';
   String get filePathCurrent => 'Текущий путь';
   String get find => 'Найти';
+  String get lang => 'Русский';
   String get loadSettingInfoToCard => 'Загрузка информации о настройке в карточку';
   String get locale => 'ru_RU';
   String get lock => 'Заблокировать';

@@ -16,6 +16,8 @@ class CoreI18n {
   String get cancel => 'Cancel';
   String get caseSensitiveSearchWarning => 'Search is case-sensitive! setting:';
   String get changeDataIn => 'You changed data in';
+  String get changeLang => 'Change language';
+  String get changeThemeMode => 'Toggle dark theme mode';
   String get currentEntityLoading => 'Loading CurrentEntity';
   String get dateTimeLocale => 'en';
   String get defaultAppBarTitle => 'Clear App Helper';
@@ -33,6 +35,7 @@ class CoreI18n {
   String get filePathChange => 'Change file path';
   String get filePathCurrent => 'Current path';
   String get find => 'Find';
+  String get lang => 'English';
   String get loadSettingInfoToCard => 'Load setting info to card';
   String get locale => 'en_EN';
   String get lock => 'Lock';
