@@ -28,6 +28,7 @@ class CoreI18nRu implements CoreI18n {
   String get filePathCurrent => 'Текущий путь';
   String get find => 'Найти';
   String get loadSettingInfoToCard => 'Загрузка информации о настройке в карточку';
+  String get locale => 'ru_RU';
   String get lock => 'Заблокировать';
   String get lockConfirm => 'Заблокировать?';
   String get lockWarning => 'При блокировке сохраняется текущее состояние, дальнейшее редактирование доступно после разблокировки';
@@ -136,6 +137,7 @@ class CoreI18nRu implements CoreI18n {
     CoreSettingsEnum.themeMode => 'Светлая/темная тема',
     CoreSettingsEnum.viewDefault => 'Открываемая по умолчанию страница',
     CoreSettingsEnum.showChangelog => 'Показывать список изменений при обновлении приложения. Автоматически обновляемый параметр.',
+    CoreSettingsEnum.currentLocaleI18n => 'Текущая локаль приложения',
   };
   String descriptionIconSettingsEnum(IconSettingsEnum setting) => switch (setting) {
     //TODO

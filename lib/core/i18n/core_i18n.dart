@@ -34,6 +34,7 @@ class CoreI18n {
   String get filePathCurrent => 'Current path';
   String get find => 'Find';
   String get loadSettingInfoToCard => 'Load setting info to card';
+  String get locale => 'en_EN';
   String get lock => 'Lock';
   String get lockConfirm => 'Lock?';
   String get lockWarning => 'When locking, the current state is saved, further editing is not available after unlocking';
@@ -142,6 +143,7 @@ class CoreI18n {
     CoreSettingsEnum.themeMode => 'Light/dark theme',
     CoreSettingsEnum.viewDefault => 'Default page to open',
     CoreSettingsEnum.showChangelog => 'Show changelog on app update. Automatically updated parameter.',
+    CoreSettingsEnum.currentLocaleI18n => 'Current application locale',
   };
   String descriptionIconSettingsEnum(IconSettingsEnum setting) => switch (setting) {
     //TODO

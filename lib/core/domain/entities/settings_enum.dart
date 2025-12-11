@@ -28,7 +28,8 @@ enum CoreSettingsEnum with EnumsOfSettings implements Enum {
   itemSwipeBaseList,
   globalQuery,
   globalTr,
-  showChangelog;
+  showChangelog,
+  currentLocaleI18n;
 
   @override
   String get description => GetIt.instance.get<CoreI18n>().descriptionCoreSettingsEnum(this);
@@ -38,6 +39,7 @@ enum CoreSettingsEnum with EnumsOfSettings implements Enum {
     CoreSettingsEnum.allAfterRemoveItemReloadList => 'core.all.after.remove.item.reload.list',
     CoreSettingsEnum.allAfterSaveItemShowInfobar => 'core.all.after.save.item.show.infobar',
     CoreSettingsEnum.autoSaveOnPop => 'core.auto.save.on.pop',
+    CoreSettingsEnum.currentLocaleI18n => 'core.current.locale.i18n',
     CoreSettingsEnum.datetimeDefaultFormat => 'core.datetime.default.format',
     CoreSettingsEnum.datetimeDefaultPersonalFormat => 'core.datetime.default.personal.format',
     CoreSettingsEnum.datetimeLanguage => 'core.datetime.language',
@@ -67,6 +69,7 @@ enum CoreSettingsEnum with EnumsOfSettings implements Enum {
     CoreSettingsEnum.allAfterRemoveItemReloadList => SettingsTypeEnum.boolean,
     CoreSettingsEnum.allAfterSaveItemShowInfobar => SettingsTypeEnum.boolean,
     CoreSettingsEnum.autoSaveOnPop => SettingsTypeEnum.boolean,
+    CoreSettingsEnum.currentLocaleI18n => SettingsTypeEnum.value,
     CoreSettingsEnum.datetimeDefaultFormat => SettingsTypeEnum.value,
     CoreSettingsEnum.datetimeDefaultPersonalFormat => SettingsTypeEnum.string,
     CoreSettingsEnum.datetimeLanguage => SettingsTypeEnum.value,
