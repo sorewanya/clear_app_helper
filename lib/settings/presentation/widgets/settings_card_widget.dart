@@ -2,7 +2,6 @@ import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
 import 'package:clear_app_helper/core/i18n/core_i18n.dart';
 import 'package:clear_app_helper/core/icons_helper.dart';
 import 'package:clear_app_helper/core/presentation/theme_data.dart';
-import 'package:clear_app_helper/core/presentation/widgets/checkbox_text_button.dart';
 import 'package:clear_app_helper/core/presentation/widgets/loading_indicator.dart';
 import 'package:clear_app_helper/settings/domain/entities/search/settings_search_entity.dart';
 import 'package:clear_app_helper/settings/domain/entities/settings_entity.dart';
@@ -32,7 +31,7 @@ class SettingsCardWidget extends StatelessWidget {
           final valueAsInt = int.tryParse(value);
           return (item.type != SettingsTypeEnum.listOfValues.index &&
                   item.type != SettingsTypeEnum.listOfValuesExtend.index)
-              ? Row(
+              ? Wrap(
                   children: [
                     iconWidget,
                     Text(string),
@@ -59,10 +58,14 @@ class SettingsCardWidget extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CheckboxTextButton(
-                  check: item.defaultValue == item.userValue || item.userValue == null,
+                IconButton(
+                  icon: Icon(
+                    IconsHelper.getIconDataByString(
+                      (item.defaultValue == item.userValue || item.userValue == null).toString(),
+                    ),
+                  ),
                   onPressed: () => settingsBloc.add(SettingsBlocEvent.resetToDefault(item)),
-                  checkName: GetIt.instance<CoreI18n>().restore,
+                  tooltip: GetIt.instance<CoreI18n>().restore,
                 ),
                 Expanded(
                   child: Column(
@@ -73,10 +76,9 @@ class SettingsCardWidget extends StatelessWidget {
                         future: settingsBloc.getDescriptionById(item.id),
                         builder: (context, snapshot) {
                           return snapshot.data != null
-                              ? Row(
-                                  children: [
-                                    Column(children: [Text(snapshot.data!.description), const SizedBox(height: 10)]),
-                                  ],
+                              ? Padding(
+                                  padding: const EdgeInsets.only(bottom: 10),
+                                  child: Text(snapshot.data!.description),
                                 )
                               : const SizedBox();
                         },

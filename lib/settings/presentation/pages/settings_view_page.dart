@@ -19,8 +19,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SettingsViewPage extends StatelessWidget {
-  const SettingsViewPage({required this.drawer, super.key});
-  final Widget drawer;
+  const SettingsViewPage({this.drawer, super.key});
+  final Widget? drawer;
 
   @override
   Widget build(BuildContext context) {
