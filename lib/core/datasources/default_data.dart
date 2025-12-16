@@ -2,13 +2,26 @@
 
 import 'dart:convert';
 
+import 'package:clear_app_helper/core/domain/entities/app_file_picker.dart';
 import 'package:clear_app_helper/core/domain/entities/item_actions.dart';
 import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
 import 'package:clear_app_helper/core/hash_func.dart';
+import 'package:clear_app_helper/core/i18n/core_i18n.dart';
+import 'package:clear_app_helper/core/platform/network_info.dart';
+import 'package:clear_app_helper/core/presentation/bloc/current_entity/current_entity_bloc_bloc.dart';
+import 'package:clear_app_helper/core/presentation/theme_data.dart';
+import 'package:clear_app_helper/settings/data/repositories/settings_description_repository.dart';
+import 'package:clear_app_helper/settings/data/repositories/settings_repository.dart';
 import 'package:clear_app_helper/settings/domain/entities/settings_description_entity.dart';
 import 'package:clear_app_helper/settings/domain/entities/settings_entity.dart';
 import 'package:clear_app_helper/settings/domain/entities/settings_required_types.dart';
+import 'package:clear_app_helper/settings/domain/usecase/settings_description_use_case.dart';
+import 'package:clear_app_helper/settings/domain/usecase/settings_use_case.dart';
+import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
+import 'package:clear_app_helper/shared_preferences.dart';
 import 'package:crypto/crypto.dart';
+import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 final currentTime = DateTime.now().toString();
@@ -231,6 +244,31 @@ SettingsEntity settingsSettingsEnumSettings(SettingsSettingsEnum e) => switch (e
 abstract class AbstractDefaultData {
   late final List<SettingsEntity> getDefaultSettingList = [];
   late final List<SettingsDescriptionEntity> getDefaultSettingDescriptionList = [];
+  static void defaultGetItSingletons(GetIt getIt) {
+    getIt
+      ..registerLazySingleton<MyThemeData>(MyThemeData.new)
+      ..registerLazySingleton<CoreI18n>(CoreI18nRu.new)
+      ..registerLazySingleton<AppFilePicker>(AppFilePickerImpl.new)
+      ..registerLazySingleton<SharedPreferencesHelper>(SharedPreferencesHelper.new)
+      ..registerLazySingleton<SettingsBloc>(
+        () => SettingsBloc(settingsUseCase: getIt(), settingsDescriptionUseCase: getIt(), defaults: getIt()),
+      )
+      ..registerLazySingleton<CurrentEntityBloc>(CurrentEntityBloc.new)
+      ..registerLazySingleton(() => SettingsUseCase(getIt<SettingsRepository>()))
+      ..registerLazySingleton(() => SettingsDescriptionUseCase(getIt<SettingsDescriptionRepository>()))
+      ..registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(getIt()));
+
+    final internetConnectionChecker = InternetConnectionChecker.createInstance(
+      addresses: List<AddressCheckOption>.unmodifiable(<AddressCheckOption>[
+        AddressCheckOption(uri: Uri.https('google.com')),
+      ]),
+      slowConnectionConfig: SlowConnectionConfig(
+        enableToCheckForSlowConnection: true,
+        slowConnectionThreshold: const Duration(seconds: 1),
+      ),
+    );
+    getIt.registerLazySingleton<InternetConnectionChecker>(() => internetConnectionChecker);
+  }
 }
 
 class SettingsDefaultData implements AbstractDefaultData {

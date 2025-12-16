@@ -11,13 +11,16 @@ class SharedPreferencesHelper {
 
   bool _inited = false;
 
-  late SharedPreferences prefs;
+  late SharedPreferences _prefs;
 
   ///GETs
   bool get inited => _inited;
 
+  String? getString(String key) => _prefs.getString(key);
+  Future<bool> setString(String key, String value) => _prefs.setString(key, value);
+
   Future<void> _init() async {
-    prefs = await SharedPreferences.getInstance();
+    _prefs = await SharedPreferences.getInstance();
     _inited = true;
   }
 }
