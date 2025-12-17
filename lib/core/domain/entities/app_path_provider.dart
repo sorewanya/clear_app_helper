@@ -1,0 +1,86 @@
+import 'dart:io';
+
+// ignore: depend_on_referenced_packages
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart' as path_provider;
+
+abstract class AppPathProvider {
+  Future<Directory> getApplicationDocumentsDirectory();
+  Future<Directory?> getDownloadsDirectory();
+  String join(
+    String part1, [
+    String? part2,
+    String? part3,
+    String? part4,
+    String? part5,
+    String? part6,
+    String? part7,
+    String? part8,
+    String? part9,
+    String? part10,
+    String? part11,
+    String? part12,
+    String? part13,
+    String? part14,
+    String? part15,
+    String? part16,
+  ]);
+  Future<void> writeFile(String path, String data);
+}
+
+class AppPathProviderImpl implements AppPathProvider {
+  @override
+  Future<Directory> getApplicationDocumentsDirectory() async {
+    return path_provider.getApplicationDocumentsDirectory();
+  }
+
+  @override
+  Future<Directory?> getDownloadsDirectory() async {
+    return path_provider.getDownloadsDirectory();
+  }
+
+  @override
+  String join(
+    String part1, [
+    String? part2,
+    String? part3,
+    String? part4,
+    String? part5,
+    String? part6,
+    String? part7,
+    String? part8,
+    String? part9,
+    String? part10,
+    String? part11,
+    String? part12,
+    String? part13,
+    String? part14,
+    String? part15,
+    String? part16,
+  ]) {
+    return path.join(
+      part1,
+      part2,
+      part3,
+      part4,
+      part5,
+      part6,
+      part7,
+      part8,
+      part9,
+      part10,
+      part11,
+      part12,
+      part13,
+      part14,
+      part15,
+      part16,
+    );
+  }
+
+  @override
+  Future<void> writeFile(String path, String data) async {
+    final File file = File(path);
+    await file.writeAsString(data);
+  }
+}
