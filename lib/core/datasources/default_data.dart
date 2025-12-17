@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:clear_app_helper/core/domain/entities/app_file_picker.dart';
 import 'package:clear_app_helper/core/domain/entities/app_path_provider.dart';
+import 'package:clear_app_helper/core/domain/entities/app_permission.dart';
 import 'package:clear_app_helper/core/domain/entities/item_actions.dart';
 import 'package:clear_app_helper/core/domain/entities/settings_enum.dart';
 import 'package:clear_app_helper/core/hash_func.dart';
@@ -249,6 +250,7 @@ abstract class AbstractDefaultData {
     getIt
       ..registerLazySingleton<MyThemeData>(MyThemeData.new)
       ..registerLazySingleton<CoreI18n>(CoreI18nRu.new)
+      ..registerLazySingleton<AppPermission>(AppPermissionImpl.new)
       ..registerLazySingleton<AppPathProvider>(AppPathProviderImpl.new)
       ..registerLazySingleton<AppFilePicker>(AppFilePickerImpl.new)
       ..registerLazySingleton<SharedPreferencesHelper>(SharedPreferencesHelper.new)
