@@ -2,7 +2,7 @@ import 'package:clear_app_helper/settings/domain/entities/enums_of_settings.dart
 import 'package:clear_app_helper/settings/domain/entities/settings_entity.dart';
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 enum ItemActionEnum {
   makeCopy,
@@ -52,25 +52,25 @@ class ItemActions {
   }
 
   List<String>? getItemSwipeLeftToRight(BuildContext context) {
-    final blocGet = context.read<SettingsBloc>().getByNamed;
+    final blocGet = GetIt.I<SettingsBloc>().getByNamed;
     return (blocGet(itemSwipeLeftToRightSetting.name)?.toType() as SettingsListOfValuesExtend?)
         ?.getUserOrDefaultAsListOfString(blocGet);
   }
 
   List<int>? getItemSwipeLeftToRightIndexes(BuildContext context) {
-    final blocGet = context.read<SettingsBloc>().getByNamed;
+    final blocGet = GetIt.I<SettingsBloc>().getByNamed;
     return (blocGet(itemSwipeLeftToRightSetting.name)?.toType() as SettingsListOfValuesExtend?)
         ?.getUserOrDefaultAsListOfIndexes;
   }
 
   List<String>? getItemSwipeRightToLeft(BuildContext context) {
-    final blocGet = context.read<SettingsBloc>().getByNamed;
+    final blocGet = GetIt.I<SettingsBloc>().getByNamed;
     return (blocGet(itemSwipeRightToLeftSetting.name)?.toType() as SettingsListOfValuesExtend?)
         ?.getUserOrDefaultAsListOfString(blocGet);
   }
 
   List<int>? getItemSwipeRightToLeftIndexes(BuildContext context) {
-    final blocGet = context.read<SettingsBloc>().getByNamed;
+    final blocGet = GetIt.I<SettingsBloc>().getByNamed;
     return (blocGet(itemSwipeRightToLeftSetting.name)?.toType() as SettingsListOfValuesExtend?)
         ?.getUserOrDefaultAsListOfIndexes;
   }

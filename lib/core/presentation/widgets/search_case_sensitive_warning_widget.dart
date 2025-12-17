@@ -6,7 +6,6 @@ import 'package:clear_app_helper/core/settings_route_names.dart';
 import 'package:clear_app_helper/settings/domain/entities/search/settings_search_entity.dart';
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SearchCaseSensitiveWarningWidget extends StatelessWidget {
@@ -15,7 +14,7 @@ class SearchCaseSensitiveWarningWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool caseSensitive =
-        context.read<SettingsBloc>().getUserOrDefaultValueByNamed(CoreSettingsEnum.searchCaseSensitive.name) == 'true';
+        GetIt.I<SettingsBloc>().getUserOrDefaultValueByNamed(CoreSettingsEnum.searchCaseSensitive.name) == 'true';
     return caseSensitive
         ? Row(
             children: [

@@ -6,7 +6,6 @@ import 'package:clear_app_helper/core/settings_route_names.dart';
 import 'package:clear_app_helper/settings/domain/entities/search/settings_search_entity.dart';
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SettingsInfoPage extends StatelessWidget {
@@ -37,7 +36,7 @@ class SettingsInfoPage extends StatelessWidget {
             Text(GetIt.instance<CoreI18n>().settingsViewStyleDefault): () => RouteHelper.toNamed(
               SettingsRouteNames.settingsDetailPage,
               arguments: SettingsSearchEntity(
-                id: context.read<SettingsBloc>().getIdByNamed(SettingsSettingsEnum.viewDefault.name),
+                id: GetIt.I<SettingsBloc>().getIdByNamed(SettingsSettingsEnum.viewDefault.name),
               ),
             ),
           },

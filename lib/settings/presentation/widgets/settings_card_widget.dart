@@ -9,7 +9,6 @@ import 'package:clear_app_helper/settings/domain/entities/settings_types.dart';
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
 import 'package:clear_app_helper/settings/presentation/widgets/confirm_type_warning.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SettingsCardWidget extends StatelessWidget {
@@ -17,7 +16,7 @@ class SettingsCardWidget extends StatelessWidget {
   final int id;
   @override
   Widget build(BuildContext context) {
-    final settingsBloc = context.read<SettingsBloc>();
+    final settingsBloc = GetIt.I<SettingsBloc>();
     return StreamBuilder<SettingsEntity?>(
       initialData: settingsBloc.getByIdSync(id),
       stream: settingsBloc.getStreamById(id),

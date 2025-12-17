@@ -12,7 +12,6 @@ import 'package:clear_app_helper/settings/domain/entities/settings_required_type
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
 import 'package:clear_app_helper/settings/presentation/widgets/saved_search_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SettingsListSearchWidget extends StatefulWidget {
@@ -32,7 +31,7 @@ class _SettingsListSearchWidgetState extends State<SettingsListSearchWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final settingsBloc = context.read<SettingsBloc>();
+    final settingsBloc = GetIt.I<SettingsBloc>();
 
     void filterSearchResults() {
       settingsBloc.add(SettingsBlocEvent.load(_searchEntity));

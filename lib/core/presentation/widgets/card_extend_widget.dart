@@ -5,7 +5,7 @@ import 'package:clear_app_helper/settings/domain/entities/enums_of_settings.dart
 import 'package:clear_app_helper/settings/domain/entities/settings_entity.dart';
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 class CardExtendWidget extends StatelessWidget {
   const CardExtendWidget({required this.cardWidgetSizeSetting, required this.widgets, super.key, this.middleWidgets});
@@ -17,8 +17,8 @@ class CardExtendWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      initialData: context.read<SettingsBloc>().getByEnum(cardWidgetSizeSetting),
-      stream: context.read<SettingsBloc>().getStreamByEnum(cardWidgetSizeSetting),
+      initialData: GetIt.I<SettingsBloc>().getByEnum(cardWidgetSizeSetting),
+      stream: GetIt.I<SettingsBloc>().getStreamByEnum(cardWidgetSizeSetting),
       builder: (context, cardWidgetSizeSnapshot) {
         if (!cardWidgetSizeSnapshot.hasData && cardWidgetSizeSnapshot.hasData is! SettingsValue) {
           return const SizedBox();

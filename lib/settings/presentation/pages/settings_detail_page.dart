@@ -20,7 +20,6 @@ import 'package:clear_app_helper/settings/presentation/widgets/list_of_saved_sea
 import 'package:clear_app_helper/settings/presentation/widgets/list_of_values_widget.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SettingsDetailPage extends StatefulWidget {
@@ -49,7 +48,7 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final settingsBloc = context.read<SettingsBloc>();
+    final settingsBloc = GetIt.I<SettingsBloc>();
     //LOCAL SCOPE FUNCTIONS
     void pop() {
       shouldPop = true;

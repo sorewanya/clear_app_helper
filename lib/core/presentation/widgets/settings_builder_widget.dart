@@ -20,7 +20,7 @@ class SettingsBuilderWidget extends StatelessWidget {
         return switch (state) {
           InitialSettingsBlocState() => Builder(
             builder: (context) {
-              context.read<SettingsBloc>().add(const SettingsBlocEvent.loadFullLists());
+              GetIt.I<SettingsBloc>().add(const SettingsBlocEvent.loadFullLists());
               return loadingIndicator(GetIt.instance<CoreI18n>().settingsBuilderStateInitial);
             },
           ),

@@ -27,11 +27,11 @@ class SettingsViewPage extends StatelessWidget {
     const emptySearchEntity = SettingsSearchEntity();
     final argSearchEntity = FunctionsHelper.getArgs<SettingsSearchEntity>() ?? emptySearchEntity;
 
-    context.read<SettingsBloc>().add(SettingsBlocEvent.load(argSearchEntity));
+    GetIt.I<SettingsBloc>().add(SettingsBlocEvent.load(argSearchEntity));
     return SettingsBuilderWidget(
       childFunc: (sf) {
         final listSearchWidget = SettingsListSearchWidget(searchEntity: sf.se);
-        final bloc = context.read<SettingsBloc>();
+        final bloc = GetIt.I<SettingsBloc>();
         const onTapRouteName = SettingsRouteNames.settingsDetailPage;
         final appBarTitle = GetIt.instance<CoreI18n>().settings;
         void onLongPress(int id) => FunctionsHelper.setNextSettingsVariantById(id: id);
@@ -42,8 +42,8 @@ class SettingsViewPage extends StatelessWidget {
           builder: (context, state) => switch (state) {
             EmptyCurrentEntityBlocState() => Builder(
               builder: (context) {
-                context.read<CurrentEntityBloc>().add(
-                  CurrentEntityBlocEvent.setNewCurrents(currentBloc: context.read<SettingsBloc>()),
+                GetIt.I<CurrentEntityBloc>().add(
+                  CurrentEntityBlocEvent.setNewCurrents(currentBloc: GetIt.I<SettingsBloc>()),
                 );
                 return loadingIndicator(GetIt.instance<CoreI18n>().currentEntityLoading);
               },
@@ -51,8 +51,8 @@ class SettingsViewPage extends StatelessWidget {
             LoadedCurrentEntityBlocState() => Builder(
               builder: (context) {
                 if (state.currentBloc is! SettingsBloc) {
-                  context.read<CurrentEntityBloc>().add(
-                    CurrentEntityBlocEvent.setNewCurrents(currentBloc: context.read<SettingsBloc>()),
+                  GetIt.I<CurrentEntityBloc>().add(
+                    CurrentEntityBlocEvent.setNewCurrents(currentBloc: GetIt.I<SettingsBloc>()),
                   );
                 }
                 return ViewDefaultCaseWidget(
@@ -73,7 +73,7 @@ class SettingsViewPage extends StatelessWidget {
                     controller: sf.controller,
                   ),
                   treeWidget: FutureBuilder(
-                    future: context.read<SettingsBloc>().getList(sf.se),
+                    future: GetIt.I<SettingsBloc>().getList(sf.se),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData && snapshot.data == null) return const SizedBox();
 

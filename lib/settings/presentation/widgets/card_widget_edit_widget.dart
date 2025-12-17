@@ -4,7 +4,6 @@ import 'package:clear_app_helper/settings/domain/entities/settings_entity.dart';
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
 import 'package:clear_app_helper/settings/presentation/widgets/list_of_values_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class CardWidgetEditWidget extends StatelessWidget {
@@ -15,7 +14,7 @@ class CardWidgetEditWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<SettingsEntity> listOfSettings = listOfNames
-        .map((e) => context.read<SettingsBloc>().getByNamed(e))
+        .map((e) => GetIt.I<SettingsBloc>().getByNamed(e))
         .whereType<SettingsEntity>()
         .toList();
     final List<Widget> listOfWidget = [];
@@ -26,7 +25,7 @@ class CardWidgetEditWidget extends StatelessWidget {
           ListOfValuesWidget(
             userValue: item.getUserOrDefaultValueAsString,
             values: item.values ?? [],
-            updateUserValue: context.read<SettingsBloc>().updateUserValueCallback(item),
+            updateUserValue: GetIt.I<SettingsBloc>().updateUserValueCallback(item),
           ),
         )
         ..add(const SizedBox(height: 5));

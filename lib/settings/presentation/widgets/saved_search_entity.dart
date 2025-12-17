@@ -11,7 +11,6 @@ import 'package:clear_app_helper/settings/domain/entities/named_entity.dart';
 import 'package:clear_app_helper/settings/domain/entities/settings_entity.dart';
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 class SavedSearchEntity<T extends SearchEntity> extends StatelessWidget {
@@ -37,7 +36,7 @@ class SavedSearchEntity<T extends SearchEntity> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settingsBloc = context.read<SettingsBloc>();
+    final settingsBloc = GetIt.I<SettingsBloc>();
     final s = settingsBloc.getByEnum(setting);
 
     if (s == null) return const SizedBox();
