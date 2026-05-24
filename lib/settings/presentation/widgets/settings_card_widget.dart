@@ -36,7 +36,7 @@ class SettingsCardWidget extends StatelessWidget {
                     Text(string),
                     //icon?
                     if (item.type == SettingsTypeEnum.icon.index && valueAsInt != null)
-                      Icon(MdiIconData(valueAsInt), size: 40)
+                      Icon(IconsHelper.mdi(valueAsInt), size: 40)
                     else
                       (item.type == SettingsTypeEnum.value.index && valueAsInt != null)
                           ? Text(item.values?[valueAsInt] ?? '')

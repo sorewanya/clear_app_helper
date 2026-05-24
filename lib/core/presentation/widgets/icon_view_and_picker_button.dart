@@ -18,7 +18,7 @@ class IconViewAndPickerButton extends StatelessWidget {
     final Map<String, IconPickerIcon> myIconMap = {};
     iconMap.forEach(
       (key, value) => myIconMap[key] = IconPickerIcon(
-        data: MdiIconData(value.codePoint),
+        data: IconsHelper.mdi(value.codePoint),
         name: '${value.codePoint}',
         pack: IconPack.custom.name,
       ),
@@ -35,7 +35,7 @@ class IconViewAndPickerButton extends StatelessWidget {
                 setInt?.call(icon.codePoint);
               }
             },
-            child: Row(children: [Icon(MdiIconData(initIconCode!), size: 40), const Text(' Изменить иконку')]),
+            child: Row(children: [Icon(IconsHelper.mdi(initIconCode!), size: 40), const Text(' Изменить иконку')]),
           )
         : const SizedBox();
   }

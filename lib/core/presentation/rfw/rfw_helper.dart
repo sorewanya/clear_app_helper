@@ -21,7 +21,7 @@ class RfwHelper {
     },
     //TODOLATE когда добавят в rfw fontPackage заменить на обычный Icon
     'MdiIcon': (BuildContext context, DataSource source) {
-      return Icon(MdiIconData(source.v<int>(<Object>['icon']) ?? 0xf1136));
+      return Icon(IconsHelper.mdi(source.v<int>(<Object>['icon']) ?? 0xf1136));
     },
     'IconFromSettingsName': (BuildContext context, DataSource source) {
       return IconsHelper.getIcon(source.v<String>(<Object>['settingName']) ?? '');

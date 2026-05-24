@@ -13,12 +13,13 @@ class IconsHelper {
   /// Try to get IconData from [nameOfSettings]
   /// default: MdiIcons.crosshairsQuestion
   static IconData getIconData(String nameOfSettings) {
-    return MdiIconData(
+    return mdi(
       int.tryParse(GetIt.instance<SettingsBloc>().getUserOrDefaultValueByNamed(nameOfSettings) ?? '0xf1136') ?? 0xf1136,
     );
   }
 
   static IconData getIconDataByEnum(EnumsOfSettings settings) => getIconData(settings.name);
+
   static IconData getIconDataByString(String name) => getIconDataOrNullByString(name) ?? MdiIcons.crosshairsQuestion;
 
   /// take IconData from added to settings in [IconSettingsEnum] or from [MdiIcons.fromString]
@@ -45,10 +46,7 @@ class IconsHelper {
     data = mapOfSettings.containsKey(name) ? getIconDataByEnum(mapOfSettings[name]!) : MdiIcons.fromString(name);
     return data;
   }
-}
 
-///Material Design Icons IconData class
-class MdiIconData extends IconData {
-  const MdiIconData(super.codePoint)
-    : super(fontFamily: 'Material Design Icons', fontPackage: 'material_design_icons_flutter');
+  static IconData mdi(int codePoint) =>
+      IconData(codePoint, fontFamily: 'Material Design Icons', fontPackage: 'material_design_icons_flutter');
 }
