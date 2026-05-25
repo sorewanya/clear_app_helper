@@ -10,7 +10,7 @@ dependencies:
   animated_toggle_switch: ^0.8.5
   animated_tree_view: ^2.3.0
   bloc_concurrency: ^0.3.0
-  copy_with_extension: ^9.1.1
+  copy_with_extension: 
   country_icons: ^3.0.0
   crypto: ^3.0.7
   dartz: ^0.10.1
@@ -21,7 +21,11 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
-  flutter_iconpicker: ^4.0.1
+  flutter_iconpicker: 
+    path: ../flutter_iconpicker/
+    # git:
+    #   url: https://github.com/sorewanya/FlutterIconPicker.git
+    #   ref: master
   flutter_slidable: ^4.0.1
   get: ^4.7.3
   get_it: ^8.2.0
@@ -30,7 +34,7 @@ dependencies:
   intl: ^0.20.2
   json_annotation: ^4.9.0
   markdown_widget: ^2.3.2+8
-  material_design_icons_flutter: ^7.0.7296
+  flutter_material_design_icons: ^3.1.0+7447
   package_info_plus: ^8.3.1
   path_provider: ^2.1.5
   permission_handler: ^12.0.1
@@ -41,6 +45,8 @@ dependencies:
 dev_dependencies:
   build_runner: ^2.10.4
   flutter_lints: ^6.0.0
+  copy_with_extension_gen:
   flutter_test:
     sdk: flutter
-  mockito: ^5.6.1
+  mockito: 
+  json_serializable:

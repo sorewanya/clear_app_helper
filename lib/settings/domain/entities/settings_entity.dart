@@ -1,4 +1,5 @@
 import 'package:clear_app_helper/core/domain/entities/app_entity.dart';
+import 'package:clear_app_helper/core/icons_helper.dart';
 import 'package:clear_app_helper/settings/domain/entities/enums_of_settings.dart';
 import 'package:clear_app_helper/settings/domain/entities/settings_types.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
@@ -6,7 +7,6 @@ import 'package:equatable/equatable.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 part './settings_types_class/settings_bool.dart';
 part './settings_types_class/settings_double.dart';

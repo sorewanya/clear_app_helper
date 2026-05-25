@@ -22,9 +22,9 @@ import 'package:clear_app_helper/settings/domain/usecase/settings_use_case.dart'
 import 'package:clear_app_helper/settings/presentation/bloc/settings_bloc_bloc.dart';
 import 'package:clear_app_helper/shared_preferences.dart';
 import 'package:crypto/crypto.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 final currentTime = DateTime.now().toString();
 

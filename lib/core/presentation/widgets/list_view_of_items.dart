@@ -4,9 +4,9 @@ import 'package:clear_app_helper/core/i18n/core_i18n.dart';
 import 'package:clear_app_helper/core/presentation/widgets/builders/current_entity_builder.dart';
 import 'package:clear_app_helper/core/route_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_material_design_icons/flutter_material_design_icons.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get_it/get_it.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 /// List widget, used [ListView.separated]
 class ListViewOfItems extends StatefulWidget {

@@ -12,7 +12,8 @@ class SettingsIcon extends SettingsEntity {
     required super.isDeleted,
   });
 
-  IconData? get getUserOrDefaultValueIconData => MdiIcons.fromString(super.getUserOrDefaultValueAsString);
+  IconData? get getUserOrDefaultValueIconData =>
+      IconsHelper.getIconDataOrNullByString(super.getUserOrDefaultValueAsString);
 
   static SettingsIcon? fromEntity(SettingsEntity? item) {
     return item != null && item.type == SettingsTypeEnum.icon.index

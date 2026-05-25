@@ -136,13 +136,13 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
         );
       } else if (type == SettingsTypeEnum.icon.index) {
         return IconViewAndPickerButton(
-          setString: (icon) => setState(() {
+          onSelected: (icon) => setState(() {
             if (userValue != icon) {
               userValue = icon;
               shouldPop = false;
             }
           }),
-          initIconCode: int.tryParse(userValue ?? defaultValue),
+          value: userValue ?? defaultValue,
         );
       } else if (type == SettingsTypeEnum.value.index) {
         return (values != null && values?.isNotEmpty == true)
@@ -254,8 +254,17 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
             setValue: (s) => name = s,
             setShouldPop: (b) => shouldPop = b,
           ),
-
-          Text('${GetIt.instance<CoreI18n>().settingDefaultValue}:$defaultValue'),
+          Row(
+            children: [
+              Text('${GetIt.instance<CoreI18n>().settingDefaultValue}:'),
+              Builder(
+                builder: (context) {
+                  final isInt = int.tryParse(defaultValue);
+                  return isInt != null ? Icon(IconsHelper.getIconDataByString(defaultValue)) : Text(defaultValue);
+                },
+              ),
+            ],
+          ),
 
           ConfirmTypeWarning(confirmType: confirmType),
           Text('${GetIt.instance<CoreI18n>().settingType}: $type'),
