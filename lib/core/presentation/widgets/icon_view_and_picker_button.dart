@@ -98,11 +98,7 @@ class IconViewAndPickerButton extends StatelessWidget {
     final icon = await showIconPicker(
       context,
       configuration: SinglePickerConfiguration(
-        iconPackModes: [
-          IconPack.allMaterial,
-          // TODO  restore after update flutter_iconpicker >4.0.3 or use customIconPack:
-          IconPack.fontAwesomeIcons,
-        ],
+        iconPackModes: [IconPack.allMaterial, IconPack.fontAwesomeIcons, IconPack.flutter_material_design_icons],
       ),
     );
     if (icon != null) {
