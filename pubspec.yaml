@@ -15,7 +15,7 @@ dependencies:
   crypto: ^3.0.7
   dartz: ^0.10.1
   equatable: ^2.0.7
-  file_picker: ^10.3.2
+  file_picker: ^11.0.2
   flash: ^3.1.1
   flex_color_picker: ^3.8.0
   flutter:
@@ -28,14 +28,14 @@ dependencies:
     #   ref: master
   flutter_slidable: ^4.0.1
   get: ^4.7.3
-  get_it: ^8.2.0
+  get_it: ^9.2.1
   graphview: ^1.2.0
   internet_connection_checker: ^3.0.1
   intl: ^0.20.2
   json_annotation: ^4.9.0
   markdown_widget: ^2.3.2+8
   flutter_material_design_icons: ^3.1.0+7447
-  package_info_plus: ^8.3.1
+  package_info_plus: ^9.0.1
   path_provider: ^2.1.5
   permission_handler: ^12.0.1
   rfw: ^1.0.32

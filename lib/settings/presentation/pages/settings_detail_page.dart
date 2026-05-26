@@ -166,16 +166,14 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
             Text('${GetIt.instance<CoreI18n>().filePathAllowedExtensions}: ${values?[0]}'),
             TextButton(
               onPressed: () {
-                FilePicker.platform
-                    .pickFiles(
-                      type: SettingsFilePath.fromEntity(origItem)?.getFileType ?? FileType.any,
-                      allowedExtensions: SettingsFilePath.fromEntity(origItem)?.getFileAllowedExtensions,
-                    )
-                    .then((path) {
-                      if (path != null) {
-                        if (mounted) setState(() => userValue = path.paths.first);
-                      }
-                    });
+                FilePicker.pickFiles(
+                  type: SettingsFilePath.fromEntity(origItem)?.getFileType ?? FileType.any,
+                  allowedExtensions: SettingsFilePath.fromEntity(origItem)?.getFileAllowedExtensions,
+                ).then((path) {
+                  if (path != null) {
+                    if (mounted) setState(() => userValue = path.paths.first);
+                  }
+                });
               },
               child: Text(GetIt.instance<CoreI18n>().filePathChange),
             ),
@@ -187,7 +185,7 @@ class _SettingsDetailPageState extends State<SettingsDetailPage> {
             Text('${GetIt.instance<CoreI18n>().filePathCurrent}: ${userValue ?? defaultValue}'),
             TextButton(
               onPressed: () {
-                FilePicker.platform.getDirectoryPath().then((path) {
+                FilePicker.getDirectoryPath().then((path) {
                   if (path != null) {
                     if (mounted) setState(() => userValue = path);
                   }

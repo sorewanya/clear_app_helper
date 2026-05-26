@@ -6,5 +6,5 @@ abstract class AppFilePicker {
 
 class AppFilePickerImpl implements AppFilePicker {
   @override
-  Future<String?> getDirectoryPath() => FilePicker.platform.getDirectoryPath();
+  Future<String?> getDirectoryPath() => FilePicker.getDirectoryPath();
 }
